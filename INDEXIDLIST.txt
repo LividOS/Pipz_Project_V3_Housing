@@ -4,9 +4,9 @@
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - INDEXIDLIST.txt
-; Version: 1.3.0
-; Last change: Added pipz-mirror-governance .vscode directory and sidecars.
-; Content-Fingerprint: 2026-01-24T02-03-54Z-4NAK7AKX
+; Version: 1.3.1
+; Last change: Sanity checked aliases for uniqueness and populated missing aliases.
+; Content-Fingerprint: 2026-01-24T02-51-04Z-72I0EJZB
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -201,23 +201,23 @@ IDs and VERIFIED flags are acceleration signals only, never authority.
     extension.ts                                  | Script             | 1TdL9EhG34T8zLbwD4G9zR3isS2u7X6iN                          | N/A
                                                   |                    |                                                            |
 --------------------------------------------------|--------------------|------------------------------------------------------------|----------
-\pipz-mirror-governance                           | DIRECTORY          |                                                            | NO        
-  package.json                                    | Config (JSON)      |                                                            | N/A
-  tsconfig.json                                   | Config (JSON)      |                                                            | N/A
-  README.md                                       | Document           |                                                            | NO
-  \src                                            | SUB-DIRECTORY      |                                                            | NO
-    extension.ts                                  | Script             |                                                            | N/A
-  \.vscode                                        | SUB-DIRECTORY      |                                                            | NO
-    extensions.json                               | Config (JSON)      |                                                            | N/A
-    launch.json                                   | Config (JSON)      |                                                            | N/A
-    settings.json                                 | Config (JSON)      |                                                            | N/A
-    tasks.json                                    | Config (JSON)      |                                                            | N/A
-    extensions.json.governance.txt                | Document           |                                                            | NO
-    launch.json.governance.txt                    | Document           |                                                            | NO
-    settings.json.governance.txt                  | Document           |                                                            | NO
-    tasks.json.governance.txt                     | Document           |                                                            | NO
-  \.ORCH_AUDITLOG                                 | SUB-DIRECTORY      |                                                            | NO
-    \mirror                                       | SUB-DIRECTORY      |                                                            | NO
+\pipz-mirror-governance                           | DIRECTORY          | 1iG82QgKEAB0_xSRT7uFog2ih77PuW9q-                          | YES
+  package.json                                    | Config (JSON)      | 1biisIAXFeqe5y0yGdcJA5T-7_akPvxi-                          | N/A
+  tsconfig.json                                   | Config (JSON)      | 1gjnig6YyeyfEOnDXT33RstG2cgCbBvR7                          | N/A
+  README.md                                       | Document           | 1JC7qmZZyGWktYvW32stOBjNbF_xmmYIU                          | YES
+  \src                                            | SUB-DIRECTORY      | 1-0dIctg_cGNMuuCMHJQYLY2kvvLFgfbE                          | YES
+    extension.ts                                  | Script             | 1UgblarfwhWob4r5Nh1A_WFbBZCIgkKCx                          | N/A
+  \.vscode                                        | SUB-DIRECTORY      | 1ltwlLX8CjynRrmxCDdJ7rrtqJ0-pWRk-                          | YES
+    extensions.json                               | Config (JSON)      | 1IvQ_FY_OYq3wAzmkmHQSfaO1p8L8DZeV                          | N/A
+    launch.json                                   | Config (JSON)      | 1V_LYXBocQdskfZOD1kjK29o5mCiOvUvK                          | N/A
+    settings.json                                 | Config (JSON)      | 1Mgt2X4a1QX9hy9qIUKP1GEEqJLfBWigN                          | N/A
+    tasks.json                                    | Config (JSON)      | 1EBh0WLFPNDI5l2IqCIzOGL4xTpqYM34T                          | N/A
+    extensions.json.governance.txt                | Document           | 1yq8GJ4mUhLtCb1dZya8unIjEkpfNqdtH                          | YES
+    launch.json.governance.txt                    | Document           | 1L0sy7iAQ8okrj_8zNkqE1HiGkxytQkWH                          | YES
+    settings.json.governance.txt                  | Document           | 1LIa7DtCH_H5JFgPE0Q3GWMOTww93Bgi6                          | YES
+    tasks.json.governance.txt                     | Document           | 1dhonC67pLRoVdY4DTlQP2dqGieS0RYdL                          | YES
+  \.ORCH_AUDITLOG                                 | SUB-DIRECTORY      | 1qR3-DgAkBtJvSoHLOBL0fM5APzniTeZ3                          | YES
+    \mirror                                       | SUB-DIRECTORY      | 1L_mbiltmBtZL-4sPxb74WRZcqc9L1oQ2                          | YES
                                                   |                    |                                                            |
 --------------------------------------------------|--------------------|------------------------------------------------------------|----------
 
@@ -232,12 +232,12 @@ IDs and VERIFIED flags are acceleration signals only, never authority.
   GLOBAL STATE REGISTRY.gsheet                    | registry, global registry, state registry, variable registry, function registry
   settings.ini                                    | settings ini, runtime settings, user settings ini, config ini
   PipzScptzIcon.png                               | app icon, application icon, tray icon, gui icon
-  .gitignore                                      | 
+  .gitignore                                      | git ignore, git config, ignore list, git exclusion
   _PROJECT_BLUEPRINT.txt                          | blueprint, project blueprint, architecture blueprint, folder blueprint, structure blueprint
   _PROJECT_ANCHOR.txt                             | anchor, project anchor, system prompt, ai anchor, governance anchor
   AI_PROJECT_INSTRUCTIONS.txt                     | project instructions, instructions, ai instructions, governance rules, ai governance
   AUDIT_RUNNER.txt                                | audit runner, audit plan, audit backlog, audit execution plan, audit runner file, audit checklist
-  INDEXIDLIST.txt                                 | index, id index, drive index, id list, index id list
+  INDEXIDLIST.txt                                 | index, id index, drive index, id list, index id list, master index
   BOOTSTRAPv4.txt                                 | bootstrap, bootstrap v4, init protocol, initialization protocol
   PHASE5_VISIBILITY_AUDIT_TEMPLATE.txt            | phase 5 template, phase 5 audit template, visibility audit template
   PHASE5_EXECUTION_CHECKLIST.txt                  | phase 5 checklist, phase 5 execution checklist, phase 5 audit checklist
@@ -246,7 +246,7 @@ IDs and VERIFIED flags are acceleration signals only, never authority.
   ORCH_PROTOCOL_SPEC.txt                          | orchestrator protocol, orch protocol, orch contract, orchestrator spec
   PROJECT_STATUS_CHECKLIST.txt                    | project checklist, status checklist, task tracker, master checklist
   PROJECT_WORKING_NOTES.txt                       | working notes, project notes, design notes, sanity notes, intent log
-  STANDARDIZED_HEADERS.txt                        | 
+  STANDARDIZED_HEADERS.txt                        | header templates, header standards, file headers, license headers
   settings.txt                                    | settings mirror, settings text, settings txt
                                                   |
 --------------------------------------------------|--------------------------------------------------------------------------------------------
@@ -275,12 +275,12 @@ IDs and VERIFIED flags are acceleration signals only, never authority.
   Movement.ahk                                    | movement, input movement, mouse movement
   Security.ahk                                    | security, license security, auth module
   SettingsLoader.ahk                              | settings loader, ini loader, config loader
-  AntiBan.txt                                     | antiban mirror
-  BreakManager.txt                                | break manager mirror
-  Interop.txt                                     | interop mirror
-  Movement.txt                                    | movement mirror
-  Security.txt                                    | security mirror
-  SettingsLoader.txt                              | settings loader mirror
+  AntiBan.txt                                     | antiban mirror, antiban txt
+  BreakManager.txt                                | break manager mirror, break manager txt
+  Interop.txt                                     | interop mirror, interop txt
+  Movement.txt                                    | movement mirror, movement txt
+  Security.txt                                    | security mirror, security txt
+  SettingsLoader.txt                              | settings loader mirror, settings loader txt
                                                   |
 --------------------------------------------------|--------------------------------------------------------------------------------------------
 \Worker                                           | worker folder, background worker, engine
@@ -291,39 +291,39 @@ IDs and VERIFIED flags are acceleration signals only, never authority.
     ConfigManager.ahk                             | config manager, ini mapper, config module
     OverlayPhysics.ahk                            | overlay physics, overlay motion, physics module
     WorkerState.ahk                               | worker state, state manager, watchdog
-    ConfigManager.txt                             | config manager mirror
-    OverlayPhysics.txt                            | overlay physics mirror
-    WorkerState.txt                               | worker state mirror
+    ConfigManager.txt                             | config manager mirror, config manager txt
+    OverlayPhysics.txt                            | overlay physics mirror, overlay physics txt
+    WorkerState.txt                               | worker state mirror, worker state txt
                                                   |
 --------------------------------------------------|--------------------------------------------------------------------------------------------
 \PipzOrchestratorExtension                        | orchestrator extension, vs code extension, orch extension
-  package.json                                    | npm package file, node package config, extension manifest
-  tsconfig.json                                   | typescript config, ts config, compiler config
-  README.md                                       | extension readme, extension documentation
+  package.json                                    | orch package file, orch node config, orchestrator manifest
+  tsconfig.json                                   | orch typescript config, orch ts config, orchestrator compiler config
+  README.md                                       | orch extension readme, orchestrator documentation
   package.json.governance.txt                     | package governance, package sidecar, npm governance
   tsconfig.json.governance.txt                    | tsconfig governance, typescript governance sidecar
-  \src                                            | extension source, src folder, typescript source
-    extension.ts                                  | vs code entry, extension entry, orchestrator extension code
+  \src                                            | orch extension source, orch src folder, orchestrator source
+    extension.ts                                  | orch vs code entry, orch extension entry, orchestrator main
 --------------------------------------------------|--------------------------------------------------------------------------------------------
 \orchestrator                                     | orchestrator folder, orchestrator scripts, orchestration backend
-  orch_bootstrap.js                               | bootstrap script, orch bootstrap, orchestrator bootstrap
+  orch_bootstrap.js                               | bootstrap script, orch bootstrap, orchestrator bootstrap, mvp bootstrap
                                                   |
 --------------------------------------------------|--------------------------------------------------------------------------------------------
 \pipz-mirror-governance                           | mirror governance, mirror extension, governance extension
-  package.json                                    | mirror package, governance package
-  tsconfig.json                                   | mirror tsconfig
-  README.md                                       | mirror readme
-  \src                                            | mirror src
-    extension.ts                                  | mirror entry, governance entry
-  \.vscode                                        | mirror vscode, governance vscode
-    extensions.json                               | mirror extensions config
-    launch.json                                   | mirror launch config
-    settings.json                                 | mirror settings
-    tasks.json                                    | mirror tasks
-    extensions.json.governance.txt                | mirror extensions governance
-    launch.json.governance.txt                    | mirror launch governance
-    settings.json.governance.txt                  | mirror settings governance
-    tasks.json.governance.txt                     | mirror tasks governance
+  package.json                                    | mirror package, governance package, mirror manifest, governance manifest
+  tsconfig.json                                   | mirror tsconfig, mirror typescript config, governance tsconfig
+  README.md                                       | mirror readme, mirror docs, governance documentation
+  \src                                            | mirror src, mirror source, governance source
+    extension.ts                                  | mirror entry, governance entry, mirror main, governance script
+  \.vscode                                        | mirror vscode, governance vscode, mirror environment
+    extensions.json                               | mirror extensions config, mirror recommended extensions
+    launch.json                                   | mirror launch config, mirror debug config
+    settings.json                                 | mirror settings, mirror workspace settings
+    tasks.json                                    | mirror tasks, mirror build tasks
+    extensions.json.governance.txt                | mirror extensions governance, mirror extensions sidecar
+    launch.json.governance.txt                    | mirror launch governance, mirror launch sidecar
+    settings.json.governance.txt                  | mirror settings governance, mirror settings sidecar
+    tasks.json.governance.txt                     | mirror tasks governance, mirror tasks sidecar
                                                   |
 --------------------------------------------------|--------------------------------------------------------------------------------------------
 

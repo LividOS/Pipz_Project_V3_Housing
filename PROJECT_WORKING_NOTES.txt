@@ -4,9 +4,9 @@
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - PROJECT_WORKING_NOTES.txt
-; Version: 0.1.2
-; Last change: Logged completion of VS Code mirror/fingerprint extension (local install) and confirmed audit logging; captured dev host folder-open anomaly resolution.
-; Content-Fingerprint: 2026-01-24T01-11-42Z-MJY41XER
+; Version: 0.1.3
+; Last change: Added extension repackaging design rationale.
+; Content-Fingerprint: 2026-01-24T14-15-57Z-XG7W1RRD
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -151,6 +151,46 @@ STOP if:
 - A human must remember a rule instead of tooling enforcing it
 - The user must manually switch AI roles for normal operation (end goal is hidden chaining)
 - Audit logs become incomplete or optional
+
+; ------------------------------------------------------------------
+VS CODE EXTENSION REPACKAGING – DESIGN RATIONALE
+; ------------------------------------------------------------------
+
+The pipz-mirror-governance extension is not “just a tool”.
+It is an ACTIVE GOVERNANCE ENFORCER.
+
+Therefore:
+
+- Any change to it can silently weaken guarantees if not rebuilt correctly
+- VS Code does NOT auto-reload packaged extensions
+- Extension Development Host ≠ real user environment
+
+Because of this, a strict VSIX repackaging runbook was introduced.
+
+Key principles enforced by the runbook:
+
+1. BUILD IS EXPLICIT
+   No implicit TypeScript transpilation is trusted.
+
+2. INSTALL IS EXPLICIT
+   The extension must be installed into the NORMAL VS Code instance,
+   not assumed to be active because Dev Host worked.
+
+3. VERIFICATION IS MANDATORY
+   Mirroring, fingerprinting, encoding, and audit logging must be
+   observed in real saves.
+
+4. NO SILENT FAILURE
+   If the extension fails to activate or log, work stops immediately.
+
+This mirrors the broader project philosophy:
+
+- Trust code, not memory
+- Trust logs, not assumptions
+- Trust enforcement, not intent
+
+This runbook is deliberately repetitive and procedural.
+That is a feature, not a flaw.
 
 ; ------------------------------------------------------------------
 FUTURE NOTES

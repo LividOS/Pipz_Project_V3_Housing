@@ -4,9 +4,9 @@
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - PROJECT_STATUS_CHECKLIST.txt
-; Version: 0.1.2
-; Last change: Marked VS Code mirror/fingerprint extension as completed + installed locally; confirmed audit logging; updated remaining tasks accordingly.
-; Content-Fingerprint: 2026-01-24T00-39-57Z-24JK5C0W
+; Version: 0.1.3
+; Last change: Added extension repackaging runbook.
+; Content-Fingerprint: 2026-01-24T14-16-37Z-K9150TQQ
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -128,6 +128,59 @@ E. VS CODE ENVIRONMENT
     - INDEXIDLIST.txt
     - PROJECT_STATUS_CHECKLIST.txt
     - PROJECT_WORKING_NOTES.txt
+
+; ------------------------------------------------------------------
+E.1 VS CODE EXTENSION REPACKAGING RUNBOOK (MANDATORY PROCEDURE)
+; ------------------------------------------------------------------
+
+PURPOSE:
+Ensure any updates to the pipz-mirror-governance VS Code extension
+are rebuilt, packaged, and installed deterministically with no drift.
+
+This procedure MUST be followed for every extension change.
+
+RUNBOOK STEPS:
+
+[ ] 1. Make code changes ONLY inside:
+      pipz-mirror-governance/
+
+[ ] 2. Verify required metadata files exist and are up to date:
+      - README.md (non-template, accurate)
+      - LICENSE.txt (PIPZ GOVERNANCE LICENSE)
+      - package.json (repository field present)
+
+[ ] 3. Build the extension (from extension root):
+      > npm run compile
+
+[ ] 4. Package the extension:
+      > vsce package
+
+      Expected output:
+      - pipz-mirror-governance-<version>.vsix
+
+[ ] 5. Install VSIX into NORMAL VS Code (not Extension Dev Host):
+      - Extensions → ⋯ → Install from VSIX
+      - Select the newly generated .vsix
+      - Reload VS Code window
+
+[ ] 6. Verification checklist (REQUIRED):
+      [ ] Extension shows as Installed & Enabled
+      [ ] Output panel shows "Pipz Mirror Governance: activated"
+      [ ] Saving governed .txt updates Content-Fingerprint
+      [ ] Saving .ahk/.ini updates mirror .txt
+      [ ] UTF-8 and UTF-16 behavior confirmed
+      [ ] Audit logs written to:
+          Pipz_Project_V3\.ORCH_AUDITLOG\mirror\
+
+[ ] 7. Only AFTER verification:
+      - Resume normal project work
+      - Extension Development Host may be closed for this component
+
+FAILURE RULE:
+If ANY verification step fails, STOP.
+Do NOT continue project work until resolved.
+
+This runbook exists to prevent silent tooling drift.
 
 ; ------------------------------------------------------------------
 F. ORCHESTRATOR (HIDDEN CHAINING)

@@ -4,9 +4,9 @@
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - _PROJECT_BLUEPRINT.txt
-; Version: 2.0.1
-; Last change: Performed high-vigilance whitespace cleanup and structural normalization; maintained 1:1 literal content match.
-; Content-Fingerprint: 2026-01-22T14-13-31Z-ICVETKNT
+; Version: 2.1.0
+; Last change: Populated missing entries from INDEXIDLIST (gitignore, STANDARDIZED_HEADERS, pipz-mirror-governance).
+; Content-Fingerprint: 2026-01-24T14-22-39Z-783WYJSG
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -35,6 +35,7 @@ PATH / FILE NAME                                  | TYPE               | DESCRIP
 \Pipz_Project_V3                                  | ROOT               | Main project directory.
   GLOBAL STATE REGISTRY.gsheet                    | Spreadsheet        | EXTERNALIZED SOURCE OF TRUTH: Variable tracking & Function Signatures.
   settings.ini                                    | Config             | Central storage for user parameters, anti-ban settings, and titles.
+  .gitignore                                      | Config             | Git exclusion rules.
   PipzScptzIcon.png                               | Asset (Image)      | Application icon used by Controller GUI and tray; branding and visual identification.
   _PROJECT_BLUEPRINT.txt                          | Document           | Primary source of truth for structure, search protocols, and logic rules.
   _PROJECT_ANCHOR.txt                             | Document           | Unified living system prompt and logic anchor for AI behavior and authority framing.
@@ -49,6 +50,7 @@ PATH / FILE NAME                                  | TYPE               | DESCRIP
   ORCH_PROTOCOL_SPEC.txt                          | Document           | Formal protocol contract defining orchestrator role separation, execution flow, audit requirements, token gates, and PASS/FAIL semantics.
   PROJECT_STATUS_CHECKLIST.txt                    | Document           | Living execution tracker enumerating completed, pending, and blocked work items across governance, tooling, and orchestration.
   PROJECT_WORKING_NOTES.txt                       | Document           | Living design journal capturing intent, rationale, risk notes, architectural decisions, and sanity anchors.
+  STANDARDIZED_HEADERS.txt                        | Document           | Templates for mandatory file headers.
   settings.txt                                    | Document           | Auditable AI mirror of settings.ini.
                                                   |                    |
 --------------------------------------------------|--------------------|------------------------------------------------------------------------
@@ -110,6 +112,25 @@ PATH / FILE NAME                                  | TYPE               | DESCRIP
   README.md                                       | Document           | Human-readable overview of the orchestrator extension purpose and usage.
   \src                                            | SUB-DIRECTORY      | Source code for the VS Code extension.
     extension.ts                                  | Script             | Extension entry point; registers commands, invokes orchestrator, and mediates Architect actions.
+                                                  |                    |
+--------------------------------------------------|--------------------|------------------------------------------------------------------------
+\pipz-mirror-governance                           | DIRECTORY          | VS Code extension for governance enforcement (mirroring, fingerprinting).
+  package.json                                    | Config (JSON)      | Extension manifest for the mirror governance extension.
+  tsconfig.json                                   | Config (JSON)      | TypeScript compiler configuration.
+  README.md                                       | Document           | Documentation for the mirror governance extension.
+  \src                                            | SUB-DIRECTORY      | Source code for the extension.
+    extension.ts                                  | Script             | Entry point for mirroring and fingerprinting logic.
+  \.vscode                                        | SUB-DIRECTORY      | Workspace configuration.
+    extensions.json                               | Config (JSON)      | Recommended VS Code extensions.
+    launch.json                                   | Config (JSON)      | Debug configuration.
+    settings.json                                 | Config (JSON)      | Workspace settings.
+    tasks.json                                    | Config (JSON)      | Build tasks.
+    extensions.json.governance.txt                | Document           | Governance sidecar for extensions.json.
+    launch.json.governance.txt                    | Document           | Governance sidecar for launch.json.
+    settings.json.governance.txt                  | Document           | Governance sidecar for settings.json.
+    tasks.json.governance.txt                     | Document           | Governance sidecar for tasks.json.
+  \.ORCH_AUDITLOG                                 | SUB-DIRECTORY      | Audit log storage for mirror operations.
+    \mirror                                       | SUB-DIRECTORY      | Mirror-specific audit logs.
                                                   |                    |
 --------------------------------------------------|--------------------|------------------------------------------------------------------------
 
