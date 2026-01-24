@@ -13,3 +13,11 @@ dist/
 $RECYCLE.BIN/
 Thumbs.db
 desktop.ini
+
+# Google Drive Sync Temp Files
+.tmp.driveupload/
+.tmp.drivedownload/
+
+# OneDrive Sync Temp Files
+*.tmp
+.DS_Store
