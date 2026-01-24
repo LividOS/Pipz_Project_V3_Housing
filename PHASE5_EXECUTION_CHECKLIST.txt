@@ -4,9 +4,9 @@
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - PHASE5_EXECUTION_CHECKLIST.txt
-; Version: 1.1.2
-; Last change: Added Section 7A Alias Coverage Verification.
-; Content-Fingerprint: 2026-01-22T11-58-47Z-YO5M7H6D
+; Version: 1.1.3
+; Last change: Added Step 0 Context Verification (Platform Specific).
+; Content-Fingerprint: 2026-01-24T21-32-26Z-3AI0TGDK
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -44,6 +44,14 @@ PRE-CONDITIONS (MANDATORY)
 [ ] Confirm Google Drive access is available and functioning  
 
 If ANY pre-condition fails → STOP
+
+; ------------------------------------------------------------------
+STEP 0 — CONTEXT VERIFICATION (PLATFORM SPECIFIC)
+; ------------------------------------------------------------------
+
+[ ] Confirm all Expected Set files are explicitly visible in the `@` context picker.
+[ ] If a file is Expected but not visible to the `@` picker, classify as **UNREADABLE (Tooling Limitation)** rather than MISSING.
+[ ] Verify that the current context window has not truncated the end of long governance files.
 
 ; ------------------------------------------------------------------
 STEP 1 — ROOT CONFIRMATION

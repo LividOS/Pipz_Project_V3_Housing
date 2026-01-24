@@ -6,7 +6,7 @@
 ; MAINTEMPLATE - README.md
 ; Version: 0.1.0
 ; Last change: Initial creation.
-; Content-Fingerprint: YYYY-MM-DDTHH-MM-SSZ-XXXXXXXX
+; Content-Fingerprint: 2026-01-24T16-28-56Z-TUVO6CS0
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
