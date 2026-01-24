@@ -1,0 +1,284 @@
+﻿; ------------------------------------------------------------------
+; AI SOT TEXT FILE (DO NOT EVER REMOVE, EDIT OR INCLUDE IN FILE EDITS) - MY FULL PATH IS "Pipz_Project_V3\Controller\Main_Controller.txt"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; GEMINI MEM TAG(DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\Controller\Main_Controller.ahk"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - Main_Controller.ahk (AHK v2)
+; Version: 2.1.9
+; Last change: Reverted to standard IconPath implementation for stable Tray and Taskbar icon inheritance + Final Fingerprinting Test.
+; Content-Fingerprint: 2026-01-23T21-01-09Z-NGT25TOC
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+#Requires AutoHotkey >=2.0
+#SingleInstance Force
+
+; ------------------------------------------------------------------
+; MODULE INCLUDES
+; ------------------------------------------------------------------
+#Include ..\Lib\Security.ahk
+#Include ..\Lib\Interop.ahk
+#Include ..\Lib\SettingsLoader.ahk
+#Include ..\Lib\BreakManager.ahk
+#Include Modules\ProcessManager.ahk
+#Include Modules\Messenger.ahk
+#Include Modules\WorkerInterface.ahk
+#Include Modules\MaintenanceManager.ahk
+#Include Modules\NavigationManager.ahk
+#Include Modules\TooltipManager.ahk
+
+; ------------------------------------------------------------------
+; INITIALIZATION & GLOBAL SETTINGS
+; ------------------------------------------------------------------
+global WorkerTitle := "Overlay_Worker_Internal"
+global LogBox := ""
+secret := "PIPSECMAX_LIREGKEY_11711503721976861054928319"
+keyFile := A_ScriptDir "\..\Worker\license.key"
+licData := ValidateLicense(secret, keyFile)
+AppName := "MAIN CONTROLLER TEMPLATE"
+AppVersion := "2.1.7"
+
+; --- Icon Implementation ---
+IconPath := A_ScriptDir "\..\PipzScptzIcon.png"
+if FileExist(IconPath) {
+    TraySetIcon(IconPath)
+}
+
+global g_WorkerPID := 0 
+rawDate := licData["EXPIRES"]
+formattedDate := FormatTime(rawDate, "MM/dd/yyyy")
+maskedID := SubStr(licData["ID"], 1, 6) "..." SubStr(licData["ID"], -4)
+
+; --- Load Globals ---
+global g_ShowOverlay       := LoadSetting("UI", "ShowOverlay", "1")
+global g_MinToTray         := LoadSetting("UI", "MinimizeToTray", "0")
+global g_WindowTitle       := LoadSetting("Game", "WindowTitle", "")
+
+global g_AntiBanEnabled    := LoadSetting("Script", "AntiBan", "0")
+global g_FastDropEnabled   := LoadSetting("Script", "FastDrop", "0")
+global g_AutoHealEnabled   := LoadSetting("Script", "AutoHeal", "0")
+global g_RandomClickEnable := LoadSetting("Script", "RandomClick", "0")
+
+global g_OvershootEnabled  := LoadSetting("AntiBan", "OvershootEnabled", "1")
+global g_OvershootPercent  := LoadSetting("AntiBan", "Overshoot", "5")
+
+global g_BreaksEnabled     := LoadSetting("AntiBan", "BreaksEnabled", "0")
+global g_BreakChance       := LoadSetting("AntiBan", "BreakChance", "5")
+global g_BreakSpacing      := LoadSetting("AntiBan", "BreakSpacing", "20")
+global g_MicroDelayEnabled := LoadSetting("AntiBan", "MicroDelayEnabled", "0")
+global g_MicroDelayMax      := LoadSetting("AntiBan", "MicroDelayMax", "500")
+global g_MicroDelayChance  := LoadSetting("AntiBan", "MicroDelayChance", "15")
+
+global g_MicroWigglesEnabled := LoadSetting("AntiBan", "MicroWigglesEnabled", "0")
+global g_WiggleIntensity     := LoadSetting("AntiBan", "WiggleIntensity", "2")
+
+; ------------------------------------------------------------------
+; GUI CONSTRUCTION
+; ------------------------------------------------------------------
+MyGui := Gui("-MinimizeBox +LastFound", AppName)
+MyGui.BackColor := "1A1A1A"
+
+; --- Dark Mode UI ---
+DllCall("dwmapi\DwmSetWindowAttribute", "Ptr", MyGui.Hwnd, "UInt", 20, "Int*", 1, "UInt", 4)
+
+; --- Navigation ---
+MyGui.SetFont("s10 Bold cBlack", "Segoe UI")
+BtnDash := MyGui.Add("Button", "x8 y10 w170 h30", "Dashboard")
+BtnDash.OnEvent("Click", (*) => ShowTab("Dashboard"))
+BtnSett := MyGui.Add("Button", "x+10 y10 w170 h30", "Settings")
+BtnSett.OnEvent("Click", (*) => ShowTab("Settings"))
+BtnABan := MyGui.Add("Button", "x+10 y10 w170 h30", "Anti-Ban")
+BtnABan.OnEvent("Click", (*) => ShowTab("Anti-Ban"))
+
+BtnLogs := MyGui.Add("Button", "x130 y45 w140 h30", "Logs")
+BtnLogs.OnEvent("Click", (*) => ShowTab("Logs"))
+BtnAbut := MyGui.Add("Button", "x+10 y45 w140 h30", "About")
+BtnAbut.OnEvent("Click", (*) => ShowTab("About"))
+
+MyGui.Add("GroupBox", "x10 y85 w530 h460 cWhite", "")
+
+; --- Dashboard Tab ---
+MyGui.SetFont("s16 Bold cWhite")
+txtAppName := MyGui.Add("Text", "x20 y125 w510 Center", AppName)
+MyGui.SetFont("s10 Norm cGray")
+txtVersion := MyGui.Add("Text", "x20 y+10 w510 Center", "Version " AppVersion)
+MyGui.SetFont("c00FF00") 
+txtLicense := MyGui.Add("Text", "x20 y+15 w510 Center", "License Active (Expires: " formattedDate ")")
+
+MyGui.SetFont("s10 Bold cBlack")
+BtnStart   := MyGui.Add("Button", "x110 y280 w100 h40", "Start")
+BtnStart.OnEvent("Click", (*) => LaunchWorker())
+BtnStop    := MyGui.Add("Button", "x+15 y280 w100 h40", "Stop")
+BtnStop.OnEvent("Click", (*) => HandleWorkerCommand("STOP"))
+BtnReset   := MyGui.Add("Button", "x+15 y280 w100 h40", "Reset")
+BtnReset.OnEvent("Click", (*) => HandleWorkerCommand("RELOAD"))
+BtnRestore := MyGui.Add("Button", "x175 y340 w200 h35", "Restore Defaults")
+BtnRestore.OnEvent("Click", (*) => RestoreDefaultSettings())
+
+MyGui.SetFont("s10 Norm cGray")
+txtStatus := MyGui.Add("Text", "x20 y420 w510 Center", "Script Status - Inactive")
+
+; --- Settings Sub-Nav ---
+MyGui.SetFont("s10 Bold cBlack")
+BtnGen  := MyGui.Add("Button", "x140 y110 w125 h30 Hidden", "General")
+BtnGen.OnEvent("Click", (*) => ShowSettingsSubTab("General"))
+BtnScrp := MyGui.Add("Button", "x+10 y110 w125 h30 Hidden", "Script")
+BtnScrp.OnEvent("Click", (*) => ShowSettingsSubTab("Script"))
+
+; --- Settings: General ---
+MyGui.SetFont("s10 Bold cWhite") 
+txtGenHeader := MyGui.Add("Text", "x20 y155 w510 Center Hidden", "General Settings")
+MyGui.SetFont("s10 Norm cWhite")
+chkOverlay   := MyGui.Add("Checkbox", "x210 y185 Hidden", "Show Overlay")
+chkOverlay.Value := g_ShowOverlay
+chkOverlay.OnEvent("Click", (c, *) => (g_ShowOverlay := c.Value, SaveSetting("UI", "ShowOverlay", c.Value)))
+chkTray      := MyGui.Add("Checkbox", "x210 y210 Hidden", "Minimize to Tray")
+chkTray.Value := g_MinToTray
+chkTray.OnEvent("Click", (c, *) => (g_MinToTray := c.Value, SaveSetting("UI", "MinimizeToTray", c.Value)))
+txtGameTitle := MyGui.Add("Text", "x20 y245 w510 Center Hidden", "Game Window Title")
+EditTitle    := MyGui.Add("Edit", "x135 y275 w280 h25 Center Hidden cBlack", g_WindowTitle)
+EditTitle.OnEvent("Change", (ctrl, *) => Messenger.PushTitleUpdate(ctrl.Value))
+
+; --- Settings: Script ---
+txtScrpHeader := MyGui.Add("Text", "x20 y155 w510 Center Hidden", "Script Settings")
+chkFeat1 := MyGui.Add("Checkbox", "x180 y190 Hidden", "Anti-Ban Patterns")
+chkFeat1.Value := g_AntiBanEnabled
+chkFeat1.OnEvent("Click", (c, *) => (g_AntiBanEnabled := c.Value, SaveSetting("Script", "AntiBan", c.Value)))
+chkFeat2 := MyGui.Add("Checkbox", "x180 y220 Hidden", "Fast-Drop")
+chkFeat2.Value := g_FastDropEnabled
+chkFeat2.OnEvent("Click", (c, *) => (g_FastDropEnabled := c.Value, SaveSetting("Script", "FastDrop", c.Value)))
+chkFeat3 := MyGui.Add("Checkbox", "x180 y250 Hidden", "Auto-Heal")
+chkFeat3.Value := g_AutoHealEnabled
+chkFeat3.OnEvent("Click", (c, *) => (g_AutoHealEnabled := c.Value, SaveSetting("Script", "AutoHeal", c.Value)))
+chkFeat4 := MyGui.Add("Checkbox", "x180 y280 Hidden", "Randomized Clicking")
+chkFeat4.Value := g_RandomClickEnable
+chkFeat4.OnEvent("Click", (c, *) => (g_RandomClickEnable := c.Value, SaveSetting("Script", "RandomClick", c.Value)))
+
+; --- Anti-Ban Sub-Nav ---
+MyGui.SetFont("s10 Bold cBlack")
+BtnABFeat := MyGui.Add("Button", "x140 y110 w125 h30 Hidden", "Features")
+BtnABFeat.OnEvent("Click", (*) => ShowABanSubTab("Features"))
+BtnABTune := MyGui.Add("Button", "x+10 y110 w125 h30 Hidden", "Tuning")
+BtnABTune.OnEvent("Click", (*) => ShowABanSubTab("Tuning"))
+
+; --- Anti-Ban: Features ---
+MyGui.SetFont("s13 Bold cWhite")
+txtABFHeader := MyGui.Add("Text", "x20 y155 w510 Center Hidden", "Anti-Ban Features")
+MyGui.SetFont("s9 Bold cWhite")
+chkOver := MyGui.Add("Checkbox", "x180 y195 Hidden", "Overshoot")
+chkOver.Value := g_OvershootEnabled
+chkOver.OnEvent("Click", (c, *) => (g_OvershootEnabled := c.Value, SaveSetting("AntiBan", "OvershootEnabled", c.Value)))
+chkMicroDelay := MyGui.Add("Checkbox", "x180 y225 Hidden", "Micro-Delays")
+chkMicroDelay.Value := g_MicroDelayEnabled
+chkMicroDelay.OnEvent("Click", (c, *) => (g_MicroDelayEnabled := c.Value, SaveSetting("AntiBan", "MicroDelayEnabled", c.Value)))
+chkBreaks := MyGui.Add("Checkbox", "x180 y255 Hidden", "Randomized Breaks")
+chkBreaks.Value := g_BreaksEnabled
+chkBreaks.OnEvent("Click", (c, *) => (g_BreaksEnabled := c.Value, SaveSetting("AntiBan", "BreaksEnabled", c.Value)))
+chkWiggle := MyGui.Add("Checkbox", "x180 y285 Hidden", "Micro-Wiggles")
+chkWiggle.Value := g_MicroWigglesEnabled
+chkWiggle.OnEvent("Click", (c, *) => (g_MicroWigglesEnabled := c.Value, SaveSetting("AntiBan", "MicroWigglesEnabled", c.Value)))
+
+; --- Anti-Ban: Tuning (DUAL COLUMN) ---
+MyGui.SetFont("s13 Bold cWhite")
+txtABTHeader := MyGui.Add("Text", "x20 y155 w510 Center Hidden", "Anti-Ban Tuning")
+
+; --- COLUMN A (x40) - MOUSE HANDLING ---
+MyGui.SetFont("s11 Bold cWhite")
+txtColAHead  := MyGui.Add("Text", "x40 y190 w220 Center Hidden", "--- Mouse Handling ---")
+MyGui.SetFont("s9 Bold cWhite")
+txtOverLbl   := MyGui.Add("Text", "x40 y225 Hidden", "Overshoot Chance (%):")
+EditOver     := MyGui.Add("Edit", "x190 y220 w60 h25 Center Hidden cBlack", g_OvershootPercent)
+UpDnOver     := MyGui.Add("UpDown", "Range1-100 Hidden", g_OvershootPercent)
+EditOver.OnEvent("Change", (ctrl, *) => (g_OvershootPercent := ctrl.Value, SaveSetting("AntiBan", "Overshoot", ctrl.Value)))
+
+txtMDMaxLbl  := MyGui.Add("Text", "x40 y260 Hidden", "Micro-Delay Max (ms):")
+EditMDMax    := MyGui.Add("Edit", "x190 y255 w60 h25 Center Hidden cBlack", g_MicroDelayMax)
+UpDnMDMax    := MyGui.Add("UpDown", "Range10-5000 Hidden", g_MicroDelayMax)
+EditMDMax.OnEvent("Change", (ctrl, *) => (g_MicroDelayMax := ctrl.Value, SaveSetting("AntiBan", "MicroDelayMax", ctrl.Value)))
+
+txtMDChnLbl  := MyGui.Add("Text", "x40 y295 Hidden", "Micro-Delay Chance (%):")
+EditMDChn    := MyGui.Add("Edit", "x190 y290 w60 h25 Center Hidden cBlack", g_MicroDelayChance)
+UpDnMDChn    := MyGui.Add("UpDown", "Range1-100 Hidden", g_MicroDelayChance)
+EditMDChn.OnEvent("Change", (ctrl, *) => (g_MicroDelayChance := ctrl.Value, SaveSetting("AntiBan", "MicroDelayChance", ctrl.Value)))
+
+txtWiggleLbl := MyGui.Add("Text", "x40 y330 Hidden", "Wiggle Intensity (px):")
+EditWiggle   := MyGui.Add("Edit", "x190 y325 w60 h25 Center Hidden cBlack", g_WiggleIntensity)
+UpDnWiggle   := MyGui.Add("UpDown", "Range1-5 Hidden", g_WiggleIntensity)
+EditWiggle.OnEvent("Change", (ctrl, *) => (g_WiggleIntensity := ctrl.Value, SaveSetting("AntiBan", "WiggleIntensity", ctrl.Value)))
+
+; --- COLUMN B (x290) - BREAK HANDLING ---
+MyGui.SetFont("s11 Bold cWhite")
+txtColBHead  := MyGui.Add("Text", "x290 y190 w220 Center Hidden", "--- Break Handling ---")
+MyGui.SetFont("s9 Bold cWhite")
+txtBrkChnLbl := MyGui.Add("Text", "x290 y225 Hidden", "Break Chance (%):")
+EditBrkChn   := MyGui.Add("Edit", "x440 y220 w60 h25 Center Hidden cBlack", g_BreakChance)
+UpDnBrkChn   := MyGui.Add("UpDown", "Range1-100 Hidden", g_BreakChance)
+EditBrkChn.OnEvent("Change", (ctrl, *) => (g_BreakChance := ctrl.Value, SaveSetting("AntiBan", "BreakChance", ctrl.Value)))
+
+txtBrkSpcLbl := MyGui.Add("Text", "x290 y260 Hidden", "Break Spacing (min):")
+EditBrkSpc   := MyGui.Add("Edit", "x440 y255 w60 h25 Center Hidden cBlack", g_BreakSpacing)
+UpDnBrkSpc   := MyGui.Add("UpDown", "Range1-120 Hidden", g_BreakSpacing)
+EditBrkSpc.OnEvent("Change", (ctrl, *) => (g_BreakSpacing := ctrl.Value, SaveSetting("AntiBan", "BreakSpacing", ctrl.Value)))
+
+; --- Logs & About ---
+MyGui.SetFont("s9 c00FF00", "Consolas")
+LogBox := MyGui.Add("Edit", "x20 y105 w510 h400 ReadOnly Background000000 vLogDisplay Hidden")
+DllCall("uxtheme\SetWindowTheme", "Ptr", LogBox.Hwnd, "Str", "DarkMode_Explorer", "Ptr", 0)
+
+MyGui.SetFont("s16 Bold cWhite", "Segoe UI")
+txtAbutAuth      := MyGui.Add("Text", "x20 y115 w510 Center Hidden", "Author")
+txtAbutAuthName := MyGui.Add("Text", "x20 y145 w510 Center Hidden", "Pipz")
+txtAbutCont      := MyGui.Add("Text", "x20 y185 w510 Center Hidden", "Contributions")
+MyGui.SetFont("s11 cGray", "Consolas")
+txtColLeft      := MyGui.Add("Text", "x100 y215 w160 Right Hidden", "GPT")
+txtSpine         := MyGui.Add("Text", "x270 y215 w10 Center Hidden", " ") 
+txtColRight      := MyGui.Add("Text", "x280 y215 w160 Left Hidden", "Gemini")
+MyGui.SetFont("s12 Bold cWhite", "Segoe UI")
+txtAbutLicH      := MyGui.Add("Text", "x20 y310 w510 Center Hidden", "License Information")
+MyGui.SetFont("s9 Bold cGray")
+txtAbutLicI      := MyGui.Add("Text", "x20 y340 w510 Center Hidden", "License ID: " maskedID)
+txtAbutLicE      := MyGui.Add("Text", "x20 y360 w510 Center Hidden", "Expires: " formattedDate)
+
+MyGui.SetFont("s8 cGray", "Segoe UI")
+MyGui.Add("Text", "x10 y575", "System HWID: " RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Cryptography", "MachineGuid"))
+
+; --- Tooltip Registration ---
+RegisterTooltip(chkOverlay.Hwnd, "Displays a visual status overlay while the script is running.")
+RegisterTooltip(chkTray.Hwnd, "Hides the application in the system tray when the window is closed.")
+RegisterTooltip(EditTitle.Hwnd, "Specify the name of the target game window to monitor.")
+RegisterTooltip(chkOver.Hwnd, "Occasionally mouse will slightly miss target destination and correct.")
+RegisterTooltip(EditOver.Hwnd, "Chance to overshoot destination.")
+RegisterTooltip(chkBreaks.Hwnd, "Occasionally pauses the script.")
+RegisterTooltip(EditBrkChn.Hwnd, "Chance to trigger a break.")
+RegisterTooltip(EditBrkSpc.Hwnd, "Minimum time between breaks. [In minutes]")
+RegisterTooltip(chkMicroDelay.Hwnd, "Adds tiny random hesitations during tasks.")
+RegisterTooltip(chkWiggle.Hwnd, "Adds tiny random jitters during mouse movement.")
+RegisterTooltip(EditMDMax.Hwnd, "Maximum length of a random hesitation in milliseconds.")
+RegisterTooltip(EditMDChn.Hwnd, "How often a micro-hesitation should occur.")
+RegisterTooltip(EditWiggle.Hwnd, "Max distance in pixels the mouse can 'jitter' during movement.")
+
+; --- Groups ---
+DashboardGroup    := [txtAppName, txtVersion, txtLicense, BtnStart, BtnStop, BtnReset, BtnRestore, txtStatus]
+SettingsNavGroup := [BtnGen, BtnScrp]
+GeneralSetGroup  := [txtGenHeader, chkOverlay, chkTray, txtGameTitle, EditTitle]
+ScriptSetGroup   := [txtScrpHeader, chkFeat1, chkFeat2, chkFeat3, chkFeat4]
+ABanNavGroup      := [BtnABFeat, BtnABTune]
+ABanFeatGroup     := [txtABFHeader, chkOver, chkMicroDelay, chkBreaks, chkWiggle]
+ABanTuneGroup     := [txtABTHeader, txtColAHead, txtOverLbl, EditOver, UpDnOver, txtMDMaxLbl, EditMDMax, UpDnMDMax, txtMDChnLbl, EditMDChn, UpDnMDChn, txtWiggleLbl, EditWiggle, UpDnWiggle, txtColBHead, txtBrkChnLbl, EditBrkChn, UpDnBrkChn, txtBrkSpcLbl, EditBrkSpc, UpDnBrkSpc]
+LogsGroup          := [LogBox]
+AboutGroup         := [txtAbutAuth, txtAbutAuthName, txtAbutCont, txtColLeft, txtSpine, txtColRight, txtAbutLicH, txtAbutLicI, txtAbutLicE]
+
+; --- Events & Start ---
+OnExit(ShutdownController)
+OnMessage(0x0200, ProcessTooltips)
+MyGui.OnEvent("Close", HandleClose)
+ShowTab("Dashboard")
+MyGui.Show("w550 h600")
+LaunchWorker(true)

@@ -1,0 +1,330 @@
+; ------------------------------------------------------------------
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\INDEXIDLIST.txt"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - INDEXIDLIST.txt
+; Version: 1.3.0
+; Last change: Added pipz-mirror-governance .vscode directory and sidecars.
+; Content-Fingerprint: 2026-01-24T01-52-09Z-AYLTMQGC
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+AUTHORITY NOTICE (MANDATORY)
+; ------------------------------------------------------------------
+
+This file provides deterministic Google Drive folder and file IDs to accelerate
+indexing, traversal, and bootstrap operations.
+
+This file is NOT a source of truth for:
+
+; - File contents
+; - Folder structure
+; - Ownership
+; - Logic
+; - Governance
+; - Verification outcomes
+
+All content authority, verification, and conflict resolution is governed by:
+
+; - AI_PROJECT_INSTRUCTIONS.txt
+; - _PROJECT_BLUEPRINT.txt
+; - _PROJECT_ANCHOR.txt
+
+Content-Fingerprint verification and GEMINI MEM TAG path validation are mandatory
+for all files, even when Drive IDs are available.
+
+; ------------------------------------------------------------------
+VERIFIED COLUMN SEMANTICS (STRICT)
+; ------------------------------------------------------------------
+
+MICRO-RULE — NON-RESOLVABLE CONTENT CLASSIFICATION (MANDATORY)
+
+Runtime artifacts, binary assets, and opaque data files that are not
+opened, read, or governed as authoritative content MUST use:
+
+; - VERIFIED = N/A
+
+This includes, but is not limited to:
+
+; - .ahk runtime scripts
+; - .ini configuration files
+; - Binary assets (e.g. .png, .ico)
+; - Secrets or opaque data (e.g. license.key)
+
+VERIFIED = YES is RESERVED exclusively for items whose contents are
+meaningfully resolvable, inspectable, and auditable as governance inputs.
+
+Marking non-resolvable content as VERIFIED = YES is prohibited.
+
+The VERIFIED column indicates whether the listed Drive ID has been:
+
+; - Successfully resolved via Google Drive
+; - Confirmed to exist and be accessible
+; - Confirmed to correspond to the declared PATH and TYPE
+
+VERIFIED does NOT indicate:
+
+; - Content correctness
+; - Content freshness
+; - Fingerprint validity
+; - Governance compliance
+
+Allowed values:
+
+; - YES  → ID resolved and matched to declared path/type
+; - NO   → ID known but not yet revalidated
+; - N/A  → Non-resolvable content (e.g. runtime-only, ephemeral, or excluded)
+
+VERIFIED status MUST NOT override:
+
+; - GEMINI MEM TAG path declarations
+; - Content-Fingerprint checks
+; - Blueprint-defined structure
+; - AI_PROJECT_INSTRUCTIONS enforcement
+
+; ------------------------------------------------------------------
+ID USAGE & PRECEDENCE RULES (STRICT)
+; ------------------------------------------------------------------
+
+1. File and folder IDs listed here MAY be used to:
+
+   ; - Locate items deterministically
+   ; - Enumerate child contents of folders
+   ; - Accelerate indexing when Drive search is ambiguous or truncated
+
+2. File and folder IDs listed here MUST NOT:
+
+   ; - Override declared paths in GEMINI MEM TAG headers
+   ; - Override structure defined in _PROJECT_BLUEPRINT.txt
+   ; - Override verification rules defined in AI_PROJECT_INSTRUCTIONS.txt
+
+3. In all conflicts:
+
+   ; - Declared path wins over ID
+   ; - Content-Fingerprint wins over VERIFIED
+   ; - Blueprint structure wins over ID
+   ; - Governance rules win over all
+
+IDs and VERIFIED flags are acceleration signals only, never authority.
+
+; ------------------------------------------------------------------
+1. MASTER INDEX: GOOGLE DRIVE ID LIST (MUST BE MAINTAINED)
+; ------------------------------------------------------------------
+
+--------------------------------------------------|--------------------|-----------------------------------------------------------------------
+ PATH / FILE NAME                                 | TYPE               | ID                                                         | VERIFIED
+--------------------------------------------------|--------------------|------------------------------------------------------------|----------
+\Pipz_Project_V3                                  | ROOT               | 1OU-HBeg2w1p78Tk1xdzuBaAwc8ZA2YKe                          | YES
+  GLOBAL STATE REGISTRY.gsheet                    | Spreadsheet        | 1ruF4Z2b_WUQtzxoXNUeThcyugd0PAP4B7sBX5GP77zA               | YES
+  settings.ini                                    | Config             | 15XWeWyphygk0f9OqkbHmkPzEsex8rome                          | N/A
+  .gitignore                                      | Config             | 1C5iGuX8qjSanONWJ26-r-5Bc7Ct81kGe                          | N/A
+  PipzScptzIcon.png                               | Asset (Image)      | 10NXIfmj1dw2CEd-i0beZC5_YD4MPPf4T                          | N/A
+  _PROJECT_BLUEPRINT.txt                          | Document           | 17AWzFH4OqYmx9Mcxl4NosFGp-uhyGYMT                          | YES
+  _PROJECT_ANCHOR.txt                             | Document           | 15YF2GnW_RA4m56-7R2yCM6WcLmPjZ307                          | YES
+  AI_PROJECT_INSTRUCTIONS.txt                     | Document           | 1TLP6j1xASA9HEA4H2RHhwtvkYR_arU_P                          | YES
+  AUDIT_RUNNER.txt                                | Document           | 1cFuPRTV39_GuGtwJM8Z1czYSPEodHga4                          | YES
+  INDEXIDLIST.txt                                 | Document           | 16DivuRC5wBfbX8xnq5l_ksf8Q21TgBxA                          | YES
+  BOOTSTRAPv4.txt                                 | Document           | 1eHulS4CPEFAxzKeCEmqjw9T7CVGQ3rfP                          | YES
+  PHASE5_VISIBILITY_AUDIT_TEMPLATE.txt            | Document           | 1vsBJ73y0ZxdkCWCbV7kwc8Jh2na2UDuN                          | YES
+  PHASE5_EXECUTION_CHECKLIST.txt                  | Document           | 1jETRg1DH1lVVynERGeC3rCnhH3vGblx_                          | YES
+  GOVERNANCE_LOCK.txt                             | Document           | 1lYiaKQ1LBJx3z2MoSoD3FirBtEyPVI_j                          | YES
+  PROJECT_LEARNED_CONSTRAINTS.txt                 | Document           | 12dk1sASojm6Cb9PBSeSoAI9Vchhgx4T3                          | YES
+  ORCH_PROTOCOL_SPEC.txt                          | Document           | 1odMqFaKPce80EgAx5AV-AYblg8SdiqsN                          | YES
+  PROJECT_STATUS_CHECKLIST.txt                    | Document           | 19q4AAo9dCIZqeGBea9Ap6kxMuoVU-KPn                          | YES
+  PROJECT_WORKING_NOTES.txt                       | Document           | 10Pin07ZKETGjt0EN3LmgEbgPkH_LLzOw                          | YES
+  STANDARDIZED_HEADERS.txt                        | Document           | 1bHktPTzL2y6p79FCwIdQ1qr73LP1-VCF                          | YES
+  settings.txt                                    | Document           | 1-1Vyt3gIEVRJkPxjmKIh4bjXHH07T_KZ                          | YES
+                                                  |                    |                                                            |
+--------------------------------------------------|--------------------|------------------------------------------------------------|----------
+\Controller                                       | DIRECTORY          | 1pMBs6kKrGiQ7q1enVOF7yj3RkTu8g_xl                          | YES
+  Main_Controller.ahk                             | Main Script        | 1B_28wBPT2KJDd2DS06a089uSHMxqCj7l                          | N/A
+  Main_Controller.txt                             | Document           | 1r7TtMqQP-NHJm-1QtcjzScSX5a-9erdW                          | YES
+  \Modules                                        | SUB-DIRECTORY      | 1Gum1cuSA-lWMvTUjk7JisvpMBXvHM2q7                          | YES
+    MaintenanceManager.ahk                        | Module             | 1hEeJugUsfm-pQUT3XcA1BNsQoH3z0ZZn                          | N/A
+    Messenger.ahk                                 | Module             | 1kghSu7GSSV_ouPFDleVZRHkgRoKFrvGX                          | N/A
+    NavigationManager.ahk                         | Module             | 1fVzmEJjq83Go8jmXygtb3gwXFI_f70ZJ                          | N/A
+    ProcessManager.ahk                            | Module             | 1TXeos3xCwUnnL05ny-2x8Yc0jMyHTzyC                          | N/A
+    TooltipManager.ahk                            | Module             | 187Sqt_gqIsOdEo4E1GJmtjWOqlPHw1v2                          | N/A
+    WorkerInterface.ahk                           | Module             | 1N6c7JpdloLVTmxwJuhnw2EApDTJ62TUI                          | N/A
+    MaintenanceManager.txt                        | Document           | 1f2ZxGqiTapUeq-N8Adcj-FIfmSl1kAB5                          | YES
+    Messenger.txt                                 | Document           | 162wbgJDXlxXVDUDD944AEVTZ1lKlj6yW                          | YES
+    NavigationManager.txt                         | Document           | 1zBTvbgxEjCc927HiJXOH3CRHzU8YedG_                          | YES
+    ProcessManager.txt                            | Document           | 1811O6BNvEVTXbIdyUW-Qmfgi44eAPzqX                          | YES
+    TooltipManager.txt                            | Document           | 1VxMBXmtFaYdbDRavzQiJcx-uwRDnRKkZ                          | YES
+    WorkerInterface.txt                           | Document           | 1uUjqIjfQaXAJ8aeFOZxqRPSR3jMR8DS_                          | YES
+                                                  |                    |                                                            |
+--------------------------------------------------|--------------------|------------------------------------------------------------|----------
+\Lib                                              | DIRECTORY          | 1D0zXwlTRljMLHs2x5eGNYeOFolCWZ2Be                          | YES
+  AntiBan.ahk                                     | Library            | 1ZDOtcGzoX2-wI2S7JHgF7GutJGH2utWC                          | N/A
+  BreakManager.ahk                                | Library            | 110qAwmAy6Y8NmR1unj98Oje5fQ3ghD1j                          | N/A
+  Interop.ahk                                     | Library            | 1Yyc_2bmL4aztBQSdt2jtwG7gnwrFMfaF                          | N/A
+  Movement.ahk                                    | Library            | 1mM5VGQlTj3MtkC-OkqzxEvwoHDFm6SCt                          | N/A
+  Security.ahk                                    | Library            | 10KlfnUOJzZEYalI4G1-9KQxraS7ZIQ1E                          | N/A
+  SettingsLoader.ahk                              | Library            | 1qukmpo4u70rsYZGDDRvTzBJ6V9yq3odQ                          | N/A
+  AntiBan.txt                                     | Document           | 1ICnJrjdHLuk8Xv306pI6ukLJ84ZNwv_W                          | YES
+  BreakManager.txt                                | Document           | 1iHDcdr7imgyiE0VToSLbkXuS4wqEF8k4                          | YES
+  Interop.txt                                     | Document           | 1zbdWhOzlKWHtSXSWLxHwEMfdG8I_cOI0                          | YES
+  Movement.txt                                    | Document           | 16dczFAtzZ3tw-MQ_w0BzbSc3g0Vbq_F0                          | YES
+  Security.txt                                    | Document           | 1I7OqhDpezRTWgQHISBgoN1zhMzClig69                          | YES
+  SettingsLoader.txt                              | Document           | 1QxwKDsWCMUr92WP7OKRaD5CkzNgCAJgo                          | YES
+                                                  |                    |                                                            |
+--------------------------------------------------|--------------------|------------------------------------------------------------|----------
+\Worker                                           | DIRECTORY          | 173QG33oajyc07rGIH0h31tG3vbYsqocb                          | YES
+  Main_Worker.ahk                                 | Main Script        | 1sjeDGlRYLRAT-uIPSvi1LAx-v5ljtaWX                          | N/A
+  license.key                                     | Data/Key           | 1tyifvKl0OK1N7XE_QXKcoJgOhTXXoDon                          | N/A
+  Main_Worker.txt                                 | Document           | 1beeVRi_U6Baw8wFEkSEP8SzcZ3WNEWmo                          | YES
+  \Modules                                        | SUB-DIRECTORY      | 1bPjBfzVVHAPdy3-0bT-qOS6IGPzKeEdu                          | YES
+    ConfigManager.ahk                             | Module             | 1EeroVi-dcJOoR6CQs5eO2gk7nrVzChwE                          | N/A
+    OverlayPhysics.ahk                            | Module             | 1iaV7RENp7ObCyY48tU22EGZaKKoO0dBw                          | N/A
+    WorkerState.ahk                               | Module             | 1JvjUzWbBacsugQGLCYAiv-jndr6IIliP                          | N/A
+    ConfigManager.txt                             | Document           | 19j_ACz7UtRRKVYFRIwgef2C3R2U54wsK                          | YES
+    OverlayPhysics.txt                            | Document           | 1QNgJ3BJuc3SurLBzCRrz5HSLCJ5Pkair                          | YES
+    WorkerState.txt                               | Document           | 1E--MaMLNhCFFcV4MaEPhcJlAcrSlAmqZ                          | YES
+                                                  |                    |                                                            |
+--------------------------------------------------|--------------------|------------------------------------------------------------|----------
+\orchestrator                                     | DIRECTORY          | 1UWaMLTTHP2Ye6sj7MomIWAWH3i8JLglP                          | YES
+  orch_bootstrap.js                               | Script             | 1yJG7qSDqzg-8PANyMYJL5t2p-aKW8PLA                          | N/A
+                                                  |                    |                                                            |
+--------------------------------------------------|--------------------|------------------------------------------------------------|----------
+\PipzOrchestratorExtension                        | DIRECTORY          | 1xJrd_pXJ9SgOKayUsG2LQJq-YJ-XOJiq                          | YES
+  package.json                                    | Config (JSON)      | 1ZcYKbLpPwyIrc_QErrhge0NUoJSuiRkM                          | N/A
+  tsconfig.json                                   | Config (JSON)      | 1Y5_38VfETTcu-xeMqb48PublZcsE834g                          | N/A
+  package.json.governance.txt                     | Document           | 1Po90G2nk4wIXuCHQjc3HeXH3wyv3AO4x                          | YES
+  tsconfig.json.governance.txt                    | Document           | 17wael1lkDdWAyYmeX1nbdzxpd5jiWQmU                          | YES
+  README.md                                       | Document           | 19yIEe4A8bgDuyN7PzaN2NNscAncgT4xr                          | YES
+  \src                                            | SUB-DIRECTORY      | 1mAszu0sAYJ_RvtyaZSqBBE7po6ECkoLb                          | YES
+    extension.ts                                  | Script             | 1TdL9EhG34T8zLbwD4G9zR3isS2u7X6iN                          | YES
+                                                  |                    |                                                            |
+--------------------------------------------------|--------------------|------------------------------------------------------------|----------
+\pipz-mirror-governance                           | DIRECTORY          |                                                            | NO        
+  package.json                                    | Config (JSON)      |                                                            | NO
+  tsconfig.json                                   | Config (JSON)      |                                                            | NO
+  README.md                                       | Document           |                                                            | NO
+  \src                                            | SUB-DIRECTORY      |                                                            | NO
+    extension.ts                                  | Script             |                                                            | NO
+  \.vscode                                        | SUB-DIRECTORY      |                                                            | NO
+    extensions.json                               | Config (JSON)      |                                                            | NO
+    launch.json                                   | Config (JSON)      |                                                            | NO
+    settings.json                                 | Config (JSON)      |                                                            | NO
+    tasks.json                                    | Config (JSON)      |                                                            | NO
+    extensions.json.governance.txt                | Document           |                                                            | NO
+    launch.json.governance.txt                    | Document           |                                                            | NO
+    settings.json.governance.txt                  | Document           |                                                            | NO
+    tasks.json.governance.txt                     | Document           |                                                            | NO
+                                                  |                    |                                                            |
+--------------------------------------------------|--------------------|------------------------------------------------------------|----------
+
+; ------------------------------------------------------------------
+2. MASTER ALIAS INDEX: COMMON NAME MAP (MUST BE MAINTAINED)
+; ------------------------------------------------------------------
+
+--------------------------------------------------|--------------------------------------------------------------------------------------------
+ PATH / FILE NAME                                 | ALIASES / ROLE
+--------------------------------------------------|--------------------------------------------------------------------------------------------
+\Pipz_Project_V3                                  | project root, project folder, project directory, root directory
+  GLOBAL STATE REGISTRY.gsheet                    | registry, global registry, state registry, variable registry, function registry
+  settings.ini                                    | settings ini, runtime settings, user settings ini, config ini
+  PipzScptzIcon.png                               | app icon, application icon, tray icon, gui icon
+  .gitignore                                      | 
+  _PROJECT_BLUEPRINT.txt                          | blueprint, project blueprint, architecture blueprint, folder blueprint, structure blueprint
+  _PROJECT_ANCHOR.txt                             | anchor, project anchor, system prompt, ai anchor, governance anchor
+  AI_PROJECT_INSTRUCTIONS.txt                     | project instructions, instructions, ai instructions, governance rules, ai governance
+  AUDIT_RUNNER.txt                                | audit runner, audit plan, audit backlog, audit execution plan, audit runner file, audit checklist
+  INDEXIDLIST.txt                                 | index, id index, drive index, id list, index id list
+  BOOTSTRAPv4.txt                                 | bootstrap, bootstrap v4, init protocol, initialization protocol
+  PHASE5_VISIBILITY_AUDIT_TEMPLATE.txt            | phase 5 template, phase 5 audit template, visibility audit template
+  PHASE5_EXECUTION_CHECKLIST.txt                  | phase 5 checklist, phase 5 execution checklist, phase 5 audit checklist
+  GOVERNANCE_LOCK.txt                             | governance lock, lock file, governance state, lock state
+  PROJECT_LEARNED_CONSTRAINTS.txt                 | plc, constraints, learned constraints, project constraints, invalidated approaches
+  ORCH_PROTOCOL_SPEC.txt                          | orchestrator protocol, orch protocol, orch contract, orchestrator spec
+  PROJECT_STATUS_CHECKLIST.txt                    | project checklist, status checklist, task tracker, master checklist
+  PROJECT_WORKING_NOTES.txt                       | working notes, project notes, design notes, sanity notes, intent log
+  STANDARDIZED_HEADERS.txt                        | 
+  settings.txt                                    | settings mirror, settings text, settings txt
+                                                  |
+--------------------------------------------------|--------------------------------------------------------------------------------------------
+\Controller                                       | controller folder, gui controller, controller directory
+  Main_Controller.ahk                             | controller, main controller, gui controller script
+  Main_Controller.txt                             | controller mirror, controller txt
+  \Modules                                        | controller modules, gui modules
+    MaintenanceManager.ahk                        | maintenance manager, update manager, maintenance module
+    Messenger.ahk                                 | messenger, logger, logging module
+    NavigationManager.ahk                         | navigation manager, ui navigation, tab manager
+    ProcessManager.ahk                            | process manager, worker manager, process control module
+    TooltipManager.ahk                            | tooltip manager, help tooltips, ui hints module
+    WorkerInterface.ahk                           | worker interface, ipc interface, worker bridge
+    MaintenanceManager.txt                        | maintenance mirror, maintenance txt
+    Messenger.txt                                 | messenger mirror, logger mirror
+    NavigationManager.txt                         | navigation mirror
+    ProcessManager.txt                            | process mirror
+    TooltipManager.txt                            | tooltip mirror
+    WorkerInterface.txt                           | worker interface mirror
+                                                  |
+--------------------------------------------------|--------------------------------------------------------------------------------------------
+\Lib                                              | lib, library, shared library, common library
+  AntiBan.ahk                                     | antiban, anti-ban, humanizer, randomness logic
+  BreakManager.ahk                                | break manager, afk manager, pause manager
+  Interop.ahk                                     | interop, ipc, messaging core
+  Movement.ahk                                    | movement, input movement, mouse movement
+  Security.ahk                                    | security, license security, auth module
+  SettingsLoader.ahk                              | settings loader, ini loader, config loader
+  AntiBan.txt                                     | antiban mirror
+  BreakManager.txt                                | break manager mirror
+  Interop.txt                                     | interop mirror
+  Movement.txt                                    | movement mirror
+  Security.txt                                    | security mirror
+  SettingsLoader.txt                              | settings loader mirror
+                                                  |
+--------------------------------------------------|--------------------------------------------------------------------------------------------
+\Worker                                           | worker folder, background worker, engine
+  Main_Worker.ahk                                 | worker, main worker, engine script
+  license.key                                     | license key, auth key, license file
+  Main_Worker.txt                                 | worker mirror, worker txt
+  \Modules                                        | worker modules, overlay modules
+    ConfigManager.ahk                             | config manager, ini mapper, config module
+    OverlayPhysics.ahk                            | overlay physics, overlay motion, physics module
+    WorkerState.ahk                               | worker state, state manager, watchdog
+    ConfigManager.txt                             | config manager mirror
+    OverlayPhysics.txt                            | overlay physics mirror
+    WorkerState.txt                               | worker state mirror
+                                                  |
+--------------------------------------------------|--------------------------------------------------------------------------------------------
+\PipzOrchestratorExtension                        | orchestrator extension, vs code extension, orch extension
+  package.json                                    | npm package file, node package config, extension manifest
+  tsconfig.json                                   | typescript config, ts config, compiler config
+  README.md                                       | extension readme, extension documentation
+  package.json.governance.txt                     | package governance, package sidecar, npm governance
+  tsconfig.json.governance.txt                    | tsconfig governance, typescript governance sidecar
+  \src                                            | extension source, src folder, typescript source
+    extension.ts                                  | vs code entry, extension entry, orchestrator extension code
+--------------------------------------------------|--------------------------------------------------------------------------------------------
+\orchestrator                                     | orchestrator folder, orchestrator scripts, orchestration backend
+  orch_bootstrap.js                               | bootstrap script, orch bootstrap, orchestrator bootstrap
+                                                  |
+--------------------------------------------------|--------------------------------------------------------------------------------------------
+\pipz-mirror-governance                           | mirror governance, mirror extension, governance extension
+  package.json                                    | mirror package, governance package
+  tsconfig.json                                   | mirror tsconfig
+  README.md                                       | mirror readme
+  \src                                            | mirror src
+    extension.ts                                  | mirror entry, governance entry
+  \.vscode                                        | mirror vscode, governance vscode
+    extensions.json                               | mirror extensions config
+    launch.json                                   | mirror launch config
+    settings.json                                 | mirror settings
+    tasks.json                                    | mirror tasks
+    extensions.json.governance.txt                | mirror extensions governance
+    launch.json.governance.txt                    | mirror launch governance
+    settings.json.governance.txt                  | mirror settings governance
+    tasks.json.governance.txt                     | mirror tasks governance
+                                                  |
+--------------------------------------------------|--------------------------------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+
+END OF INDEXIDLIST

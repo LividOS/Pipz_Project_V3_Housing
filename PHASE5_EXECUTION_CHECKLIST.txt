@@ -1,0 +1,242 @@
+; ------------------------------------------------------------------
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\PHASE5_EXECUTION_CHECKLIST.txt"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - PHASE5_EXECUTION_CHECKLIST.txt
+; Version: 1.1.2
+; Last change: Added Section 7A Alias Coverage Verification.
+; Content-Fingerprint: 2026-01-22T11-58-47Z-YO5M7H6D
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+PHASE 5 — FULL VISIBILITY & ACCESSIBILITY AUDIT
+; ------------------------------------------------------------------ 
+
+EXECUTION CHECKLIST (DETERMINISTIC)
+
+This document defines the exact steps required to EXECUTE Phase 5.
+
+This is NOT:
+
+; - A report
+; - A template
+; - An analysis
+; - A narrative
+
+This checklist is PROCEDURAL and MUST be followed in order.
+
+No step may be skipped.  
+No inference is permitted.  
+Any failure requires STOP.
+
+; ------------------------------------------------------------------
+PRE-CONDITIONS (MANDATORY)
+; ------------------------------------------------------------------
+
+[ ] Confirm Bootstrap v4 Phases 0–4 have completed successfully  
+[ ] Confirm BOOTSTRAPv4.txt was located, opened, and fully read in this session  
+[ ] Confirm Phase 5 was explicitly requested by name by the user  
+[ ] Confirm Google Drive access is available and functioning  
+
+If ANY pre-condition fails → STOP
+
+; ------------------------------------------------------------------
+STEP 1 — ROOT CONFIRMATION
+; ------------------------------------------------------------------
+
+[ ] Resolve project root using Bootstrap v4 precedence rules ONLY:
+
+    ; - INDEXIDLIST.txt (if present)
+    ; - GEMINI MEM TAG declared paths
+    ; - _PROJECT_BLUEPRINT.txt structure
+
+[ ] Record resolved root Drive ID
+[ ] Record resolved root declared path
+
+If root cannot be resolved deterministically → STOP
+
+; ------------------------------------------------------------------
+STEP 2 — ROOT-ANCHORED ENUMERATION
+; ------------------------------------------------------------------
+
+[ ] Begin enumeration from resolved root Drive ID
+[ ] Use parent-child traversal ONLY
+[ ] DO NOT use Google Drive search
+[ ] For each folder discovered:
+
+    ; - Record Drive ID
+    ; - Record name
+    ; - Record parent ID
+    ; - Record type (folder)
+
+If traversal fails, is incomplete, or is truncated → STOP
+
+; ------------------------------------------------------------------
+STEP 3 — RECURSIVE DISCOVERY
+; ------------------------------------------------------------------
+
+For EACH folder discovered:
+
+[ ] Enumerate all immediate children
+[ ] Record for EACH item:
+
+    ; - Drive ID
+    ; - Name
+    ; - Parent ID
+    ; - Type (file / folder)
+
+[ ] Continue recursively until no undiscovered folders remain
+
+If enumeration cannot continue deterministically → STOP
+
+; ------------------------------------------------------------------
+STEP 4 — PATH RECONSTRUCTION
+; ------------------------------------------------------------------
+
+For EACH discovered item:
+
+[ ] Walk parent chain to resolved root
+[ ] Rebuild full path
+[ ] Record reconstructed full path
+[ ] Compare against:
+
+    ; - GEMINI MEM TAG declared paths (for governed .txt files)
+    ; - Blueprint-defined expected structure (_PROJECT_BLUEPRINT.txt ONLY)
+
+Rules:
+
+; - _PROJECT_ANCHOR.txt is NOT a structural authority
+; - Runtime-only and non-readable assets may legitimately lack GEMINI MEM TAGs
+
+If path cannot be reconstructed → STOP
+
+; ------------------------------------------------------------------
+STEP 5 — READABILITY CHECK
+; ------------------------------------------------------------------
+
+For EACH discovered file:
+
+[ ] Determine content class:
+
+    ; - Governed-readable (.txt mirrors, governance docs)
+    ; - Runtime-only (.ahk, .ini, .key)
+    ; - Binary / asset (.png, etc.)
+
+[ ] Attempt read ONLY if file is governed-readable
+[ ] Record result:
+
+    ; - Readable
+    ; - Unreadable (with failure mode)
+    ; - N/A (non-readable by definition)
+
+If tooling prevents a definitive determination → STOP
+
+; ------------------------------------------------------------------
+STEP 6 — EXPECTED SET COMPILATION
+; ------------------------------------------------------------------
+
+[ ] Compile expected item list from:
+
+    ; - _PROJECT_BLUEPRINT.txt (STRUCTURE AUTHORITY)
+
+[ ] DO NOT derive structure from _PROJECT_ANCHOR.txt
+[ ] Record all expected paths
+
+If expected set cannot be compiled deterministically → STOP
+
+; ------------------------------------------------------------------
+STEP 7 — INDEX SET COMPILATION
+; ------------------------------------------------------------------
+
+[ ] Compile indexed item list from INDEXIDLIST.txt (if present)
+[ ] Record declared paths, IDs, and VERIFIED/N/A status
+[ ] Treat VERIFIED and N/A as acceleration signals ONLY
+
+; ------------------------------------------------------------------
+STEP 7A — ALIAS COVERAGE VERIFICATION (INDEX QUALITY CHECK)
+; ------------------------------------------------------------------
+
+Purpose:
+This step verifies that INDEXIDLIST.txt supports deterministic implicit file
+resolution under AI_PROJECT_INSTRUCTIONS Rule 2i by ensuring that alias and role
+mappings are complete and non-ambiguous.
+
+[ ] Locate and open INDEXIDLIST.txt
+[ ] Identify the following two sections within INDEXIDLIST.txt:
+    ; - MASTER INDEX: GOOGLE DRIVE ID LIST
+    ; - MASTER ALIAS INDEX: COMMON NAME MAP
+
+[ ] Coverage Check (MANDATORY):
+    ; - For every item in MASTER INDEX with VERIFIED = YES:
+      ; - Confirm a corresponding row exists in MASTER ALIAS INDEX
+      ; - Confirm ALIASES / ROLE is non-empty
+
+[ ] No-Ambiguity Check (MANDATORY):
+    ; - Build a set of alias tokens by splitting ALIASES / ROLE values on commas
+    ; - Normalize alias tokens for comparison:
+      ; - Trim whitespace
+      ; - Case-insensitive match
+    ; - Confirm no alias token maps to more than one PATH / FILE NAME
+
+[ ] No-Orphan Alias Check (MANDATORY):
+    ; - Confirm every PATH / FILE NAME listed in MASTER ALIAS INDEX exists in MASTER INDEX
+
+[ ] Record results for report generation:
+    ; - Alias coverage count: covered / total (VERIFIED = YES)
+    ; - List of missing-alias items (full paths)
+    ; - List of ambiguous aliases and the conflicting paths
+    ; - List of orphan alias rows (paths present in alias index but not in master index)
+
+If ANY mandatory check fails → STOP
+
+; ------------------------------------------------------------------
+STEP 8 — RECONCILIATION & CLASSIFICATION
+; ------------------------------------------------------------------
+
+For EACH item across Expected, Discovered, and Indexed sets:
+
+[ ] Compare presence and path alignment
+[ ] Classify item as EXACTLY ONE of:
+
+    ; - VERIFIED      (exists, readable if governed, path matches)
+    ; - UNREADABLE    (exists but cannot be read when required)
+    ; - MISSING       (expected but not discovered)
+    ; - ORPHANED      (discovered but not expected)
+    ; - UNGOVERNED    (exists but lacks required governance)
+
+[ ] Record explicit justification for classification
+
+If classification is ambiguous → STOP
+
+; ------------------------------------------------------------------
+STEP 9 — REPORT GENERATION
+; ------------------------------------------------------------------
+
+[ ] Populate PHASE5_VISIBILITY_AUDIT_TEMPLATE.txt
+[ ] Include:
+
+    ; - All metadata
+    ; - All classified items
+    ; - All discrepancies
+
+[ ] Do NOT modify any project files
+[ ] Do NOT normalize or interpret results
+
+; ------------------------------------------------------------------
+STEP 10 — TERMINATION
+; ------------------------------------------------------------------
+
+[ ] Declare Phase 5 execution complete
+[ ] Present report ONLY
+[ ] Do NOT propose fixes
+[ ] Do NOT infer causes
+[ ] Do NOT continue analysis unless explicitly instructed
+
+; ------------------------------------------------------------------
+END OF PHASE 5 EXECUTION CHECKLIST
+; ------------------------------------------------------------------

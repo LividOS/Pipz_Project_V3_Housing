@@ -1,0 +1,188 @@
+; ------------------------------------------------------------------
+; GEMINI MEM TAG(DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\_PROJECT_BLUEPRINT.txt"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - _PROJECT_BLUEPRINT.txt
+; Version: 2.0.1
+; Last change: Performed high-vigilance whitespace cleanup and structural normalization; maintained 1:1 literal content match.
+; Content-Fingerprint: 2026-01-22T14-13-31Z-ICVETKNT
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+### 1. MASTER BLUEPRINT: FOLDER ARCHITECTURE (MUST BE MAINTAINED)
+; ------------------------------------------------------------------
+
+AUTHORITATIVE ROLE DECLARATION (PHASE 5)
+
+This section constitutes the sole authoritative Expected Set definition used during Phase 5 reconciliation.
+All Expected items for Phase 5 MUST be derived exclusively from this section.
+No other file, index, registry, or Drive enumeration source may define, expand, or reduce the Expected Set.
+
+INDEXIDLIST.txt provides acceleration only.
+_PROJECT_ANCHOR.txt provides intent and constraints only.
+Discovered Drive contents provide Observed Set data only.
+
+; ------------------------------------------------------------------
+
+--------------------------------------------------|--------------------|------------------------------------------------------------------------
+PATH / FILE NAME                                  | TYPE               | DESCRIPTION / RESPONSIBILITY
+--------------------------------------------------|--------------------|------------------------------------------------------------------------
+\Pipz_Project_V3                                  | ROOT               | Main project directory.
+  GLOBAL STATE REGISTRY.gsheet                    | Spreadsheet        | EXTERNALIZED SOURCE OF TRUTH: Variable tracking & Function Signatures.
+  settings.ini                                    | Config             | Central storage for user parameters, anti-ban settings, and titles.
+  PipzScptzIcon.png                               | Asset (Image)      | Application icon used by Controller GUI and tray; branding and visual identification.
+  _PROJECT_BLUEPRINT.txt                          | Document           | Primary source of truth for structure, search protocols, and logic rules.
+  _PROJECT_ANCHOR.txt                             | Document           | Unified living system prompt and logic anchor for AI behavior and authority framing.
+  AI_PROJECT_INSTRUCTIONS.txt                     | Document           | AI governance ruleset; mandatory read source defining verification, fingerprinting, header mandates, and enforcement behavior.
+  AUDIT_RUNNER.txt                                | Document           | Procedural audit execution plan and backlog; defines required audits, invocation commands, and pass/fail criteria. Non-authoritative; execution-focused.
+  INDEXIDLIST.txt                                 | Document           | Deterministic Google Drive ID acceleration map; reference-only, never a source of authority.
+  BOOTSTRAPv4.txt                                 | Document           | Canonical, authoritative definition of the Bootstrap v4 initialization protocol.
+  PHASE5_VISIBILITY_AUDIT_TEMPLATE.txt            | Document           | Read-only report template for Phase 5 visibility audits.
+  PHASE5_EXECUTION_CHECKLIST.txt                  | Document           | Deterministic execution checklist for Phase 5 audit runs.
+  GOVERNANCE_LOCK.txt                             | Document           | Governance lifecycle state declaration and phase lock indicator (non-authoritative).
+  PROJECT_LEARNED_CONSTRAINTS.txt                 | Document           | Non-authoritative, scope-indexed log of confirmed constraints and invalidated approaches to prevent regression.
+  ORCH_PROTOCOL_SPEC.txt                          | Document           | Formal protocol contract defining orchestrator role separation, execution flow, audit requirements, token gates, and PASS/FAIL semantics.
+  PROJECT_STATUS_CHECKLIST.txt                    | Document           | Living execution tracker enumerating completed, pending, and blocked work items across governance, tooling, and orchestration.
+  PROJECT_WORKING_NOTES.txt                       | Document           | Living design journal capturing intent, rationale, risk notes, architectural decisions, and sanity anchors.
+  settings.txt                                    | Document           | Auditable AI mirror of settings.ini.
+                                                  |                    |
+--------------------------------------------------|--------------------|------------------------------------------------------------------------
+\Controller                                       | DIRECTORY          | Container for the Interactive GUI Process.
+  Main_Controller.ahk                             | Main Script        | Entry point for GUI; handles UI, validation, orchestration commands, and high-level control.
+  Main_Controller.txt                             | Document           | Auditable AI mirror of Main_Controller.ahk.
+  \Modules                                        | SUB-DIRECTORY      | Internal logic specific to the GUI and user interaction.
+    MaintenanceManager.ahk                        | Module             | Handles script updates, cleanup routines, and environment validation.
+    Messenger.ahk                                 | Module             | Manages structured logging, UI messaging, and status propagation.
+    NavigationManager.ahk                         | Module             | Controls GUI tab switching, navigation state, and menu transitions.
+    ProcessManager.ahk                            | Module             | Monitors and manages the Worker process lifecycle and target application window.
+    TooltipManager.ahk                            | Module             | Handles dynamic help tooltips and contextual hover descriptions.
+    WorkerInterface.ahk                           | Module             | IPC bridge; sends commands, state sync, and control signals to the Worker.
+    MaintenanceManager.txt                        | Document           | Auditable AI mirror of MaintenanceManager.ahk.
+    Messenger.txt                                 | Document           | Auditable AI mirror of Messenger.ahk.
+    NavigationManager.txt                         | Document           | Auditable AI mirror of NavigationManager.ahk.
+    ProcessManager.txt                            | Document           | Auditable AI mirror of ProcessManager.ahk.
+    TooltipManager.txt                            | Document           | Auditable AI mirror of TooltipManager.ahk.
+    WorkerInterface.txt                           | Document           | Auditable AI mirror of WorkerInterface.ahk.
+                                                  |                    |
+--------------------------------------------------|--------------------|------------------------------------------------------------------------
+\Lib                                              | DIRECTORY          | Shared Libraries (#Include) used by both Controller and Worker.
+  AntiBan.ahk                                     | Library            | Human-modeling logic: randomized Bezier curves, click variation, and timing noise.
+  BreakManager.ahk                                | Library            | Probability-based AFK logic: weighted pauses and humanized idle behavior.
+  Interop.ahk                                     | Library            | IPC / messaging primitives for cross-process communication.
+  Movement.ahk                                    | Library            | Shared mouse and keyboard wrappers for consistent interaction behavior.
+  Security.ahk                                    | Library            | License decryption, validation, and integrity enforcement.
+  SettingsLoader.ahk                              | Library            | Standardized INI engine for configuration loading and persistence.
+  AntiBan.txt                                     | Document           | Auditable AI mirror of AntiBan.ahk.
+  BreakManager.txt                                | Document           | Auditable AI mirror of BreakManager.ahk.
+  Interop.txt                                     | Document           | Auditable AI mirror of Interop.ahk.
+  Movement.txt                                    | Document           | Auditable AI mirror of Movement.ahk.
+  Security.txt                                    | Document           | Auditable AI mirror of Security.ahk.
+  SettingsLoader.txt                              | Document           | Auditable AI mirror of SettingsLoader.ahk.
+                                                  |                    |
+--------------------------------------------------|--------------------|------------------------------------------------------------------------
+\Worker                                           | DIRECTORY          | Container for the Background Task Script.
+  Main_Worker.ahk                                 | Main Script        | Core execution engine: primary logic loop and task execution.
+  license.key                                     | Data/Key           | Encrypted authorization key required by Security.ahk.
+  Main_Worker.txt                                 | Document           | Auditable AI mirror of Main_Worker.ahk.
+  \Modules                                        | SUB-DIRECTORY      | Internal logic specific to the Worker process and Overlay behavior.
+    ConfigManager.ahk                             | Module             | Maps INI settings into Worker global state.
+    OverlayPhysics.ahk                            | Module             | Spring-and-damper physics math for smooth overlay movement.
+    WorkerState.ahk                               | Module             | Watchdog timers, IPC receivers, and overlay state management.
+    ConfigManager.txt                             | Document           | Auditable AI mirror of ConfigManager.ahk.
+    OverlayPhysics.txt                            | Document           | Auditable AI mirror of OverlayPhysics.ahk.
+    WorkerState.txt                               | Document           | Auditable AI mirror of WorkerState.ahk.
+                                                  |                    |
+--------------------------------------------------|--------------------|------------------------------------------------------------------------
+\orchestrator                                     | DIRECTORY          | Local orchestration runtime responsible for governed execution, audits, and hidden role chaining.
+  orch_bootstrap.js                               | Script             | Orchestrator bootstrap verifier; performs governance checks, initializes audit runs, and writes bootstrap audit artifacts. No model calls.
+                                                  |                    |
+--------------------------------------------------|--------------------|------------------------------------------------------------------------
+\PipzOrchestratorExtension                        | DIRECTORY          | VS Code extension providing the Architect-facing UI for governed orchestration.
+  package.json                                    | Config (JSON)      | Extension manifest defining commands, activation events, and metadata.
+  tsconfig.json                                   | Config (JSON)      | TypeScript compiler configuration for the extension.
+  package.json.governance.txt                     | Document           | Governance sidecar for package.json; stores mandated headers, fingerprints, and audit metadata.
+  tsconfig.json.governance.txt                    | Document           | Governance sidecar for tsconfig.json; stores mandated headers, fingerprints, and audit metadata.
+  README.md                                       | Document           | Human-readable overview of the orchestrator extension purpose and usage.
+  \src                                            | SUB-DIRECTORY      | Source code for the VS Code extension.
+    extension.ts                                  | Script             | Extension entry point; registers commands, invokes orchestrator, and mediates Architect actions.
+                                                  |                    |
+--------------------------------------------------|--------------------|------------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+### 2. REGISTRY ACCESS & VERIFICATION PROTOCOL (CRITICAL)
+; ------------------------------------------------------------------
+
+To maintain a 1:1 literal match of the project state, the following protocol MUST be followed:
+
+1. **LOCATION:** All Global State, Function, and Logic Rule data is stored externally in `GLOBAL STATE REGISTRY.gsheet`.
+
+2. **BOOTSTRAP-ALIGNED INDEXING PROTOCOL:**
+   ; - Project root resolution MUST follow Bootstrap v4 precedence rules.
+   ; - `INDEXIDLIST.txt` MUST be used first when present to deterministically resolve the project root.
+   ; - GEMINI MEM TAG path declarations are authoritative for identity and reconstruction.
+   ; - Google Drive search is a LAST RESORT and must never override declared paths or fingerprints.
+
+   ; - Once the root is resolved, enumerate and verify visibility of:
+     ; - `\Controller`
+     ; - `\Controller\Modules`
+     ; - `\Lib`
+     ; - `\Worker`
+     ; - `\Worker\Modules`
+
+   ; - Confirm visibility of all root governance files:
+     ; - `AI_PROJECT_INSTRUCTIONS.txt`
+     ; - `_PROJECT_BLUEPRINT.txt`
+     ; - `_PROJECT_ANCHOR.txt`
+     ; - `BOOTSTRAPv4.txt`
+	 ; - `AUDIT_RUNNER.txt`
+     ; - `PHASE5_VISIBILITY_AUDIT_TEMPLATE.txt`
+     ; - `PHASE5_EXECUTION_CHECKLIST.txt`
+     ; - `GOVERNANCE_LOCK.txt`
+     ; - `PROJECT_LEARNED_CONSTRAINTS.txt`
+     ; - `GLOBAL STATE REGISTRY.gsheet`
+     ; - `INDEXIDLIST.txt`
+     ; - `settings.txt`
+     ; - `PipzScptzIcon.png`
+
+   Visibility confirmation is existence and path correctness only.
+   Runtime-only and non-readable assets (e.g. .png, .ahk, .ini, .key) are not subject to read or fingerprint verification.
+
+3. **REGISTRY VERIFICATION RULE:**
+   ; - Access the gsheet and read ALL required tabs:
+     ; - `GLOBAL STATE REGISTRY` (Variables, Owners, Init Values)
+     ; - `GLOBAL FUNCTION REGISTRY` (Functions, Owners, Purpose)
+     ; - `GLOBAL LOGIC RULES` (Logic Invariants / Ground Truth rules)
+   ; - If any required tab is missing, inaccessible, or cannot be fully read, the AI must stop.
+
+4. **CONTENT-FINGERPRINT ENFORCEMENT:**
+   ; - The Content-Fingerprint declared in this file (`_PROJECT_BLUEPRINT.txt`) MUST be extracted and verified against the current Drive mirror before use.
+   ; - Any mismatch between the declared fingerprint and the Drive mirror constitutes a hard stop.
+
+5. **TOOLING LIMITATION HARD-STOP:**
+   ; - If tooling limitations (including truncation, partial reads, or access restrictions) prevent a verifiable full read of this file, any required governance file, or any required registry tab, the AI must stop and explicitly report the limitation.
+   ; - The AI must not infer, assume, summarize, or fabricate missing content under any circumstances.
+
+6. **CUMULATIVE INTEGRITY:** Never remove registry entries.
+   Updates must maintain a 1:1 literal match with the source code and verified mirrors.
+
+; ------------------------------------------------------------------
+### 3. GLOBAL LOGIC ANCHORS
+; ------------------------------------------------------------------
+
+; - **DRY ARCHITECTURE:** No variable or function definitions should be hardcoded in text documents. Refer to `GLOBAL STATE REGISTRY.gsheet`.
+; - **IPC STANDARD:** All communication between Controller and Worker uses WM_COPYDATA or custom message `0x5555`.
+; - **STATE PERSISTENCE:** The Worker must remain a slave to `Settings.ini`; enforcement is handled by the Watchdog in `WorkerState.ahk`.
+; - **GROUND TRUTH RULES (MANDATORY):** Logic invariants are defined in `GLOBAL STATE REGISTRY.gsheet` under the tab titled `GLOBAL LOGIC RULES`.
+
+These rules must be read and verified before any audit, debugging, refactor, or feature change.
+
+; ------------------------------------------------------------------
+
+END OF PROJECT BLUEPRINT

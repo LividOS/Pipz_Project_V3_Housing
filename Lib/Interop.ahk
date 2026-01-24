@@ -1,0 +1,121 @@
+﻿; ------------------------------------------------------------------
+; GEMINI MEM TAG(DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\Lib\Interop.ahk"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - Interop.ahk (AHK v2)
+; Version: 1.0.0
+; Last change: EMPTY.
+; Content-Fingerprint: 2026-01-21T20-32-30Z-JG1CZAZC
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+#Requires AutoHotkey >=2.0
+
+; ------------------------------------------------------------------
+; COMMUNICATION LAYER (Window Messages)
+; ------------------------------------------------------------------
+
+; Custom Message ID used to signal the Worker
+global WM_TRIGGER_STATE := 0x5555 
+
+; Timer Offset Globals
+global g_PausedTimeTotal := 0   ; Accumulated paused time
+global g_PauseStart := 0       ; When the current pause began
+
+; --- WORKER SIDE: LISTEN ---
+SetupWorkerListener() {
+    OnMessage(WM_TRIGGER_STATE, Worker_ReceiveSignal)
+}
+
+; This fires the moment the Controller sends a message
+Worker_ReceiveSignal(wParam, lParam, msg, hwnd) {
+    global g_WorkerState, g_StartTime, g_PausedTimeTotal, g_PauseStart
+    
+    ; Logic: 1 = Running/Active, 0 = Paused, 2 = Inactive/Reset
+    if (wParam == 1) {
+        ; If we were paused, calculate how long we stayed in that state
+        if (g_WorkerState == "paused") {
+            g_PausedTimeTotal += (A_TickCount - g_PauseStart)
+        }
+        g_WorkerState := "active"
+    } 
+    else if (wParam == 0) {
+        ; If we aren't already paused, record the start of the pause
+        if (g_WorkerState != "paused") {
+            g_PauseStart := A_TickCount
+        }
+        g_WorkerState := "paused"
+    } 
+    else if (wParam == 2) {
+        ; RESET SIGNAL - Sets state back to base inactive and clears all timers
+        g_WorkerState := "inactive"
+        g_StartTime := 0 
+        g_PausedTimeTotal := 0
+        g_PauseStart := 0
+    }
+}
+
+; --- CONTROLLER SIDE: SEND ---
+; The Controller calls this to toggle the Worker via its GUI title
+SendWorkerSignal(state) {
+    global WorkerTitle
+    
+    ; Determine which window title to look for (use global variable or fallback)
+    targetTitle := IsSet(WorkerTitle) ? WorkerTitle : "Overlay_Worker_Internal"
+    
+    if !winId := WinExist(targetTitle) 
+        return false
+    
+    ; Determine wParam based on state string
+    ; 1 = active (running), 0 = paused, 2 = inactive (reset)
+    sig := (state == "active" || state == "running") ? 1 : (state == "paused" ? 0 : 2)
+    
+    PostMessage(WM_TRIGGER_STATE, sig, 0, , "ahk_id " winId)
+    return true
+}
+
+; ------------------------------------------------------------------
+; PROCESS MANAGEMENT
+; ------------------------------------------------------------------
+
+IsProcessAlive(pid) {
+    if !pid
+        return false
+    return ProcessExist(pid)
+}
+
+ProcessSuspend(PID) {
+    if !ProcessExist(PID)
+        return false
+    hProc := DllCall("OpenProcess", "UInt", 0x1F0FFF, "Int", 0, "UInt", PID, "Ptr")
+    if !hProc
+        return false
+    DllCall("ntdll\NtSuspendProcess", "Ptr", hProc)
+    DllCall("CloseHandle", "Ptr", hProc)
+    return true
+}
+
+ProcessResume(PID) {
+    if !ProcessExist(PID)
+        return false
+    hProc := DllCall("OpenProcess", "UInt", 0x1F0FFF, "Int", 0, "UInt", PID, "Ptr")
+    if !hProc
+        return false
+    DllCall("ntdll\NtResumeProcess", "Ptr", hProc)
+    DllCall("CloseHandle", "Ptr", hProc)
+    return true
+}
+
+; Helper for version detection if needed for external tools
+IsAhkV1Exe(exePath) {
+    ver := ""
+    try ver := FileGetVersion(exePath)
+    if (ver = "")
+        return false
+    major := StrSplit(ver, ".")[1] + 0
+    return (major = 1)
+}

@@ -1,0 +1,15 @@
+# Dependencies
+node_modules/
+
+# Build output
+out/
+dist/
+
+# VS Code temporary files
+.vscode-test/
+*.log
+
+# OneDrive / System files
+$RECYCLE.BIN/
+Thumbs.db
+desktop.ini

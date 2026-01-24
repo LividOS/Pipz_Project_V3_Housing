@@ -1,0 +1,149 @@
+﻿; ------------------------------------------------------------------
+; GEMINI MEM TAG(DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\Worker\Main_Worker.ahk"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - Main_Worker.ahk (AHK v2)
+; Version: 2.0.6
+; Last change: Added #NoTrayIcon to hide worker from system tray.
+; Content-Fingerprint: 2026-01-21T20-36-28Z-GNPP931Y
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+#Requires AutoHotkey >=2.0
+#SingleInstance Force
+#NoTrayIcon
+
+; ------------------------------------------------------------------
+; MODULE INCLUDES
+; ------------------------------------------------------------------
+#Include ..\Lib\Security.ahk
+#Include ..\Lib\Interop.ahk
+#Include ..\Lib\Movement.ahk
+#Include ..\Lib\AntiBan.ahk
+#Include ..\Lib\SettingsLoader.ahk
+#Include ..\Lib\BreakManager.ahk
+#Include Modules\OverlayPhysics.ahk
+#Include Modules\WorkerState.ahk
+#Include Modules\ConfigManager.ahk
+
+; ------------------------------------------------------------------
+; INITIALIZATION & SECURITY
+; ------------------------------------------------------------------
+SetTitleMatchMode("RegEx")
+CoordMode("Mouse", "Client")
+CoordMode("Pixel", "Client")
+CoordMode("ToolTip", "Screen")
+
+secret := "PIPSECMAX_LIREGKEY_11711503721976861054928319"
+keyFile := A_ScriptDir "\license.key"
+licData := ValidateLicense(secret, keyFile)
+
+; Global Configuration & State
+global g_Config := Map()
+global g_LastSettingsUpdate := 0 ; INITIALIZED TO 0: Forces Watchdog to trigger on first change
+global g_StartTime := 0
+global g_WorkerState := "inactive" 
+global InternalTitle := "Overlay_Worker_Internal"
+global g_GameTitle := ""
+
+; Communication HWNDs
+global ControllerHWND := A_Args.Length > 0 ? Integer(A_Args[1]) : 0
+
+; --- Global Variables (Matching Controller) ---
+global g_ShowOverlay       := 1
+global g_OvershootEnabled  := 1 
+global g_OvershootPercent  := 5 
+global g_MicroDelayEnabled := 0
+global g_MicroDelayMax     := 500
+global g_MicroDelayChance  := 15
+global g_BreaksEnabled     := 0
+global g_BreakChance       := 5
+global g_BreakSpacing      := 20
+
+; Timer Globals
+global g_PausedTimeTotal := 0
+global g_PauseStart := 0
+
+; Overlay Physics State
+global overlayWidth := 360, overlayHeight := 108
+global overlayCurX := 30.0, overlayCurY := 500.0 
+global overlayVelX := 0.0, overlayVelY := 0.0
+global springStrength := 0.45 
+global springDamping  := 0.75 
+global springSnapDist := 200  
+global sleepThreshold := 0.1  
+
+; 1. Load Initial Settings (Timestamp remains 0 for now)
+LoadWorkerConfiguration()
+
+; CRITICAL FIX: Removed the FileGetTime baseline. 
+; This allows Watchdog_CheckSettings (triggered by timer) to detect the 
+; difference between 0 and the actual file time, triggering the Cyan flash.
+
+; 2. REMOVED: Initial baseline set. 
+; We now allow Watchdog_CheckSettings to catch the first difference naturally.
+
+; Listen for Title Updates (Message 0x004A)
+OnMessage(0x004A, ReceiveWindowTitle) 
+
+; ------------------------------------------------------------------
+; WORKER OVERLAY CONSTRUCTION
+; ------------------------------------------------------------------
+overlayGui := Gui("+AlwaysOnTop -Caption +ToolWindow +E0x20", InternalTitle)
+overlayGui.BackColor := "Black"
+
+overlayGui.SetFont("s18 Bold cYellow", "Segoe UI")
+txtTitle := overlayGui.AddText("x0 y0 w" overlayWidth " h42 Center +0x200", "SCRIPTTITLE_PLACEHOLDER")
+
+overlayGui.SetFont("s12 Bold c808080", "Segoe UI")
+txtStatus := overlayGui.AddText("x0 y40 w" overlayWidth " h28 Center +0x200", "Status - Inactive")
+
+overlayGui.SetFont("s12 c808080", "Segoe UI")
+txtTimer := overlayGui.AddText("x0 y68 w" overlayWidth " h28 Center +0x200", "Time Spent - 00:00:00")
+
+overlayGui.Show("NoActivate w" overlayWidth " h" overlayHeight)
+WinSetTransparent(210, overlayGui)
+
+; --- Start Systems ---
+SetupWorkerListener()
+SetTimer(UpdateOverlayPosition, 10)
+SetTimer(Watchdog_CheckSettings, 1000) ; Check for INI changes every second
+
+; ------------------------------------------------------------------
+; MAIN EXECUTION LOOP
+; ------------------------------------------------------------------
+Loop {
+    if (g_WorkerState == "inactive") {
+        g_StartTime := 0 
+        UpdateWorkerOverlay("Status - Inactive", "808080")
+        txtTimer.Opt("c808080")
+        txtTimer.Value := "Time Spent - 00:00:00"
+        Sleep(500)
+        continue
+    }
+    
+    if (g_WorkerState == "active" && g_StartTime == 0) {
+        g_StartTime := A_TickCount
+    }
+    
+    if (g_WorkerState == "paused") {
+        UpdateWorkerOverlay("Status - Paused", "Yellow")
+        txtTimer.Opt("cRed") 
+        Sleep(500)
+        continue
+    }
+
+    UpdateTimerDisplay()
+    
+    try AntiBanCheckpoint()
+
+    UpdateWorkerOverlay("Status - Active", "00FF00")
+    
+    Sleep(100) 
+}
+
+OnExit((*) => ExitApp())

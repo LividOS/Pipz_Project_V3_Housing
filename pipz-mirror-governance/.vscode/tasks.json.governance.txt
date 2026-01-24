@@ -1,0 +1,21 @@
+; ------------------------------------------------------------------
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\pipz-mirror-governance\.vscode\tasks.json.governance.txt"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - tasks.json.governance.txt
+; Version: 0.1.0
+; Last change: Initial creation. (Sidecar governance header for tasks.json)
+; Content-Fingerprint: 2026-01-24T01-46-29Z-KR9FESA7
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+GOVERNED TARGET:
+- Pipz_Project_V3\pipz-mirror-governance\.vscode\tasks.json
+
+NOTES:
+- tasks.json must remain valid JSON (no comments).
+- Governance header lives in this sidecar file only.

@@ -1,0 +1,205 @@
+; ------------------------------------------------------------------
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\PROJECT_STATUS_CHECKLIST.txt"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - PROJECT_STATUS_CHECKLIST.txt
+; Version: 0.1.2
+; Last change: Marked VS Code mirror/fingerprint extension as completed + installed locally; confirmed audit logging; updated remaining tasks accordingly.
+; Content-Fingerprint: 2026-01-24T00-39-57Z-24JK5C0W
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT (LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+PROJECT: Pipz_Project_V3
+PURPOSE: Track all remaining, in-progress, and completed work items.
+STATUS: LIVING DOCUMENT — MUST BE UPDATED AS WORK PROGRESSES.
+
+LEGEND:
+[✓] DONE / CONFIRMED
+[~] IN PROGRESS / PARTIALLY COMPLETE
+[?] NEEDS CONFIRMATION
+[ ] NOT STARTED / PENDING
+[!] BLOCKER / HIGH RISK
+
+; ------------------------------------------------------------------
+A. GOVERNANCE & AUTHORITY LAYER
+; ------------------------------------------------------------------
+
+[✓] Core governance files exist:
+    - _PROJECT_ANCHOR.txt
+    - _PROJECT_BLUEPRINT.txt
+    - AI_PROJECT_INSTRUCTIONS.txt
+    - PROJECT_LEARNED_CONSTRAINTS.txt
+    - INDEXIDLIST.txt
+
+[✓] AI_PROJECT_INSTRUCTIONS.txt updated to include:
+    - Multi-language header styles
+    - JSON sidecar governance rule
+
+[~] INDEXIDLIST.txt updated to include:
+    - MVP orchestrator files
+    - VS Code extension files
+    - JSON governance sidecars
+    - PROJECT_STATUS_CHECKLIST.txt + PROJECT_WORKING_NOTES.txt
+    (Final verification pass still required)
+
+[ ] Verify ALL governed files contain:
+    - GEMINI MEM TAG
+    - Correct FULL PATH
+    - Version / Last change
+    - Content-Fingerprint
+
+; ------------------------------------------------------------------
+B. HEADER STANDARDIZATION
+; ------------------------------------------------------------------
+
+[✓] Mandated header templates defined for:
+    - .txt
+    - .js
+    - .ts
+    - .md
+    - .yaml / .yml
+    - .py
+
+[✓] JSON explicitly excluded from embedded headers
+[✓] JSON governance is handled via sidecar files:
+    - package.json.governance.txt
+    - tsconfig.json.governance.txt
+
+[ ] Verify every existing file conforms to its mandated header style
+
+; ------------------------------------------------------------------
+C. JSON & SIDECAR GOVERNANCE
+; ------------------------------------------------------------------
+
+[✓] Rule established: JSON files must remain pure (no comments)
+[✓] Sidecar rule defined:
+    - <filename>.json.governance.txt
+
+[✓] JSON governance sidecars created for:
+    - package.json (Orchestrator)
+    - tsconfig.json (Orchestrator)
+
+[~] Confirm JSON sidecar files are referenced in:
+    - INDEXIDLIST.txt
+    - _PROJECT_BLUEPRINT.txt
+    (Blueprint update drafted; final confirmation still required)
+
+; ------------------------------------------------------------------
+D. MIRRORING & FINGERPRINTING
+; ------------------------------------------------------------------
+
+[✓] MirrorAhkToTxt.py reviewed and preserved (no functionality loss) as legacy reference
+[✓] Header detection generalized across comment styles
+
+[✓] Mirroring system migrated to VS Code as extension:
+    - Runtime mirroring (.ahk/.ini -> .txt)
+    - Fingerprint updates on save (governed files)
+    - Standalone governed fingerprinting (extra file types list)
+    - UTF-8 + UTF-16 compatibility
+    - Audit logging to .ORCH_AUDITLOG/mirror/
+
+[✓] Audit logging verified as live:
+    - fingerprint_stage logs created
+    - mirror_write logs created (includes encoding)
+
+[✓] Notepad++ retirement status:
+    - MirrorAhkToTxt.py no longer required for mirroring/fingerprints
+    - Decision whether to fully stop using Notepad++ for any editing decided by user.
+    - Status (RETIRED)
+
+; ------------------------------------------------------------------
+E. VS CODE ENVIRONMENT
+; ------------------------------------------------------------------
+
+[✓] VS Code installed
+[✓] Git installed and initialized
+[✓] Continue extension installed
+[✓] Continue YAML config loads successfully
+
+[?] Confirm Continue system message ALWAYS forces read of:
+    - _PROJECT_ANCHOR.txt
+    - _PROJECT_BLUEPRINT.txt
+    - AI_PROJECT_INSTRUCTIONS.txt
+    - PROJECT_LEARNED_CONSTRAINTS.txt
+    - INDEXIDLIST.txt
+    - PROJECT_STATUS_CHECKLIST.txt
+    - PROJECT_WORKING_NOTES.txt
+
+; ------------------------------------------------------------------
+F. ORCHESTRATOR (HIDDEN CHAINING)
+; ------------------------------------------------------------------
+
+[✓] Architectural decision: User only interacts with Architect
+[✓] Full-file output default (diff optional)
+[✓] Audit log path fixed:
+    Pipz_Project_V3\.ORCH_AUDITLOG
+
+[~] ORCH_PROTOCOL_SPEC.txt drafted
+[~] Orchestrator MVP skeleton exists (bootstrap-only, no model calls)
+
+[?] Confirm MVP bootstrap command:
+    - Executes successfully
+    - Creates .ORCH_AUDITLOG/<run_id>/
+    - Outputs bootstrap_report.json
+    - Reports PASS
+
+; ------------------------------------------------------------------
+G. ROLE SEPARATION
+; ------------------------------------------------------------------
+
+[✓] Architect (GPT-5.2) — user-facing
+[✓] Executor (GPT-4.1) — implementation
+[✓] SubSupervisor (GPT-4.1) — mechanical checks
+[✓] HeadSupervisor (GPT-5.2) — semantic review
+
+[ ] Formalize:
+    - Tool contracts between roles
+    - PASS / FAIL schemas
+    - Token gates:
+        - CONFIRM_EXECUTION
+        - CONFIRM_APPLY
+
+; ------------------------------------------------------------------
+H. MCP / HIDDEN EXECUTION INFRASTRUCTURE
+; ------------------------------------------------------------------
+
+[~] Decision leaning toward custom MCP server / orchestrator extension
+
+[ ] Decide implementation language (Node vs Python)
+
+[ ] Implement governed tools:
+    - Read
+    - Write
+    - Mirror (may call/assume VS Code mirror extension or replicate logic)
+    - Fingerprint (may call/assume VS Code mirror extension or replicate logic)
+
+[ ] Wire MCP tools so user NEVER interacts with Executor/Supervisors
+
+; ------------------------------------------------------------------
+I. AUDITABILITY
+; ------------------------------------------------------------------
+
+[✓] .ORCH_AUDITLOG directory structure defined
+[✓] Mirror extension audit logs confirmed live under:
+    .ORCH_AUDITLOG\mirror\
+
+[ ] Define mandatory artifacts per orchestrator run (separate from mirror logs):
+    - Work order
+    - Executor output
+    - Supervisor checklist
+    - Semantic review
+
+[ ] Ensure orchestrator logs are append-only and non-overwritable
+
+; ------------------------------------------------------------------
+J. FINAL CONFIRMATION CHECKPOINTS
+; ------------------------------------------------------------------
+
+[✓] VS Code mirror behavior matches intended runtime requirements (mirroring + fingerprints + encoding + audit logs)
+[ ] No governed file is missing from INDEXIDLIST.txt
+[ ] No file bypasses orchestrator for changes (future; requires MCP/orchestrator completion)
+[ ] User interacts with exactly ONE AI surface (future; requires MCP/orchestrator completion)

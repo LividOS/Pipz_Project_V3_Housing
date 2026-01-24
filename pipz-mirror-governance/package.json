@@ -1,0 +1,47 @@
+{
+  "name": "pipz-mirror-governance",
+  "displayName": "pipz-mirror-governance",
+  "description": "Governed mirroring and fingerprint enforcement for Pipz_Project_V3",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.108.1"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+  "onStartupFinished"
+],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "pipz-mirror-governance.helloWorld",
+        "title": "Hello World"
+      }
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "file:///C:/Users/mello/OneDrive/Desktop/Pipz_Project_V3/pipz-mirror-governance",
+    "directory": "pipz-mirror-governance"
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.108.1",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "typescript-eslint": "^8.52.0",
+    "eslint": "^9.39.2",
+    "typescript": "^5.9.3",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2"
+  }
+}

@@ -1,0 +1,108 @@
+﻿; ------------------------------------------------------------------
+; GEMINI MEM TAG(DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\Worker\Modules\WorkerState.ahk"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - WorkerState.ahk (AHK v2)
+; Version: 2.0.2
+; Last change: Added g_IsSyncing flag to prevent Main Loop from overwriting SYNC-01 flash.
+; Content-Fingerprint: 2026-01-21T20-40-08Z-ZAUSJJMI
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+#Requires AutoHotkey >=2.0
+
+global g_IsSyncing := false
+
+ReceiveWindowTitle(wParam, lParam, msg, hwnd) {
+    try {
+        lpData := NumGet(lParam, A_PtrSize * 2, "Ptr")
+        newTitle := StrGet(lpData)
+        global g_Config
+        g_Config["GameTitle"] := newTitle
+        return true
+    } catch {
+        return false
+    }
+}
+
+UpdateTimerDisplay() {
+    global txtTimer, g_StartTime, g_PausedTimeTotal
+    elapsed := (A_TickCount - g_StartTime - g_PausedTimeTotal) // 1000
+    elapsed := Max(0, elapsed)
+    hh := Format("{:02}", elapsed // 3600)
+    mm := Format("{:02}", Mod(elapsed // 60, 60))
+    ss := Format("{:02}", Mod(elapsed, 60))
+    txtTimer.Opt("c00FF00") 
+    txtTimer.Value := "Time Spent - " hh ":" mm ":" ss
+}
+
+Watchdog_CheckSettings() {
+    global g_LastSettingsUpdate, g_WorkerState, g_IsSyncing
+    settingsFile := GetSettingsPath()
+    
+    try {
+        currentMTime := FileGetTime(settingsFile, "M")
+        
+        if (currentMTime != g_LastSettingsUpdate) {
+            ; 1. Update the tracking timestamp
+            g_LastSettingsUpdate := currentMTime
+			
+			; 2.Block Main Loop UI updates
+			g_IsSyncing := true
+            
+            ; 3. Reload settings into memory
+            LoadWorkerConfiguration()
+            
+            ; 4. Trigger Visual Feedback (SYNC-01)
+            UpdateWorkerOverlay("Status - Settings Synced", "Cyan")
+            
+            ; 5. Revert to the correct current state after 1 second
+            SetTimer(RevertStatus, -1000)
+        }
+    } catch {
+        return
+    }
+
+    ; Nested function: Reverts overlay color based on current state
+    RevertStatus() {
+        global g_WorkerState, g_IsSyncing
+		g_IsSyncing := false ; Release UI block
+		
+        if (g_WorkerState == "active")
+            UpdateWorkerOverlay("Status - Active", "00FF00")
+        else if (g_WorkerState == "paused")
+            UpdateWorkerOverlay("Status - Paused", "Yellow")
+        else
+            ; This handles "inactive" and any uninitialized states
+            UpdateWorkerOverlay("Status - Inactive", "808080")
+    }
+}
+
+UpdateWorkerOverlay(statusMsg := "", statusColor := "White") {
+    global txtStatus, g_IsSyncing
+    ; If we are currently flashing "Synced", ignore standard updates unless they are the "Synced" message itself
+	if (g_IsSyncing && statusMsg != "Status - Settings Synced")
+		return
+	
+	if (statusMsg != "") {
+        txtStatus.Value := statusMsg
+        
+        ; Mapping friendly names to Hex for Gui control
+        if (statusColor = "Cyan") 
+            statusColor := "00FFFF"
+        else if (statusColor = "Green" || statusColor = "00FF00")
+            statusColor := "00FF00"
+        else if (statusColor = "Yellow" || statusColor = "FFFF00")
+            statusColor := "FFFF00"
+        else if (statusColor = "Orange")
+            statusColor := "FFA500"
+        else if (statusColor = "808080" || statusColor = "Grey")
+            statusColor := "808080"
+            
+        txtStatus.Opt("c" . statusColor)
+    }
+}

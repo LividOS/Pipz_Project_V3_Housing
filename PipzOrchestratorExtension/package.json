@@ -1,0 +1,35 @@
+{
+  "name": "pipz-orchestrator",
+  "displayName": "Pipz Orchestrator (MVP)",
+  "description": "Runs a governed, auditable orchestrator pipeline for Pipz_Project_V3.",
+  "version": "0.1.0",
+  "publisher": "local",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:pipzOrch.run"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "pipzOrch.run",
+        "title": "Pipz: Governed Change (Orchestrator) \u2014 Bootstrap Audit (MVP)"
+      }
+    ]
+  },
+  "scripts": {
+    "compile": "tsc -p .",
+    "watch": "tsc -watch -p .",
+    "vscode:prepublish": "npm run compile"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.30",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.4.5"
+  }
+}

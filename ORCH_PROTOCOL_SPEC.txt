@@ -1,0 +1,162 @@
+; ------------------------------------------------------------------
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\ORCH_PROTOCOL_SPEC.txt"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - ORCH_PROTOCOL_SPEC.txt
+; Version: 1.0.0
+; Last change: Initial Creation and Upload.
+; Content-Fingerprint: 2026-01-22T14-10-18Z-FQZW8ZK5
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+ORCH v0.1 — Pipz_Project_V3 Orchestrator Protocol Spec
+; ------------------------------------------------------------------
+
+Purpose
+-------
+Provide a deterministic, auditable, behind-the-scenes role chain that the user
+can drive from a single VS Code command, while strictly adhering to project
+governance.
+
+Non-goals (v0.1)
+----------------
+- No automatic git commit (commit remains a human action).
+- No silent/implicit execution. All execution requires explicit token(s).
+- No indexing/embeddings reliance.
+- No background “agent chaining” inside Continue. This orchestrator is external.
+
+User Preferences (locked for v0.1)
+----------------------------------
+- Executor output: FULL FILES by default (diffs available on request).
+- Audit logs directory (relative to repo root):
+    Pipz_Project_V3/.ORCH_AUDITLOG
+
+Roles
+-----
+Mode 1 — ARCHITECT (GPT-5.2)
+  - Produces: ExecutionPlan only (no code edits).
+  - Cannot output diffs/full files.
+
+Mode 2 — EXECUTOR (GPT-4.1)
+  - Input: ExecutionPlan + exact current file contents.
+  - Output: FULL updated file contents by default (plus optional diff).
+
+Mode 3 — HEAD SUPERVISOR (GPT-5.2)
+  - Semantic review + risk notes.
+  - Approve or veto only. No edits.
+
+Mode 4 — SUB SUPERVISOR (GPT-4.1)
+  - Mechanical checklist gate.
+  - PASS/FAIL only with reasons. No opinions. Not overrideable.
+
+Tokens / Gates
+--------------
+CONFIRM_EXECUTION
+  - Authorizes running EXECUTOR after ARCHITECT plan is produced.
+
+CONFIRM_APPLY
+  - Authorizes applying executor output to workspace AFTER both supervisors PASS.
+
+Commit remains explicit user action.
+
+WorkOrder (canonical)
+---------------------
+A WorkOrder is a JSON document that captures the complete chain state.
+
+Schema (informal)
+-----------------
+{
+  "workorder_version": "0.1",
+  "request_id": "<uuid>",
+  "created_utc": "<ISO-8601>",
+  "repo_root": "<absolute path>",
+  "audit_dir": "<absolute path to .ORCH_AUDITLOG/run>",
+  "user_goal": "<string>",
+  "requested_output": { "full_files_default": true, "diff_on_request": true },
+
+  "bootstrap": {
+    "status": "PASS|FAIL",
+    "required_files": [...],
+    "checks": [
+      { "file": "...", "gemini_mem_tag": "PASS|FAIL", "content_fingerprint": "PASS|FAIL" }
+    ],
+    "fingerprints_used": { "<file>": "<fingerprint>" },
+    "errors": [...]
+  },
+
+  "architect": {
+    "model": "gpt-5.2",
+    "status": "PENDING|PASS|FAIL",
+    "execution_plan": { ... },
+    "notes": ""
+  },
+
+  "executor": {
+    "model": "gpt-4.1",
+    "status": "PENDING|PASS|FAIL",
+    "touched_files": ["..."],
+    "outputs": {
+      "full_files": { "<path>": "<full content>" },
+      "diff": "<unified diff or null>"
+    }
+  },
+
+  "subsupervisor": {
+    "model": "gpt-4.1",
+    "status": "PENDING|PASS|FAIL",
+    "checklist": [
+      { "check": "Scope limited to expected files", "result": "PASS|FAIL", "details": "" }
+    ]
+  },
+
+  "headsupervisor": {
+    "model": "gpt-5.2",
+    "status": "PENDING|PASS|FAIL",
+    "semantic_review": { "summary": "", "risks": [] }
+  },
+
+  "final_verdict": {
+    "status": "PENDING|PASS|FAIL",
+    "reason": ""
+  }
+}
+
+Audit Artifacts
+---------------
+Each run writes to:
+  .ORCH_AUDITLOG/<UTC timestamp>_<request_id>/
+    - workorder.json
+    - bootstrap_report.json
+    - (future) architect.json, executor.json, supervisor.json, apply_report.json
+    - (future) patches/*.diff
+
+Bootstrap Verification (local, v0.1)
+------------------------------------
+The orchestrator verifies (locally in the VS Code workspace):
+- Required governance files exist (per your governance set)
+- Each file contains a GEMINI MEM TAG path declaration
+- Each file contains a Content-Fingerprint line (where applicable)
+- If any verification fails => STOP (WorkOrder FAIL)
+
+Required files (v0.1)
+---------------------
+- AI_PROJECT_INSTRUCTIONS.txt
+- BOOTSTRAPv4.txt
+- _PROJECT_BLUEPRINT.txt
+- _PROJECT_ANCHOR.txt
+- INDEXIDLIST.txt
+- PROJECT_LEARNED_CONSTRAINTS.txt
+- AUDIT_RUNNER.txt
+- PHASE5_EXECUTION_CHECKLIST.txt
+- PHASE5_VISIBILITY_AUDIT_TEMPLATE.txt
+- GLOBAL STATE REGISTRY.xlsx  (registry, read-only reference)
+
+Notes
+-----
+This spec does NOT replace your project governance files. It is an
+implementation contract for the orchestrator only.

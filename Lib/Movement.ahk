@@ -1,0 +1,347 @@
+﻿; ------------------------------------------------------------------
+; GEMINI MEM TAG(DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\Lib\Movement.ahk"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - Movement.ahk (AHK v2)
+; Version: 1.8.1
+; Last change: Integrated dynamic g_WiggleIntensity (1-5px) into WindMouse jitter logic.
+; Content-Fingerprint: 2026-01-21T20-28-52Z-WPDWO8MD
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+#Requires AutoHotkey >=2.0
+
+; ------------------------------------------------------------------
+; ------------------------------------------------------------------
+; Human-like Mouse Movements for AHK v2
+; ------------------------------------------------------------------
+; Added at end of the script so we can use the
+; MoveMouse function
+; ------------------------------------------------------------------
+; ------------------------------------------------------------------
+;  v1.7                                          ;
+;  Original script by: Flight in Pascal                          ;
+;  Link: https://github.com/SRL/SRL/blob/master/shared/mouse.simba                ;
+;  More Flight's mouse moves: https://paste.villavu.com/show/3279/               ;
+;  ModIfied script with simpler method MoveMouse() by: dexon in C#               ;
+;  Conversion from C# into AHK by: HowDoIStayInDreams, with the help of Arekusei ;
+;  Refactor & Rewrite v1.6+ by Pipz ;
+; ------------------------------------------------------------------
+; ------------------------------------------------------------------
+;  Changelog:                                    
+;  v1.3 added dynamic mouse speed;
+;  v1.4 added acceleration and brake, shout-out to kl and Lazy;
+;  v1.5 fixed jiggle at the destination (pointed out by Sound);
+;   added smoother Sleep function;
+;   maxStep is now more dynamic, using GlitchedSoul's weighted Random;
+;  v1.6 added dynamic path weaving and smoothing;
+;   added randomised destination overshoot and correction;
+;   changed from square randomization to circular ;
+;   added muscle memory simulation and decay;
+;  v1.7 refactored and updated compatibility to autohotkey v2+;
+;  v1.7.1 refactored for thread-safe global sync;
+;  v1.8 integrated micro-wiggles and refined overshoot chance;
+; ------------------------------------------------------------------
+
+MoveMouse(x, y, speed := "", RD := "") {
+    ; --- Global Synchronization ---
+    global g_OvershootEnabled, g_OvershootPercent, g_MicroWigglesEnabled
+
+    ; Thread-Safe Local Fetch
+    currOverEnabled := (IsSet(g_OvershootEnabled) && g_OvershootEnabled)
+    currOverPercent := IsSet(g_OvershootPercent) ? g_OvershootPercent : 0
+    currOverBase    := currOverPercent / 100.0
+    
+    ; Wiggle Logic
+    currWiggleEnabled := (IsSet(g_MicroWigglesEnabled) && g_MicroWigglesEnabled)
+
+    if (speed == "") {
+        speed := Random(25, 30) / 10.0
+    }
+
+    ; Circular Randomization of target destination (15px radius)
+    angleDeg := Random(0, 360)
+    angleRad := angleDeg * (3.14159 / 180)
+    distance := Sqrt(Random(0, 100) / 100.0) * 15 
+
+    offsetX := Cos(angleRad) * distance
+    offsetY := Sin(angleRad) * distance
+
+    targetX := x + offsetX
+    targetY := y + offsetY
+
+    ; --- Muscle Memory Simulation ---
+    static MuscleMemory := Map()
+    MEMORY_DECAY_INTERVAL := 10000
+    MEMORY_DECAY_RATE := 0.01
+
+    MouseGetPos(&startX, &startY)
+    distX := targetX - startX
+    distY := targetY - startY
+    distanceTotal := Hypot(distX, distY)
+
+    overshootOccurred := false
+    overshootX := targetX
+    overshootY := targetY
+
+    ; Apply Overshoot Logic (Simulating Human Inaccuracy)
+    if (currOverEnabled && currOverBase > 0) {
+        targetKey := Round(targetX) "|" Round(targetY)
+        reduction := 0
+        
+        if (MuscleMemory.Has(targetKey)) {
+            mem := MuscleMemory[targetKey]
+            elapsed := A_TickCount - mem.lastTime
+            decaySteps := Floor(elapsed / MEMORY_DECAY_INTERVAL)
+            mem.val := Max(mem.val - (decaySteps * MEMORY_DECAY_RATE), 0)
+            MuscleMemory[targetKey] := mem
+            reduction := mem.val
+        }
+
+        overshootChance := Max(currOverBase - reduction, 0)
+        
+        if (Random(0, 100) < overshootChance * 100) {
+            factor := Min(Max(distanceTotal / 500 * 0.03, 0.02), 0.05)
+            overshootFactor := Random(factor * 50, factor * 150) / 100
+            overshootX := targetX + (distX * overshootFactor)
+            overshootY := targetY + (distY * overshootFactor)
+            overshootOccurred := true
+        }
+    }
+
+    ; Perform Movement
+    if (RD == "RD") {
+        goRelative(overshootX, overshootY, speed, currWiggleEnabled)
+    } else {
+        goStandard(overshootX, overshootY, speed, currWiggleEnabled)
+    }
+
+    ; Correction Movement
+    if (overshootOccurred) {
+        PreciseSleep(Random(40, 90)) ; Human reaction delay before correction
+        if (RD == "RD") {
+            goRelative(targetX - overshootX, targetY - overshootY, speed * 1.5, false)
+        } else {
+            goStandard(targetX, targetY, speed * 1.5, false)
+        }
+
+        ; Record to Muscle Memory
+        reductionAmount := 0.01 + (Random(0, 100) / 100) * 0.01
+        targetKey := Round(targetX) "|" Round(targetY)
+        if (MuscleMemory.Has(targetKey)) {
+            mem := MuscleMemory[targetKey]
+            mem.val := Min(mem.val + reductionAmount, 0.03)
+            mem.lastTime := A_TickCount
+            MuscleMemory[targetKey] := mem
+        } else {
+            MuscleMemory[targetKey] := {val: Min(reductionAmount, 0.03), lastTime: A_TickCount}
+        }
+    }
+}
+
+; --- Core Path Generation ---
+
+WindMouse(xs, ys, xe, ye, gravity, wind, minWait, maxWait, maxStep, targetArea, SleepsArray, Wiggle := false) {
+    windX := 0, windY := 0, veloX := 0, veloY := 0
+    newX := Round(xs), newY := Round(ys)
+    sqrt2 := Sqrt(2), sqrt3 := Sqrt(3), sqrt5 := Sqrt(5)
+    dist := Hypot(xe - xs, ye - ys)
+    i := 1
+    stepVar := maxStep
+
+    Loop {
+        wind := Min(wind, dist)
+        if (dist >= targetArea) {
+            windX := windX / sqrt3 + (Random(0, Round(wind) * 2) - wind) / sqrt5
+            windY := windY / sqrt3 + (Random(0, Round(wind) * 2) - wind) / sqrt5
+            maxStep := RandomWeight(stepVar / 2, (stepVar + (stepVar / 2)) / 2, stepVar)
+        } else {
+            windX := windX / sqrt2
+            windY := windY / sqrt2
+            maxStep := (maxStep < 3) ? 1 : maxStep / 3
+        }
+
+        veloX += windX + gravity * (xe - xs) / dist
+        veloY += windY + gravity * (ye - ys) / dist
+
+        if (Hypot(veloX, veloY) > maxStep) {
+            veloMag := Hypot(veloX, veloY)
+            RandomDist := maxStep / 2 + (Random(0, Round(maxStep)) / 2)
+            veloX := (veloX / veloMag) * RandomDist
+            veloY := (veloY / veloMag) * RandomDist
+        }
+
+        ; --- MICRO-WIGGLE INJECTION ---
+        if (Wiggle && Mod(i, 3) == 0) {
+			intensity := IsSet(g_WiggleIntensity) ? Float(g_WiggleIntensity) : 1.0
+            xs += Random(-intensity, intensity)
+            ys += Random(-intensity, intensity)
+        }
+
+        oldX := Round(xs), oldY := Round(ys)
+        xs += veloX, ys += veloY
+        dist := Hypot(xe - xs, ye - ys)
+
+        if (dist <= 1)
+            break
+
+        newX := Round(xs), newY := Round(ys)
+        if (oldX != newX || oldY != newY)
+            MouseMove(newX, newY)
+
+        c := SleepsArray.Length
+        if (c > 0) {
+            idx := (i > c) ? c : i
+            waitSleep := SleepsArray[idx]
+            wait := Max(Round(Abs(Random(Float(waitSleep), Float(waitSleep) + 1))), 1)
+            PreciseSleep(wait)
+        } else {
+            PreciseSleep(1) 
+        }
+        i++
+    }
+
+    if (Round(xe) != newX || Round(ye) != newY)
+        MouseMove(Round(xe), Round(ye))
+}
+
+WindMouse2(xs, ys, xe, ye, gravity, wind, minWait, maxWait, maxStep, targetArea) {
+    windX := 0, windY := 0, veloX := 0, veloY := 0
+    newX := Round(xs), newY := Round(ys)
+    waitDiff := maxWait - minWait
+    sqrt2 := Sqrt(2), sqrt3 := Sqrt(3), sqrt5 := Sqrt(5)
+    dist := Hypot(xe - xs, ye - ys)
+    newArr := []
+    stepVar := maxStep
+
+    Loop {
+        wind := Min(wind, dist)
+        if (dist >= targetArea) {
+            windX := windX / sqrt3 + (Random(0, Round(wind) * 2) - wind) / sqrt5
+            windY := windY / sqrt3 + (Random(0, Round(wind) * 2) - wind) / sqrt5
+            maxStep := RandomWeight(stepVar / 2, (stepVar + (stepVar / 2)) / 2, stepVar)
+        } else {
+            windX /= sqrt2
+            windY /= sqrt2
+            maxStep := (maxStep < 3) ? 1 : maxStep / 3
+        }
+        
+        veloX += windX + gravity * (xe - xs) / dist
+        veloY += windY + gravity * (ye - ys) / dist
+
+        if (Hypot(veloX, veloY) > maxStep) {
+            veloMag := Hypot(veloX, veloY)
+            RandomDist := maxStep / 2 + (Random(0, Round(maxStep)) / 2)
+            veloX := (veloX / veloMag) * RandomDist
+            veloY := (veloY / veloMag) * RandomDist
+        }
+
+        oldX := Round(xs), oldY := Round(ys)
+        xs += veloX, ys += veloY
+        dist := Hypot(xe - xs, ye - ys)
+
+        if (dist <= 1)
+            break
+
+        newX := Round(xs), newY := Round(ys)
+        step := Hypot(xs - oldX, ys - oldY)
+        mean := Round(waitDiff * (step / maxStep) + minWait) / 7
+        wait := Muller((mean) / 2, (mean) / 2.718281)
+        newArr.Push(wait)
+    }
+    return newArr
+}
+
+; --- Core Math & Utility ---
+
+Hypot(dx, dy) => Sqrt(dx * dx + dy * dy)
+
+PreciseSleep(ms) {
+    DllCall("QueryPerformanceFrequency", "Int64*", &freq := 0)
+    DllCall("QueryPerformanceCounter", "Int64*", &CounterBefore := 0)
+    CounterAfter := CounterBefore
+    while (((CounterAfter - CounterBefore) / freq * 1000) < ms) {
+        DllCall("QueryPerformanceCounter", "Int64*", &CounterAfter)
+    }
+}
+
+Muller(m, s) {
+    static i := 0, Y := 0
+    if (i := !i) {
+        U := Sqrt(-2 * Ln(Random(0.0, 1.0))) * s
+        VV := Random(0.0, 6.2831853071795862)
+        Y := m + U * Sin(VV)
+        return m + U * Cos(VV)
+    }
+    return Y
+}
+
+SortArray(arr, order := "A") {
+    Loop arr.Length {
+        idx := A_Index
+        Loop arr.Length - idx {
+            j := A_Index
+            if (order = "A" ? (arr[j] > arr[j+1]) : (arr[j] < arr[j+1])) {
+                temp := arr[j]
+                arr[j] := arr[j+1]
+                arr[j+1] := temp
+            }
+        }
+    }
+}
+
+RandomWeight(minVal, target, maxVal) {
+    Rmin := Random(minVal, target)
+    Rmax := Random(target, maxVal)
+    return Random(Rmin, Rmax)
+}
+
+goStandard(x, y, speed, wiggle := false) {
+    MouseGetPos(&xpos, &ypos)
+    distance := (Sqrt(Hypot(x - xpos, y - ypos))) * speed
+    dynamicSpeed := (1 / Max(distance, 1)) * 60
+    finalSpeed := Random(dynamicSpeed, dynamicSpeed + 0.8)
+    stepArea := Max((finalSpeed / 2 + distance) / 10, 0.1)
+    
+    newArr := WindMouse2(xpos, ypos, x, y, 10, 3, finalSpeed * 10, finalSpeed * 12, stepArea * 11, stepArea * 7)
+    SortArray(newArr, "D")
+    
+    half := Floor(newArr.Length / 2)
+    while (newArr.Length > half)
+        newArr.Pop()
+
+    newClone := newArr.Clone()
+    SortArray(newClone, "A")
+    for val in newClone
+        newArr.Push(val)
+
+    WindMouse(xpos, ypos, x, y, 10, 3, finalSpeed * 10, finalSpeed * 12, stepArea * 11, stepArea * 7, newArr, wiggle)
+}
+
+goRelative(x, y, speed, wiggle := false) {
+    MouseGetPos(&xpos, &ypos)
+    targetX := xpos + x
+    targetY := ypos + y
+    distance := (Sqrt(Hypot(targetX - xpos, targetY - ypos))) * speed
+    dynamicSpeed := (1 / Max(distance, 1)) * 60
+    finalSpeed := Random(dynamicSpeed, dynamicSpeed + 0.8)
+    stepArea := Max((finalSpeed / 2 + distance) / 10, 0.1)
+
+    newArr := WindMouse2(xpos, ypos, targetX, targetY, 10, 3, finalSpeed * 10, finalSpeed * 12, stepArea * 11, stepArea * 7)
+    SortArray(newArr, "D")
+    
+    half := Floor(newArr.Length / 2)
+    while (newArr.Length > half)
+        newArr.Pop()
+
+    newClone := newArr.Clone()
+    SortArray(newClone, "A")
+    for val in newClone
+        newArr.Push(val)
+
+    WindMouse(xpos, ypos, targetX, targetY, 10, 3, finalSpeed * 10, finalSpeed * 12, stepArea * 11, stepArea * 7, newArr, wiggle)
+}

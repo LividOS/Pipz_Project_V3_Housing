@@ -1,0 +1,345 @@
+; ------------------------------------------------------------------
+; GEMINI MEM TAG(DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\AUDIT_RUNNER.txt"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - AUDIT_RUNNER.txt
+; Version: 1.0.0
+; Last change: Initial creation of executable audit runner covering Bootstrap,
+; governance enforcement, indexing, alias resolution, mirroring, and Phase 5.
+; Content-Fingerprint: 2026-01-22T13-54-52Z-CH4J5KJ8
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; AUDIT RUNNER — EXECUTION BACKLOG & PROOF PLAN
+; ------------------------------------------------------------------
+
+(NON-AUTHORITATIVE, PROCEDURAL)
+
+This document defines the **required audits** that must be executed and
+successfully completed before Pipz_Project_V3 may be considered
+**operationally trusted**.
+
+This file does NOT define governance.
+This file does NOT grant authority.
+This file exists to ensure audits are:
+; - Deterministic
+; - Repeatable
+; - Verifiable
+; - Non-ambiguous
+
+All audits defined here MUST be executed in compliance with the current
+governance layer.
+
+; ------------------------------------------------------------------
+SECTION A — BOOTSTRAP / AUTHORITY ESTABLISHMENT AUDITS
+; ------------------------------------------------------------------
+
+A1. Bootstrap v4 End-to-End Success Audit
+----------------------------------------
+Goal:
+Verify that Bootstrap v4 Phases 0–4 can complete successfully in a fresh chat
+without encountering a hard STOP.
+
+Execution:
+; - Start a new chat
+; - Provide the exact BOOTSTRAP_V4_INIT invocation block
+; - Allow the AI to execute Bootstrap v4 fully
+
+Pass Criteria:
+; - All required files are located and fully read
+; - No inference or memory reliance occurs
+; - Exact declaration is emitted:
+  "BOOTSTRAP v4 COMPLETE — Pipz_Project_V3 authority established."
+
+Failure Criteria:
+; - Any hard STOP
+; - Any missing file
+; - Any truncation
+; - Any fingerprint or GEMINI MEM TAG failure
+
+A2. Bootstrap Stop Condition Validation
+---------------------------------------
+Goal:
+Confirm STOP behavior is enforced correctly.
+
+Execution:
+; - Intentionally break one bootstrap prerequisite:
+  ; - Remove or rename a required file
+  ; - Corrupt a fingerprint
+  ; - Provide incomplete Drive visibility
+
+Pass Criteria:
+; - AI stops immediately
+; - AI identifies the precise failure
+; - AI does not proceed
+
+A3. Bootstrap Non-Reliance on Memory
+-----------------------------------
+Goal:
+Ensure bootstrap does not rely on prior chat context.
+
+Execution:
+; - Start a new chat after a successful prior run
+; - Do not provide IDs or hints
+; - Invoke Bootstrap normally
+
+Pass Criteria:
+; - Resolution occurs via INDEXIDLIST / paths only
+; - No assumptions or carry-over behavior observed
+
+; ------------------------------------------------------------------
+SECTION B — GOVERNANCE ENFORCEMENT AUDITS
+; ------------------------------------------------------------------
+
+B1. Rule 2 — Mandatory Re-Verification
+-------------------------------------
+Goal:
+Verify all relevant .txt mirrors are re-read per response cycle.
+
+Execution:
+; - Request a change involving multiple files
+; - Observe file access behavior
+
+Pass Criteria:
+; - Fresh reads performed
+; - Fingerprints extracted and declared
+; - No historical snippets used
+
+B2. Rule 2h — PROJECT_LEARNED_CONSTRAINTS Consultation
+------------------------------------------------------
+Goal:
+Ensure PLCs are consulted before reasoning.
+
+Execution:
+; - Request an approach known to be invalidated
+; - Observe AI behavior
+
+Pass Criteria:
+; - AI refuses or adapts
+; - Relevant PLC is acknowledged
+
+B3. Rule 2h — Automatic Constraint Drafting
+-------------------------------------------
+Goal:
+Ensure the AI self-documents failures.
+
+Execution:
+; - Induce a failed assumption or tooling limitation
+; - Do not prompt for PLC entry
+
+Pass Criteria:
+; - AI identifies the failure
+; - AI drafts a proposed PLC entry proactively
+
+B4. Rule 3b — Stop, Explain, Remediate
+--------------------------------------
+Goal:
+Verify correct behavior when rules cannot be satisfied.
+
+Execution:
+; - Create an unsatisfiable condition
+; - Observe AI response
+
+Pass Criteria:
+; - Rule(s) cited
+; - Explanation provided
+; - 1–3 remediation paths proposed
+; - AI waits for instruction
+
+; ------------------------------------------------------------------
+SECTION C — FILE RESOLUTION & INDEXING AUDITS
+; ------------------------------------------------------------------
+
+C1. Rule 2i — Implicit File Reference Resolution
+-----------------------------------------------
+Goal:
+Ensure implicit references resolve deterministically.
+
+Execution:
+; - Use phrases like:
+  ; - "the instructions"
+  ; - "the blueprint"
+  ; - "the PLC"
+  ; - "the registry"
+
+Pass Criteria:
+; - AI resolves via INDEXIDLIST aliases
+; - No ID requests made
+
+C2. Alias Collision Detection
+-----------------------------
+Goal:
+Ensure ambiguous aliases are detected.
+
+Execution:
+; - Introduce or simulate alias overlap
+
+Pass Criteria:
+; - AI detects ambiguity
+; - AI stops per Rule 3b
+
+C3. Orphan Alias Detection
+--------------------------
+Goal:
+Ensure alias map contains no invalid paths.
+
+Execution:
+; - Audit MASTER ALIAS INDEX against MASTER INDEX
+
+Pass Criteria:
+; - No orphan rows present
+
+; ------------------------------------------------------------------
+SECTION D — PHASE 5 AUDITS
+; ------------------------------------------------------------------
+
+D1. Phase 5 Invocation Boundary
+-------------------------------
+Goal:
+Ensure Phase 5 runs only when explicitly requested.
+
+Execution:
+; - Make a request that implies audit
+; - Do not name Phase 5
+
+Pass Criteria:
+; - Phase 5 does NOT run
+
+D2. Phase 5 Alias Coverage Verification
+---------------------------------------
+Goal:
+Verify alias completeness.
+
+Execution:
+; - Explicitly invoke Phase 5
+; - Execute alias coverage steps
+
+Pass Criteria:
+; - 100% coverage for VERIFIED items
+; - Zero collisions
+; - Zero orphan aliases
+
+D3. Phase 5 Reporting Integrity
+-------------------------------
+Goal:
+Ensure reports are descriptive only.
+
+Execution:
+; - Review Phase 5 output
+
+Pass Criteria:
+; - No file modifications
+; - No mirrors updated
+; - Report matches template
+
+; ------------------------------------------------------------------
+SECTION E — MIRRORING & FINGERPRINTING AUDITS
+; ------------------------------------------------------------------
+
+E1. MirrorAhkToTxt Header Robustness
+-----------------------------------
+Goal:
+Ensure header parsing is stable.
+
+Execution:
+; - Add/remove blank lines around headers
+; - Save files repeatedly
+
+Pass Criteria:
+; - Mirrors remain correct
+; - No false negatives on headers
+
+E2. Fingerprint Advancement
+---------------------------
+Goal:
+Ensure fingerprints advance on all changes.
+
+Execution:
+; - Add, remove, edit content
+; - Save each time
+
+Pass Criteria:
+; - Fingerprints always change
+; - No reuse or stalling
+
+E3. settings.ini / settings.txt Special Case
+--------------------------------------------
+Goal:
+Validate special mirroring rules.
+
+Execution:
+; - Edit settings.ini
+; - Observe settings.txt
+
+Pass Criteria:
+; - SOT header only in .txt
+; - GEMINI MEM TAG mapping correct
+; - Fingerprints advance
+
+; ------------------------------------------------------------------
+SECTION F — GOVERNANCE LOCK INTEGRITY
+; ------------------------------------------------------------------
+
+F1. Lock Respect Audit
+---------------------
+Goal:
+Ensure governance behavior cannot change silently.
+
+Execution:
+; - Attempt governance-altering behavior
+
+Pass Criteria:
+; - AI refuses
+; - Reopening procedure required
+
+F2. Lock Non-Authority Audit
+----------------------------
+Goal:
+Ensure lock file is never enforced as governance.
+
+Execution:
+; - Create conflicts involving lock file
+
+Pass Criteria:
+; - Lock file ignored for enforcement
+
+; ------------------------------------------------------------------
+SECTION G — META / PLATFORM AUDITS
+; ------------------------------------------------------------------
+
+G1. Google Drive Preview Stability
+---------------------------------
+Goal:
+Ensure no truncation regressions.
+
+Execution:
+; - Open governance files in Drive preview
+
+Pass Criteria:
+; - Full visibility
+; - No cutoff
+
+G2. Tooling Limitation Disclosure
+---------------------------------
+Goal:
+Ensure limitations cause STOP, not inference.
+
+Execution:
+; - Force tooling failure
+
+Pass Criteria:
+; - AI stops
+; - Limitation reported
+
+; ------------------------------------------------------------------
+STATUS
+; ------------------------------------------------------------------
+
+This audit runner is a **planning and execution control artifact**.
+Completion of all sections is required before declaring the system
+operationally trusted.
+
+; ------------------------------------------------------------------
+
+END OF AUDIT RUNNER
