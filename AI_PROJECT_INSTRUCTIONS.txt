@@ -6,9 +6,9 @@
 ; Pipz_Project_V3 [AHK v2] (AI-Specific Operating Instructions)
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - AI_PROJECT_INSTRUCTIONS.txt
-; Version: 1.6.1
-; Last change: Integrated Rule 3d (PLC Drafting) and Rule 2k (Exit-Gate Sanity Audit).
-; Content-Fingerprint: 2026-01-25T19-27-05Z-N5B1CA2W
+; Version: 1.6.2
+; Last change: Revised sections to reflect new merged governance and registry files.
+; Content-Fingerprint: 2026-01-26T21-17-39Z-D8KX2JYD
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -170,10 +170,10 @@ The AI MUST locate, open, and fully read the following minimum canonical set:
 
 ; - AI_PROJECT_INSTRUCTIONS.txt
 ; - _PROJECT_BLUEPRINT.txt
-; - _PROJECT_ANCHOR.txt
-; - INDEXIDLIST.txt (if present)
-; - GLOBAL STATE REGISTRY.gsheet
-  ; - All required tabs (variables, functions, invariants)
+; - _PROJECT_ANCHOR_MASTER.txt
+; - INDEXIDLIST.txt
+; - GLOBAL_REGISTRY_MASTER.csv or GLOBAL_REGISTRY_MASTER.gsheet
+  ; - All required sections (GLOBAL_STATE_REGISTRY, GLOBAL_FUNCTION_REGISTRY, GLOBAL_LOGIC_RULES_REGISTRY)
 
 Each file must:
 
@@ -766,7 +766,7 @@ Where:
 7. Registry Supremacy Rule
 ; ------------------------------------------------------------------
 
-7a. GLOBAL STATE REGISTRY.gsheet is the single source of truth for:
+7a. GLOBAL_REGISTRY_MASTER.csv and GLOBAL_REGISTRY_MASTER.gsheet(Same file, different types) are the single source of truth for:
 7aa. Global variables
 7ab. Function ownership
 7ac. Logic invariants
@@ -794,7 +794,7 @@ Where:
 8b. Must be reflected in:
 8ba. Code
 8bb. .txt mirror
-8bc. _PROJECT_BLUEPRINT.txt (and _PROJECT_ANCHOR.txt when applicable)
+8bc. _PROJECT_BLUEPRINT.txt (and _PROJECT_ANCHOR_MASTER.txt when applicable)
 
 8c. If synchronization is incomplete, the change is invalid.
 
