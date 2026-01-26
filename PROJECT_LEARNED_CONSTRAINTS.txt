@@ -4,9 +4,9 @@
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - PROJECT_LEARNED_CONSTRAINTS.txt
-; Version: 1.0.1
-; Last change: Normalized formatting for Drive preview stability; no semantic changes.
-; Content-Fingerprint: 2026-01-21T20-58-41Z-JJFHUQIY
+; Version: 1.1.5
+; Last change: Fully normalized PLC-0006 through PLC-0009 with strict field compliance.
+; Content-Fingerprint: 2026-01-25T21-58-01Z-5C46IWVH
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -27,6 +27,9 @@ This document does NOT:
 ; - Override BOOTSTRAPv4.txt
 ; - Override _PROJECT_BLUEPRINT.txt
 ; - Override GLOBAL STATE REGISTRY.gsheet
+; - Override GLOBAL_STATE_REGISTRY.csv
+; - Override GLOBAL_FUNCTION_REGISTRY.csv
+; - Override GLOBAL_LOGIC_RULES.csv
 ; - Override registry ownership, structure, or invariants
 
 If any entry in this document conflicts with authoritative sources:
@@ -62,11 +65,12 @@ Use EXACTLY ONE SCOPE per entry:
 ; - Indexing
 ; - Phase5
 ; - Controller
-; - Controller\Modules
 ; - Worker
-; - Worker\Modules
 ; - Lib
 ; - CrossCutting
+; - Infrastructure
+; - Tooling
+; - Audits
 
 ; ------------------------------------------------------------------
 ENTRY FORMAT (STRICT)
@@ -106,21 +110,21 @@ SCOPE INDEX (MUST BE MAINTAINED)
 Format:
 SCOPE | ENTRY IDS
 
-Governance | PLC-0001
-Bootstrap  | (none)
-Indexing   | (none)
-Phase5     | (none)
-Controller | (none)
-Controller\Modules | (none)
-Worker     | (none)
-Worker\Modules | (none)
-Lib        | (none)
-CrossCutting | PLC-0002, PLC-0003, PLC-0004, PLC-0005
+Governance     | PLC-0001
+Bootstrap      | (none)
+Indexing       | (none)
+Phase5         | (none)
+Controller     | (none)
+Worker         | (none)
+Lib            | (none)
+CrossCutting   | PLC-0002, PLC-0003, PLC-0004, PLC-0005
+Infrastructure | PLC-0006
+Tooling        | PLC-0007, PLC-0008
+Audits         | PLC-0009
 
 ; ------------------------------------------------------------------
 ENTRIES (APPEND ONLY BELOW THIS LINE)
 ; ------------------------------------------------------------------
-
 ENTRY ID: PLC-0001
 DATE (UTC): 2026-01-21
 SCOPE: Governance
@@ -271,6 +275,124 @@ Pipz_Project_V3\MirrorAhkToTxt.py
 
 NOTES:
 This is a tooling safety constraint; it does not change project governance semantics.
+
+; ------------------------------------------------------------------
+
+ENTRY ID: PLC-0006
+DATE (UTC): 2026-01-25
+SCOPE: Infrastructure
+STATUS: CONFIRMED
+TITLE: Google Drive .gsheet internal data is inaccessible to external connectors
+
+CONTEXT:
+Attempted use of Google Sheets as a live project registry for logic and state.
+
+DISCOVERY:
+The Google Drive API/connector exposes .gsheet files as metadata objects only; the tabular content (cells/tabs) is not streamable as raw text to the IDE or Gemini Code Assist.
+
+INVALIDATED APPROACH:
+Relying on .gsheet files for active project governance or state registries.
+
+VALIDATED CONSTRAINT:
+All project registries must exist as flat .csv files in the root registry directory to ensure visibility.
+
+EVIDENCE:
+Phase 2 Bootstrap failure on 2026-01-25; Agent reported file existence but "Zero content/Logic Blind" state.
+
+RELATED FILES:
+Pipz_Project_V3\Registry\GLOBAL_LOGIC_RULES.csv
+Pipz_Project_V3\Registry\GLOBAL_FUNCTION_REGISTRY.csv
+
+NOTES:
+The .gsheet remains the non-active "Backup Vault".
+
+; ------------------------------------------------------------------
+
+ENTRY ID: PLC-0007
+DATE (UTC): 2026-01-25
+SCOPE: Tooling
+STATUS: CONFIRMED
+TITLE: Gemini Code Assist context window cannot parse multi-tab spreadsheet logic
+
+CONTEXT:
+Bootstrapping a project with complex registry dependencies involving multiple logic sheets.
+
+DISCOVERY:
+Current LLM tooling lacks the native ability to programmatically "switch tabs" or interpret spreadsheet-specific binary/XML formatting without high risk of hallucination.
+
+INVALIDATED APPROACH:
+Prompting the AI to "read Tab 2 of the registry sheet."
+
+VALIDATED CONSTRAINT:
+Governance data must be presented in flat, delimiter-heavy formats (CSV/TXT) to ensure high-fidelity LLM ingestion.
+
+EVIDENCE:
+Successful ingestion and audit only after transition to individual flat CSV files.
+
+RELATED FILES:
+Pipz_Project_V3\Registry\GLOBAL_LOGIC_RULES.csv
+
+NOTES:
+N/A
+
+; ------------------------------------------------------------------
+
+ENTRY ID: PLC-0008
+DATE (UTC): 2026-01-25
+SCOPE: Tooling
+STATUS: CONFIRMED
+TITLE: Gemini Code Assist Loop Detection Limit (Sequential Call Ceiling)
+
+CONTEXT:
+Sequential audit of 14+ files in a single turn using the code execution stream.
+
+DISCOVERY:
+The IDE execution stream triggers a 'loop_detected' error if sequential tool calls (read_file) exceed internal safety thresholds (~10-15 calls).
+
+INVALIDATED APPROACH:
+Running "Single-Sweep" audits or scans on more than 10 files in a single turn.
+
+VALIDATED CONSTRAINT:
+Automated processes must be segmented to reset the call counter every 5 operations.
+
+EVIDENCE:
+Error: "Unknown error from LLM stream: {'type':'loop_detected'}" encountered 2026-01-25.
+
+RELATED FILES:
+N/A
+
+NOTES:
+This is a technical safety ceiling of the Gemini Code Assist implementation.
+
+; ------------------------------------------------------------------
+
+ENTRY ID: PLC-0009
+DATE (UTC): 2026-01-25
+SCOPE: Audits
+STATUS: CONFIRMED
+TITLE: Mandatory Atomic Batching for Governance Verification
+
+CONTEXT:
+Performing Phase 5 Structural and Governance audits across a large codebase.
+
+DISCOVERY:
+Large-batch audits increase the risk of LLM "attention drift," leading to overlooked header errors or session timeouts.
+
+INVALIDATED APPROACH:
+Conducting full-project governance scans in a single prompt.
+
+VALIDATED CONSTRAINT:
+All governance audits must be executed in "Atomic Batches" of exactly 5 files to ensure 1:1 literal verification.
+
+EVIDENCE:
+PLC-0008 technical limitation; verification of 5-file batches results in 100% accuracy.
+
+RELATED FILES:
+Pipz_Project_V3\PHASE5_EXECUTION_CHECKLIST.txt
+Pipz_Project_V3\PHASE5_VISIBILITY_AUDIT_TEMPLATE.txt
+
+NOTES:
+Governed by GLOBAL LOGIC RULE GEN-03.
 
 ; ------------------------------------------------------------------
 

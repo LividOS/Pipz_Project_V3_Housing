@@ -6,9 +6,9 @@
 ; Pipz_Project_V3 [AHK v2] (AI-Specific Operating Instructions)
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - AI_PROJECT_INSTRUCTIONS.txt
-; Version: 1.5.4
-; Last change: Added cross-language header comment-prefix compatibility rules (JS/TS/PY/YAML) and JSON sidecar requirement.
-; Content-Fingerprint: 2026-01-22T12-04-07Z-X7066DAF
+; Version: 1.6.1
+; Last change: Integrated Rule 3d (PLC Drafting) and Rule 2k (Exit-Gate Sanity Audit).
+; Content-Fingerprint: 2026-01-25T19-27-05Z-N5B1CA2W
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -80,11 +80,17 @@ BOOTSTRAP v4 INVOCATION TOKEN REQUIREMENT (ABSOLUTE)
 ; ------------------------------------------------------------------
 
 For any new chat session related to Pipz_Project_V3, the user's FIRST message MUST include a machine-checkable invocation token and canonical invocation text.
-The required invocation is STRICT and MUST appear exactly as follows:
+The required invocation is STRICT and MUST appear exactly as one of the following formats:
+
+FORMAT 1:
 
 BOOTSTRAP_V4_INIT
 This project is defined in my Google Drive under Pipz_Project_V3.
 Locate AI_PROJECT_INSTRUCTIONS.txt and initiate Bootstrap v4.
+
+FORMAT 2:
+
+BOOTSTRAP_V4_INIT
 
 Rules:
 T1. The first non-empty line of the user's first message in a new session MUST be exactly:
@@ -591,6 +597,21 @@ STATUS — HISTORICAL
      constitutes a violation of this instruction set and requires STOP under Rule 3b.
 
 ; ------------------------------------------------------------------
+2k. Pre-Transmission Sanity Audit (MANDATORY EXIT-GATE)
+; ------------------------------------------------------------------
+2ka. Prior to completing any response, the AI MUST perform a silent internal 
+     audit of the proposed content against all project governance files.
+2kb. VERIFICATION CRITERIA:
+     - Is there a Version Header from STANDARDIZED_HEADERS.txt?
+     - Is the content a 1:1 literal match (no summarization)?
+     - Does the logic violate any PLC (e.g., PLC-0005 or PLC-0006)?
+     - Are all registry updates formatted in raw tab-separated style?
+2kc. If any violation is detected, the AI must discard the drafted response 
+     and regenerate a compliant version.
+2kd. Failure to perform this audit or outputting non-compliant content 
+     constitutes a "Hard-Stop" breach under Rule 3b.
+
+; ------------------------------------------------------------------
 3. Scope of Authority Rule
 ; ------------------------------------------------------------------
 
@@ -644,6 +665,25 @@ Where:
 
 3cf. Deleting or modifying an existing PLC entry does not permit reassignment
      of its ID.
+
+; ------------------------------------------------------------------
+3d. Proactive Constraint Capture Mandate (THE "EMISSION" RULE)
+; ------------------------------------------------------------------
+
+3da. Upon identifying a "Learned Constraint" (defined as any discovery that 
+     invalidates a previous approach, reveals a platform/tooling limitation, 
+     or identifies a non-obvious failure mode), the AI MUST immediately 
+     stop and draft a new entry for PROJECT_LEARNED_CONSTRAINTS.txt.
+
+3db. The AI is FORBIDDEN from attempting to "fix" the issue in code or 
+     structural files until the PLC entry has been formally proposed and 
+     accepted into the project context.
+
+3dc. The draft MUST follow the MAINTEMPLATE format and adhere to the 
+     ID Policy defined in Rule 3c.
+
+3dd. Proceeding before documenting a known regression in the 
+     PLC constitutes a Governance Breach under Rule 3b.
 
 ; ------------------------------------------------------------------
 4. Version Header Enforcement Rule (ABSOLUTE)

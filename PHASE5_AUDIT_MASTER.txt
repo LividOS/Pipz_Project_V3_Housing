@@ -1,16 +1,20 @@
 ; ------------------------------------------------------------------
-; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\PHASE5_EXECUTION_CHECKLIST.txt"
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\PHASE5_AUDIT_MASTER.txt"
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
-; MAINTEMPLATE - PHASE5_EXECUTION_CHECKLIST.txt
-; Version: 1.1.3
-; Last change: Added Step 0 Context Verification (Platform Specific).
-; Content-Fingerprint: 2026-01-24T21-32-26Z-3AI0TGDK
+; MAINTEMPLATE - PHASE5_AUDIT_MASTER.txt
+; Version: 1.0.0
+; Last change: Initial merge of PHASE5_EXECUTION_CHECKLIST.txt and PHASE5_VISIBILITY_AUDIT_TEMPLATE.txt
+; Content-Fingerprint: 2026-01-26T19-26-48Z-S2XBQX65
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
 ; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; SECTION A — PHASE 5 EXECUTION CHECKLIST (DETERMINISTIC)
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -145,7 +149,7 @@ For EACH discovered file:
 If tooling prevents a definitive determination → STOP
 
 ; ------------------------------------------------------------------
-STEP 6 — EXPECTED SET COMPILATION
+STEP 6 — EXPECTED SET COMPILATION (ARCHITECTURAL TRUTH)
 ; ------------------------------------------------------------------
 
 [ ] Compile expected item list from:
@@ -153,6 +157,7 @@ STEP 6 — EXPECTED SET COMPILATION
     ; - _PROJECT_BLUEPRINT.txt (STRUCTURE AUTHORITY)
 
 [ ] DO NOT derive structure from _PROJECT_ANCHOR.txt
+[ ] For each blueprint entry, record the MANDATORY relative path.
 [ ] Record all expected paths
 
 If expected set cannot be compiled deterministically → STOP
@@ -211,10 +216,11 @@ For EACH item across Expected, Discovered, and Indexed sets:
 [ ] Compare presence and path alignment
 [ ] Classify item as EXACTLY ONE of:
 
-    ; - VERIFIED      (exists, readable if governed, path matches)
+    ; - VERIFIED      (exists, readable if governed, path matches blueprint)
     ; - UNREADABLE    (exists but cannot be read when required)
-    ; - MISSING       (expected but not discovered)
-    ; - ORPHANED      (discovered but not expected)
+    ; - MISSING       (expected by blueprint but not discovered)
+    ; - ORPHANED      (discovered but not expected by blueprint)
+    ; - MISPLACED     (exists but path deviates from blueprint)
     ; - UNGOVERNED    (exists but lacks required governance)
 
 [ ] Record explicit justification for classification
@@ -225,7 +231,7 @@ If classification is ambiguous → STOP
 STEP 9 — REPORT GENERATION
 ; ------------------------------------------------------------------
 
-[ ] Populate PHASE5_VISIBILITY_AUDIT_TEMPLATE.txt
+[ ] Populate SECTION B — PHASE 5 AUDIT REPORT TEMPLATE
 [ ] Include:
 
     ; - All metadata
@@ -248,3 +254,250 @@ STEP 10 — TERMINATION
 ; ------------------------------------------------------------------
 END OF PHASE 5 EXECUTION CHECKLIST
 ; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+
+END OF PHASE 5 EXECUTION CHECKLIST SECTION (SECTION A)
+
+; ------------------------------------------------------------------
+; SECTION B — PHASE 5 AUDIT REPORT TEMPLATE (READ-ONLY)
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+PHASE 5 — FULL VISIBILITY & ACCESSIBILITY AUDIT REPORT
+; ------------------------------------------------------------------
+
+Project: Pipz_Project_V3
+Invocation Type: EXPLICIT USER REQUEST BY NAME
+Bootstrap Dependency: Bootstrap v4 (Phases 0–4 MUST have succeeded)
+
+Audit Scope:
+
+; - Google Drive visibility and accessibility ONLY
+; - Governance correctness is NOT evaluated here
+
+This report is READ-ONLY.
+No remediation, modification, or inference is permitted.
+
+; ------------------------------------------------------------------
+Audit Metadata
+; ------------------------------------------------------------------
+
+Audit Timestamp (UTC):
+Audit Initiated By:
+Resolved Root Folder ID:
+Resolved Root Path:
+
+; ------------------------------------------------------------------
+Tooling Context
+; ------------------------------------------------------------------
+
+Drive Access Status:
+Drive Listing Method:
+
+; - Parent-child traversal only
+; - Search usage: NONE
+
+; ------------------------------------------------------------------
+Enumeration Summary
+; ------------------------------------------------------------------
+
+Total Folders Discovered:
+Total Files Discovered:
+Total Files Readable:
+Total Files Unreadable:
+Total Ungoverned Files:
+Total Expected-but-Missing Files:
+
+; ------------------------------------------------------------------
+SECTION A — VERIFIED ITEMS
+; ------------------------------------------------------------------
+
+Definition:
+Items that:
+
+; - Exist on Drive
+; - Are readable
+; - Match declared or expected paths
+
+Format:
+
+[VERIFIED]
+Full Path:
+Drive ID:
+File Type:
+Notes (if any):
+
+; ------------------------------------------------------------------
+SECTION B — UNREADABLE ITEMS
+; ------------------------------------------------------------------
+
+Definition:
+Items that:
+
+; - Exist on Drive
+; - Could not be opened or fully read
+
+Format:
+[UNREADABLE]
+Full Path:
+Drive ID:
+Failure Mode:
+Notes:
+
+; ------------------------------------------------------------------
+SECTION C — MISSING EXPECTED ITEMS
+; ------------------------------------------------------------------
+
+Definition:
+Items that:
+
+; - Are required by Blueprint / Anchor
+; - Were NOT found during Drive traversal
+
+Format:
+[MISSING]
+Expected Path:
+Governing Source:
+Notes:
+
+; ------------------------------------------------------------------
+SECTION D — ORPHANED ITEMS
+; ------------------------------------------------------------------
+
+Definition:
+Items that:
+
+; - Exist on Drive
+; - Are NOT declared in Blueprint, Anchor, or registry
+
+Format:
+[ORPHANED]
+Full Path:
+Drive ID:
+Notes:
+
+; ------------------------------------------------------------------
+SECTION E — UNGOVERNED ITEMS
+; ------------------------------------------------------------------
+
+Definition:
+Items that:
+
+; - Exist on Drive
+; - Are readable
+; - Lack GEMINI MEM TAG or governing declaration
+
+Format:
+[UNGOVERNED]
+Full Path:
+Drive ID:
+Notes:
+
+; ------------------------------------------------------------------
+SECTION F — INDEX DISCREPANCIES
+
+; ------------------------------------------------------------------
+
+Definition:
+Conflicts between:
+
+; - INDEXIDLIST.txt
+; - Discovered Drive structure
+
+Format:
+[INDEX MISMATCH]
+Declared Path:
+Declared ID:
+Observed Path:
+Observed ID:
+Notes:
+
+; ------------------------------------------------------------------
+SECTION G — ALIAS COVERAGE (RULE 2i SUPPORT)
+; ------------------------------------------------------------------
+
+Definition:
+Verification that INDEXIDLIST.txt alias and role mappings are complete and non-ambiguous
+to support deterministic implicit file resolution under AI_PROJECT_INSTRUCTIONS Rule 2i.
+
+## Alias Coverage Summary
+
+Total VERIFIED=YES items in MASTER INDEX:
+Total items with non-empty aliases:
+Coverage (covered/total):
+
+## Missing Alias Items (MUST LIST)
+
+Format:
+[MISSING ALIAS]
+
+* Full Path:
+
+## Ambiguous Alias Collisions (MUST LIST)
+
+Definition:
+Alias tokens that map to more than one path (case-insensitive).
+
+Format:
+[ALIAS COLLISION]
+
+* Alias Token:
+  Path A:
+  Path B:
+  Notes:
+
+## Orphan Alias Rows (IF ANY)
+
+Definition:
+Paths present in MASTER ALIAS INDEX but not present in MASTER INDEX.
+
+Format:
+[ORPHAN ALIAS ROW]
+
+* Full Path:
+  Notes:
+
+; ------------------------------------------------------------------
+SECTION H — STRUCTURAL ALIGNMENT (BLUEPRINT VS. PHYSICAL)
+; ------------------------------------------------------------------
+
+Definition:
+Verification that the physical directory structure and file placement matches
+the Architectural Truth defined in _PROJECT_BLUEPRINT.txt.
+
+Architectural Source: _PROJECT_BLUEPRINT.txt
+
+[BLUEPRINT DISCREPANCIES]
+
+* Expected Path (per Blueprint):
+* Discovered Path (Actual):
+* Status: [MISSING | ORPHANED | MISPLACED]
+* Impact: [CRITICAL | DEGRADED]
+* Notes:
+
+; ------------------------------------------------------------------
+AUDIT CONCLUSION
+; ------------------------------------------------------------------
+
+Audit Result:
+
+; - SUCCESS (No blocking visibility issues)
+; - DEGRADED (Non-blocking issues present)
+; - FAILED (Blocking visibility issues)
+
+Blocking Issues Summary (if any):
+
+Non-Blocking Issues Summary (if any):
+
+; ------------------------------------------------------------------
+END OF PHASE 5 AUDIT REPORT
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+
+END OF PHASE 5 AUDIT REPORT TEMPLATE SECTION (SECTION B)
+
+; ------------------------------------------------------------------
+
+END OF PHASE 5 AUDIT MASTER

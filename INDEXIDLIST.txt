@@ -4,9 +4,9 @@
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - INDEXIDLIST.txt
-; Version: 1.3.1
-; Last change: Sanity checked aliases for uniqueness and populated missing aliases.
-; Content-Fingerprint: 2026-01-24T02-51-04Z-72I0EJZB
+; Version: 1.3.2
+; Last change: Populated new entries for new unified governance files.
+; Content-Fingerprint: 2026-01-26T21-00-54Z-UZATKM2J
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -33,7 +33,7 @@ All content authority, verification, and conflict resolution is governed by:
 
 ; - AI_PROJECT_INSTRUCTIONS.txt
 ; - _PROJECT_BLUEPRINT.txt
-; - _PROJECT_ANCHOR.txt
+; - _PROJECT_ANCHOR_MASTER.txt
 
 Content-Fingerprint verification and GEMINI MEM TAG path validation are mandatory
 for all files, even when Drive IDs are available.
@@ -120,25 +120,27 @@ IDs and VERIFIED flags are acceleration signals only, never authority.
  PATH / FILE NAME                                 | TYPE               | ID                                                         | VERIFIED
 --------------------------------------------------|--------------------|------------------------------------------------------------|----------
 \Pipz_Project_V3                                  | ROOT               | 1OU-HBeg2w1p78Tk1xdzuBaAwc8ZA2YKe                          | YES
-  GLOBAL STATE REGISTRY.gsheet                    | Spreadsheet        | 1ruF4Z2b_WUQtzxoXNUeThcyugd0PAP4B7sBX5GP77zA               | YES
   settings.ini                                    | Config             | 15XWeWyphygk0f9OqkbHmkPzEsex8rome                          | N/A
   .gitignore                                      | Config             | 1C5iGuX8qjSanONWJ26-r-5Bc7Ct81kGe                          | N/A
   PipzScptzIcon.png                               | Asset (Image)      | 10NXIfmj1dw2CEd-i0beZC5_YD4MPPf4T                          | N/A
   _PROJECT_BLUEPRINT.txt                          | Document           | 17AWzFH4OqYmx9Mcxl4NosFGp-uhyGYMT                          | YES
-  _PROJECT_ANCHOR.txt                             | Document           | 15YF2GnW_RA4m56-7R2yCM6WcLmPjZ307                          | YES
+  _PROJECT_ANCHOR_MASTER.txt                      | Document           | 1TIanwt8JSNhI47vuN_-G4dFRjwNIf898                          | YES
   AI_PROJECT_INSTRUCTIONS.txt                     | Document           | 1TLP6j1xASA9HEA4H2RHhwtvkYR_arU_P                          | YES
   AUDIT_RUNNER.txt                                | Document           | 1cFuPRTV39_GuGtwJM8Z1czYSPEodHga4                          | YES
   INDEXIDLIST.txt                                 | Document           | 16DivuRC5wBfbX8xnq5l_ksf8Q21TgBxA                          | YES
   BOOTSTRAPv4.txt                                 | Document           | 1eHulS4CPEFAxzKeCEmqjw9T7CVGQ3rfP                          | YES
-  PHASE5_VISIBILITY_AUDIT_TEMPLATE.txt            | Document           | 1vsBJ73y0ZxdkCWCbV7kwc8Jh2na2UDuN                          | YES
-  PHASE5_EXECUTION_CHECKLIST.txt                  | Document           | 1jETRg1DH1lVVynERGeC3rCnhH3vGblx_                          | YES
+  PHASE5_AUDIT_MASTER.txt                         | Document           | 1NSHdQ6972glz02knvic-7QNgFcDxbHxQ                          | YES
   GOVERNANCE_LOCK.txt                             | Document           | 1lYiaKQ1LBJx3z2MoSoD3FirBtEyPVI_j                          | YES
   PROJECT_LEARNED_CONSTRAINTS.txt                 | Document           | 12dk1sASojm6Cb9PBSeSoAI9Vchhgx4T3                          | YES
   ORCH_PROTOCOL_SPEC.txt                          | Document           | 1odMqFaKPce80EgAx5AV-AYblg8SdiqsN                          | YES
   PROJECT_STATUS_CHECKLIST.txt                    | Document           | 19q4AAo9dCIZqeGBea9Ap6kxMuoVU-KPn                          | YES
-  PROJECT_WORKING_NOTES.txt                       | Document           | 10Pin07ZKETGjt0EN3LmgEbgPkH_LLzOw                          | YES
   STANDARDIZED_HEADERS.txt                        | Document           | 1bHktPTzL2y6p79FCwIdQ1qr73LP1-VCF                          | YES
   settings.txt                                    | Document           | 1-1Vyt3gIEVRJkPxjmKIh4bjXHH07T_KZ                          | YES
+                                                  |                    |                                                            |
+--------------------------------------------------|--------------------|------------------------------------------------------------|----------
+\Registry                                         | SUB-DIRECTORY      | 1UEBagBflqD4ANRl8O6DpIGfN3bgte1CQ                          | YES
+  GLOBAL_REGISTRY_MASTER.gsheet                   | Spreadsheet        | 1eGN-XnwHYXnFETdoTQ_ViO9m6O5gyHiLNoSVoZsetnc               | YES
+  GLOBAL_REGISTRY_MASTER.csv                      | Spreadsheet        | 1svU14Gx_QuAuNIxE9YivvZfPY76OJkzd                          | YES
                                                   |                    |                                                            |
 --------------------------------------------------|--------------------|------------------------------------------------------------|----------
 \Controller                                       | DIRECTORY          | 1pMBs6kKrGiQ7q1enVOF7yj3RkTu8g_xl                          | YES
@@ -229,25 +231,27 @@ IDs and VERIFIED flags are acceleration signals only, never authority.
  PATH / FILE NAME                                 | ALIASES / ROLE
 --------------------------------------------------|--------------------------------------------------------------------------------------------
 \Pipz_Project_V3                                  | project root, project folder, project directory, root directory
-  GLOBAL STATE REGISTRY.gsheet                    | registry, global registry, state registry, variable registry, function registry
   settings.ini                                    | settings ini, runtime settings, user settings ini, config ini
   PipzScptzIcon.png                               | app icon, application icon, tray icon, gui icon
   .gitignore                                      | git ignore, git config, ignore list, git exclusion
   _PROJECT_BLUEPRINT.txt                          | blueprint, project blueprint, architecture blueprint, folder blueprint, structure blueprint
-  _PROJECT_ANCHOR.txt                             | anchor, project anchor, system prompt, ai anchor, governance anchor
+  _PROJECT_ANCHOR_MASTER.txt                      | anchor, project anchor, system prompt, ai anchor, governance anchor, working notes, project notes, design notes, sanity notes, intent log
   AI_PROJECT_INSTRUCTIONS.txt                     | project instructions, instructions, ai instructions, governance rules, ai governance
   AUDIT_RUNNER.txt                                | audit runner, audit plan, audit backlog, audit execution plan, audit runner file, audit checklist
   INDEXIDLIST.txt                                 | index, id index, drive index, id list, index id list, master index
   BOOTSTRAPv4.txt                                 | bootstrap, bootstrap v4, init protocol, initialization protocol
-  PHASE5_VISIBILITY_AUDIT_TEMPLATE.txt            | phase 5 template, phase 5 audit template, visibility audit template
-  PHASE5_EXECUTION_CHECKLIST.txt                  | phase 5 checklist, phase 5 execution checklist, phase 5 audit checklist
+  PHASE5_AUDIT_MASTER.txt                         | phase 5 template, phase 5 audit template, visibility audit template, phase 5 checklist, phase 5 execution checklist, phase 5 audit checklist
   GOVERNANCE_LOCK.txt                             | governance lock, lock file, governance state, lock state
   PROJECT_LEARNED_CONSTRAINTS.txt                 | plc, constraints, learned constraints, project constraints, invalidated approaches
   ORCH_PROTOCOL_SPEC.txt                          | orchestrator protocol, orch protocol, orch contract, orchestrator spec
   PROJECT_STATUS_CHECKLIST.txt                    | project checklist, status checklist, task tracker, master checklist
-  PROJECT_WORKING_NOTES.txt                       | working notes, project notes, design notes, sanity notes, intent log
   STANDARDIZED_HEADERS.txt                        | header templates, header standards, file headers, license headers
   settings.txt                                    | settings mirror, settings text, settings txt
+                                                  |
+--------------------------------------------------|--------------------------------------------------------------------------------------------
+\Registry                                         | registry root, registry folder, registry directory
+  GLOBAL_REGISTRY_MASTER.gsheet                   | registry sheet, global registry sheet, state registry sheet, variable registry sheet, function registry sheet, logic registry sheet
+  GLOBAL_REGISTRY_MASTER.csv                      | registry, global registry, state registry, variable registry, function registry, logic registry
                                                   |
 --------------------------------------------------|--------------------------------------------------------------------------------------------
 \Controller                                       | controller folder, gui controller, controller directory
@@ -324,6 +328,8 @@ IDs and VERIFIED flags are acceleration signals only, never authority.
     launch.json.governance.txt                    | mirror launch governance, mirror launch sidecar
     settings.json.governance.txt                  | mirror settings governance, mirror settings sidecar
     tasks.json.governance.txt                     | mirror tasks governance, mirror tasks sidecar
+  \.ORCH_AUDITLOG                                 | orch logs, audit root, governance logs
+    \mirror                                       | mirror logs, save logs, audit mirror
                                                   |
 --------------------------------------------------|--------------------------------------------------------------------------------------------
 

@@ -4,9 +4,9 @@
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - BOOTSTRAPv4.txt
-; Version: 1.1.0
-; Last change: Normalized formatting for Drive preview stability; no semantic changes.
-; Content-Fingerprint: 2026-01-21T19-28-54Z-KZ8YIHVT
+; Version: 1.2.0
+; Last change: Updated Phase 2 to use CSV Registry Mirrors per PLC-0006.
+; Content-Fingerprint: 2026-01-25T18-38-24Z-9Z8D4ZJN
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -91,22 +91,24 @@ The AI **MUST** locate, open, and fully read the following **minimum canonical s
 ; - `AI_PROJECT_INSTRUCTIONS.txt`
 ; - `_PROJECT_BLUEPRINT.txt`
 ; - `_PROJECT_ANCHOR.txt`
-; - `INDEXIDLIST.txt` (if present)
-; - `GLOBAL STATE REGISTRY.gsheet`
-
-  ; - All required tabs (variables, functions, invariants)
+; - `INDEXIDLIST.txt`
+; - `PROJECT_LEARNED_CONSTRAINTS.txt`
+; - `Registry\GLOBAL_LOGIC_RULES.csv`
+; - `Registry\GLOBAL_FUNCTION_REGISTRY.csv`
+; - `Registry\GLOBAL_STATE_REGISTRY.csv`
 
 Each file must:
 
 ; - Be readable in full
 ; - Declare Content-Fingerprint (where applicable)
 ; - Match its declared identity
+; - Adhere to the PLC-0006 "Flat-File Sovereignty" constraint
 
 STOP CONDITIONS:
 
-; - Any file is missing
+; - Any file listed above is missing from the provided context.
 ; - Any file is unreadable or truncated
-; - Any required registry tab is inaccessible
+; - The .gsheet is provided instead of the required .csv mirrors (Ref: PLC-0006).
 
 ; ------------------------------------------------------------------
 PHASE 3 — STRUCTURE RECONSTRUCTION (EXPECTED STATE)

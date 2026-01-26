@@ -4,9 +4,9 @@
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - _PROJECT_BLUEPRINT.txt
-; Version: 2.1.0
-; Last change: Populated missing entries from INDEXIDLIST (gitignore, STANDARDIZED_HEADERS, pipz-mirror-governance).
-; Content-Fingerprint: 2026-01-24T14-22-39Z-783WYJSG
+; Version: 2.1.1
+; Last change: Populated missing entries for new unified governance files.
+; Content-Fingerprint: 2026-01-26T20-38-03Z-1CBO4O37
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -24,7 +24,7 @@ All Expected items for Phase 5 MUST be derived exclusively from this section.
 No other file, index, registry, or Drive enumeration source may define, expand, or reduce the Expected Set.
 
 INDEXIDLIST.txt provides acceleration only.
-_PROJECT_ANCHOR.txt provides intent and constraints only.
+_PROJECT_ANCHOR_MASTER.txt provides intent, identity rules, architectural rationale and constraints only.
 Discovered Drive contents provide Observed Set data only.
 
 ; ------------------------------------------------------------------
@@ -33,23 +33,20 @@ Discovered Drive contents provide Observed Set data only.
 PATH / FILE NAME                                  | TYPE               | DESCRIPTION / RESPONSIBILITY
 --------------------------------------------------|--------------------|------------------------------------------------------------------------
 \Pipz_Project_V3                                  | ROOT               | Main project directory.
-  GLOBAL STATE REGISTRY.gsheet                    | Spreadsheet        | EXTERNALIZED SOURCE OF TRUTH: Variable tracking & Function Signatures.
-  settings.ini                                    | Config             | Central storage for user parameters, anti-ban settings, and titles.
+  settings.ini                                    | Config             | Central storage for AutoHotkey user parameters, anti-ban settings, and titles.
   .gitignore                                      | Config             | Git exclusion rules.
   PipzScptzIcon.png                               | Asset (Image)      | Application icon used by Controller GUI and tray; branding and visual identification.
   _PROJECT_BLUEPRINT.txt                          | Document           | Primary source of truth for structure, search protocols, and logic rules.
-  _PROJECT_ANCHOR.txt                             | Document           | Unified living system prompt and logic anchor for AI behavior and authority framing.
+  _PROJECT_ANCHOR_MASTER.txt                      | Document           | Canonical unified system anchor defining mission intent, behavioral constraints, identity rules, and long-term architectural rationale. Authoritative, non-structural, and non-initializing.
   AI_PROJECT_INSTRUCTIONS.txt                     | Document           | AI governance ruleset; mandatory read source defining verification, fingerprinting, header mandates, and enforcement behavior.
   AUDIT_RUNNER.txt                                | Document           | Procedural audit execution plan and backlog; defines required audits, invocation commands, and pass/fail criteria. Non-authoritative; execution-focused.
   INDEXIDLIST.txt                                 | Document           | Deterministic Google Drive ID acceleration map; reference-only, never a source of authority.
   BOOTSTRAPv4.txt                                 | Document           | Canonical, authoritative definition of the Bootstrap v4 initialization protocol.
-  PHASE5_VISIBILITY_AUDIT_TEMPLATE.txt            | Document           | Read-only report template for Phase 5 visibility audits.
-  PHASE5_EXECUTION_CHECKLIST.txt                  | Document           | Deterministic execution checklist for Phase 5 audit runs.
+  PHASE5_AUDIT_MASTER.txt                         | Document           | Deterministic execution checklist and read-only report template for Phase 5 visibility audits.
   GOVERNANCE_LOCK.txt                             | Document           | Governance lifecycle state declaration and phase lock indicator (non-authoritative).
   PROJECT_LEARNED_CONSTRAINTS.txt                 | Document           | Non-authoritative, scope-indexed log of confirmed constraints and invalidated approaches to prevent regression.
   ORCH_PROTOCOL_SPEC.txt                          | Document           | Formal protocol contract defining orchestrator role separation, execution flow, audit requirements, token gates, and PASS/FAIL semantics.
   PROJECT_STATUS_CHECKLIST.txt                    | Document           | Living execution tracker enumerating completed, pending, and blocked work items across governance, tooling, and orchestration.
-  PROJECT_WORKING_NOTES.txt                       | Document           | Living design journal capturing intent, rationale, risk notes, architectural decisions, and sanity anchors.
   STANDARDIZED_HEADERS.txt                        | Document           | Templates for mandatory file headers.
   settings.txt                                    | Document           | Auditable AI mirror of settings.ini.
                                                   |                    |
@@ -85,6 +82,11 @@ PATH / FILE NAME                                  | TYPE               | DESCRIP
   Movement.txt                                    | Document           | Auditable AI mirror of Movement.ahk.
   Security.txt                                    | Document           | Auditable AI mirror of Security.ahk.
   SettingsLoader.txt                              | Document           | Auditable AI mirror of SettingsLoader.ahk.
+                                                  |                    |
+--------------------------------------------------|--------------------|------------------------------------------------------------------------
+\Registry                                         | DIRECTORY          | Stores the registry files that contain our functions, variables, and logic rules.
+  GLOBAL_REGISTRY_MASTER.gsheet                   | Spreadsheet        | EXTERNALIZED SOURCE OF TRUTH: Variable tracking, Function Signatures and Logic Rules.
+  GLOBAL_REGISTRY_MASTER.csv                      | Spreadsheet        | INTERNALIZED SOURCE OF TRUTH: Variable tracking, Function Signatures and Logic Rules.
                                                   |                    |
 --------------------------------------------------|--------------------|------------------------------------------------------------------------
 \Worker                                           | DIRECTORY          | Container for the Background Task Script.
@@ -142,7 +144,7 @@ PATH / FILE NAME                                  | TYPE               | DESCRIP
 
 To maintain a 1:1 literal match of the project state, the following protocol MUST be followed:
 
-1. **LOCATION:** All Global State, Function, and Logic Rule data is stored externally in `GLOBAL STATE REGISTRY.gsheet`.
+1. **LOCATION:** All Global State, Function, and Logic Rule data is stored externally in `GLOBAL_REGISTRY_MASTER.gsheet`.
 
 2. **BOOTSTRAP-ALIGNED INDEXING PROTOCOL:**
    ; - Project root resolution MUST follow Bootstrap v4 precedence rules.
@@ -156,38 +158,38 @@ To maintain a 1:1 literal match of the project state, the following protocol MUS
      ; - `\Lib`
      ; - `\Worker`
      ; - `\Worker\Modules`
+     ; - `\Registry`
 
-   ; - Confirm visibility of all root governance files:
+   ; - Confirm visibility of all governance files:
      ; - `AI_PROJECT_INSTRUCTIONS.txt`
      ; - `_PROJECT_BLUEPRINT.txt`
-     ; - `_PROJECT_ANCHOR.txt`
+     ; - `_PROJECT_ANCHOR_MASTER.txt`
+     ; - `PHASE5_AUDIT_MASTER.txt`
      ; - `BOOTSTRAPv4.txt`
-	 ; - `AUDIT_RUNNER.txt`
-     ; - `PHASE5_VISIBILITY_AUDIT_TEMPLATE.txt`
-     ; - `PHASE5_EXECUTION_CHECKLIST.txt`
+	   ; - `AUDIT_RUNNER.txt`
      ; - `GOVERNANCE_LOCK.txt`
      ; - `PROJECT_LEARNED_CONSTRAINTS.txt`
-     ; - `GLOBAL STATE REGISTRY.gsheet`
+     ; - `GLOBAL_REGISTRY_MASTER.gsheet`
+     ; - `GLOBAL_REGISTRY_MASTER.csv`
      ; - `INDEXIDLIST.txt`
-     ; - `settings.txt`
-     ; - `PipzScptzIcon.png`
+     ; - `STANDARDIZED_HEADERS.txt`
 
    Visibility confirmation is existence and path correctness only.
    Runtime-only and non-readable assets (e.g. .png, .ahk, .ini, .key) are not subject to read or fingerprint verification.
 
 3. **REGISTRY VERIFICATION RULE:**
-   ; - Access the gsheet and read ALL required tabs:
-     ; - `GLOBAL STATE REGISTRY` (Variables, Owners, Init Values)
-     ; - `GLOBAL FUNCTION REGISTRY` (Functions, Owners, Purpose)
-     ; - `GLOBAL LOGIC RULES` (Logic Invariants / Ground Truth rules)
-   ; - If any required tab is missing, inaccessible, or cannot be fully read, the AI must stop.
+   ; - Access the gsheet and read ALL required sections:
+     ; - `GLOBAL_STATE_REGISTRY` (Variables, Owners, Init Values)
+     ; - `GLOBAL_FUNCTION_REGISTRY` (Functions, Owners, Purpose)
+     ; - `GLOBAL_LOGIC_RULES_REGISTRY` (Logic Invariants / Ground Truth rules)
+   ; - If any required section is missing, inaccessible, or cannot be fully read, the AI must access the (`GLOBAL_REGISTRY_MASTER.csv`) and attempt verification using this file; If the content is still missing, inaccessible, or cannot be fully read, the AI must stop.
 
 4. **CONTENT-FINGERPRINT ENFORCEMENT:**
    ; - The Content-Fingerprint declared in this file (`_PROJECT_BLUEPRINT.txt`) MUST be extracted and verified against the current Drive mirror before use.
    ; - Any mismatch between the declared fingerprint and the Drive mirror constitutes a hard stop.
 
 5. **TOOLING LIMITATION HARD-STOP:**
-   ; - If tooling limitations (including truncation, partial reads, or access restrictions) prevent a verifiable full read of this file, any required governance file, or any required registry tab, the AI must stop and explicitly report the limitation.
+   ; - If tooling limitations (including truncation, partial reads, or access restrictions) prevent a verifiable full read of this file, any required governance file, or any required registry section, the AI must stop and explicitly report the limitation.
    ; - The AI must not infer, assume, summarize, or fabricate missing content under any circumstances.
 
 6. **CUMULATIVE INTEGRITY:** Never remove registry entries.
@@ -197,10 +199,10 @@ To maintain a 1:1 literal match of the project state, the following protocol MUS
 ### 3. GLOBAL LOGIC ANCHORS
 ; ------------------------------------------------------------------
 
-; - **DRY ARCHITECTURE:** No variable or function definitions should be hardcoded in text documents. Refer to `GLOBAL STATE REGISTRY.gsheet`.
+; - **DRY ARCHITECTURE:** No variable or function definitions should be hardcoded in text documents. Refer to `GLOBAL_REGISTRY_MASTER.gsheet` section `GLOBAL_STATE_REGISTRY`.
 ; - **IPC STANDARD:** All communication between Controller and Worker uses WM_COPYDATA or custom message `0x5555`.
 ; - **STATE PERSISTENCE:** The Worker must remain a slave to `Settings.ini`; enforcement is handled by the Watchdog in `WorkerState.ahk`.
-; - **GROUND TRUTH RULES (MANDATORY):** Logic invariants are defined in `GLOBAL STATE REGISTRY.gsheet` under the tab titled `GLOBAL LOGIC RULES`.
+; - **GROUND TRUTH RULES (MANDATORY):** Logic invariants are defined in `GLOBAL_REGISTRY_MASTER.gsheet` under the section titled `GLOBAL_LOGIC_RULES_REGISTRY`.
 
 These rules must be read and verified before any audit, debugging, refactor, or feature change.
 
