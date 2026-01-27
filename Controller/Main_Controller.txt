@@ -10,7 +10,7 @@
 ; MAINTEMPLATE - Main_Controller.ahk (AHK v2)
 ; Version: 2.1.9
 ; Last change: Reverted to standard IconPath implementation for stable Tray and Taskbar icon inheritance + Final Fingerprinting Test.
-; Content-Fingerprint: 2026-01-23T21-01-09Z-NGT25TOC
+; Content-Fingerprint: 2026-01-27T19-28-31Z-2OEHRSC6
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -133,7 +133,7 @@ BtnScrp := MyGui.Add("Button", "x+10 y110 w125 h30 Hidden", "Script")
 BtnScrp.OnEvent("Click", (*) => ShowSettingsSubTab("Script"))
 
 ; --- Settings: General ---
-MyGui.SetFont("s10 Bold cWhite") 
+MyGui.SetFont("s13 Bold cWhite") 
 txtGenHeader := MyGui.Add("Text", "x20 y155 w510 Center Hidden", "General Settings")
 MyGui.SetFont("s10 Norm cWhite")
 chkOverlay   := MyGui.Add("Checkbox", "x210 y185 Hidden", "Show Overlay")
@@ -142,7 +142,9 @@ chkOverlay.OnEvent("Click", (c, *) => (g_ShowOverlay := c.Value, SaveSetting("UI
 chkTray      := MyGui.Add("Checkbox", "x210 y210 Hidden", "Minimize to Tray")
 chkTray.Value := g_MinToTray
 chkTray.OnEvent("Click", (c, *) => (g_MinToTray := c.Value, SaveSetting("UI", "MinimizeToTray", c.Value)))
+MyGui.SetFont("s13 Bold cWhite") 
 txtGameTitle := MyGui.Add("Text", "x20 y245 w510 Center Hidden", "Game Window Title")
+MyGui.SetFont("s10 Bold cWhite") 
 EditTitle    := MyGui.Add("Edit", "x135 y275 w280 h25 Center Hidden cBlack", g_WindowTitle)
 EditTitle.OnEvent("Change", (ctrl, *) => Messenger.PushTitleUpdate(ctrl.Value))
 

@@ -4,9 +4,9 @@
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - PROJECT_LEARNED_CONSTRAINTS.txt
-; Version: 1.1.7
-; Last change: Migrated file to new governance directory and updated all references in file, marked some reference files as DEPRECIATED due to migration and merging.
-; Content-Fingerprint: 2026-01-27T17-37-15Z-E70JS6CN
+; Version: 1.1.8
+; Last change: Added PLC-0010 and PLC-0011 regarding AHK v2 SetTimer callback requirements within static classes.
+; Content-Fingerprint: 2026-01-27T19-48-15Z-O9UPVJP5
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -56,7 +56,7 @@ Narrative, opinions, and "best practices" without a confirmed outcome are prohib
 SCOPE TAXONOMY (CANONICAL)
 ; ------------------------------------------------------------------
 
-Use EXACTLY ONE SCOPE per entry:
+Use EXACTLY ONE SCOPE per entry (DEFINE NEW SCOPE IF NEEDED | NO DUAL SCOPES):
 
 ; - Governance
 ; - Bootstrap
@@ -69,9 +69,10 @@ Use EXACTLY ONE SCOPE per entry:
 ; - Infrastructure
 ; - Tooling
 ; - Audits
+; - AutoHotkey v2 Logic
 
 ; ------------------------------------------------------------------
-ENTRY FORMAT (STRICT)
+ENTRY FORMAT (STRICT | DO NOT OMIT ANY FIELD)
 ; ------------------------------------------------------------------
 
 ENTRY ID: PLC-0000
@@ -96,10 +97,10 @@ EVIDENCE:
 <What observation confirms this? Logs, reproducible steps, file references, etc.>
 
 RELATED FILES:
-<List relevant project files (paths), if applicable>
+<List relevant project files (paths). Otherwise write: N/A>
 
 NOTES:
-<Optional. Must remain factual.>
+<Optional. Must remain factual. Otherwise write: N/A>
 
 ; ------------------------------------------------------------------
 SCOPE INDEX (MUST BE MAINTAINED)
@@ -119,6 +120,7 @@ CrossCutting   | PLC-0002, PLC-0003, PLC-0004, PLC-0005
 Infrastructure | PLC-0006
 Tooling        | PLC-0007, PLC-0008
 Audits         | PLC-0009
+AutoHotkey v2 Logic | PLC-0010, PLC-0011
 
 ; ------------------------------------------------------------------
 ENTRIES (APPEND ONLY BELOW THIS LINE)
@@ -391,6 +393,58 @@ Pipz_Project_V3\PHASE5_VISIBILITY_AUDIT_TEMPLATE.txt (DEPRECIATED)
 
 NOTES:
 Governed by GLOBAL LOGIC RULE GEN-03.
+
+; ------------------------------------------------------------------
+
+ENTRY ID: PLC-0010
+DATE (UTC): 2026-01-27
+SCOPE: AutoHotkey v2 Logic
+STATUS: CONFIRMED
+TITLE: SetTimer Static Method Callback Failure
+
+CONTEXT:
+Attempting to trigger a debounced log or function call using SetTimer within a static class method (e.g., Messenger.PushTitleUpdate).
+
+DISCOVERY:
+In AHK v2, referencing a static method as `this.MethodName` or `ClassName.MethodName` inside a `SetTimer` call throws "Error: Invalid callback function." The interpreter does not automatically treat these as Func objects in this context.
+
+INVALIDATED APPROACH:
+`SetTimer(this.MethodName, -1000)` or `SetTimer(Messenger.MethodName, -1000)`
+
+EVIDENCE:
+Runtime error thrown consistently in Pipz_Project_V3 Controller whenever the Game Window Title field was modified.
+
+RELATED FILES:
+Pipz_Project_V3\Controller\Modules\Messenger.ahk
+
+NOTES:
+This constraint is critical for maintaining stable execution of AHK v2 scripts that rely on timed callbacks within static methods.
+
+; ------------------------------------------------------------------
+
+ENTRY ID: PLC-0011
+DATE (UTC): 2026-01-27
+SCOPE: AutoHotkey v2 Logic
+STATUS: CONFIRMED
+TITLE: Mandatory Method Binding for Class-Based Timers
+
+CONTEXT:
+Ensuring valid callbacks for SetTimer when the target function resides within a Class.
+
+VALIDATED CONSTRAINT:
+When passing a class method to `SetTimer`, it MUST be explicitly bound to the class or instance object to create a "BoundFunc" object.
+
+VALIDATED APPROACH:
+`SetTimer(ClassName.MethodName.Bind(ClassName), -1000)`
+
+EVIDENCE:
+Successful execution of the timer callback without errors in Pipz_Project_V3 Controller after applying the `.Bind()` method.
+
+RELATED FILES:
+Pipz_Project_V3\Controller\Modules\Messenger.ahk
+
+NOTES:
+This ensures the callback is recognized as a valid callable object by the AHK v2 runtime, regardless of whether the method actually requires the `this` parameter.
 
 ; ------------------------------------------------------------------
 

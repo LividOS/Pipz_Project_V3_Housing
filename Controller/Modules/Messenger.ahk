@@ -6,7 +6,7 @@
 ; MAINTEMPLATE - Messenger.ahk (AHK v2)
 ; Version: 1.0.0
 ; Last change: EMPTY.
-; Content-Fingerprint: 2026-01-21T19-35-52Z-YAIPOW2Y
+; Content-Fingerprint: 2026-01-27T19-21-08Z-WUHP9X42
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -38,7 +38,7 @@ class Messenger {
 
         ; 3. Debounced Logging
         global g_PendingTitle := newTitle
-        SetTimer(this.LoggedTitleUpdate, -1000) 
+        SetTimer(Messenger.LoggedTitleUpdate.Bind(Messenger), -1000) 
     }
 
     static LoggedTitleUpdate() {
