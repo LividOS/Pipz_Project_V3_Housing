@@ -4,9 +4,9 @@
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - PHASE5_AUDIT_MASTER.txt
-; Version: 2.0.0
-; Last change: Initial merge of PHASE5_EXECUTION_CHECKLIST.txt and PHASE5_VISIBILITY_AUDIT_TEMPLATE.txt
-; Content-Fingerprint: 2026-01-27T12-31-51Z-4AH72VUO
+; Version: 2.0.1
+; Last change: Revised step 4 to reference new unified anchor file.
+; Content-Fingerprint: 2026-01-27T15-52-03Z-WKGKSAOI
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -122,7 +122,7 @@ For EACH discovered item:
 
 Rules:
 
-; - _PROJECT_ANCHOR.txt is NOT a structural authority
+; - _PROJECT_ANCHOR_MASTER.txt is NOT a structural authority
 ; - Runtime-only and non-readable assets may legitimately lack GEMINI MEM TAGs
 
 If path cannot be reconstructed → STOP
@@ -156,7 +156,7 @@ STEP 6 — EXPECTED SET COMPILATION (ARCHITECTURAL TRUTH)
 
     ; - _PROJECT_BLUEPRINT.txt (STRUCTURE AUTHORITY)
 
-[ ] DO NOT derive structure from _PROJECT_ANCHOR.txt
+[ ] DO NOT derive structure from _PROJECT_ANCHOR_MASTER.txt
 [ ] For each blueprint entry, record the MANDATORY relative path.
 [ ] Record all expected paths
 

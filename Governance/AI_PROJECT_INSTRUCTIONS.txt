@@ -6,9 +6,9 @@
 ; Pipz_Project_V3 [AHK v2] (AI-Specific Operating Instructions)
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - AI_PROJECT_INSTRUCTIONS.txt
-; Version: 1.6.2
-; Last change: Revised sections to reflect new merged governance and registry files.
-; Content-Fingerprint: 2026-01-26T21-17-39Z-D8KX2JYD
+; Version: 1.6.4
+; Last change: Revised rules 7 and 13 to reflect new registry hierarchy.
+; Content-Fingerprint: 2026-01-27T13-25-33Z-BY6BAQFO
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -172,20 +172,26 @@ The AI MUST locate, open, and fully read the following minimum canonical set:
 ; - _PROJECT_BLUEPRINT.txt
 ; - _PROJECT_ANCHOR_MASTER.txt
 ; - INDEXIDLIST.txt
-; - GLOBAL_REGISTRY_MASTER.csv or GLOBAL_REGISTRY_MASTER.gsheet
-  ; - All required sections (GLOBAL_STATE_REGISTRY, GLOBAL_FUNCTION_REGISTRY, GLOBAL_LOGIC_RULES_REGISTRY)
+; - GLOBAL_REGISTRY_MASTER (AUTHORITY HIERARCHY):
+    1. PRIMARY: GLOBAL_REGISTRY_MASTER.gsheet
+    2. FALLBACK: GLOBAL_REGISTRY_MASTER.csv (Literal 1:1 Mirror)
 
 Each file must:
 
 ; - Be readable in full
 ; - Declare Content-Fingerprint where applicable
 ; - Match declared identity
+; - [REGISTRY SPECIFIC]: Verify all required sections are present:
+    ; - GLOBAL_STATE_REGISTRY
+    ; - GLOBAL_FUNCTION_REGISTRY
+    ; - GLOBAL_LOGIC_RULES_REGISTRY
 
 STOP CONDITIONS:
 
 ; - Any file is missing
 ; - Any file is unreadable or truncated
-; - Any required registry tab is inaccessible
+; - GLOBAL_REGISTRY_MASTER.gsheet is inaccessible AND .csv fallback is missing or desynchronized
+; - Any required registry section is inaccessible
 
 ; ------------------------------------------------------------------
 PHASE 3 — STRUCTURE RECONSTRUCTION
@@ -766,20 +772,24 @@ Where:
 7. Registry Supremacy Rule
 ; ------------------------------------------------------------------
 
-7a. GLOBAL_REGISTRY_MASTER.csv and GLOBAL_REGISTRY_MASTER.gsheet(Same file, different types) are the single source of truth for:
-7aa. Global variables
-7ab. Function ownership
-7ac. Logic invariants
+7a. The Registry Authority is defined by the following hierarchy:
+7aa. PRIMARY: GLOBAL_REGISTRY_MASTER.gsheet
+7ab. FALLBACK: GLOBAL_REGISTRY_MASTER.csv (Literal 1:1 Mirror)
 
-7b. AI obligations:
-7ba. Never introduce a variable or function not present in the registry.
-7bb. Never remove a registry entry.
-7bc. If code conflicts with the registry:
-7bca. The AI must flag the conflict.
-7bcb. Propose reconciliation.
-7bcc. Wait for confirmation before proceeding.
+7b. These sources are the single source of truth for:
+7ba. Global variables
+7bb. Function ownership
+7bc. Logic invariants
 
-7c. The AI must consult the registry before writing code, not after.
+7c. AI obligations:
+7ca. Never introduce a variable or function not present in the registry.
+7cb. Never remove a registry entry.
+7cc. If code conflicts with the registry:
+7cca. The AI must flag the conflict.
+7ccb. Propose reconciliation.
+7ccc. Wait for confirmation before proceeding.
+
+7d. The AI must consult the registry before writing code, not after.
 
 ; ------------------------------------------------------------------
 8. Blueprint Synchronization Rule
@@ -869,11 +879,12 @@ Where:
 ; ------------------------------------------------------------------
 
 13a. For the AI:
-13aa. Google Drive mirrors and registry define reality.
+13aa. The file hierarchy defined in Rule 7 (GSheet > CSV) and the 
+     structural mirrors in _PROJECT_BLUEPRINT.txt define reality.
 13ab. Local state is irrelevant.
 13ac. Past conversation memory is advisory only.
 
-13b. If Drive and memory disagree, Drive wins.
+13b. If Drive and memory disagree, the Drive-based Authority Hierarchy wins.
 
 ; ------------------------------------------------------------------
 14. Instruction Self-Enforcement Rule

@@ -6,7 +6,7 @@
 // MAINTEMPLATE - orch_bootstrap.js
 // Version: 0.1.0
 // Last change: Initial creation.
-// Content-Fingerprint: YYYY-MM-DDTHH-MM-SSZ-XXXXXXXX
+// Content-Fingerprint: 2026-01-27T16-31-27Z-38LOEAGA
 // ------------------------------------------------------------------
 
 // ------------------------------------------------------------------
@@ -68,12 +68,11 @@ function main() {
     "AI_PROJECT_INSTRUCTIONS.txt",
     "BOOTSTRAPv4.txt",
     "_PROJECT_BLUEPRINT.txt",
-    "_PROJECT_ANCHOR.txt",
+    "_PROJECT_ANCHOR_MASTER.txt",
     "INDEXIDLIST.txt",
     "PROJECT_LEARNED_CONSTRAINTS.txt",
     "AUDIT_RUNNER.txt",
-    "PHASE5_EXECUTION_CHECKLIST.txt",
-    "PHASE5_VISIBILITY_AUDIT_TEMPLATE.txt",
+    "PHASE5_AUDIT_MASTER.txt",
     "GLOBAL STATE REGISTRY.xlsx"
   ];
 

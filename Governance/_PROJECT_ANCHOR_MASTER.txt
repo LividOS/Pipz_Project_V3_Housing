@@ -4,9 +4,9 @@
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - _PROJECT_ANCHOR_MASTER.txt
-; Version: 2.0.0
-; Last change: Initial merge of _PROJECT_ANCHOR.txt and PROJECT_WORKING_NOTES.txt
-; Content-Fingerprint: 2026-01-27T12-32-07Z-9LFWYHX6
+; Version: 2.0.1
+; Last change: Revised section a step 2 and 7 to reflect new registry hierarchy requirements.
+; Content-Fingerprint: 2026-01-27T13-55-48Z-94QFEV6R
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -69,6 +69,16 @@ All initialization, indexing, verification, and authority establishment is gover
 ; - Phase ordering is strict.
 ; - This Anchor MUST NOT introduce alternate search paths, shortcuts, or fallback logic.
 ; - Any conflict between this file and Bootstrap v4 MUST be resolved in favor of Bootstrap v4.
+
+**SYSTEM HIERARCHY & AUTHORITY**
+The hierarchy of authority for Pipz_Project_V3 is:
+
+1. AI_PROJECT_INSTRUCTIONS.txt (Rules 0–16)
+2. BOOTSTRAPv4.txt (Initialization)
+3. _PROJECT_BLUEPRINT.txt (Structural Truth)
+4. GLOBAL_REGISTRY_MASTER.gsheet (Primary Authority)
+5. GLOBAL_REGISTRY_MASTER.csv (Literal Fallback Mirror)
+6. _PROJECT_ANCHOR_MASTER.txt (Intent & Rationale)
 
 **NEW CHAT INVOCATION (REFERENCE ONLY)**
 For a fresh session cold-start, the required user invocation (including the machine-checkable token `BOOTSTRAP_V4_INIT`) is defined in:
@@ -167,10 +177,12 @@ Any change that affects:
 ; - Verification semantics
 
 MUST be synchronized across:
-; - `_PROJECT_BLUEPRINT.txt`
-; - `_PROJECT_ANCHOR.txt`
-; - `AI_PROJECT_INSTRUCTIONS.txt`
-; - `INDEXIDLIST.txt` (when applicable)
+; - _PROJECT_BLUEPRINT.txt
+; - _PROJECT_ANCHOR_MASTER.txt
+; - AI_PROJECT_INSTRUCTIONS.txt
+; - INDEXIDLIST.txt (when applicable)
+; - GLOBAL_REGISTRY_MASTER.gsheet
+; - GLOBAL_REGISTRY_MASTER.csv
 
 Partial updates are invalid.
 

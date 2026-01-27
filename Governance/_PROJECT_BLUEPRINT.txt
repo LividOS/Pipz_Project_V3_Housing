@@ -4,9 +4,9 @@
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - _PROJECT_BLUEPRINT.txt
-; Version: 2.1.1
-; Last change: Populated missing entries for new unified governance files.
-; Content-Fingerprint: 2026-01-26T20-38-03Z-1CBO4O37
+; Version: 2.1.2
+; Last change: Revised registry table entries and section 3 logic.
+; Content-Fingerprint: 2026-01-27T14-22-47Z-9DUAQSX1
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -85,8 +85,8 @@ PATH / FILE NAME                                  | TYPE               | DESCRIP
                                                   |                    |
 --------------------------------------------------|--------------------|------------------------------------------------------------------------
 \Registry                                         | DIRECTORY          | Stores the registry files that contain our functions, variables, and logic rules.
-  GLOBAL_REGISTRY_MASTER.gsheet                   | Spreadsheet        | EXTERNALIZED SOURCE OF TRUTH: Variable tracking, Function Signatures and Logic Rules.
-  GLOBAL_REGISTRY_MASTER.csv                      | Spreadsheet        | INTERNALIZED SOURCE OF TRUTH: Variable tracking, Function Signatures and Logic Rules.
+  GLOBAL_REGISTRY_MASTER.gsheet                   | Google Sheet       | PRIMARY AUTHORITY: Variable tracking, Function Signatures, and Logic Rules.
+  GLOBAL_REGISTRY_MASTER.csv                      | CSV File           | FALLBACK MIRROR: Literal 1:1 copy of `GLOBAL_REGISTRY_MASTER.gsheet`.
                                                   |                    |
 --------------------------------------------------|--------------------|------------------------------------------------------------------------
 \Worker                                           | DIRECTORY          | Container for the Background Task Script.
@@ -144,7 +144,7 @@ PATH / FILE NAME                                  | TYPE               | DESCRIP
 
 To maintain a 1:1 literal match of the project state, the following protocol MUST be followed:
 
-1. **LOCATION:** All Global State, Function, and Logic Rule data is stored externally in `GLOBAL_REGISTRY_MASTER.gsheet`.
+1. **REGISTRY LOCATION:** All Global State, Function, and Logic Rule data is stored externally in `GLOBAL_REGISTRY_MASTER.gsheet` (with `GLOBAL_REGISTRY_MASTER.csv` as the authoritative fallback mirror).
 
 2. **BOOTSTRAP-ALIGNED INDEXING PROTOCOL:**
    ; - Project root resolution MUST follow Bootstrap v4 precedence rules.
@@ -177,12 +177,17 @@ To maintain a 1:1 literal match of the project state, the following protocol MUS
    Visibility confirmation is existence and path correctness only.
    Runtime-only and non-readable assets (e.g. .png, .ahk, .ini, .key) are not subject to read or fingerprint verification.
 
-3. **REGISTRY VERIFICATION RULE:**
-   ; - Access the gsheet and read ALL required sections:
-     ; - `GLOBAL_STATE_REGISTRY` (Variables, Owners, Init Values)
-     ; - `GLOBAL_FUNCTION_REGISTRY` (Functions, Owners, Purpose)
-     ; - `GLOBAL_LOGIC_RULES_REGISTRY` (Logic Invariants / Ground Truth rules)
-   ; - If any required section is missing, inaccessible, or cannot be fully read, the AI must access the (`GLOBAL_REGISTRY_MASTER.csv`) and attempt verification using this file; If the content is still missing, inaccessible, or cannot be fully read, the AI must stop.
+3. **REGISTRY VERIFICATION PROTOCOL (HIERARCHY ENFORCEMENT):**
+   ; - The AI MUST prioritize the PRIMARY source for all registry reads.
+   ; - PRIMARY: `GLOBAL_REGISTRY_MASTER.gsheet`
+   ; - FALLBACK: `GLOBAL_REGISTRY_MASTER.csv` (Literal 1:1 Mirror)
+   ; - Protocol:
+     ; - Access `GLOBAL_REGISTRY_MASTER.gsheet` and read ALL required sections:
+       ; - GLOBAL_STATE_REGISTRY
+       ; - GLOBAL_FUNCTION_REGISTRY
+       ; - GLOBAL_LOGIC_RULES_REGISTRY
+     ; - If `GLOBAL_REGISTRY_MASTER.gsheet` is inaccessible, the AI MUST switch to `GLOBAL_REGISTRY_MASTER.csv` and attempt verification.
+     ; - If BOTH sources are inaccessible or cannot be fully read, the AI must STOP.
 
 4. **CONTENT-FINGERPRINT ENFORCEMENT:**
    ; - The Content-Fingerprint declared in this file (`_PROJECT_BLUEPRINT.txt`) MUST be extracted and verified against the current Drive mirror before use.
@@ -199,12 +204,15 @@ To maintain a 1:1 literal match of the project state, the following protocol MUS
 ### 3. GLOBAL LOGIC ANCHORS
 ; ------------------------------------------------------------------
 
-; - **DRY ARCHITECTURE:** No variable or function definitions should be hardcoded in text documents. Refer to `GLOBAL_REGISTRY_MASTER.gsheet` section `GLOBAL_STATE_REGISTRY`.
-; - **IPC STANDARD:** All communication between Controller and Worker uses WM_COPYDATA or custom message `0x5555`.
-; - **STATE PERSISTENCE:** The Worker must remain a slave to `Settings.ini`; enforcement is handled by the Watchdog in `WorkerState.ahk`.
-; - **GROUND TRUTH RULES (MANDATORY):** Logic invariants are defined in `GLOBAL_REGISTRY_MASTER.gsheet` under the section titled `GLOBAL_LOGIC_RULES_REGISTRY`.
+; - **DRY ARCHITECTURE:** No variable or function definitions should be hardcoded in text documents. 
+Refer to the `GLOBAL_STATE_REGISTRY` and `GLOBAL_FUNCTION_REGISTRY` sections within the master registry file `GLOBAL_REGISTRY_MASTER.gsheet` (or the `GLOBAL_REGISTRY_MASTER.csv` fallback).
 
-These rules must be read and verified before any audit, debugging, refactor, or feature change.
+; - **IPC STANDARD:** All communication between Controller and Worker uses WM_COPYDATA or custom message `0x5555`.
+
+; - **STATE PERSISTENCE:** The Worker must remain a slave to `Settings.ini`; enforcement is handled by the Watchdog in `WorkerState.ahk`.
+
+; - **GROUND TRUTH RULES (MANDATORY):** Logic invariants are defined in the `GLOBAL_LOGIC_RULES_REGISTRY` section of the authoritative registry files.
+These rules must be read and verified from `GLOBAL_REGISTRY_MASTER.gsheet` (or `GLOBAL_REGISTRY_MASTER.csv` fallback) before any audit, debugging, refactor, or feature change.
 
 ; ------------------------------------------------------------------
 

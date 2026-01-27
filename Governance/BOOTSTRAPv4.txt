@@ -4,9 +4,9 @@
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - BOOTSTRAPv4.txt
-; Version: 1.2.1
-; Last change: Updated Phase 2 to use new merged registry and governance files.
-; Content-Fingerprint: 2026-01-26T21-11-00Z-SZZUD97K
+; Version: 1.2.2
+; Last change: Revised Phase 2 to reflect new registry hierarchy requirements.
+; Content-Fingerprint: 2026-01-27T13-39-09Z-5SJNOFBZ
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -86,14 +86,16 @@ If root cannot be resolved deterministically → **STOP**.
 PHASE 2 — CANONICAL FILE SET VERIFICATION
 ; ------------------------------------------------------------------
 
-The AI **MUST** locate, open, and fully read the following **minimum canonical set**:
+The AI **MUST** locate, open, and fully read the following mandatory files:
+; - AI_PROJECT_INSTRUCTIONS.txt
+; - _PROJECT_BLUEPRINT.txt
+; - _PROJECT_ANCHOR_MASTER.txt
+; - INDEXIDLIST.txt
+; - PROJECT_LEARNED_CONSTRAINTS.txt
 
-; - `AI_PROJECT_INSTRUCTIONS.txt`
-; - `_PROJECT_BLUEPRINT.txt`
-; - `_PROJECT_ANCHOR_MASTER.txt`
-; - `INDEXIDLIST.txt`
-; - `PROJECT_LEARNED_CONSTRAINTS.txt`
-; - `Registry\GLOBAL_REGISTRY_MASTER.csv` or `Registry\GLOBAL_REGISTRY_MASTER.gsheet`
+The AI **MUST** ALSO locate and read the MASTER REGISTRY (Hierarchy Enforcement):
+; - PRIMARY: GLOBAL_REGISTRY_MASTER.gsheet
+; - FALLBACK: GLOBAL_REGISTRY_MASTER.csv (Required ONLY if .gsheet is missing)
 
 Each file must:
 
@@ -104,9 +106,9 @@ Each file must:
 
 STOP CONDITIONS:
 
-; - Any file listed above is missing from the provided context.
-; - Any file is unreadable or truncated
-; - The .gsheet is provided instead of the required .csv mirrors (Ref: PLC-0006).
+; - Any of the four mandatory governance files are missing.
+; - BOTH GLOBAL_REGISTRY_MASTER.gsheet AND GLOBAL_REGISTRY_MASTER.csv are missing.
+; - The .csv is present but its content-fingerprint does not match the .gsheet (if both are accessible).
 
 ; ------------------------------------------------------------------
 PHASE 3 — STRUCTURE RECONSTRUCTION (EXPECTED STATE)

@@ -4,9 +4,9 @@
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - PROJECT_STATUS_CHECKLIST.txt
-; Version: 0.1.3
-; Last change: Added extension repackaging runbook.
-; Content-Fingerprint: 2026-01-24T14-16-37Z-K9150TQQ
+; Version: 0.1.4
+; Last change: Revised section a removing depreceated reference and adding reference to new unified governance file.
+; Content-Fingerprint: 2026-01-27T15-54-40Z-DJ77SKKV
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -29,7 +29,7 @@ A. GOVERNANCE & AUTHORITY LAYER
 ; ------------------------------------------------------------------
 
 [✓] Core governance files exist:
-    - _PROJECT_ANCHOR.txt
+    - _PROJECT_ANCHOR_MASTER.txt
     - _PROJECT_BLUEPRINT.txt
     - AI_PROJECT_INSTRUCTIONS.txt
     - PROJECT_LEARNED_CONSTRAINTS.txt
@@ -43,7 +43,7 @@ A. GOVERNANCE & AUTHORITY LAYER
     - MVP orchestrator files
     - VS Code extension files
     - JSON governance sidecars
-    - PROJECT_STATUS_CHECKLIST.txt + PROJECT_WORKING_NOTES.txt
+    - PROJECT_STATUS_CHECKLIST.txt
     (Final verification pass still required)
 
 [ ] Verify ALL governed files contain:
@@ -121,13 +121,12 @@ E. VS CODE ENVIRONMENT
 [✓] Continue YAML config loads successfully
 
 [?] Confirm Continue system message ALWAYS forces read of:
-    - _PROJECT_ANCHOR.txt
+    - _PROJECT_ANCHOR_MASTER.txt
     - _PROJECT_BLUEPRINT.txt
     - AI_PROJECT_INSTRUCTIONS.txt
     - PROJECT_LEARNED_CONSTRAINTS.txt
     - INDEXIDLIST.txt
     - PROJECT_STATUS_CHECKLIST.txt
-    - PROJECT_WORKING_NOTES.txt
 
 ; ------------------------------------------------------------------
 E.1 VS CODE EXTENSION REPACKAGING RUNBOOK (MANDATORY PROCEDURE)

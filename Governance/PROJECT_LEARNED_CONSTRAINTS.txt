@@ -4,9 +4,9 @@
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - PROJECT_LEARNED_CONSTRAINTS.txt
-; Version: 1.1.5
-; Last change: Fully normalized PLC-0006 through PLC-0009 with strict field compliance.
-; Content-Fingerprint: 2026-01-25T21-58-01Z-5C46IWVH
+; Version: 1.1.6
+; Last change: Updated registry references to new unified files.
+; Content-Fingerprint: 2026-01-27T15-58-46Z-N969G083
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -26,10 +26,8 @@ This document does NOT:
 ; - Override AI_PROJECT_INSTRUCTIONS.txt
 ; - Override BOOTSTRAPv4.txt
 ; - Override _PROJECT_BLUEPRINT.txt
-; - Override GLOBAL STATE REGISTRY.gsheet
-; - Override GLOBAL_STATE_REGISTRY.csv
-; - Override GLOBAL_FUNCTION_REGISTRY.csv
-; - Override GLOBAL_LOGIC_RULES.csv
+; - Override GLOBAL_REGISTRY_MASTER.gsheet
+; - Override GLOBAL_REGISTRY_MASTER.csv
 ; - Override registry ownership, structure, or invariants
 
 If any entry in this document conflicts with authoritative sources:
