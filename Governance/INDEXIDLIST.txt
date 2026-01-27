@@ -6,7 +6,7 @@
 ; MAINTEMPLATE - INDEXIDLIST.txt
 ; Version: 1.3.4
 ; Last change: Migrated file to new governance directory and updated all references in file.
-; Content-Fingerprint: 2026-01-27T17-26-13Z-61PHTQGN
+; Content-Fingerprint: 2026-01-27T18-10-54Z-4788V4MT
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -125,6 +125,8 @@ IDs and VERIFIED flags are acceleration signals only, never authority.
   PipzScptzIcon.png                               | Asset (Image)      | 10NXIfmj1dw2CEd-i0beZC5_YD4MPPf4T                          | N/A
   ORCH_PROTOCOL_SPEC.txt                          | Document           | 1odMqFaKPce80EgAx5AV-AYblg8SdiqsN                          | YES
   settings.txt                                    | Document           | 1-1Vyt3gIEVRJkPxjmKIh4bjXHH07T_KZ                          | YES
+  AUDIT_RUNNER.txt                                | Document           | 1cFuPRTV39_GuGtwJM8Z1czYSPEodHga4                          | YES
+  PROJECT_STATUS_CHECKLIST.txt                    | Document           | 19q4AAo9dCIZqeGBea9Ap6kxMuoVU-KPn                          | YES
                                                   |                    |                                                            |
 --------------------------------------------------|--------------------|------------------------------------------------------------|----------
 \Registry                                         | SUB-DIRECTORY      | 1UEBagBflqD4ANRl8O6DpIGfN3bgte1CQ                          | YES
@@ -154,13 +156,11 @@ IDs and VERIFIED flags are acceleration signals only, never authority.
   _PROJECT_BLUEPRINT.txt                          | Document           | 17AWzFH4OqYmx9Mcxl4NosFGp-uhyGYMT                          | YES
   _PROJECT_ANCHOR_MASTER.txt                      | Document           | 1TIanwt8JSNhI47vuN_-G4dFRjwNIf898                          | YES
   AI_PROJECT_INSTRUCTIONS.txt                     | Document           | 1TLP6j1xASA9HEA4H2RHhwtvkYR_arU_P                          | YES
-  AUDIT_RUNNER.txt                                | Document           | 1cFuPRTV39_GuGtwJM8Z1czYSPEodHga4                          | YES
   INDEXIDLIST.txt                                 | Document           | 16DivuRC5wBfbX8xnq5l_ksf8Q21TgBxA                          | YES
   BOOTSTRAPv4.txt                                 | Document           | 1eHulS4CPEFAxzKeCEmqjw9T7CVGQ3rfP                          | YES
   PHASE5_AUDIT_MASTER.txt                         | Document           | 1NSHdQ6972glz02knvic-7QNgFcDxbHxQ                          | YES
   GOVERNANCE_LOCK.txt                             | Document           | 1lYiaKQ1LBJx3z2MoSoD3FirBtEyPVI_j                          | YES
   PROJECT_LEARNED_CONSTRAINTS.txt                 | Document           | 12dk1sASojm6Cb9PBSeSoAI9Vchhgx4T3                          | YES
-  PROJECT_STATUS_CHECKLIST.txt                    | Document           | 19q4AAo9dCIZqeGBea9Ap6kxMuoVU-KPn                          | YES
   STANDARDIZED_HEADERS.txt                        | Document           | 1bHktPTzL2y6p79FCwIdQ1qr73LP1-VCF                          | YES
                                                   |                    |                                                            |
 --------------------------------------------------|--------------------|------------------------------------------------------------|----------
@@ -241,6 +241,8 @@ IDs and VERIFIED flags are acceleration signals only, never authority.
   .gitignore                                      | git ignore, git config, ignore list, git exclusion
   ORCH_PROTOCOL_SPEC.txt                          | orchestrator protocol, orch protocol, orch contract, orchestrator spec
   settings.txt                                    | settings mirror, settings text, settings txt
+  PROJECT_STATUS_CHECKLIST.txt                    | project checklist, status checklist, task tracker, master checklist
+  AUDIT_RUNNER.txt                                | audit runner, audit plan, audit backlog, audit execution plan, audit runner file
                                                   |
 --------------------------------------------------|--------------------------------------------------------------------------------------------
 \Registry                                         | registry root, registry folder, registry directory
@@ -270,13 +272,11 @@ IDs and VERIFIED flags are acceleration signals only, never authority.
   _PROJECT_BLUEPRINT.txt                          | blueprint, project blueprint, architecture blueprint, folder blueprint, structure blueprint
   _PROJECT_ANCHOR_MASTER.txt                      | anchor, project anchor, system prompt, ai anchor, governance anchor, working notes, project notes, design notes, sanity notes, intent log
   AI_PROJECT_INSTRUCTIONS.txt                     | project instructions, instructions, ai instructions, governance rules, ai governance
-  AUDIT_RUNNER.txt                                | audit runner, audit plan, audit backlog, audit execution plan, audit runner file, audit checklist
   INDEXIDLIST.txt                                 | index, id index, drive index, id list, index id list, master index
   BOOTSTRAPv4.txt                                 | bootstrap, bootstrap v4, init protocol, initialization protocol
   PHASE5_AUDIT_MASTER.txt                         | phase 5 template, phase 5 audit template, visibility audit template, phase 5 checklist, phase 5 execution checklist, phase 5 audit checklist
   GOVERNANCE_LOCK.txt                             | governance lock, lock file, governance state, lock state
   PROJECT_LEARNED_CONSTRAINTS.txt                 | plc, constraints, learned constraints, project constraints, invalidated approaches, learned approaches
-  PROJECT_STATUS_CHECKLIST.txt                    | project checklist, status checklist, task tracker, master checklist
   STANDARDIZED_HEADERS.txt                        | header templates, header standards, file headers, license headers
                                                   |
 --------------------------------------------------|--------------------------------------------------------------------------------------------

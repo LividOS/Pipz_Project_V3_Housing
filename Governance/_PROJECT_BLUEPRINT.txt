@@ -6,7 +6,7 @@
 ; MAINTEMPLATE - _PROJECT_BLUEPRINT.txt
 ; Version: 2.1.3
 ; Last change: Migrated file to new governance directory and updated table structure.
-; Content-Fingerprint: 2026-01-27T16-50-54Z-LA2P4PG5
+; Content-Fingerprint: 2026-01-27T18-08-34Z-L1BOCD9U
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -38,6 +38,8 @@ PATH / FILE NAME                                  | TYPE               | DESCRIP
   PipzScptzIcon.png                               | Asset (Image)      | Application icon used by Controller GUI and tray; branding and visual identification.
   ORCH_PROTOCOL_SPEC.txt                          | Document           | Formal protocol contract defining orchestrator role separation, execution flow, audit requirements, token gates, and PASS/FAIL semantics.
   settings.txt                                    | Document           | Auditable AI mirror of settings.ini.
+  PROJECT_STATUS_CHECKLIST.txt                    | Document           | Living execution tracker enumerating completed, pending, and blocked work items across governance, tooling, and orchestration.
+  AUDIT_RUNNER.txt                                | Document           | Procedural audit execution plan and backlog; defines required audits, invocation commands, and pass/fail criteria. Non-authoritative; execution-focused.
                                                   |                    |
 --------------------------------------------------|--------------------|------------------------------------------------------------------------
 \Controller                                       | DIRECTORY          | Container for the Interactive GUI Process.
@@ -62,13 +64,11 @@ PATH / FILE NAME                                  | TYPE               | DESCRIP
   _PROJECT_BLUEPRINT.txt                          | Document           | Primary source of truth for structure, search protocols, and logic rules.
   _PROJECT_ANCHOR_MASTER.txt                      | Document           | Canonical unified system anchor defining mission intent, behavioral constraints, identity rules, and long-term architectural rationale. Authoritative, non-structural, and non-initializing.
   AI_PROJECT_INSTRUCTIONS.txt                     | Document           | AI governance ruleset; mandatory read source defining verification, fingerprinting, header mandates, and enforcement behavior.
-  AUDIT_RUNNER.txt                                | Document           | Procedural audit execution plan and backlog; defines required audits, invocation commands, and pass/fail criteria. Non-authoritative; execution-focused.
   INDEXIDLIST.txt                                 | Document           | Deterministic Google Drive ID acceleration map; reference-only, never a source of authority.
   BOOTSTRAPv4.txt                                 | Document           | Canonical, authoritative definition of the Bootstrap v4 initialization protocol.
   PHASE5_AUDIT_MASTER.txt                         | Document           | Deterministic execution checklist and read-only report template for Phase 5 visibility audits.
   GOVERNANCE_LOCK.txt                             | Document           | Governance lifecycle state declaration and phase lock indicator (non-authoritative).
   PROJECT_LEARNED_CONSTRAINTS.txt                 | Document           | Non-authoritative, scope-indexed log of confirmed constraints and invalidated approaches to prevent regression.
-  PROJECT_STATUS_CHECKLIST.txt                    | Document           | Living execution tracker enumerating completed, pending, and blocked work items across governance, tooling, and orchestration.
   STANDARDIZED_HEADERS.txt                        | Document           | Templates for mandatory file headers.
                                                   |                    |
 --------------------------------------------------|--------------------|------------------------------------------------------------------------
@@ -172,7 +172,6 @@ To maintain a 1:1 literal match of the project state, the following protocol MUS
      ; - `_PROJECT_ANCHOR_MASTER.txt`
      ; - `PHASE5_AUDIT_MASTER.txt`
      ; - `BOOTSTRAPv4.txt`
-	   ; - `AUDIT_RUNNER.txt`
      ; - `GOVERNANCE_LOCK.txt`
      ; - `PROJECT_LEARNED_CONSTRAINTS.txt`
      ; - `GLOBAL_REGISTRY_MASTER.gsheet`

@@ -1,12 +1,12 @@
 ; ------------------------------------------------------------------
-; GEMINI MEM TAG(DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\Governance\AUDIT_RUNNER.txt"
+; GEMINI MEM TAG(DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\AUDIT_RUNNER.txt"
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - AUDIT_RUNNER.txt
-; Version: 1.0.2
-; Last change: Migrated file to new governance directory and updated all references in file.
-; Content-Fingerprint: 2026-01-27T17-03-26Z-H5OIT8VV
+; Version: 1.0.3
+; Last change: Migrated file back to root directory and updated all references in file.
+; Content-Fingerprint: 2026-01-27T18-04-34Z-T3ZKFAQX
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
