@@ -122,7 +122,7 @@ springSnapDist,OverlayPhysics.ahk,500,Distance threshold (px) beyond which the o
 SECTION_HEADER: GLOBAL_LOGIC_RULES_REGISTRY,,,
 SECTION ID,RULE NAME,LOGIC INVARIANT,
 GEN-01,Registry Truth,"ANY change to logic or structure MUST be reflected in the code, 'INDEXIDLIST.txt', '_PROJECT_BLUEPRINT.txt', and the authoritative 'GLOBAL_REGISTRY_MASTER.gsheet'. The 'GLOBAL_REGISTRY_MASTER.csv' MUST be updated simultaneously to maintain a 1:1 literal fallback mirror.",
-GEN-02,Version Heading,"ANY change, addition, removal, edit or otherwise to any project file (excluding the registry, settings.ini, blueprint, and anchor files) must be accompanied by a separate 'version header' code block as defined in your 'Instructions' memory.",
+GEN-02,Version Heading,"ANY change, addition, removal, edit or otherwise to any project file (excluding the registry, and all runtime artifacts or otherwise non-readable files) must be accompanied by a separate 'version header' code block as defined by `STANDARDIZED_HEADERS.txt`",
 GEN-03,Accuracy Validation,"You must FULLY ANALYZE the relevant files using the SEARCH & INDEXING PROTOCOL to ensure the current file state is the same as the users before ANY change, addition, removal, edit or otherwise to any project file.",
 SYNC-01,Startup Flash,g_LastSettingsUpdate MUST be 0 at launch to trigger initial sync flash (Cyan).,
 SYNC-02,Watchdog Owner,WorkerState.ahk is the SOLE owner of the synchronization timestamp.,
