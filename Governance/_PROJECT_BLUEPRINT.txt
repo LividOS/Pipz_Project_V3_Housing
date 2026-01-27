@@ -4,9 +4,9 @@
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - _PROJECT_BLUEPRINT.txt
-; Version: 2.1.3
+; Version: 2.1.4
 ; Last change: Migrated file to new governance directory and updated table structure.
-; Content-Fingerprint: 2026-01-27T18-08-34Z-L1BOCD9U
+; Content-Fingerprint: 2026-01-27T18-27-37Z-RQMOWRVG
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -38,8 +38,6 @@ PATH / FILE NAME                                  | TYPE               | DESCRIP
   PipzScptzIcon.png                               | Asset (Image)      | Application icon used by Controller GUI and tray; branding and visual identification.
   ORCH_PROTOCOL_SPEC.txt                          | Document           | Formal protocol contract defining orchestrator role separation, execution flow, audit requirements, token gates, and PASS/FAIL semantics.
   settings.txt                                    | Document           | Auditable AI mirror of settings.ini.
-  PROJECT_STATUS_CHECKLIST.txt                    | Document           | Living execution tracker enumerating completed, pending, and blocked work items across governance, tooling, and orchestration.
-  AUDIT_RUNNER.txt                                | Document           | Procedural audit execution plan and backlog; defines required audits, invocation commands, and pass/fail criteria. Non-authoritative; execution-focused.
                                                   |                    |
 --------------------------------------------------|--------------------|------------------------------------------------------------------------
 \Controller                                       | DIRECTORY          | Container for the Interactive GUI Process.
@@ -140,6 +138,11 @@ PATH / FILE NAME                                  | TYPE               | DESCRIP
   \mirror                                         | SUB-DIRECTORY      | Mirror-specific audit logs.
                                                   |                    |
 --------------------------------------------------|--------------------|------------------------------------------------------------------------
+\PPAVP                                            | DIRECTORY          | Container for all project planning, audit, and verification procedures and documentation excluding phase 5.
+  PROJECT_STATUS_CHECKLIST.txt                    | Document           | Living execution tracker enumerating completed, pending, and blocked work items across governance, tooling, and orchestration.
+  AUDIT_RUNNER.txt                                | Document           | Procedural audit execution plan and backlog; defines required audits, invocation commands, and pass/fail criteria. Non-authoritative; execution-focused.
+                                                  |                    |
+--------------------------------------------------|--------------------|------------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
 
@@ -165,6 +168,7 @@ To maintain a 1:1 literal match of the project state, the following protocol MUS
      ; - `\Worker\Modules`
      ; - `\Registry`
      ; - `\Governance`
+     ; - `\PPAVP`
 
    ; - Confirm visibility of all governance files:
      ; - `AI_PROJECT_INSTRUCTIONS.txt`
