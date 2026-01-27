@@ -1,12 +1,12 @@
 ; ------------------------------------------------------------------
-; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\BOOTSTRAPv4.txt"
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\Governance\BOOTSTRAPv4.txt"
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - BOOTSTRAPv4.txt
-; Version: 1.2.2
-; Last change: Revised Phase 2 to reflect new registry hierarchy requirements.
-; Content-Fingerprint: 2026-01-27T13-39-09Z-5SJNOFBZ
+; Version: 1.2.3
+; Last change: Migrated file to new governance directory and updated all references in file.
+; Content-Fingerprint: 2026-01-27T17-08-09Z-W1U197TO
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -33,7 +33,7 @@ The AI **MUST**:
 
 1. Locate, open, and fully read:
 
-   ; - `Pipz_Project_V3\AI_PROJECT_INSTRUCTIONS.txt`
+   ; - `Pipz_Project_V3\Governance\AI_PROJECT_INSTRUCTIONS.txt`
 
 2. Verify:
 
@@ -65,14 +65,14 @@ Bootstrap v4 **does not rely on Google Drive search alone**.
 
 Root resolution uses the following **strict precedence order**:
 
-1. `INDEXIDLIST.txt` (if present)
+1. `Pipz_Project_V3\Governance\INDEXIDLIST.txt` (if present)
 
    ; - Canonical Drive folder ID for `\Pipz_Project_V3`
    ; - Declared as acceleration only, never truth
 
 2. GEMINI MEM TAG declared paths
 
-3. `_PROJECT_BLUEPRINT.txt` defined structure
+3. `Pipz_Project_V3\Governance\_PROJECT_BLUEPRINT.txt` defined structure
 
 4. Google Drive search (LAST RESORT ONLY)
 
@@ -117,7 +117,9 @@ PHASE 3 — STRUCTURE RECONSTRUCTION (EXPECTED STATE)
 Using **only authoritative declarations**, the AI reconstructs the **expected project structure**, including:
 
 ; - Root directory
-; - Controller / Worker / Lib / Registry / Modules directories
+; - Governance directory
+; - Registry directory
+; - Controller / Worker / Lib / Modules directories
 ; - Required `.txt` mirrors
 ; - Required runtime counterparts
 

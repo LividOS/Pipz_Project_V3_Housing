@@ -1,12 +1,12 @@
 ; ------------------------------------------------------------------
-; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\INDEXIDLIST.txt"
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\Governance\INDEXIDLIST.txt"
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - INDEXIDLIST.txt
-; Version: 1.3.3
-; Last change: Revised table file entries to reflect proper file types.
-; Content-Fingerprint: 2026-01-27T14-28-55Z-SJ9FFI36
+; Version: 1.3.4
+; Last change: Migrated file to new governance directory and updated all references in file.
+; Content-Fingerprint: 2026-01-27T17-26-13Z-61PHTQGN
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -123,18 +123,7 @@ IDs and VERIFIED flags are acceleration signals only, never authority.
   settings.ini                                    | Config (INI)       | 15XWeWyphygk0f9OqkbHmkPzEsex8rome                          | N/A
   .gitignore                                      | Config (GIT)       | 1C5iGuX8qjSanONWJ26-r-5Bc7Ct81kGe                          | N/A
   PipzScptzIcon.png                               | Asset (Image)      | 10NXIfmj1dw2CEd-i0beZC5_YD4MPPf4T                          | N/A
-  _PROJECT_BLUEPRINT.txt                          | Document           | 17AWzFH4OqYmx9Mcxl4NosFGp-uhyGYMT                          | YES
-  _PROJECT_ANCHOR_MASTER.txt                      | Document           | 1TIanwt8JSNhI47vuN_-G4dFRjwNIf898                          | YES
-  AI_PROJECT_INSTRUCTIONS.txt                     | Document           | 1TLP6j1xASA9HEA4H2RHhwtvkYR_arU_P                          | YES
-  AUDIT_RUNNER.txt                                | Document           | 1cFuPRTV39_GuGtwJM8Z1czYSPEodHga4                          | YES
-  INDEXIDLIST.txt                                 | Document           | 16DivuRC5wBfbX8xnq5l_ksf8Q21TgBxA                          | YES
-  BOOTSTRAPv4.txt                                 | Document           | 1eHulS4CPEFAxzKeCEmqjw9T7CVGQ3rfP                          | YES
-  PHASE5_AUDIT_MASTER.txt                         | Document           | 1NSHdQ6972glz02knvic-7QNgFcDxbHxQ                          | YES
-  GOVERNANCE_LOCK.txt                             | Document           | 1lYiaKQ1LBJx3z2MoSoD3FirBtEyPVI_j                          | YES
-  PROJECT_LEARNED_CONSTRAINTS.txt                 | Document           | 12dk1sASojm6Cb9PBSeSoAI9Vchhgx4T3                          | YES
   ORCH_PROTOCOL_SPEC.txt                          | Document           | 1odMqFaKPce80EgAx5AV-AYblg8SdiqsN                          | YES
-  PROJECT_STATUS_CHECKLIST.txt                    | Document           | 19q4AAo9dCIZqeGBea9Ap6kxMuoVU-KPn                          | YES
-  STANDARDIZED_HEADERS.txt                        | Document           | 1bHktPTzL2y6p79FCwIdQ1qr73LP1-VCF                          | YES
   settings.txt                                    | Document           | 1-1Vyt3gIEVRJkPxjmKIh4bjXHH07T_KZ                          | YES
                                                   |                    |                                                            |
 --------------------------------------------------|--------------------|------------------------------------------------------------|----------
@@ -159,6 +148,20 @@ IDs and VERIFIED flags are acceleration signals only, never authority.
     ProcessManager.txt                            | Document           | 1811O6BNvEVTXbIdyUW-Qmfgi44eAPzqX                          | YES
     TooltipManager.txt                            | Document           | 1VxMBXmtFaYdbDRavzQiJcx-uwRDnRKkZ                          | YES
     WorkerInterface.txt                           | Document           | 1uUjqIjfQaXAJ8aeFOZxqRPSR3jMR8DS_                          | YES
+                                                  |                    |                                                            |
+--------------------------------------------------|--------------------|------------------------------------------------------------|----------
+\Governance                                       | DIRECTORY          | 1iYz1-T6dS47O03mxYU8_FTg1Xbj7wJ_w                          | YES
+  _PROJECT_BLUEPRINT.txt                          | Document           | 17AWzFH4OqYmx9Mcxl4NosFGp-uhyGYMT                          | YES
+  _PROJECT_ANCHOR_MASTER.txt                      | Document           | 1TIanwt8JSNhI47vuN_-G4dFRjwNIf898                          | YES
+  AI_PROJECT_INSTRUCTIONS.txt                     | Document           | 1TLP6j1xASA9HEA4H2RHhwtvkYR_arU_P                          | YES
+  AUDIT_RUNNER.txt                                | Document           | 1cFuPRTV39_GuGtwJM8Z1czYSPEodHga4                          | YES
+  INDEXIDLIST.txt                                 | Document           | 16DivuRC5wBfbX8xnq5l_ksf8Q21TgBxA                          | YES
+  BOOTSTRAPv4.txt                                 | Document           | 1eHulS4CPEFAxzKeCEmqjw9T7CVGQ3rfP                          | YES
+  PHASE5_AUDIT_MASTER.txt                         | Document           | 1NSHdQ6972glz02knvic-7QNgFcDxbHxQ                          | YES
+  GOVERNANCE_LOCK.txt                             | Document           | 1lYiaKQ1LBJx3z2MoSoD3FirBtEyPVI_j                          | YES
+  PROJECT_LEARNED_CONSTRAINTS.txt                 | Document           | 12dk1sASojm6Cb9PBSeSoAI9Vchhgx4T3                          | YES
+  PROJECT_STATUS_CHECKLIST.txt                    | Document           | 19q4AAo9dCIZqeGBea9Ap6kxMuoVU-KPn                          | YES
+  STANDARDIZED_HEADERS.txt                        | Document           | 1bHktPTzL2y6p79FCwIdQ1qr73LP1-VCF                          | YES
                                                   |                    |                                                            |
 --------------------------------------------------|--------------------|------------------------------------------------------------|----------
 \Lib                                              | DIRECTORY          | 1D0zXwlTRljMLHs2x5eGNYeOFolCWZ2Be                          | YES
@@ -218,8 +221,10 @@ IDs and VERIFIED flags are acceleration signals only, never authority.
     launch.json.governance.txt                    | Document           | 1L0sy7iAQ8okrj_8zNkqE1HiGkxytQkWH                          | YES
     settings.json.governance.txt                  | Document           | 1LIa7DtCH_H5JFgPE0Q3GWMOTww93Bgi6                          | YES
     tasks.json.governance.txt                     | Document           | 1dhonC67pLRoVdY4DTlQP2dqGieS0RYdL                          | YES
-  \.ORCH_AUDITLOG                                 | SUB-DIRECTORY      | 1qR3-DgAkBtJvSoHLOBL0fM5APzniTeZ3                          | YES
-    \mirror                                       | SUB-DIRECTORY      | 1L_mbiltmBtZL-4sPxb74WRZcqc9L1oQ2                          | YES
+                                                  |                    |                                                            |
+--------------------------------------------------|--------------------|------------------------------------------------------------|----------
+\.ORCH_AUDITLOG                                   | DIRECTORY          | 1x6aXWyf0wyef4VGDaf_98RNvPim9KwI-                          | YES
+  \mirror                                         | SUB-DIRECTORY      | 1XGqYOrCjKoxWZ_PY1_ZzxBWDIKKGVsqd                          | YES
                                                   |                    |                                                            |
 --------------------------------------------------|--------------------|------------------------------------------------------------|----------
 
@@ -234,18 +239,7 @@ IDs and VERIFIED flags are acceleration signals only, never authority.
   settings.ini                                    | settings ini, runtime settings, user settings ini, config ini
   PipzScptzIcon.png                               | app icon, application icon, tray icon, gui icon
   .gitignore                                      | git ignore, git config, ignore list, git exclusion
-  _PROJECT_BLUEPRINT.txt                          | blueprint, project blueprint, architecture blueprint, folder blueprint, structure blueprint
-  _PROJECT_ANCHOR_MASTER.txt                      | anchor, project anchor, system prompt, ai anchor, governance anchor, working notes, project notes, design notes, sanity notes, intent log
-  AI_PROJECT_INSTRUCTIONS.txt                     | project instructions, instructions, ai instructions, governance rules, ai governance
-  AUDIT_RUNNER.txt                                | audit runner, audit plan, audit backlog, audit execution plan, audit runner file, audit checklist
-  INDEXIDLIST.txt                                 | index, id index, drive index, id list, index id list, master index
-  BOOTSTRAPv4.txt                                 | bootstrap, bootstrap v4, init protocol, initialization protocol
-  PHASE5_AUDIT_MASTER.txt                         | phase 5 template, phase 5 audit template, visibility audit template, phase 5 checklist, phase 5 execution checklist, phase 5 audit checklist
-  GOVERNANCE_LOCK.txt                             | governance lock, lock file, governance state, lock state
-  PROJECT_LEARNED_CONSTRAINTS.txt                 | plc, constraints, learned constraints, project constraints, invalidated approaches
   ORCH_PROTOCOL_SPEC.txt                          | orchestrator protocol, orch protocol, orch contract, orchestrator spec
-  PROJECT_STATUS_CHECKLIST.txt                    | project checklist, status checklist, task tracker, master checklist
-  STANDARDIZED_HEADERS.txt                        | header templates, header standards, file headers, license headers
   settings.txt                                    | settings mirror, settings text, settings txt
                                                   |
 --------------------------------------------------|--------------------------------------------------------------------------------------------
@@ -266,10 +260,24 @@ IDs and VERIFIED flags are acceleration signals only, never authority.
     WorkerInterface.ahk                           | worker interface, ipc interface, worker bridge
     MaintenanceManager.txt                        | maintenance mirror, maintenance txt
     Messenger.txt                                 | messenger mirror, logger mirror
-    NavigationManager.txt                         | navigation mirror
-    ProcessManager.txt                            | process mirror
-    TooltipManager.txt                            | tooltip mirror
-    WorkerInterface.txt                           | worker interface mirror
+    NavigationManager.txt                         | navigation mirror, navigation txt
+    ProcessManager.txt                            | process mirror, process txt
+    TooltipManager.txt                            | tooltip mirror, tooltip txt
+    WorkerInterface.txt                           | worker interface mirror, worker interface txt
+                                                  |
+--------------------------------------------------|--------------------------------------------------------------------------------------------
+\Governance                                       | governance folder, law folder, rule folder, authoritative folder, guidance folder, governance layer, governance root, governance root folder
+  _PROJECT_BLUEPRINT.txt                          | blueprint, project blueprint, architecture blueprint, folder blueprint, structure blueprint
+  _PROJECT_ANCHOR_MASTER.txt                      | anchor, project anchor, system prompt, ai anchor, governance anchor, working notes, project notes, design notes, sanity notes, intent log
+  AI_PROJECT_INSTRUCTIONS.txt                     | project instructions, instructions, ai instructions, governance rules, ai governance
+  AUDIT_RUNNER.txt                                | audit runner, audit plan, audit backlog, audit execution plan, audit runner file, audit checklist
+  INDEXIDLIST.txt                                 | index, id index, drive index, id list, index id list, master index
+  BOOTSTRAPv4.txt                                 | bootstrap, bootstrap v4, init protocol, initialization protocol
+  PHASE5_AUDIT_MASTER.txt                         | phase 5 template, phase 5 audit template, visibility audit template, phase 5 checklist, phase 5 execution checklist, phase 5 audit checklist
+  GOVERNANCE_LOCK.txt                             | governance lock, lock file, governance state, lock state
+  PROJECT_LEARNED_CONSTRAINTS.txt                 | plc, constraints, learned constraints, project constraints, invalidated approaches, learned approaches
+  PROJECT_STATUS_CHECKLIST.txt                    | project checklist, status checklist, task tracker, master checklist
+  STANDARDIZED_HEADERS.txt                        | header templates, header standards, file headers, license headers
                                                   |
 --------------------------------------------------|--------------------------------------------------------------------------------------------
 \Lib                                              | lib, library, shared library, common library
@@ -328,8 +336,10 @@ IDs and VERIFIED flags are acceleration signals only, never authority.
     launch.json.governance.txt                    | mirror launch governance, mirror launch sidecar
     settings.json.governance.txt                  | mirror settings governance, mirror settings sidecar
     tasks.json.governance.txt                     | mirror tasks governance, mirror tasks sidecar
-  \.ORCH_AUDITLOG                                 | orch logs, audit root, governance logs
-    \mirror                                       | mirror logs, save logs, audit mirror
+                                                  |
+--------------------------------------------------|--------------------------------------------------------------------------------------------
+\.ORCH_AUDITLOG                                   | orch logs, audit root, governance logs
+  \mirror                                         | mirror logs, save logs, audit mirror
                                                   |
 --------------------------------------------------|--------------------------------------------------------------------------------------------
 

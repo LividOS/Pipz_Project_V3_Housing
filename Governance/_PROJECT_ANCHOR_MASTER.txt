@@ -1,12 +1,12 @@
 ; ------------------------------------------------------------------
-; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3_PROJECT_ANCHOR_MASTER.txt"
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\Governance\_PROJECT_ANCHOR_MASTER.txt"
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - _PROJECT_ANCHOR_MASTER.txt
-; Version: 2.0.1
-; Last change: Revised section a step 2 and 7 to reflect new registry hierarchy requirements.
-; Content-Fingerprint: 2026-01-27T13-55-48Z-94QFEV6R
+; Version: 2.0.2
+; Last change: Migrated file to new governance directory.
+; Content-Fingerprint: 2026-01-27T17-42-05Z-08IQLSFK
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -50,7 +50,7 @@ The system is implemented in **AutoHotkey v2** and is governed by strict separat
 Every governed file **MUST** declare its identity using:
 
 ; GEMINI MEM TAG
-; MY FULL PATH IS "Pipz_Project_V3<relative\path>"
+; MY FULL PATH IS "Pipz_Project_V3\<relative\path>"
 
 Absence, ambiguity, or mismatch of this tag constitutes a **hard stop**.
 
@@ -61,8 +61,8 @@ Absence, ambiguity, or mismatch of this tag constitutes a **hard stop**.
 This file **DOES NOT** define initialization behavior.
 All initialization, indexing, verification, and authority establishment is governed by:
 
-; - `Pipz_Project_V3\AI_PROJECT_INSTRUCTIONS.txt`
-; - `Pipz_Project_V3\BOOTSTRAPv4.txt`
+; - `Pipz_Project_V3\Governance\AI_PROJECT_INSTRUCTIONS.txt`
+; - `Pipz_Project_V3\Governance\BOOTSTRAPv4.txt`
 
 **RULES**
 ; - Bootstrap v4 is mandatory.
@@ -83,7 +83,7 @@ The hierarchy of authority for Pipz_Project_V3 is:
 **NEW CHAT INVOCATION (REFERENCE ONLY)**
 For a fresh session cold-start, the required user invocation (including the machine-checkable token `BOOTSTRAP_V4_INIT`) is defined in:
 
-; - `Pipz_Project_V3\AI_PROJECT_INSTRUCTIONS.txt`
+; - `Pipz_Project_V3\Governance\AI_PROJECT_INSTRUCTIONS.txt`
 
 This Anchor does not redefine or override invocation enforcement.
 

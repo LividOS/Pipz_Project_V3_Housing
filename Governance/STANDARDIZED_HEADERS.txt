@@ -1,4 +1,19 @@
 ; ------------------------------------------------------------------
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\Governance\STANDARDIZED_HEADERS.txt"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - STANDARDIZED_HEADERS.txt
+; Version: 0.1.5
+; Last change: Migrated file to new governance directory and updated all references in file.
+; Content-Fingerprint: 2026-01-27T17-40-58Z-MIU4VXED
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT (LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
   MANDATED HEADER STYLES BY FILE TYPE (ABSOLUTE)
 ; ------------------------------------------------------------------
 

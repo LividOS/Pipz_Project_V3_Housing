@@ -1,12 +1,12 @@
 ; ------------------------------------------------------------------
-; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\PROJECT_STATUS_CHECKLIST.txt"
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\Governance\PROJECT_STATUS_CHECKLIST.txt"
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - PROJECT_STATUS_CHECKLIST.txt
-; Version: 0.1.4
-; Last change: Revised section a removing depreceated reference and adding reference to new unified governance file.
-; Content-Fingerprint: 2026-01-27T15-54-40Z-DJ77SKKV
+; Version: 0.1.5
+; Last change: Migrated file to new governance directory and updated all references in file.
+; Content-Fingerprint: 2026-01-27T17-39-00Z-KYURZTOM
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------

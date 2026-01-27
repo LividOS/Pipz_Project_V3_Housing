@@ -1,12 +1,12 @@
 ; ------------------------------------------------------------------
-; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\PHASE5_AUDIT_MASTER.txt"
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\Governance\PHASE5_AUDIT_MASTER.txt"
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - PHASE5_AUDIT_MASTER.txt
-; Version: 2.0.1
-; Last change: Revised step 4 to reference new unified anchor file.
-; Content-Fingerprint: 2026-01-27T15-52-03Z-WKGKSAOI
+; Version: 2.0.2
+; Last change: Migrated file to new governance directory and updated all references in file.
+; Content-Fingerprint: 2026-01-27T17-29-36Z-HZNC4ZS9
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------

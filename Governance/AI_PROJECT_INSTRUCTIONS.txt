@@ -1,14 +1,14 @@
 ; ------------------------------------------------------------------
-; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\AI_PROJECT_INSTRUCTIONS.txt"
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\Governance\AI_PROJECT_INSTRUCTIONS.txt"
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
 ; Pipz_Project_V3 [AHK v2] (AI-Specific Operating Instructions)
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - AI_PROJECT_INSTRUCTIONS.txt
-; Version: 1.6.4
-; Last change: Revised rules 7 and 13 to reflect new registry hierarchy.
-; Content-Fingerprint: 2026-01-27T13-25-33Z-BY6BAQFO
+; Version: 1.6.5
+; Last change: Migrated file to new governance directory and updated all references in file.
+; Content-Fingerprint: 2026-01-27T17-01-06Z-12OLJCD2
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -31,13 +31,13 @@ BOOTSTRAP ARTIFACT REFERENCE RULE (CANONICAL)
 
 The canonical, authoritative definition of the Bootstrap v4 protocol is:
 
-; - Pipz_Project_V3\BOOTSTRAPv4.txt
+; - Pipz_Project_V3\Governance\BOOTSTRAPv4.txt
 
 Rules:
 
 B1. At the start of every new chat related to Pipz_Project_V3, after completing PHASE 0 of this file, the AI MUST locate, open, and fully read:
 
-    ; - Pipz_Project_V3\BOOTSTRAPv4.txt
+    ; - Pipz_Project_V3\Governance\BOOTSTRAPv4.txt
 	
 B2. The AI MUST execute Bootstrap v4 strictly according to the contents of BOOTSTRAPv4.txt.
 
@@ -124,7 +124,7 @@ PHASE 0 — GOVERNANCE GATE
 The AI MUST:
 0.1 Locate, open, and fully read:
 
-    ; - Pipz_Project_V3\AI_PROJECT_INSTRUCTIONS.txt
+    ; - Pipz_Project_V3\Governance\AI_PROJECT_INSTRUCTIONS.txt
 	
 0.2 Verify:
 
@@ -200,6 +200,8 @@ PHASE 3 — STRUCTURE RECONSTRUCTION
 Using only authoritative declarations, the AI reconstructs the expected project structure, including:
 
 ; - Root directory
+; - Governance directory
+; - Registry directory
 ; - Controller, Worker, Lib, and Modules subdirectories
 ; - Required .txt mirrors
 ; - Required runtime counterparts
@@ -257,7 +259,7 @@ When invoked, Phase 5 performs a full recursive audit of the project's Google Dr
 PHASE 5 — EXECUTION RULES
 ; ------------------------------------------------------------------
 
-Phase 5 execution MUST follow Pipz_Project_V3\PHASE5_EXECUTION_CHECKLIST.txt.
+Phase 5 execution MUST follow Pipz_Project_V3\Governance\PHASE5_AUDIT_MASTER.txt.
 
 5.1 Root-Anchored Traversal
 ; - Enumeration MUST begin from the resolved project root folder ID
@@ -493,7 +495,7 @@ Where:
      Pipz_Project_V3, the AI MUST:
 
 2haa. Locate, open, and fully read:
-      ; - Pipz_Project_V3\PROJECT_LEARNED_CONSTRAINTS.txt
+      ; - Pipz_Project_V3\Governance\PROJECT_LEARNED_CONSTRAINTS.txt
 
 2hab. Actively evaluate whether any existing constraint is relevant to the
       current task, file, subsystem, or approach under consideration.
@@ -517,7 +519,7 @@ Where:
 2hed. Or an approach conflicts with project reality,
 
 2hf. The AI MUST immediately draft a proposed entry for:
-      ; - Pipz_Project_V3\PROJECT_LEARNED_CONSTRAINTS.txt
+      ; - Pipz_Project_V3\Governance\PROJECT_LEARNED_CONSTRAINTS.txt
 
 2hg. Drafted constraint entries MUST:
 2hga. Follow the Project Learned Constraints ID Policy.
@@ -538,7 +540,7 @@ Where:
      before claiming inability to read or locate the file.
 
 2ib. Deterministic resolution MUST follow this order:
-2iba. Consult Pipz_Project_V3\INDEXIDLIST.txt for a matching file entry,
+2iba. Consult Pipz_Project_V3\Governance\INDEXIDLIST.txt for a matching file entry,
       including alias and role mappings defined therein.
 2ibb. Use the associated Drive ID to locate and open the file.
 2ibc. Verify the file identity using path declarations and fingerprints.
@@ -646,7 +648,7 @@ STATUS — HISTORICAL
 
 3c. Project Learned Constraints ID Policy (ABSOLUTE)
 
-3ca. All entries in Pipz_Project_V3\PROJECT_LEARNED_CONSTRAINTS.txt must be identified
+3ca. All entries in Pipz_Project_V3\Governance\PROJECT_LEARNED_CONSTRAINTS.txt must be identified
      by a stable, monotonically increasing ID using the format:
 
      PLC-XXXX

@@ -1,12 +1,12 @@
 ; ------------------------------------------------------------------
-; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\GOVERNANCE_LOCK.txt"
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\Governance\GOVERNANCE_LOCK.txt"
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - GOVERNANCE_LOCK.txt
-; Version: 1.0.4
-; Last change: Governance state re-locked after merging of governance files and registries.
-; Content-Fingerprint: 2026-01-26T21-19-37Z-Z51HN664
+; Version: 1.0.5
+; Last change: Governance state re-locked after migrating file to new governance directory and updating all references in file.
+; Content-Fingerprint: 2026-01-27T17-09-31Z-BHBSS3CS
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -42,11 +42,11 @@ As of this declaration:
 
 The authoritative governance sources remain:
 
-; - `Pipz_Project_V3\AI_PROJECT_INSTRUCTIONS.txt`
-; - `Pipz_Project_V3\BOOTSTRAPv4.txt`
-; - `Pipz_Project_V3\_PROJECT_BLUEPRINT.txt`
-; - `Pipz_Project_V3\_PROJECT_ANCHOR_MASTER.txt`
-; - `Pipz_Project_V3\INDEXIDLIST.txt`
+; - `Pipz_Project_V3\Governance\AI_PROJECT_INSTRUCTIONS.txt`
+; - `Pipz_Project_V3\Governance\BOOTSTRAPv4.txt`
+; - `Pipz_Project_V3\Governance\_PROJECT_BLUEPRINT.txt`
+; - `Pipz_Project_V3\Governance\_PROJECT_ANCHOR_MASTER.txt`
+; - `Pipz_Project_V3\Governance\INDEXIDLIST.txt`
 
 This file does not participate in governance enforcement.
 
