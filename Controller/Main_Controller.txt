@@ -10,11 +10,66 @@
 ; MAINTEMPLATE - Main_Controller.ahk (AHK v2)
 ; Version: 2.1.9
 ; Last change: Reverted to standard IconPath implementation for stable Tray and Taskbar icon inheritance + Final Fingerprinting Test.
-; Content-Fingerprint: 2026-01-27T19-28-31Z-2OEHRSC6
+; Content-Fingerprint: 2026-01-28T23-10-18Z-LMVLEBA2
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
 ; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; SIGNPOST GOVERNANCE — FILE: Main_Controller.ahk
+; ------------------------------------------------------------------
+; MODULE NAME:
+;   Main_Controller (Controller Entrypoint)
+;
+; WHAT IT OWNS / CONTROLS:
+;   - Controller process bootstrap and lifetime
+;   - GUI construction and layout
+;   - Global runtime state initialization (g_* globals + DEFAULTS)
+;   - Event wiring:
+;       * GUI OnEvent handlers
+;       * Windows message hooks
+;       * Process lifecycle hooks (OnExit)
+;   - Initial worker warm-start (inactive state)
+;
+; INPUTS (events/messages/functions it responds to):
+;   - User GUI interactions:
+;       * Buttons, checkboxes, edits, navigation tabs/subtabs
+;   - Windows messages:
+;       * WM_MOUSEMOVE (0x0200) routed to tooltip processing
+;   - Process lifecycle:
+;       * OnExit handler
+;
+; OUTPUTS / SIDE EFFECTS (files, settings, processes, IPC, UI):
+;   - UI:
+;       * Builds and shows Controller GUI
+;       * Binds controls to handlers in Controller_Core
+;   - Settings:
+;       * Loads settings.ini values into runtime globals via LoadSetting()
+;       * Routes user changes to SaveSetting() through event handlers
+;   - Security:
+;       * Validates license at startup and hard-stops on failure
+;   - IPC / Process control:
+;       * Launches Worker process (inactive warm-start)
+;       * Sends worker state transitions via SendWorkerSignal()
+;
+; DEPENDENCIES (globals/functions it relies on):
+;   - Included modules:
+;       Core_Utils.ahk (defaults + settings + security)
+;       Interop.ahk (IPC/state signaling)
+;       Humanoid.ahk (shared behavior primitives)
+;       Controller_Core.ahk (controller subsystems)
+;   - Globals defined here and consumed elsewhere:
+;       WorkerTitle, g_WorkerPID, g_ShowOverlay, g_MinToTray,
+;       g_WindowTitle, g_* anti-ban settings
+;
+; GOVERNANCE NOTES (hard-stop rules, invariants, what must remain true):
+;   - This file is an **entrypoint** and part of the governed surface (Policy B).
+;   - DEFAULTS must be sourced exclusively from GetDefaultSettings().
+;   - License validation must occur before GUI show or worker launch.
+;   - All GUI events should route into Controller_Core logic (no deep logic here).
+;   - Any new OnMessage / OnExit / startup behavior must be reflected in the governed registry.
 ; ------------------------------------------------------------------
 
 #Requires AutoHotkey >=2.0
@@ -23,16 +78,10 @@
 ; ------------------------------------------------------------------
 ; MODULE INCLUDES
 ; ------------------------------------------------------------------
-#Include ..\Lib\Security.ahk
+#Include ..\Lib\Core_Utils.ahk
 #Include ..\Lib\Interop.ahk
-#Include ..\Lib\SettingsLoader.ahk
-#Include ..\Lib\BreakManager.ahk
-#Include Modules\ProcessManager.ahk
-#Include Modules\Messenger.ahk
-#Include Modules\WorkerInterface.ahk
-#Include Modules\MaintenanceManager.ahk
-#Include Modules\NavigationManager.ahk
-#Include Modules\TooltipManager.ahk
+#Include ..\Lib\Humanoid.ahk
+#Include Controller_Core.ahk
 
 ; ------------------------------------------------------------------
 ; INITIALIZATION & GLOBAL SETTINGS
@@ -56,28 +105,32 @@ rawDate := licData["EXPIRES"]
 formattedDate := FormatTime(rawDate, "MM/dd/yyyy")
 maskedID := SubStr(licData["ID"], 1, 6) "..." SubStr(licData["ID"], -4)
 
+; --- Load Defaults (Defaults defined in Core_Utils.ahk) ---
+global DEFAULTS := GetDefaultSettings()
+
 ; --- Load Globals ---
-global g_ShowOverlay       := LoadSetting("UI", "ShowOverlay", "1")
-global g_MinToTray         := LoadSetting("UI", "MinimizeToTray", "0")
-global g_WindowTitle       := LoadSetting("Game", "WindowTitle", "")
+global g_ShowOverlay         := LoadSetting("UI", "ShowOverlay",              DEFAULTS["UI|ShowOverlay"])
+global g_MinToTray           := LoadSetting("UI", "MinimizeToTray",           DEFAULTS["UI|MinimizeToTray"])
+global g_WindowTitle         := LoadSetting("Game", "WindowTitle",            DEFAULTS["Game|WindowTitle"])
 
-global g_AntiBanEnabled    := LoadSetting("Script", "AntiBan", "0")
-global g_FastDropEnabled   := LoadSetting("Script", "FastDrop", "0")
-global g_AutoHealEnabled   := LoadSetting("Script", "AutoHeal", "0")
-global g_RandomClickEnable := LoadSetting("Script", "RandomClick", "0")
+global g_AntiBanEnabled      := LoadSetting("Script", "AntiBan",              DEFAULTS["Script|AntiBan"])
+global g_FastDropEnabled     := LoadSetting("Script", "FastDrop",             DEFAULTS["Script|FastDrop"])
+global g_AutoHealEnabled     := LoadSetting("Script", "AutoHeal",             DEFAULTS["Script|AutoHeal"])
+global g_RandomClickEnable   := LoadSetting("Script", "RandomClick",          DEFAULTS["Script|RandomClick"])
 
-global g_OvershootEnabled  := LoadSetting("AntiBan", "OvershootEnabled", "1")
-global g_OvershootPercent  := LoadSetting("AntiBan", "Overshoot", "5")
+global g_OvershootEnabled    := LoadSetting("AntiBan", "OvershootEnabled",    DEFAULTS["AntiBan|OvershootEnabled"])
+global g_OvershootPercent    := LoadSetting("AntiBan", "Overshoot",           DEFAULTS["AntiBan|Overshoot"])
 
-global g_BreaksEnabled     := LoadSetting("AntiBan", "BreaksEnabled", "0")
-global g_BreakChance       := LoadSetting("AntiBan", "BreakChance", "5")
-global g_BreakSpacing      := LoadSetting("AntiBan", "BreakSpacing", "20")
-global g_MicroDelayEnabled := LoadSetting("AntiBan", "MicroDelayEnabled", "0")
-global g_MicroDelayMax      := LoadSetting("AntiBan", "MicroDelayMax", "500")
-global g_MicroDelayChance  := LoadSetting("AntiBan", "MicroDelayChance", "15")
+global g_BreaksEnabled       := LoadSetting("AntiBan", "BreaksEnabled",       DEFAULTS["AntiBan|BreaksEnabled"])
+global g_BreakChance         := LoadSetting("AntiBan", "BreakChance",         DEFAULTS["AntiBan|BreakChance"])
+global g_BreakSpacing        := LoadSetting("AntiBan", "BreakSpacing",        DEFAULTS["AntiBan|BreakSpacing"])
 
-global g_MicroWigglesEnabled := LoadSetting("AntiBan", "MicroWigglesEnabled", "0")
-global g_WiggleIntensity     := LoadSetting("AntiBan", "WiggleIntensity", "2")
+global g_MicroDelayEnabled   := LoadSetting("AntiBan", "MicroDelayEnabled",   DEFAULTS["AntiBan|MicroDelayEnabled"])
+global g_MicroDelayMax       := LoadSetting("AntiBan", "MicroDelayMax",       DEFAULTS["AntiBan|MicroDelayMax"])
+global g_MicroDelayChance    := LoadSetting("AntiBan", "MicroDelayChance",    DEFAULTS["AntiBan|MicroDelayChance"])
+
+global g_MicroWigglesEnabled := LoadSetting("AntiBan", "MicroWigglesEnabled", DEFAULTS["AntiBan|MicroWigglesEnabled"])
+global g_WiggleIntensity     := LoadSetting("AntiBan", "WiggleIntensity",     DEFAULTS["AntiBan|WiggleIntensity"])
 
 ; ------------------------------------------------------------------
 ; GUI CONSTRUCTION

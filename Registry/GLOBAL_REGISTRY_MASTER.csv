@@ -1,134 +1,38 @@
-SECTION_HEADER: GLOBAL_FUNCTION_REGISTRY,,,
 FUNCTION NAME,OWNER (FILE),PARAMETERS,PURPOSE / LOGIC RULE
-OnStart,Controller\Main_Controller.ahk,(*),"Validates settings, launches Worker process, and updates GUI state."
-OnStop,Controller\Main_Controller.ahk,(*),Terminated Worker via PID and reverts GUI to inactive state.
-OnReset,Controller\Main_Controller.ahk,(*),Triggers full stop/restart of Worker to refresh memory/logic.
-OnRestore,Controller\Main_Controller.ahk,(*),Calls RestoreDefaultSettings(*) and refreshes GUI visuals.
-OnTabClick,Controller\Main_Controller.ahk,"(GuiCtrl, *)","Orchestrates UI visibility for Dashboard, Settings, and Anti-Ban."
-OnSubTabClick,Controller\Main_Controller.ahk,"(GuiCtrl, *)",Handles nested navigation (General vs Script settings).
-OnSettingsChange,Controller\Main_Controller.ahk,(*),Monitors GUI inputs and triggers SaveSetting() for INI persistence.
-UpdateStatus,Controller\Main_Controller.ahk,"(msg, col)",Modifies Dashboard status text and color indicators.
-MainGui_Close,Controller\Main_Controller.ahk,(*),Ensures Worker is killed before Controller exits.
-RestoreDefaultSettings,Controller\Modules\MaintenanceManager.ahk,(*),Logic for resetting INI values and GUI controls to defaults.
-Messenger.Log,Controller\Modules\Messenger.ahk,(text),Static wrapper that calls the global UpdateLog function.
-Messenger.PushTitleUpdate,Controller\Modules\Messenger.ahk,(newTitle),Saves new game title to INI and pushes live IPC update to Worker.
-Messenger.LoggedTitleUpdate,Controller\Modules\Messenger.ahk,(),Debounced timer function for logging title changes.
-Messenger.SendDataToWorker,Controller\Modules\Messenger.ahk,"(targetHWND, stringToSend)",Low-level IPC implementation using WM_COPYDATA (0x004A).
-ShowTab,Controller\Modules\NavigationManager.ahk,(tabName),Switches visibility for primary GUI tab groups and handles placeholder hints.
-ShowSettingsSubTab,Controller\Modules\NavigationManager.ahk,(subName),Manages sub-navigation visibility between General and Script settings.
-ShowABanSubTab,Controller\Modules\NavigationManager.ahk,(subName),Manages sub-navigation visibility between Anti-Ban Features and Tuning.
-HandleClose,Controller\Modules\NavigationManager.ahk,(GuiObj),GUI close event; handles Minimize to Tray logic or application exit.
-LaunchWorker,Controller\Modules\ProcessManager.ahk,(skipAutoStart := false),"Handles lifecycle, initial launch, and state changes of the Worker."
-WatchWorkerHealth,Controller\Modules\ProcessManager.ahk,(),Timer-based watchdog monitoring if the Worker process is still running.
-ShutdownController,Controller\Modules\ProcessManager.ahk,(*),Ensures the Worker process is closed when the Controller exits.
-RegisterTooltip,Controller\Modules\TooltipManager.ahk,"(ctrlHwnd, text)",Registers a control and its associated help text in the global map.
-ProcessTooltips,Controller\Modules\TooltipManager.ahk,"(wParam, lParam, msg, *)",Message monitor function handling contextual hover help.
-UpdateLog,Controller\Modules\WorkerInterface.ahk,(text),Appends timestamped text to the LogBox GUI control and auto-scrolls.
-HandleWorkerCommand,Controller\Modules\WorkerInterface.ahk,(cmd),"Processes ""STOP"" or ""RELOAD"" commands to manage worker signaling and GUI states."
-Clamp,Lib\AntiBan.ahk,"(val, min, max)",Math utility to restrict a value between a minimum and maximum range.
-PerformMicroDelay,Lib\AntiBan.ahk,"(minMs := 10, maxMs := """")",Randomized short sleep logic based on configured micro-delay chance.
-CheckForBreak,Lib\AntiBan.ahk,(),Evaluates break chance and cooldown to pause execution for a random duration.
-ShouldOvershoot,Lib\AntiBan.ahk,(),Returns boolean based on the configured overshoot percentage chance.
-AntiBanCheckpoint,Lib\BreakManager.ahk,(),"The primary ""Checkpoint"" to be called within the Worker's loop."
-MaybeMicroDelay,Lib\BreakManager.ahk,(),Evaluates chance and triggers a randomized micro-pause if enabled.
-MaybeBreak,Lib\BreakManager.ahk,(),"Handles evaluation logic for break chance, spacing, and duration selection."
-DoBreak,Lib\BreakManager.ahk,"(minMs, maxMs)",Execution logic for breaks including overlay notifications and weighted durations.
-HasFunc,Lib\BreakManager.ahk,(fnName),Helper to safely check for a global function's existence without reserved word errors.
-SetupWorkerListener,Lib\Interop.ahk,(),Worker-side function to listen for WM_TRIGGER_STATE messages.
-Worker_ReceiveSignal,Lib\Interop.ahk,"(wParam, lParam, msg, hwnd)","Processes incoming state signals (Run, Pause, Reset) and adjusts timer offsets."
-SendWorkerSignal,Lib\Interop.ahk,(state),Controller-side function to toggle Worker state via window messages.
-IsProcessAlive,Lib\Interop.ahk,(pid),Checks if a process ID currently exists.
-ProcessSuspend,Lib\Interop.ahk,(PID),Suspends a process via ntdll\NtSuspendProcess.
-ProcessResume,Lib\Interop.ahk,(PID),Resumes a suspended process via ntdll\NtResumeProcess.
-IsAhkV1Exe,Lib\Interop.ahk,(exePath),Detects if an executable is an AutoHotkey v1 version.
-Hypot,Lib\Movement.ahk,"(x, y)",Calculates the hypotenuse (magnitude) of a 2D vector.
-WindMouse,Lib\Movement.ahk,"(xs, ys, xe, ye, gravity, wind, minWait, maxWait, maxStep, targetArea, newArr, wiggle := false)",Calculates mouse path.
-WindMouse2,Lib\Movement.ahk,"(xs, ys, xe, ye, gravity, wind, minWait, maxWait, maxStep, targetArea)",Calculates a WindMouse path and returns the array of points without executing movement.
-SortArray,Lib\Movement.ahk,"(Array, Order := ""A"")",Utility to sort a coordinate array in ascending or descending order.
-MoveMouse,Lib\Movement.ahk,"(x, y, speed := 0.8, wiggle := false)",High-level wrapper. Applies circular randomization and muscle memory decay (10s interval).
-goRelative,Lib\Movement.ahk,"(x, y, speed, wiggle := false)",Calculates and moves mouse relative to current position with dynamic speed.
-ValidateLicense,Lib\Security.ahk,"(secret, keyFile)","Core validation function: reads, deobfuscates, parses, and hashes license data against HWID."
-License_Deobfuscate_FromBase64,Lib\Security.ahk,"(cipherB64, secret)",Decrypts Base64 input using an internal salt-based XOR stream cipher.
-License_HashData,Lib\Security.ahk,"(dataMap, keysList)",Generates a verification SHA256-equivalent hash from sorted license key-value pairs.
-GetMachineGUID,Lib\Security.ahk,(),Retrieves the unique hardware identifier (MachineGuid) from the Windows Registry.
-GetSettingsPath,Lib\SettingsLoader.ahk,(),Resolves the absolute path to settings.ini by checking the local and parent directories.
-LoadSetting,Lib\SettingsLoader.ahk,"(section, key, default := """")",Retrieves a specific value from the INI file with a fallback default.
-SaveSetting,Lib\SettingsLoader.ahk,"(section, key, value)",Writes a key-value pair to the designated section in the INI file.
-UpdateWorkerOverlay,Worker\Main_Worker.ahk,"(statusText, statusColor)",Updates the visual HUD text and color.
-OnMessage,Worker\Main_Worker.ahk,"(0x004A, ReceiveData)",Built-in message handler for IPC WM_COPYDATA.
-ReceiveData,Worker\Main_Worker.ahk,"(wParam, lParam, *)",Callback function that decodes string data sent from the Controller.
-LoadWorkerConfiguration,Worker\Modules\ConfigManager.ahk,(),Initializes global g_Config map and syncs local logic variables with INI settings.
-UpdateOverlayPosition,Worker\Modules\OverlayPhysics.ahk,(),"Performs window tracking, visibility logic, and spring physics calculations to update overlay position."
-ReceiveWindowTitle,Worker\Modules\WorkerState.ahk,"(wParam, lParam, msg, hwnd)",IPC handler to update the target window title in the worker's configuration map.
-UpdateTimerDisplay,Worker\Modules\WorkerState.ahk,(),Calculates total active execution time (subtracting paused time) and updates the HUD timer.
-Watchdog_CheckSettings,Worker\Modules\WorkerState.ahk,(),"Polls the INI file's modification time; triggers config reload and visual ""Sync"" flash if changed."
-UpdateWorkerOverlay,Worker\Modules\WorkerState.ahk,"(statusMsg, statusColor)",Logic to update overlay status text and map descriptive color names to hex codes.
-,,,
-SECTION_HEADER: GLOBAL_STATE_REGISTRY,,,
-VARIABLE NAME,OWNER,INIT VALUE,PURPOSE / LOGIC RULE
-AppVersion,Controller\Main_Controller.ahk,2.1.7,Semantic version tracking for the Main Controller.
-IconPath,Controller\Main_Controller.ahk,"A_ScriptDir ""\..\PipzScptzIcon.png""",Path to project visual identity asset.
-AppName,Controller\Main_Controller.ahk,MAIN CONTROLLER TEMPLATE,Primary UI title variable.
-g_Config,Main_Worker,Map(),Centralized container for all active INI settings.
-g_LastSettingsUpdate,WorkerState,0,[CRITICAL] Watchdog baseline. Must stay 0 until first tick.
-g_WorkerState,Main_Worker,inactive,"Current operational mode: ""active"", ""paused"", or ""inactive""."
-g_StartTime,Main_Worker,0,TickCount recorded when worker switches from inactive to active.
-g_PausedTimeTotal,Main_Worker,0,"Cumulative milliseconds spent in ""paused"" state to offset timer."
-g_PauseStart,Main_Worker,0,TickCount recorded at the moment the pause began.
-g_GameTitle,Main_Worker,,Target window title retrieved from settings or IPC update.
-ControllerHWND,Main_Worker,0,Handle to the Controller window for sending Return Messages.
-WorkerTitle,Main_Controller.ahk,Overlay_Worker_Internal,Unique internal HWND name for process identification.
-LogBox,Main_Controller.ahk,,Global reference to the GUI Edit control for logging.
-g_WorkerPID,Main_Controller.ahk,0,Process ID of the active Worker; used for lifecycle management.
-g_ShowOverlay,Main_Controller.ahk,"LoadSetting(""UI"", ""ShowOverlay"", ""1"")",GUI State: Toggle for showing the visual overlay.
-g_MinToTray,Main_Controller.ahk,"LoadSetting(""UI"", ""MinimizeToTray"", ""0"")",GUI State: Toggle for minimizing to system tray on close.
-g_WindowTitle,Main_Controller.ahk,"LoadSetting(""Game"", ""WindowTitle"", """")",User-defined target window title for the Worker process.
-g_AntiBanEnabled,Main_Controller.ahk,"LoadSetting(""AntiBan"", ""Enabled"", ""0"")",Toggle for generic anti-ban pattern generation.
-g_FastDropEnabled,Main_Controller.ahk,"LoadSetting(""Script"", ""FastDrop"", ""0"")",Toggle for high-speed item dropping logic.
-g_AutoHealEnabled,Main_Controller.ahk,"LoadSetting(""Script"", ""AutoHeal"", ""0"")",Toggle for automated health management routines.
-g_RandomClickEnable,Main_Controller.ahk,"LoadSetting(""Script"", ""RandomClick"", ""0"")",Toggle for randomized coordinate offsets on clicks.
-g_ReactionSpeed,Main_Controller.ahk,"LoadSetting(""AntiBan"", ""ReactionSpeed"", ""150"")",Standardized human-modeling delay (ms) for Anti-Ban logic.
-g_OvershootEnabled,Main_Controller.ahk,"LoadSetting(""AntiBan"", ""OvershootEnabled"", ""1"")",Toggle for human-like mouse overshooting logic.
-g_OvershootPercent,Main_Controller.ahk,"LoadSetting(""AntiBan"", ""OvershootPercent"", ""5"")",Maximum percentage of distance to overshoot target.
-g_BreaksEnabled,Main_Controller.ahk,"LoadSetting(""AntiBan"", ""BreaksEnabled"", ""0"")",Toggle for long-duration human-like break system.
-g_BreakChance,Main_Controller.ahk,"LoadSetting(""AntiBan"", ""BreakChance"", ""5"")",Percentage chance (1-100) to take a break.
-g_BreakSpacing,Main_Controller.ahk,"LoadSetting(""AntiBan"", ""BreakSpacing"", ""20"")",Minimum minutes required between consecutive breaks.
-g_MicroDelayEnabled,Main_Controller.ahk,"LoadSetting(""AntiBan"", ""MicroDelayEnabled"", ""0"")",Toggle for short randomized pauses between actions.
-g_MicroDelayMax,Main_Controller.ahk,"LoadSetting(""AntiBan"", ""MicroDelayMax"", ""500"")",Ceiling (ms) for randomized micro-delay durations.
-g_MicroDelayChance,Main_Controller.ahk,"LoadSetting(""AntiBan"", ""MicroDelayChance"", ""15"")",Percentage chance (1-100) for a micro-delay to trigger.
-g_MicroWigglesEnabled,Main_Controller.ahk,"LoadSetting(""AntiBan"", ""MicroWigglesEnabled"", ""0"")",Global toggle to enable/disable jitter logic in Movement.ahk.
-g_WiggleIntensity,Main_Controller.ahk,"LoadSetting(""AntiBan"", ""WiggleIntensity"", ""2"")",Range: 1-5px. Defines the max tremor distance during pathing.
-g_PendingTitle,Messenger.ahk,,Temporary storage for debounced game title updates.
-workerHWND,Messenger.ahk,WinExist(WorkerTitle),Cached window handle for the Worker process.
-cds,Messenger.ahk,"Buffer(A_PtrSize * 3, 0)",COPYDATASTRUCT buffer used for IPC transmission.
-TooltipMap,TooltipManager.ahk,Map(),Global map storing control HWNDs and their help text.
-PrevHwnd,TooltipManager.ahk,0,Static tracking variable for the last hovered control.
-txtStatus,WorkerInterface.ahk,(GUI Object),Global reference to the status text indicator.
-BtnStart,WorkerInterface.ahk,(GUI Object),Global reference to the Start/Resume button.
-BtnStop,WorkerInterface.ahk,(GUI Object),Global reference to the Stop/Pause button.
-g_LastBreakTick,AntiBan.ahk,0,TickCount of the end of the most recent break taken.
-LastBreakTick,BreakManager.ahk,0,Shared TickCount for human-weighted AFK logic.
-LastEvalTick,BreakManager.ahk,0,TickCount of the last time break probability was rolled.
-WM_TRIGGER_STATE,Interop.ahk,0x5555,Custom Message ID used to signal the Worker.
-SettingsPath,SettingsLoader.ahk,,Static internal path to the settings.ini file.
-overlayCurX,OverlayPhysics.ahk,0,Current interpolated X coordinate of the overlay.
-overlayCurY,OverlayPhysics.ahk,0,Current interpolated Y coordinate of the overlay.
-overlayVelX,OverlayPhysics.ahk,0,Current horizontal velocity for spring physics.
-overlayVelY,OverlayPhysics.ahk,0,Current vertical velocity for spring physics.
-springStrength,OverlayPhysics.ahk,0.15,Constant determining the 'snappiness' of the overlay tracking.
-springDamping,OverlayPhysics.ahk,0.84,Constant determining the 'friction' or slowdown of overlay movement.
-springSnapDist,OverlayPhysics.ahk,500,Distance threshold (px) beyond which the overlay teleports instead of sliding.
-,,,
-SECTION_HEADER: GLOBAL_LOGIC_RULES_REGISTRY,,,
-SECTION ID,RULE NAME,LOGIC INVARIANT,
-GEN-01,Registry Truth,"ANY change to logic or structure MUST be reflected in the code, 'INDEXIDLIST.txt', '_PROJECT_BLUEPRINT.txt', and the authoritative 'GLOBAL_REGISTRY_MASTER.gsheet'. The 'GLOBAL_REGISTRY_MASTER.csv' MUST be updated simultaneously to maintain a 1:1 literal fallback mirror.",
-GEN-02,Version Heading,"ANY change, addition, removal, edit or otherwise to any project file (excluding the registry, and all runtime artifacts or otherwise non-readable files) must be accompanied by a separate 'version header' code block as defined by `STANDARDIZED_HEADERS.txt`",
-GEN-03,Accuracy Validation,"You must FULLY ANALYZE the relevant files using the SEARCH & INDEXING PROTOCOL to ensure the current file state is the same as the users before ANY change, addition, removal, edit or otherwise to any project file.",
-SYNC-01,Startup Flash,g_LastSettingsUpdate MUST be 0 at launch to trigger initial sync flash (Cyan).,
-SYNC-02,Watchdog Owner,WorkerState.ahk is the SOLE owner of the synchronization timestamp.,
-IPC-01,Message Safety,Every message receiver (OnMessage) must be wrapped in a Try/Catch block.,
-IPC-02,Return Path,"If ControllerHWND is > 0, Worker signals success back to Controller.",
-ANTIBAN-01,Shared Context,\Lib functions must use HasFunc()/IsSet() before calling Overlay/Messenger.,
-ANTIBAN-02,Break Priority,A break (AFK) always overrides and pauses a Micro-Delay.,
-PHYSICS-01,Independent Tick,Overlay movement must run on a 10ms Timer independent of Main Loop.,
-PHYSICS-02,Snap Threshold,"If distance < sleepThreshold, velocity = 0.0 and calculation halts.",
+RegisterTooltip,Controller\Controller_Core.ahk,"(ctrlHwnd, text)",Associates a GUI control HWND with tooltip text for hover display.
+ProcessTooltips,Controller\Controller_Core.ahk,"(wParam, lParam, msg, *)",OnMessage handler that shows/hides ToolTip() based on hovered control HWND using TooltipMap.
+UpdateLog,Controller\Controller_Core.ahk,(text),Appends a timestamped line to the controller LogBox and auto-scrolls to bottom.
+HandleWorkerCommand,Controller\Controller_Core.ahk,(cmd),Controller-side command handler for STOP/RELOAD; updates worker state via SendWorkerSignal/LaunchWorker and updates GUI buttons/status/log.
+Messenger.Log,Controller\Controller_Core.ahk,(text),Writes a line to controller log (wrapper around UpdateLog).
+Messenger.PushTitleUpdate,Controller\Controller_Core.ahk,(newTitle),"Persists Game/WindowTitle, sends WM_COPYDATA title update to worker if running, and schedules a logged confirmation."
+Messenger.LoggedTitleUpdate,Controller\Controller_Core.ahk,(),Deferred log line confirming new game window title designation.
+Messenger.SendDataToWorker,Controller\Controller_Core.ahk,"(targetHWND, stringToSend)",Sends WM_COPYDATA payload to worker HWND (used for window title updates).
+RestoreDefaultSettings,Controller\Controller_Core.ahk,(*),"Resets all persistent settings to Core_Utils.GetDefaultSettings(), writes INI via SaveSetting(), updates controller GUI controls, and pushes title update to worker."
+ShowTab,Controller\Controller_Core.ahk,(tabName),Primary UI router; toggles visibility of control groups and selects initial sub-tabs for Settings/Anti-Ban.
+ShowSettingsSubTab,Controller\Controller_Core.ahk,(subName),Toggles visibility between General vs Script settings groups.
+ShowABanSubTab,Controller\Controller_Core.ahk,(subName),Toggles visibility between Anti-Ban Features vs Tuning groups.
+HandleClose,Controller\Controller_Core.ahk,(GuiObj),"OnClose handler; minimizes to tray if g_MinToTray enabled, otherwise exits."
+LaunchWorker,Controller\Controller_Core.ahk,(skipAutoStart := false),"Starts or reuses Worker process, sends initial state via SendWorkerSignal, updates GUI, and arms health timer."
+WatchWorkerHealth,Controller\Controller_Core.ahk,(),Timer callback to detect lost worker PID and update GUI to inactive state.
+ShutdownController,Controller\Controller_Core.ahk,(*),OnExit handler; closes worker process if running.
+LoadWorkerConfiguration,Worker\Worker_Core.ahk,(),Loads persistent settings into g_Config using LoadSetting() with Core defaults; maps values into worker globals; updates g_LastSettingsUpdate when appropriate.
+ReceiveWindowTitle,Worker\Worker_Core.ahk,"(wParam, lParam, msg, hwnd)","OnMessage WM_COPYDATA handler; updates g_Config[""GameTitle""] from controller-sent payload."
+UpdateTimerDisplay,Worker\Worker_Core.ahk,(),Updates overlay timer text based on active runtime (A_TickCount - g_StartTime - paused total).
+Watchdog_CheckSettings,Worker\Worker_Core.ahk,(),"Timer callback; detects settings.ini mtime changes, reloads configuration, shows SYNC status, then reverts status after delay."
+UpdateWorkerOverlay,Worker\Worker_Core.ahk,"(statusMsg := """", statusColor := ""White"")",Updates overlay status text/color; suppresses non-sync updates during sync window.
+UpdateOverlayPosition,Worker\Worker_Core.ahk,(),Timer callback; positions overlay relative to game window using spring physics; hides overlay when g_ShowOverlay disabled.
+SetupWorkerListener,Lib\Interop.ahk,(),Registers worker signal receiver (OnMessage) for controller→worker state commands and initializes listener.
+Worker_ReceiveSignal,Lib\Interop.ahk,"(wParam, lParam, msg, hwnd)",Worker-side OnMessage handler; updates g_WorkerState and pause timing based on received state.
+SendWorkerSignal,Lib\Interop.ahk,(state),Controller-side helper to send state command to worker window (running/paused/inactive).
+IsProcessAlive,Lib\Interop.ahk,(pid),Returns whether a PID exists (process still alive).
+ProcessSuspend,Lib\Interop.ahk,(PID),Suspends a process by PID (used for pausing worker if implemented).
+ProcessResume,Lib\Interop.ahk,(PID),Resumes a suspended process by PID.
+IsAhkV1Exe,Lib\Interop.ahk,(exePath),Checks whether a given executable path appears to be an AutoHotkey v1 binary.
+GetSettingsPath,Lib\Core_Utils.ahk,(),Returns canonical path to settings.ini used by controller/worker.
+LoadSetting,Lib\Core_Utils.ahk,"(section, key, default := """")",Reads a setting from INI (settings.ini); returns provided default if missing.
+SaveSetting,Lib\Core_Utils.ahk,"(section, key, value)",Writes a setting to INI (settings.ini).
+ValidateLicense,Lib\Core_Utils.ahk,"(secret, keyFile)",Validates and decodes license file into a map (ID/EXPIRES/etc).
+SHA256,Lib\Core_Utils.ahk,(str),Computes SHA-256 hash; used by security/license routines.
+License_Deobfuscate_FromBase64,Lib\Core_Utils.ahk,"(b64Text, secret)",Decodes and deobfuscates base64 license blob using secret.
+License_Obfuscate_ToBase64,Lib\Core_Utils.ahk,"(plainText, secret)",Obfuscates and base64-encodes license data using secret.
+GetDefaultSettings,Lib\Core_Utils.ahk,(),Returns map of canonical default settings for controller/worker (SINGLE SOURCE OF TRUTH).

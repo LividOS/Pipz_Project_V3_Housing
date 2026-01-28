@@ -1,0 +1,334 @@
+; ------------------------------------------------------------------
+; AI SOT TEXT FILE (DO NOT EVER REMOVE, EDIT OR INCLUDE IN FILE EDITS) - MY FULL PATH IS "Pipz_Project_V3\Worker\Worker_Core.txt"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; GEMINI MEM TAG(DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\Worker\Worker_Core.ahk"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - Worker_Core.ahk (AHK v2)
+; Version: 1.0.0
+; Last change: Consolidated Worker\Modules\ConfigManager + OverlayPhysics + WorkerState into Worker_Core.
+; Content-Fingerprint: 2026-01-28T23-08-53Z-ZCVP410O
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; SIGNPOST GOVERNANCE — FILE: Worker_Core.ahk
+; ------------------------------------------------------------------
+; MODULE NAME:
+;   Worker_Core (Core Container)
+;
+; WHAT IT OWNS / CONTROLS:
+;   - Worker-side “core container” subsystems referenced by Main_Worker:
+;       1) Config Manager (defaults + INI load -> runtime maps/globals)
+;       2) Worker State (WM_COPYDATA title receive, watchdog, status/timer updates)
+;       3) Overlay Physics (overlay positioning + visibility gating)
+;
+; INPUTS (events/messages/functions it responds to):
+;   - Called by Main_Worker startup and timers:
+;       * LoadWorkerConfiguration() at boot and during watchdog sync
+;       * Watchdog_CheckSettings() via SetTimer(1000)
+;       * UpdateOverlayPosition() via SetTimer(10)
+;   - Windows message hook:
+;       * ReceiveWindowTitle(wParam, lParam, msg, hwnd) via OnMessage(0x004A, ...)
+;   - Runtime loop updates:
+;       * UpdateWorkerOverlay(statusMsg, statusColor)
+;       * UpdateTimerDisplay()
+;
+; OUTPUTS / SIDE EFFECTS (files, settings, processes, IPC, UI):
+;   - Settings IO:
+;       * Reads settings.ini via LoadSetting()/GetSettingsPath()
+;       * No writes expected here (writes originate in controller)
+;   - IPC ingestion:
+;       * WM_COPYDATA title payload updates worker runtime target title
+;   - UI:
+;       * Mutates overlay GUI: Show/Hide/Move
+;       * Updates overlay controls (txtStatus, txtTimer) color/text
+;       * Provides “Settings Synced” cyan flash feedback (SYNC-01) after watchdog reload
+;   - Runtime state:
+;       * Updates g_Config map and g_* globals consumed by Humanoid and worker runtime
+;       * Uses g_IsSyncing gating to prevent conflicting status overwrites during sync feedback
+;
+; DEPENDENCIES (globals/functions it relies on):
+;   - Core_Utils (shared lib):
+;       GetDefaultSettings(), GetSettingsPath(), LoadSetting()
+;   - Globals and GUI objects created in Main_Worker:
+;       overlayGui, txtStatus, txtTimer,
+;       overlayCurX/overlayCurY/overlayVelX/overlayVelY,
+;       overlayWidth/overlayHeight, springStrength/springDamping/springSnapDist,
+;       ControllerHWND (if used), InternalTitle, g_WorkerState,
+;       g_Config, g_LastSettingsUpdate, g_ShowOverlay
+;   - AHK built-ins:
+;       FileGetTime(), WinGetList()/WinExist(), WinGetClientPos(), SetTimer(), StrGet()/NumGet()
+;
+; GOVERNANCE NOTES (hard-stop rules, invariants, what must remain true):
+;   - Do NOT reintroduce per-tick INI reads in overlay physics.
+;     * The watchdog (1000ms) is the only allowed INI polling path.
+;   - WM_COPYDATA (0x004A) handling is the canonical title update ingestion path:
+;       * must update g_Config["GameTitle"] (or equivalent owned key) only
+;   - Overlay visibility must be gated by g_ShowOverlay (runtime global) and not direct INI reads.
+;   - SYNC-01 invariant:
+;       * When settings file mtime changes, reload settings, show cyan “Settings Synced” briefly,
+;         then revert to correct state label based on g_WorkerState.
+; ------------------------------------------------------------------
+
+#Requires AutoHotkey >=2.0
+
+; ------------------------------------------------------------------
+; Config Manager Module (Originally from ConfigManager.ahk) [DO NOT REMOVE]
+; Handles centralized INI management for both Controller and Worker
+; ------------------------------------------------------------------
+
+LoadWorkerConfiguration() {
+    global g_Config, g_LastSettingsUpdate
+    global g_OvershootEnabled, g_OvershootPercent
+    global g_MicroDelayEnabled, g_MicroDelayMax, g_MicroDelayChance
+    global g_BreaksEnabled, g_BreakChance, g_BreakSpacing
+
+    defaults := GetDefaultSettings()
+
+    ; 1. Load values using centralized defaults
+    g_Config["GameTitle"]         := LoadSetting("Game", "WindowTitle",          defaults["Game|WindowTitle"])
+    g_Config["OvershootEnabled"]  := LoadSetting("AntiBan", "OvershootEnabled",  defaults["AntiBan|OvershootEnabled"])
+    g_Config["Overshoot"]         := LoadSetting("AntiBan", "Overshoot",         defaults["AntiBan|Overshoot"])
+    g_Config["MicroDelayEnabled"] := LoadSetting("AntiBan", "MicroDelayEnabled", defaults["AntiBan|MicroDelayEnabled"])
+    g_Config["MicroDelayMax"]     := LoadSetting("AntiBan", "MicroDelayMax",     defaults["AntiBan|MicroDelayMax"])
+    g_Config["MicroDelayChance"]  := LoadSetting("AntiBan", "MicroDelayChance",  defaults["AntiBan|MicroDelayChance"])
+    g_Config["BreaksEnabled"]     := LoadSetting("AntiBan", "BreaksEnabled",     defaults["AntiBan|BreaksEnabled"])
+    g_Config["BreakChance"]       := LoadSetting("AntiBan", "BreakChance",       defaults["AntiBan|BreakChance"])
+    g_Config["BreakSpacing"]      := LoadSetting("AntiBan", "BreakSpacing",      defaults["AntiBan|BreakSpacing"])
+
+    ; 2. Map the Config values to Global Variables for the logic modules
+    g_OvershootEnabled  := g_Config["OvershootEnabled"]
+    g_OvershootPercent  := g_Config["Overshoot"]
+    g_MicroDelayEnabled := g_Config["MicroDelayEnabled"]
+    g_MicroDelayMax     := g_Config["MicroDelayMax"]
+    g_MicroDelayChance  := g_Config["MicroDelayChance"]
+    g_BreaksEnabled     := g_Config["BreaksEnabled"]
+    g_BreakChance       := g_Config["BreakChance"]
+    g_BreakSpacing      := g_Config["BreakSpacing"]
+
+    ; 3. Timestamp management for the Watchdog
+    settingsFile := GetSettingsPath()
+    if (settingsFile != "" && FileExist(settingsFile)) {
+        try {
+            if (g_LastSettingsUpdate != 0) {
+                g_LastSettingsUpdate := FileGetTime(settingsFile, "M")
+            }
+        } catch {
+            ; Skip if file is locked
+        }
+    }
+}
+
+; ------------------------------------------------------------------
+; END OF Settings Loader Module
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; Worker State Module (Originally from WorkerState.ahk) [DO NOT REMOVE]
+; Handles Worker state management and UI updates
+; ------------------------------------------------------------------
+
+global g_IsSyncing := false
+
+ReceiveWindowTitle(wParam, lParam, msg, hwnd) {
+    try {
+        lpData := NumGet(lParam, A_PtrSize * 2, "Ptr")
+        newTitle := StrGet(lpData)
+        global g_Config
+        g_Config["GameTitle"] := newTitle
+        return true
+    } catch {
+        return false
+    }
+}
+
+UpdateTimerDisplay() {
+    global txtTimer, g_StartTime, g_PausedTimeTotal
+    elapsed := (A_TickCount - g_StartTime - g_PausedTimeTotal) // 1000
+    elapsed := Max(0, elapsed)
+    hh := Format("{:02}", elapsed // 3600)
+    mm := Format("{:02}", Mod(elapsed // 60, 60))
+    ss := Format("{:02}", Mod(elapsed, 60))
+    txtTimer.Opt("c00FF00")
+    txtTimer.Value := "Time Spent - " hh ":" mm ":" ss
+}
+
+Watchdog_CheckSettings() {
+    global g_LastSettingsUpdate, g_WorkerState, g_IsSyncing
+    settingsFile := GetSettingsPath()
+
+    try {
+        currentMTime := FileGetTime(settingsFile, "M")
+
+        if (currentMTime != g_LastSettingsUpdate) {
+            ; 1. Update the tracking timestamp
+            g_LastSettingsUpdate := currentMTime
+
+            ; 2. Block Main Loop UI updates
+            g_IsSyncing := true
+
+            ; 3. Reload settings into memory
+            LoadWorkerConfiguration()
+
+            ; 4. Trigger Visual Feedback (SYNC-01)
+            UpdateWorkerOverlay("Status - Settings Synced", "Cyan")
+
+            ; 5. Revert to the correct current state after 1 second
+            SetTimer(RevertStatus, -1000)
+        }
+    } catch {
+        return
+    }
+
+    RevertStatus() {
+        global g_WorkerState, g_IsSyncing
+        g_IsSyncing := false
+
+        if (g_WorkerState == "active")
+            UpdateWorkerOverlay("Status - Active", "00FF00")
+        else if (g_WorkerState == "paused")
+            UpdateWorkerOverlay("Status - Paused", "Yellow")
+        else
+            UpdateWorkerOverlay("Status - Inactive", "808080")
+    }
+}
+
+UpdateWorkerOverlay(statusMsg := "", statusColor := "White") {
+    global txtStatus, g_IsSyncing
+    if (g_IsSyncing && statusMsg != "Status - Settings Synced")
+        return
+
+    if (statusMsg != "") {
+        txtStatus.Value := statusMsg
+
+        if (statusColor = "Cyan")
+            statusColor := "00FFFF"
+        else if (statusColor = "Green" || statusColor = "00FF00")
+            statusColor := "00FF00"
+        else if (statusColor = "Yellow" || statusColor = "FFFF00")
+            statusColor := "FFFF00"
+        else if (statusColor = "Orange")
+            statusColor := "FFA500"
+        else if (statusColor = "808080" || statusColor = "Grey")
+            statusColor := "808080"
+
+        txtStatus.Opt("c" . statusColor)
+    }
+}
+
+; ------------------------------------------------------------------
+; END OF Worker State Module
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; Overlay Physics Module (Originally from OverlayPhysics.ahk) [DO NOT REMOVE]
+; Handles dynamic overlay positioning with physics simulation
+; ------------------------------------------------------------------
+
+UpdateOverlayPosition() {
+    global overlayCurX, overlayCurY, overlayVelX, overlayVelY
+    global springStrength, springDamping, springSnapDist, overlayHeight, overlayWidth
+    global g_Config, ControllerHWND, overlayGui
+
+    static lastGX := 0, lastGY := 0, isDragging := false, dragTick := 0
+    targetTitle := g_Config["GameTitle"]
+
+    ; 1. Visibility Check (no per-tick INI reads)
+    global g_ShowOverlay
+    if (g_ShowOverlay == "0" || g_ShowOverlay == 0) {
+        overlayGui.Hide()
+        return
+    }
+
+    ; 2. Determine Target Coordinates
+    targetHWND := 0
+    if (targetTitle != "") {
+        pattern := "i)" . targetTitle
+        winList := WinGetList(pattern)
+        for hwnd in winList {
+            if (hwnd != ControllerHWND && hwnd != overlayGui.Hwnd) {
+                targetHWND := hwnd
+                break
+            }
+        }
+    }
+
+    if (targetHWND && WinExist(targetHWND)) {
+        try {
+            WinGetClientPos(&gx, &gy, &gw, &gh, targetHWND)
+            if (gx < -30000) {
+                overlayGui.Hide()
+                return
+            }
+
+            if (gx != lastGX || gy != lastGY) {
+                isDragging := true
+                dragTick := A_TickCount
+            } else if (A_TickCount - dragTick > 60) {
+                isDragging := false
+            }
+            lastGX := gx, lastGY := gy
+            overlayGui.Show("NoActivate")
+
+            tX := gx + 15
+            tY := (gy + gh) - (overlayHeight + 15)
+            minX := gx, maxX := gx + gw - overlayWidth
+            minY := gy, maxY := gy + gh - overlayHeight
+        } catch {
+            tX := 30, tY := A_ScreenHeight - overlayHeight - 50
+            isDragging := false
+        }
+    } else {
+        overlayGui.Show("NoActivate")
+        tX := 30, tY := A_ScreenHeight - overlayHeight - 50
+        isDragging := false
+    }
+
+    ; 3. Physics Engine
+    if (isDragging) {
+        overlayCurX := tX, overlayCurY := tY
+        overlayVelX := 0, overlayVelY := 0
+    } else {
+        dx := tX - overlayCurX, dy := tY - overlayCurY
+        dist := Sqrt(dx*dx + dy*dy)
+
+        if (dist > springSnapDist) {
+            overlayCurX := tX, overlayCurY := tY
+            overlayVelX := 0, overlayVelY := 0
+        } else {
+            overlayVelX := (overlayVelX + (dx * springStrength)) * springDamping
+            overlayVelY := (overlayVelY + (dy * springStrength)) * springDamping
+            overlayCurX += overlayVelX, overlayCurY += overlayVelY
+        }
+    }
+
+    if IsSet(minX) {
+        overlayCurX := Max(minX, Min(overlayCurX, maxX))
+        overlayCurY := Max(minY, Min(overlayCurY, maxY))
+    }
+
+    finalX := Round(overlayCurX), finalY := Round(overlayCurY)
+    static lastFinalX := 0, lastFinalY := 0
+    if (finalX != lastFinalX || finalY != lastFinalY) {
+        overlayGui.Move(finalX, finalY)
+        lastFinalX := finalX
+        lastFinalY := finalY
+    }
+}
+
+; ------------------------------------------------------------------
+; END OF Overlay Physics Module
+; ------------------------------------------------------------------
+
+; END OF FILE Worker_Core.ahk

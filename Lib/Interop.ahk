@@ -6,11 +6,65 @@
 ; MAINTEMPLATE - Interop.ahk (AHK v2)
 ; Version: 1.0.0
 ; Last change: EMPTY.
-; Content-Fingerprint: 2026-01-21T20-32-30Z-JG1CZAZC
+; Content-Fingerprint: 2026-01-28T23-13-25Z-76KKSL17
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
 ; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; SIGNPOST GOVERNANCE — FILE: Interop.ahk
+; ------------------------------------------------------------------
+; MODULE NAME:
+;   Interop (Controller ↔ Worker Inter-Process Contract)
+;
+; WHAT IT OWNS / CONTROLS:
+;   - IPC contract between Controller and Worker:
+;       * WM_TRIGGER_STATE (state signaling)
+;       * WM_COPYDATA (used indirectly for title updates)
+;   - Worker-side listener installation and state transitions
+;   - Controller-side state dispatch helper
+;   - Shared process-management helpers
+;   - AutoHotkey v1 executable detection utility
+;
+; INPUTS (events/messages/functions it responds to):
+;   - Worker:
+;       * WM_TRIGGER_STATE messages from Controller
+;   - Controller:
+;       * Calls to SendWorkerSignal(state)
+;   - Utility calls:
+;       * Process state checks / suspend / resume
+;       * AHK version inspection
+;
+; OUTPUTS / SIDE EFFECTS (files, settings, processes, IPC, UI):
+;   - IPC:
+;       * Posts window messages to worker window
+;   - Runtime state:
+;       * Mutates g_WorkerState and pause-time accounting globals
+;   - Process control:
+;       * May suspend or resume external processes via OS calls
+;
+; DEPENDENCIES (globals/functions it relies on):
+;   - Shared globals:
+;       WM_TRIGGER_STATE,
+;       g_WorkerState,
+;       g_StartTime,
+;       g_PausedTimeTotal,
+;       g_PauseStart,
+;       WorkerTitle (controller side)
+;   - AHK built-ins:
+;       OnMessage(), PostMessage(), ProcessExist(), DllCall()
+;
+; GOVERNANCE NOTES (hard-stop rules, invariants, what must remain true):
+;   - This file defines **governed IPC surface area** (Policy-B):
+;       * Any change to WM_TRIGGER_STATE or its encoding requires registry updates.
+;   - State encoding invariant:
+;       * 1 = running / active
+;       * 0 = paused
+;       * 2 = inactive / reset
+;   - Must remain safe when loaded in either Controller or Worker context.
+;   - IPC handlers must remain non-blocking (no MsgBox, no sleeps).
 ; ------------------------------------------------------------------
 
 #Requires AutoHotkey >=2.0

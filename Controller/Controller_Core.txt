@@ -1,0 +1,447 @@
+; ------------------------------------------------------------------
+; AI SOT TEXT FILE (DO NOT EVER REMOVE, EDIT OR INCLUDE IN FILE EDITS) - MY FULL PATH IS "Pipz_Project_V3\Controller\Controller_Core.txt"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; GEMINI MEM TAG(DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\Controller\Controller_Core.ahk"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - Controller_Core.ahk (AHK v2)
+; Version: 1.0.0
+; Last change: Consolidated Controller\Modules\*.ahk into Controller_Core.
+; Content-Fingerprint: 2026-01-28T23-06-31Z-FKYT1AGA
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; SIGNPOST GOVERNANCE — FILE: Controller_Core.ahk
+; ------------------------------------------------------------------
+; MODULE NAME:
+;   Controller_Core (Core Container)
+;
+; WHAT IT OWNS / CONTROLS:
+;   - Controller-side “core container” subsystems referenced by Main_Controller:
+;       1) Tooltip Manager
+;       2) Worker Interface (UI state + logging + command routing)
+;       3) Messenger (controller -> worker title update via WM_COPYDATA)
+;       4) Maintenance (Restore Defaults: globals + INI + GUI sync)
+;       5) Navigation (tabs/subtabs + close behavior)
+;       6) Process Manager (launch/health/shutdown worker)
+;
+; INPUTS (events/messages/functions it responds to):
+;   - Called by Main_Controller GUI events:
+;       * HandleWorkerCommand("STOP"/"RELOAD")
+;       * RestoreDefaultSettings(*)
+;       * ShowTab()/ShowSettingsSubTab()/ShowABanSubTab()
+;       * HandleClose(GuiObj)
+;       * LaunchWorker(skipAutoStart := false)
+;   - Windows message hook:
+;       * ProcessTooltips(wParam, lParam, msg, *) via OnMessage(0x0200, ...)
+;   - UI change events:
+;       * Messenger.PushTitleUpdate(newTitle) from EditTitle OnChange and Restore Defaults
+;
+; OUTPUTS / SIDE EFFECTS (files, settings, processes, IPC, UI):
+;   - UI:
+;       * ToolTip() show/hide + timed clear
+;       * Control visibility toggles for tab groups
+;       * Status text + button labels/enabled state
+;       * Tray mode hide/show and tray menu mutation
+;   - Settings:
+;       * Writes settings.ini via SaveSetting() (title update + restore defaults + checkbox/edit events routed in Main_Controller)
+;   - IPC:
+;       * Sends WM_COPYDATA (0x004A) payload to worker window for title updates
+;       * Sends worker state via SendWorkerSignal("running"/"paused"/"inactive")
+;   - Process control:
+;       * Run() launches Worker\Main_Worker.ahk and tracks PID
+;       * ProcessClose() terminates worker in ShutdownController
+;       * SetTimer() starts/stops WatchWorkerHealth
+;
+; DEPENDENCIES (globals/functions it relies on):
+;   - GUI controls and groups built in Main_Controller:
+;       MyGui, LogBox, txtStatus, BtnStart, BtnStop, EditTitle,
+;       DashboardGroup, SettingsNavGroup, GeneralSetGroup, ScriptSetGroup,
+;       ABanNavGroup, ABanFeatGroup, ABanTuneGroup, LogsGroup, AboutGroup, etc.
+;   - Globals:
+;       WorkerTitle, g_WorkerPID, g_MinToTray, g_WindowTitle, g_* settings values
+;   - Shared functions from included libs:
+;       SaveSetting(), GetDefaultSettings(), SendWorkerSignal()
+;
+; GOVERNANCE NOTES (hard-stop rules, invariants, what must remain true):
+;   - Controller_Core must remain a “core container” file: subsystems stay clearly bounded.
+;   - Do NOT introduce per-tick INI reads here.
+;   - Title update invariant:
+;       * SaveSetting("Game","WindowTitle", newTitle) must occur
+;       * WM_COPYDATA must be sent when worker is present
+;   - STOP must remain a pause signal (NOT a kill); hard stop occurs only in shutdown path.
+;   - Worker path invariant: ..\Worker\Main_Worker.ahk relative to controller script dir.
+; ------------------------------------------------------------------
+
+#Requires AutoHotkey >=2.0
+
+; ------------------------------------------------------------------
+; Tooltip Manager Module (Originally from TooltipManager.ahk) [DO NOT REMOVE]
+; Handles dynamic tooltips for UI elements
+; ------------------------------------------------------------------
+
+global TooltipMap := Map()
+
+RegisterTooltip(ctrlHwnd, text) {
+    TooltipMap[ctrlHwnd] := text
+}
+
+ProcessTooltips(wParam, lParam, msg, *) {
+    static PrevHwnd := 0
+
+    MouseGetPos(,,, &currHwnd, 2)
+
+    if (currHwnd = PrevHwnd)
+        return
+    PrevHwnd := currHwnd
+
+    if TooltipMap.Has(currHwnd) {
+        ToolTip(TooltipMap[currHwnd])
+        SetTimer () => ToolTip(), -10000
+    } else {
+        ToolTip()
+    }
+}
+
+; ------------------------------------------------------------------
+; END OF Tooltip Manager Module
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; Worker Interface Module (Originally from WorkerInterface.ahk) [DO NOT REMOVE]
+; Handles communication and state updates between Controller and Worker
+; ------------------------------------------------------------------
+
+UpdateLog(text) {
+    global LogBox
+    try {
+        if !IsSet(LogBox) || !LogBox.Hwnd
+            return
+    } catch {
+        return
+    }
+
+    LogBox.Value .= "[" FormatTime(, "HH:mm:ss") "] " text "`r`n"
+    SendMessage(0x0115, 7, 0, LogBox.Hwnd)
+}
+
+HandleWorkerCommand(cmd) {
+    global g_WorkerPID, txtStatus, BtnStart, BtnStop, WorkerTitle
+
+    if (cmd == "STOP") {
+        if (workerHWND := WinExist(WorkerTitle)) {
+            SendWorkerSignal("paused")
+        }
+
+        txtStatus.Text := "Script Status - Paused", txtStatus.Opt("cYellow")
+        BtnStart.Text := "Resume", BtnStart.Enabled := true
+        BtnStop.Text := "Paused", BtnStop.Enabled := false
+        UpdateLog("Worker Paused, awaiting user action.")
+    }
+    else if (cmd == "RELOAD") {
+        if !winId := WinExist(WorkerTitle) {
+            LaunchWorker(true)
+        } else {
+            SendWorkerSignal("inactive")
+        }
+
+        txtStatus.Text := "Script Status - Inactive", txtStatus.Opt("cGray")
+        BtnStart.Text := "Start", BtnStart.Enabled := true
+        BtnStop.Text := "Stop", BtnStop.Enabled := true
+        UpdateLog("Worker Reset, returning to inactive state.")
+    }
+}
+
+; ------------------------------------------------------------------
+; END OF Worker Interface Module
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; Messenger Module (Originally from Messenger.ahk) [DO NOT REMOVE]
+; Handles messaging between Controller and Worker
+; ------------------------------------------------------------------
+
+class Messenger {
+
+    static Log(text) {
+        try UpdateLog(text)
+    }
+
+    static PushTitleUpdate(newTitle) {
+        SaveSetting("Game", "WindowTitle", newTitle)
+
+        if (workerHWND := WinExist(WorkerTitle)) {
+            this.SendDataToWorker(workerHWND, newTitle)
+        }
+
+        global g_PendingTitle := newTitle
+        SetTimer(Messenger.LoggedTitleUpdate.Bind(Messenger), -1000)
+    }
+
+    static LoggedTitleUpdate() {
+        global g_PendingTitle
+        Messenger.Log("Game Window Title Updated, anchoring to newly designated window.`nNew Designation: `"" g_PendingTitle "`"")
+    }
+
+    static SendDataToWorker(targetHWND, stringToSend) {
+        try {
+            cds := Buffer(A_PtrSize * 3, 0)
+            sizeInBytes := (StrLen(stringToSend) + 1) * 2
+            NumPut("Ptr", 0,            cds, 0)
+            NumPut("UInt", sizeInBytes, cds, A_PtrSize)
+            NumPut("Ptr", StrPtr(stringToSend), cds, A_PtrSize * 2)
+            SendMessage(0x004A, A_ScriptHwnd, cds.Ptr,, "ahk_id " targetHWND)
+        }
+    }
+}
+
+; ------------------------------------------------------------------
+; END OF Messenger Module
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; Maintenance Manager Module (Originally from MaintenanceManager.ahk) [DO NOT REMOVE]
+; Handles restoration of default settings and maintenance tasks
+; ------------------------------------------------------------------
+
+RestoreDefaultSettings(*) {
+    global
+
+    if (MsgBox("Restore all settings to default values?", "Settings Confirmation", 1) != "OK")
+        return
+
+    defaults := GetDefaultSettings()
+
+    g_ShowOverlay         := defaults["UI|ShowOverlay"]
+    g_MinToTray           := defaults["UI|MinimizeToTray"]
+    g_WindowTitle         := defaults["Game|WindowTitle"]
+
+    g_AntiBanEnabled      := defaults["Script|AntiBan"]
+    g_FastDropEnabled     := defaults["Script|FastDrop"]
+    g_AutoHealEnabled     := defaults["Script|AutoHeal"]
+    g_RandomClickEnable   := defaults["Script|RandomClick"]
+
+    g_OvershootEnabled    := defaults["AntiBan|OvershootEnabled"]
+    g_OvershootPercent    := defaults["AntiBan|Overshoot"]
+
+    g_BreaksEnabled       := defaults["AntiBan|BreaksEnabled"]
+    g_BreakChance         := defaults["AntiBan|BreakChance"]
+    g_BreakSpacing        := defaults["AntiBan|BreakSpacing"]
+
+    g_MicroDelayEnabled   := defaults["AntiBan|MicroDelayEnabled"]
+    g_MicroDelayMax       := defaults["AntiBan|MicroDelayMax"]
+    g_MicroDelayChance    := defaults["AntiBan|MicroDelayChance"]
+
+    g_MicroWigglesEnabled := defaults["AntiBan|MicroWigglesEnabled"]
+    g_WiggleIntensity     := defaults["AntiBan|WiggleIntensity"]
+
+    for k, v in defaults {
+        parts := StrSplit(k, "|", , 2)
+        if (parts.Length = 2)
+            SaveSetting(parts[1], parts[2], v)
+    }
+
+    try chkOverlay.Value := g_ShowOverlay
+    try chkTray.Value    := g_MinToTray
+    try EditTitle.Value  := g_WindowTitle
+
+    try chkFeat1.Value   := g_AntiBanEnabled
+    try chkFeat2.Value   := g_FastDropEnabled
+    try chkFeat3.Value   := g_AutoHealEnabled
+    try chkFeat4.Value   := g_RandomClickEnable
+
+    try chkOver.Value        := g_OvershootEnabled
+    try EditOver.Value       := g_OvershootPercent
+    try UpDnOver.Value       := g_OvershootPercent
+
+    try chkBreaks.Value      := g_BreaksEnabled
+    try EditBrkChn.Value     := g_BreakChance
+    try UpDnBrkChn.Value     := g_BreakChance
+    try EditBrkSpc.Value     := g_BreakSpacing
+    try UpDnBrkSpc.Value     := g_BreakSpacing
+
+    try chkMicroDelay.Value  := g_MicroDelayEnabled
+    try EditMDMax.Value      := g_MicroDelayMax
+    try UpDnMDMax.Value      := g_MicroDelayMax
+    try EditMDChn.Value      := g_MicroDelayChance
+    try UpDnMDChn.Value      := g_MicroDelayChance
+
+    try chkWiggle.Value      := g_MicroWigglesEnabled
+    try EditWiggle.Value     := g_WiggleIntensity
+    try UpDnWiggle.Value     := g_WiggleIntensity
+
+    try Messenger.PushTitleUpdate(g_WindowTitle)
+
+    if (fUpdateLog := HasMethod(UpdateLog, "Call") ? UpdateLog : 0)
+        UpdateLog("All settings reset to default values.")
+}
+
+; ------------------------------------------------------------------
+; END OF Maintenance Manager Module
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; Navigation Manager Module (Originally from NavigationManager.ahk) [DO NOT REMOVE]
+; Handles tab and sub-tab navigation within the GUI
+; ------------------------------------------------------------------
+
+ShowTab(tabName) {
+    global
+    allGroups := [DashboardGroup, SettingsNavGroup, GeneralSetGroup, ScriptSetGroup, ABanNavGroup, ABanFeatGroup, ABanTuneGroup, LogsGroup, AboutGroup]
+
+    for grp in allGroups
+        for ctrl in grp
+            ctrl.Visible := false
+
+    if (tabName == "Dashboard") {
+        for ctrl in DashboardGroup
+            ctrl.Visible := true
+    } else if (tabName == "Settings") {
+        for ctrl in SettingsNavGroup
+            ctrl.Visible := true
+        ShowSettingsSubTab("General")
+        SendMessage(0x1501, 0, StrPtr("RuneLite - CHARACTERNAME"), EditTitle.Hwnd)
+    } else if (tabName == "Anti-Ban") {
+        for ctrl in ABanNavGroup
+            ctrl.Visible := true
+        ShowABanSubTab("Features")
+    } else if (tabName == "Logs") {
+        for ctrl in LogsGroup
+            ctrl.Visible := true
+    } else if (tabName == "About") {
+        for ctrl in AboutGroup
+            ctrl.Visible := true
+    }
+}
+
+ShowSettingsSubTab(subName) {
+    global GeneralSetGroup, ScriptSetGroup
+    for ctrl in GeneralSetGroup
+        ctrl.Visible := (subName == "General")
+    for ctrl in ScriptSetGroup
+        ctrl.Visible := (subName == "Script")
+}
+
+ShowABanSubTab(subName) {
+    global ABanFeatGroup, ABanTuneGroup
+    for ctrl in ABanFeatGroup
+        ctrl.Visible := (subName == "Features")
+    for ctrl in ABanTuneGroup
+        ctrl.Visible := (subName == "Tuning")
+}
+
+HandleClose(GuiObj) {
+    global g_MinToTray
+    shouldTray := g_MinToTray
+
+    if (shouldTray == "1") {
+        GuiObj.Hide()
+        A_IconTip := "Main Controller Template`nDouble-click to restore"
+        TraySetIcon("shell32.dll", 28)
+
+        A_TrayMenu.Delete()
+        A_TrayMenu.Add("Restore", (*) => GuiObj.Show())
+        A_TrayMenu.Add("Exit", (*) => ExitApp())
+        A_TrayMenu.Default := "Restore"
+
+        UpdateLog("Application minimized to system tray.")
+    } else {
+        ExitApp()
+    }
+}
+
+; ------------------------------------------------------------------
+; END OF Navigation Manager Module
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; Process Manager Module (Originally from ProcessManager.ahk) [DO NOT REMOVE]
+; Handles launching and monitoring of the Worker process
+; ------------------------------------------------------------------
+
+LaunchWorker(skipAutoStart := false) {
+    global g_WorkerPID, txtStatus, BtnStart, BtnStop
+    workerPath := A_ScriptDir "\..\Worker\Main_Worker.ahk"
+
+    if !FileExist(workerPath) {
+        UpdateLog("Error: Worker script not found")
+        return
+    }
+
+    if (g_WorkerPID && ProcessExist(g_WorkerPID)) {
+        if (!skipAutoStart) {
+            SendWorkerSignal("running")
+            txtStatus.Text := "Script Status - Running", txtStatus.Opt("c00FF00")
+
+            if (BtnStart.Text == "Resume") {
+                UpdateLog("Worker Resumed, continuing from last action.")
+            } else {
+                UpdateLog("Worker Started, currently active.")
+            }
+
+            BtnStart.Text := "Running", BtnStart.Enabled := false
+            BtnStop.Text := "Pause", BtnStop.Enabled := true
+        }
+        return
+    }
+
+    try {
+        Run(A_AhkPath ' "' workerPath '" ' MyGui.Hwnd, , , &pid)
+        g_WorkerPID := pid
+        Sleep(800)
+
+        if (!skipAutoStart) {
+            SendWorkerSignal("running")
+            txtStatus.Text := "Script Status - Running", txtStatus.Opt("c00FF00")
+            BtnStart.Text := "Running", BtnStart.Enabled := false
+            BtnStop.Text := "Pause", BtnStop.Enabled := true
+            UpdateLog("Worker Started, currently active.")
+        } else {
+            txtStatus.Text := "Script Status - Inactive", txtStatus.Opt("cGray")
+            BtnStart.Text := "Start", BtnStart.Enabled := true
+            BtnStop.Text := "Stop", BtnStop.Enabled := true
+            UpdateLog("Worker Online, awaiting user input.")
+        }
+        SetTimer(WatchWorkerHealth, 1000)
+    } catch Any as e {
+        UpdateLog("Failed to launch worker: " e.Message)
+    }
+}
+
+WatchWorkerHealth() {
+    global g_WorkerPID, txtStatus
+    if (g_WorkerPID && !ProcessExist(g_WorkerPID)) {
+        g_WorkerPID := 0
+        txtStatus.Text := "Script Status - Inactive (Process Lost)", txtStatus.Opt("cRed")
+        SetTimer(WatchWorkerHealth, 0)
+    }
+}
+
+ShutdownController(*) {
+    global g_WorkerPID
+    if (g_WorkerPID && ProcessExist(g_WorkerPID))
+        ProcessClose(g_WorkerPID)
+}
+
+; ------------------------------------------------------------------
+; END OF Process Manager Module
+; ------------------------------------------------------------------
+
+; END OF FILE Controller_Core.ahk

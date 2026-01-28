@@ -1,0 +1,92 @@
+SYMBOL,TYPE,OWNER (FILE),SIGNATURE
+RegisterTooltip,function,Controller/Controller_Core.ahk,"(ctrlHwnd, text)"
+ProcessTooltips,function,Controller/Controller_Core.ahk,"(wParam, lParam, msg, *)"
+UpdateLog,function,Controller/Controller_Core.ahk,(text)
+HandleWorkerCommand,function,Controller/Controller_Core.ahk,(cmd)
+if,function,Controller/Controller_Core.ahk,"(cmd == ""STOP"")"
+Messenger,class,Controller/Controller_Core.ahk,
+Messenger.RestoreDefaultSettings,method,Controller/Controller_Core.ahk,(*)
+Messenger.ShowTab,method,Controller/Controller_Core.ahk,(tabName)
+Messenger.if,method,Controller/Controller_Core.ahk,"(tabName == ""Dashboard"")"
+Messenger.ShowSettingsSubTab,method,Controller/Controller_Core.ahk,(subName)
+Messenger.ShowABanSubTab,method,Controller/Controller_Core.ahk,(subName)
+Messenger.HandleClose,method,Controller/Controller_Core.ahk,(GuiObj)
+Messenger.if,method,Controller/Controller_Core.ahk,"(shouldTray == ""1"")"
+Messenger.LaunchWorker,method,Controller/Controller_Core.ahk,(skipAutoStart := false)
+Messenger.if,method,Controller/Controller_Core.ahk,(!skipAutoStart)
+Messenger.if,method,Controller/Controller_Core.ahk,"(BtnStart.Text == ""Resume"")"
+Messenger.if,method,Controller/Controller_Core.ahk,(!skipAutoStart)
+Messenger.WatchWorkerHealth,method,Controller/Controller_Core.ahk,()
+Messenger.ShutdownController,method,Controller/Controller_Core.ahk,(*)
+if,function,Worker/Main_Worker.ahk,"(g_WorkerState == ""inactive"")"
+if,function,Worker/Main_Worker.ahk,"(g_WorkerState == ""active"" && g_StartTime == 0)"
+if,function,Worker/Main_Worker.ahk,"(g_WorkerState == ""paused"")"
+LoadWorkerConfiguration,function,Worker/Worker_Core.ahk,()
+if,function,Worker/Worker_Core.ahk,(g_LastSettingsUpdate != 0)
+ReceiveWindowTitle,function,Worker/Worker_Core.ahk,"(wParam, lParam, msg, hwnd)"
+UpdateTimerDisplay,function,Worker/Worker_Core.ahk,()
+Watchdog_CheckSettings,function,Worker/Worker_Core.ahk,()
+if,function,Worker/Worker_Core.ahk,(currentMTime != g_LastSettingsUpdate)
+RevertStatus,function,Worker/Worker_Core.ahk,()
+UpdateWorkerOverlay,function,Worker/Worker_Core.ahk,"(statusMsg := """", statusColor := ""White"")"
+if,function,Worker/Worker_Core.ahk,"(statusMsg != """")"
+UpdateOverlayPosition,function,Worker/Worker_Core.ahk,()
+if,function,Worker/Worker_Core.ahk,"(g_ShowOverlay == ""0"" || g_ShowOverlay == 0)"
+if,function,Worker/Worker_Core.ahk,"(targetTitle != """")"
+if,function,Worker/Worker_Core.ahk,(hwnd != ControllerHWND && hwnd != overlayGui.Hwnd)
+if,function,Worker/Worker_Core.ahk,(gx < -30000)
+if,function,Worker/Worker_Core.ahk,(gx != lastGX || gy != lastGY)
+if,function,Worker/Worker_Core.ahk,(isDragging)
+if,function,Worker/Worker_Core.ahk,(dist > springSnapDist)
+if,function,Worker/Worker_Core.ahk,(finalX != lastFinalX || finalY != lastFinalY)
+GetSettingsPath,function,Lib/Core_Utils.ahk,()
+if,function,Lib/Core_Utils.ahk,"(SettingsPath = """")"
+LoadSetting,function,Lib/Core_Utils.ahk,"(section, key, default := """")"
+SaveSetting,function,Lib/Core_Utils.ahk,"(section, key, value)"
+GetDefaultSettings,function,Lib/Core_Utils.ahk,()
+ValidateLicense,function,Lib/Core_Utils.ahk,"(secret, keyFile)"
+if,function,Lib/Core_Utils.ahk,"(k = ""HASH"")"
+if,function,Lib/Core_Utils.ahk,"(foundHash = """" || foundHash != expectedHash)"
+if,function,Lib/Core_Utils.ahk,"(licID != ""DISABLED"")"
+if,function,Lib/Core_Utils.ahk,"(licID = ""LOCK"" || licID = """")"
+SortKeys,function,Lib/Core_Utils.ahk,(arr)
+SHA256,function,Lib/Core_Utils.ahk,(str)
+License_Deobfuscate_FromBase64,function,Lib/Core_Utils.ahk,"(b64Text, secret)"
+License_Obfuscate_ToBase64,function,Lib/Core_Utils.ahk,"(plainText, secret)"
+PerformMicroDelay,function,Lib/Humanoid.ahk,"(minMs := 10, maxMs := """")"
+CheckForBreak,function,Lib/Humanoid.ahk,()
+ShouldOvershoot,function,Lib/Humanoid.ahk,()
+AntiBanCheckpoint,function,Lib/Humanoid.ahk,()
+MaybeMicroDelay,function,Lib/Humanoid.ahk,()
+MaybeBreak,function,Lib/Humanoid.ahk,()
+DoBreak,function,Lib/Humanoid.ahk,"(minMs, maxMs)"
+if,function,Lib/Humanoid.ahk,(duration > 5000)
+HasFunc,function,Lib/Humanoid.ahk,(fnName)
+MoveMouse,function,Lib/Humanoid.ahk,"(x, y, speed := """", RD := """")"
+if,function,Lib/Humanoid.ahk,"(speed == """")"
+if,function,Lib/Humanoid.ahk,(currOverEnabled && currOverBase > 0)
+if,function,Lib/Humanoid.ahk,"(RD == ""RD"")"
+if,function,Lib/Humanoid.ahk,(overshootOccurred)
+if,function,Lib/Humanoid.ahk,"(RD == ""RD"")"
+WindMouse,function,Lib/Humanoid.ahk,"(xs, ys, xe, ye, gravity, wind, minWait, maxWait, maxStep, targetArea, SleepsArray, Wiggle := false)"
+if,function,Lib/Humanoid.ahk,(dist >= targetArea)
+if,function,Lib/Humanoid.ahk,(c > 0)
+WindMouse2,function,Lib/Humanoid.ahk,"(xs, ys, xe, ye, gravity, wind, minWait, maxWait, maxStep, targetArea)"
+if,function,Lib/Humanoid.ahk,(dist >= targetArea)
+PreciseSleep,function,Lib/Humanoid.ahk,(ms)
+Muller,function,Lib/Humanoid.ahk,"(m, s)"
+if,function,Lib/Humanoid.ahk,(i := !i)
+SortArray,function,Lib/Humanoid.ahk,"(arr, order := ""A"")"
+RandomWeight,function,Lib/Humanoid.ahk,"(minVal, target, maxVal)"
+goStandard,function,Lib/Humanoid.ahk,"(x, y, speed, wiggle := false)"
+goRelative,function,Lib/Humanoid.ahk,"(x, y, speed, wiggle := false)"
+SetupWorkerListener,function,Lib/Interop.ahk,()
+Worker_ReceiveSignal,function,Lib/Interop.ahk,"(wParam, lParam, msg, hwnd)"
+if,function,Lib/Interop.ahk,(wParam == 1)
+if,function,Lib/Interop.ahk,"(g_WorkerState == ""paused"")"
+if,function,Lib/Interop.ahk,"(g_WorkerState != ""paused"")"
+SendWorkerSignal,function,Lib/Interop.ahk,(state)
+IsProcessAlive,function,Lib/Interop.ahk,(pid)
+ProcessSuspend,function,Lib/Interop.ahk,(PID)
+ProcessResume,function,Lib/Interop.ahk,(PID)
+IsAhkV1Exe,function,Lib/Interop.ahk,(exePath)

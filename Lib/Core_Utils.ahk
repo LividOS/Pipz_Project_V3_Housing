@@ -1,0 +1,354 @@
+; ------------------------------------------------------------------
+; GEMINI MEM TAG(DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\Lib\Core_Utils.ahk"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - Core_Utils.ahk (AHK v2)
+; Version: 1.0.0
+; Last change: Initial merging of SettingsLoader and Security modules. 
+; Content-Fingerprint: 2026-01-28T23-09-14Z-LALRKUAT
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; SIGNPOST GOVERNANCE — FILE: Core_Utils.ahk
+; ------------------------------------------------------------------
+; MODULE NAME:
+;   Core_Utils (Shared Core Utilities)
+;
+; WHAT IT OWNS / CONTROLS:
+;   - Canonical settings IO helpers:
+;       * GetSettingsPath()
+;       * LoadSetting()
+;       * SaveSetting()
+;   - Canonical defaults provider:
+;       * GetDefaultSettings()
+;   - Security primitives:
+;       * License validation pipeline
+;       * Hashing / crypto helpers (e.g., SHA256, Base64 helpers)
+;
+; INPUTS (events/messages/functions it responds to):
+;   - Direct function calls from Controller and Worker:
+;       * Settings load at startup
+;       * Restore-default flows
+;       * Watchdog reloads (worker side)
+;       * License validation during process bootstrap
+;
+; OUTPUTS / SIDE EFFECTS (files, settings, processes, IPC, UI):
+;   - Settings IO:
+;       * Reads settings.ini via IniRead
+;       * Writes settings.ini via IniWrite
+;   - Security enforcement:
+;       * May show blocking MsgBox and ExitApp on critical license failure
+;
+; DEPENDENCIES (globals/functions it relies on):
+;   - settings.ini expected at project root (relative to Controller/Worker folders)
+;   - license.key file for ValidateLicense()
+;   - AHK built-ins:
+;       IniRead/IniWrite, FileExist/FileRead, RegExReplace,
+;       DllCall (Crypt32 / Advapi32), StrPut/StrGet
+;
+; GOVERNANCE NOTES (hard-stop rules, invariants, what must remain true):
+;   - GetDefaultSettings() is the **single source of truth** for all default values.
+;     * No other file may hardcode defaults without routing through it.
+;   - Settings path resolution semantics must remain stable unless project layout changes.
+;   - Security failures must remain explicit and deterministic (no silent fallthrough).
+;   - No UI logic or runtime loop logic should be added here; utilities only.
+; ------------------------------------------------------------------
+
+#Requires AutoHotkey >=2.0
+
+; ------------------------------------------------------------------
+; Settings Loader Module (Originally from SettingsLoader.ahk) [DO NOT REMOVE]
+; Handles centralized INI management for both Controller and Worker
+; ------------------------------------------------------------------
+
+GetSettingsPath() {
+    ; We check if the settings.ini exists in the parent folder (Root).
+    ; If this script is called from Controller/ or Worker/, it goes up one level.
+    static SettingsPath := ""
+    
+    if (SettingsPath = "") {
+        ; Check current dir (Root) first, then parent dir
+        if FileExist(A_ScriptDir "\settings.ini")
+            SettingsPath := A_ScriptDir "\settings.ini"
+        else
+            SettingsPath := A_ScriptDir "\..\settings.ini"
+    }
+    return SettingsPath
+}
+
+LoadSetting(section, key, default := "") {
+    try {
+        return IniRead(GetSettingsPath(), section, key, default)
+    } catch {
+        return default
+    }
+}
+
+SaveSetting(section, key, value) {
+    try {
+        IniWrite(value, GetSettingsPath(), section, key)
+    } catch {
+        ; Using a non-blocking ToolTip instead of MsgBox to prevent automation hangs
+        ToolTip("Error: Could not write to settings.ini")
+        SetTimer(() => ToolTip(), -3000)
+    }
+}
+
+GetDefaultSettings() {
+    d := Map()
+
+    ; UI
+    d["UI|ShowOverlay"]      := "1"
+    d["UI|MinimizeToTray"]   := "0"
+
+    ; Game
+    d["Game|WindowTitle"]    := ""
+
+    ; Script
+    d["Script|AntiBan"]      := "0"
+    d["Script|FastDrop"]     := "0"
+    d["Script|AutoHeal"]     := "0"
+    d["Script|RandomClick"]  := "0"
+
+    ; AntiBan
+    d["AntiBan|OvershootEnabled"]     := "1"
+    d["AntiBan|Overshoot"]            := "5"
+    d["AntiBan|BreaksEnabled"]        := "0"
+    d["AntiBan|BreakChance"]          := "5"
+    d["AntiBan|BreakSpacing"]         := "20"
+    d["AntiBan|MicroDelayEnabled"]    := "0"
+    d["AntiBan|MicroDelayMax"]        := "500"
+    d["AntiBan|MicroDelayChance"]     := "15"
+    d["AntiBan|MicroWigglesEnabled"]  := "0"
+    d["AntiBan|WiggleIntensity"]      := "2"
+
+    return d
+}
+
+; ------------------------------------------------------------------
+; END OF Settings Loader Module
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; Security Module (Originally from Security.ahk) [DO NOT REMOVE]
+; Handles license validation, HWID binding, and expiration checks
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; CORE VALIDATION FUNCTION
+; ------------------------------------------------------------------
+
+ValidateLicense(secret, keyFile) {
+    if !FileExist(keyFile) {
+        MsgBox("Critical Error: License file not found.", "Security", 16)
+        ExitApp()
+    }
+
+    ; 1. Read and Deobfuscate
+    cipherB64 := RegExReplace(FileRead(keyFile), "\s+")
+    try payload := License_Deobfuscate_FromBase64(cipherB64, secret)
+    catch {
+        MsgBox("Critical Error: License decryption failed.", "Security", 16)
+        ExitApp()
+    }
+    
+    ; 2. Parse Data into a Sorted Array for Hashing
+    data := Map()
+    keysList := []
+    foundHash := ""
+    
+    payload := StrReplace(payload, "`r", "")
+    Loop Parse, payload, "`n" {
+        line := Trim(A_LoopField)
+        if (line = "" || !InStr(line, "="))
+            continue
+            
+        parts := StrSplit(line, "=", , 2)
+        k := StrUpper(Trim(parts[1]))
+        v := Trim(parts[2])
+        
+        if (k = "HASH") {
+            foundHash := v
+        } else {
+            data[k] := v
+            keysList.Push(k)
+        }
+    }
+
+    ; 3. Generate Integrity String (Alphabetical Order)
+    ; This solves the mismatch between Generator order and Script order
+    SortKeys(keysList)
+    rawLines := ""
+    for index, k in keysList {
+        rawLines .= k "=" data[k] "`n"
+    }
+    rawLines := RTrim(rawLines, "`n")
+
+    ; 4. Integrity Check
+    expectedHash := SHA256(rawLines "|" secret)
+    if (foundHash = "" || foundHash != expectedHash) {
+        ; Debug message to help you align your Generator if needed
+        MsgBox("Integrity Violation.`n`nExpected: " expectedHash "`nFound: " (foundHash = "" ? "MISSING" : foundHash) "`n`nFormat used for Hash:`n" rawLines, "Security", 16)
+        ExitApp()
+    }
+
+    ; 5. HWID Binding Logic
+    currentHWID := StrUpper(RegRead("HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Cryptography", "MachineGuid"))
+    licID := data.Has("ID") ? StrUpper(data["ID"]) : ""
+
+    if (licID != "DISABLED") {
+        if (licID = "LOCK" || licID = "") {
+            ; Logic to update the file with the new HWID
+            data["ID"] := currentHWID
+            
+            finalOutput := ""
+            newKeys := []
+            for k, v in data {
+                finalOutput .= k "=" v "`n"
+                newKeys.Push(k)
+            }
+            SortKeys(newKeys)
+            
+            hashData := ""
+            for i, k in newKeys
+                hashData .= k "=" data[k] "`n"
+            
+            newHash := SHA256(RTrim(hashData, "`n") "|" secret)
+            FileDelete(keyFile)
+            FileAppend(License_Obfuscate_ToBase64(finalOutput "HASH=" newHash, secret), keyFile)
+            MsgBox("License bound to machine.", "Security", 64)
+        } else if (licID != currentHWID) {
+            MsgBox("Access Denied: HWID Mismatch.`n`nLicense: " licID "`nLocal: " currentHWID, "Security", 16)
+            ExitApp()
+        }
+    }
+
+    ; 6. Expiration Check
+    if (SubStr(A_NowUTC, 1, 8) > data["EXPIRES"]) {
+        MsgBox("Access Denied: License expired on " data["EXPIRES"], "Security", 16)
+        ExitApp()
+    }
+    return data
+}
+
+; Helper to sort the keys for consistent hashing
+SortKeys(arr) {
+    str := ""
+    for i, v in arr
+        str .= v "`n"
+    str := Sort(RTrim(str, "`n"))
+    Loop Parse, str, "`n"
+        arr[A_Index] := A_LoopField
+}
+
+; ------------------------------------------------------------------
+; CRYPTOGRAPHIC PRIMITIVES
+; ------------------------------------------------------------------
+
+SHA256(str) {
+    static PROV_RSA_AES := 24, CRYPT_VERIFYCONTEXT := 0xF0000000, CALG_SHA_256 := 0x0000800C, HP_HASHVAL := 0x0002
+    hProv := 0, hHash := 0
+    if !DllCall("Advapi32\CryptAcquireContextW", "Ptr*", &hProv, "Ptr", 0, "Ptr", 0, "UInt", PROV_RSA_AES, "UInt", CRYPT_VERIFYCONTEXT)
+        throw Error("CryptAcquireContext failed")
+    if !DllCall("Advapi32\CryptCreateHash", "Ptr", hProv, "UInt", CALG_SHA_256, "Ptr", 0, "UInt", 0, "Ptr*", &hHash) {
+        DllCall("Advapi32\CryptReleaseContext", "Ptr", hProv, "UInt", 0)
+        throw Error("CryptCreateHash failed")
+    }
+    if !DllCall("Advapi32\CryptHashData", "Ptr", hHash, "AStr", str, "UInt", StrLen(str), "UInt", 0) {
+        DllCall("Advapi32\CryptDestroyHash", "Ptr", hHash)
+        DllCall("Advapi32\CryptReleaseContext", "Ptr", hProv, "UInt", 0)
+        throw Error("CryptHashData failed")
+    }
+    hashBuf := Buffer(32), cbHash := 32
+    DllCall("Advapi32\CryptGetHashParam", "Ptr", hHash, "UInt", HP_HASHVAL, "Ptr", hashBuf, "UInt*", &cbHash, "UInt", 0)
+    DllCall("Advapi32\CryptDestroyHash", "Ptr", hHash)
+    DllCall("Advapi32\CryptReleaseContext", "Ptr", hProv, "UInt", 0)
+    hex := ""
+    Loop 32
+        hex .= Format("{:02x}", NumGet(hashBuf, A_Index-1, "UChar"))
+    return hex
+}
+
+License_Deobfuscate_FromBase64(b64Text, secret) {
+    static CRYPT_STRING_BASE64_ANY := 0x6
+    binLen := 0
+    DllCall("Crypt32\CryptStringToBinaryW", "Str", b64Text, "UInt", 0, "UInt", CRYPT_STRING_BASE64_ANY, "Ptr", 0, "UInt*", &binLen, "Ptr", 0, "Ptr", 0)
+    blob := Buffer(binLen)
+    DllCall("Crypt32\CryptStringToBinaryW", "Str", b64Text, "UInt", 0, "UInt", CRYPT_STRING_BASE64_ANY, "Ptr", blob, "UInt*", &binLen, "Ptr", 0, "Ptr", 0)
+    salt := Buffer(16)
+    DllCall("RtlMoveMemory", "Ptr", salt, "Ptr", blob, "UPtr", 16)
+    saltHex := ""
+    Loop 16
+        saltHex .= Format("{:02x}", NumGet(salt, A_Index-1, "UChar"))
+    hProv := 0, hHash := 0
+    DllCall("Advapi32\CryptAcquireContextW", "Ptr*", &hProv, "Ptr", 0, "Ptr", 0, "UInt", 24, "UInt", 0xF0000000)
+    DllCall("Advapi32\CryptCreateHash", "Ptr", hProv, "UInt", 0x800C, "Ptr", 0, "UInt", 0, "Ptr*", &hHash)
+    ksKey := saltHex "|" secret
+    DllCall("Advapi32\CryptHashData", "Ptr", hHash, "AStr", ksKey, "UInt", StrLen(ksKey), "UInt", 0)
+    keyBytes := Buffer(32), cbHash := 32
+    DllCall("Advapi32\CryptGetHashParam", "Ptr", hHash, "UInt", 2, "Ptr", keyBytes, "UInt*", &cbHash, "UInt", 0)
+    DllCall("Advapi32\CryptDestroyHash", "Ptr", hHash)
+    DllCall("Advapi32\CryptReleaseContext", "Ptr", hProv, "UInt", 0)
+    ctLen := binLen - 16
+    pt := Buffer(ctLen)
+    Loop ctLen {
+        b := NumGet(blob, A_Index+15, "UChar")
+        kk := NumGet(keyBytes, Mod(A_Index-1, 32), "UChar")
+        NumPut("UChar", b ^ kk, pt, A_Index-1)
+    }
+    return StrGet(pt, "UTF-8")
+}
+
+License_Obfuscate_ToBase64(plainText, secret) {
+    ptLen := StrPut(plainText, "UTF-8") - 1
+    pt := Buffer(ptLen)
+    StrPut(plainText, pt, "UTF-8")
+    
+    ; Generate a 16-byte random salt using the universal BCrypt API
+    salt := Buffer(16)
+    DllCall("Bcrypt\BCryptGenRandom", "Ptr", 0, "Ptr", salt, "UInt", 16, "UInt", 2) ; 2 = BCRYPT_USE_SYSTEM_PREFERRED_RNG
+    
+    saltHex := ""
+    Loop 16
+        saltHex .= Format("{:02x}", NumGet(salt, A_Index-1, "UChar"))
+    
+    hProv := 0, hHash := 0
+    DllCall("Advapi32\CryptAcquireContextW", "Ptr*", &hProv, "Ptr", 0, "Ptr", 0, "UInt", 24, "UInt", 0xF0000000)
+    DllCall("Advapi32\CryptCreateHash", "Ptr", hProv, "UInt", 0x800C, "Ptr", 0, "UInt", 0, "Ptr*", &hHash)
+    ksKey := saltHex "|" secret
+    DllCall("Advapi32\CryptHashData", "Ptr", hHash, "AStr", ksKey, "UInt", StrLen(ksKey), "UInt", 0)
+    keyBytes := Buffer(32), cbHash := 32
+    DllCall("Advapi32\CryptGetHashParam", "Ptr", hHash, "UInt", 2, "Ptr", keyBytes, "UInt*", &cbHash, "UInt", 0)
+    DllCall("Advapi32\CryptDestroyHash", "Ptr", hHash)
+    DllCall("Advapi32\CryptReleaseContext", "Ptr", hProv, "UInt", 0)
+    
+    ct := Buffer(ptLen)
+    Loop ptLen {
+        b := NumGet(pt, A_Index-1, "UChar")
+        kk := NumGet(keyBytes, Mod(A_Index-1, 32), "UChar")
+        NumPut("UChar", b ^ kk, ct, A_Index-1)
+    }
+    
+    finalBlob := Buffer(16 + ptLen)
+    DllCall("RtlMoveMemory", "Ptr", finalBlob.Ptr, "Ptr", salt.Ptr, "UPtr", 16)
+    DllCall("RtlMoveMemory", "Ptr", finalBlob.Ptr + 16, "Ptr", ct.Ptr, "UPtr", ptLen)
+    
+    size := 0
+    DllCall("Crypt32\CryptBinaryToStringW", "Ptr", finalBlob.Ptr, "UInt", finalBlob.Size, "UInt", 0x40000001, "Ptr", 0, "UInt*", &size)
+    res := Buffer(size * 2)
+    DllCall("Crypt32\CryptBinaryToStringW", "Ptr", finalBlob.Ptr, "UInt", finalBlob.Size, "UInt", 0x40000001, "Ptr", res.Ptr, "UInt*", &size)
+    return StrGet(res, "UTF-16")
+}
+
+; ------------------------------------------------------------------
+; END OF Security Module
+; ------------------------------------------------------------------
+
+; END OF FILE Core_Utils.ahk

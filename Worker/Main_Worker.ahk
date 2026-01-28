@@ -6,11 +6,70 @@
 ; MAINTEMPLATE - Main_Worker.ahk (AHK v2)
 ; Version: 2.0.6
 ; Last change: Added #NoTrayIcon to hide worker from system tray.
-; Content-Fingerprint: 2026-01-21T20-36-28Z-GNPP931Y
+; Content-Fingerprint: 2026-01-28T23-10-58Z-AKRROZR4
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
 ; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; SIGNPOST GOVERNANCE — FILE: Main_Worker.ahk
+; ------------------------------------------------------------------
+; MODULE NAME:
+;   Main_Worker (Worker Entrypoint)
+;
+; WHAT IT OWNS / CONTROLS:
+;   - Worker process bootstrap and lifetime
+;   - Overlay GUI construction and presentation
+;   - Global runtime state initialization:
+;       * g_Config map
+;       * g_WorkerState
+;       * runtime-only timing and physics state
+;   - Entrypoints:
+;       * WM_COPYDATA title updates
+;       * IPC listener startup
+;       * Timers (overlay physics + settings watchdog)
+;       * Main execution loop
+;
+; INPUTS (events/messages/functions it responds to):
+;   - IPC messages from Controller:
+;       * WM_COPYDATA (0x004A) — title updates
+;       * WM_TRIGGER_STATE — running/paused/inactive transitions
+;   - Timers:
+;       * UpdateOverlayPosition() (high-frequency)
+;       * Watchdog_CheckSettings() (settings sync)
+;   - Runtime loop triggers:
+;       * g_WorkerState transitions
+;
+; OUTPUTS / SIDE EFFECTS (files, settings, processes, IPC, UI):
+;   - UI:
+;       * Shows, hides, moves overlay GUI
+;       * Updates overlay status and timer text
+;   - Settings:
+;       * Reads settings.ini via Core_Utils loaders (NOT per-tick)
+;   - Runtime behavior:
+;       * Executes Humanoid logic while active
+;       * Applies pause-time accounting and state transitions
+;
+; DEPENDENCIES (globals/functions it relies on):
+;   - Included modules:
+;       Core_Utils.ahk (defaults + settings + security)
+;       Interop.ahk (IPC + state listener)
+;       Humanoid.ahk (behavior engine)
+;       Worker_Core.ahk (worker subsystems)
+;   - Globals shared across worker runtime:
+;       g_Config, g_WorkerState, g_ShowOverlay,
+;       overlayGui, txtStatus, txtTimer,
+;       overlayCurX/Y, overlayVelX/Y,
+;       g_StartTime, g_PausedTimeTotal, g_PauseStart
+;
+; GOVERNANCE NOTES (hard-stop rules, invariants, what must remain true):
+;   - This file is an **entrypoint** and part of the governed surface (Policy B).
+;   - Overlay physics must never perform INI reads; watchdog is the only polling path.
+;   - WM_COPYDATA handling for title updates must remain intact and discoverable.
+;   - Worker main loop must remain resilient (no blocking UI calls).
+;   - Any new timers or IPC handlers must be reflected in the governed registry.
 ; ------------------------------------------------------------------
 
 #Requires AutoHotkey >=2.0
@@ -20,15 +79,10 @@
 ; ------------------------------------------------------------------
 ; MODULE INCLUDES
 ; ------------------------------------------------------------------
-#Include ..\Lib\Security.ahk
+#Include ..\Lib\Core_Utils.ahk
 #Include ..\Lib\Interop.ahk
-#Include ..\Lib\Movement.ahk
-#Include ..\Lib\AntiBan.ahk
-#Include ..\Lib\SettingsLoader.ahk
-#Include ..\Lib\BreakManager.ahk
-#Include Modules\OverlayPhysics.ahk
-#Include Modules\WorkerState.ahk
-#Include Modules\ConfigManager.ahk
+#Include ..\Lib\Humanoid.ahk
+#Include Worker_Core.ahk
 
 ; ------------------------------------------------------------------
 ; INITIALIZATION & SECURITY
@@ -53,18 +107,25 @@ global g_GameTitle := ""
 ; Communication HWNDs
 global ControllerHWND := A_Args.Length > 0 ? Integer(A_Args[1]) : 0
 
-; --- Global Variables (Matching Controller) ---
-global g_ShowOverlay       := 1
-global g_OvershootEnabled  := 1 
-global g_OvershootPercent  := 5 
-global g_MicroDelayEnabled := 0
-global g_MicroDelayMax     := 500
-global g_MicroDelayChance  := 15
-global g_BreaksEnabled     := 0
-global g_BreakChance       := 5
-global g_BreakSpacing      := 20
+; Defaults (single source of truth)
+defaults := GetDefaultSettings()
 
-; Timer Globals
+; --- Global Variables (Matching Controller) ---
+; Initialized from single-source defaults; LoadWorkerConfiguration() will then load persisted values.
+global g_ShowOverlay       := defaults["UI|ShowOverlay"]
+
+global g_OvershootEnabled  := defaults["AntiBan|OvershootEnabled"]
+global g_OvershootPercent  := defaults["AntiBan|Overshoot"]
+
+global g_MicroDelayEnabled := defaults["AntiBan|MicroDelayEnabled"]
+global g_MicroDelayMax     := defaults["AntiBan|MicroDelayMax"]
+global g_MicroDelayChance  := defaults["AntiBan|MicroDelayChance"]
+
+global g_BreaksEnabled     := defaults["AntiBan|BreaksEnabled"]
+global g_BreakChance       := defaults["AntiBan|BreakChance"]
+global g_BreakSpacing      := defaults["AntiBan|BreakSpacing"]
+
+; --- Runtime State (not persisted) ---
 global g_PausedTimeTotal := 0
 global g_PauseStart := 0
 
