@@ -8,9 +8,9 @@
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - Worker_Core.ahk (AHK v2)
-; Version: 1.0.0
-; Last change: Consolidated Worker\Modules\ConfigManager + OverlayPhysics + WorkerState into Worker_Core.
-; Content-Fingerprint: 2026-01-28T23-08-53Z-ZCVP410O
+; Version: 1.0.1
+; Last change: Added new globals for script toggles section and updated map.
+; Content-Fingerprint: 2026-01-29T20-13-10Z-XC85IUG6
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -86,6 +86,8 @@
 
 LoadWorkerConfiguration() {
     global g_Config, g_LastSettingsUpdate
+    global g_AntiBanEnabled, g_FastDropEnabled, g_AutoHealEnabled, g_RandomClickEnabled
+    global g_ShowOverlay
     global g_OvershootEnabled, g_OvershootPercent
     global g_MicroDelayEnabled, g_MicroDelayMax, g_MicroDelayChance
     global g_BreaksEnabled, g_BreakChance, g_BreakSpacing
@@ -93,6 +95,11 @@ LoadWorkerConfiguration() {
     defaults := GetDefaultSettings()
 
     ; 1. Load values using centralized defaults
+    g_ShowOverlay                 := LoadSetting("UI", "ShowOverlay",            defaults["UI|ShowOverlay"])
+    g_AntiBanEnabled              := LoadSetting("Script", "AntiBan",            defaults["Script|AntiBan"])
+    g_FastDropEnabled             := LoadSetting("Script", "FastDrop",           defaults["Script|FastDrop"])
+    g_AutoHealEnabled             := LoadSetting("Script", "AutoHeal",           defaults["Script|AutoHeal"])
+    g_RandomClickEnabled          := LoadSetting("Script", "RandomClick",        defaults["Script|RandomClick"])
     g_Config["GameTitle"]         := LoadSetting("Game", "WindowTitle",          defaults["Game|WindowTitle"])
     g_Config["OvershootEnabled"]  := LoadSetting("AntiBan", "OvershootEnabled",  defaults["AntiBan|OvershootEnabled"])
     g_Config["Overshoot"]         := LoadSetting("AntiBan", "Overshoot",         defaults["AntiBan|Overshoot"])

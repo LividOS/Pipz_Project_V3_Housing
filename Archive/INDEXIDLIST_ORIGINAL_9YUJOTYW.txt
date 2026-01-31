@@ -1,0 +1,309 @@
+; ------------------------------------------------------------------
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\Governance\INDEXIDLIST.txt"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - INDEXIDLIST.txt
+; Version: 1.3.4
+; Last change: Migrated file to new governance directory and updated all references in file.
+; Content-Fingerprint: 2026-01-29T00-15-48Z-9YUJOTYW
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+AUTHORITY NOTICE (MANDATORY)
+; ------------------------------------------------------------------
+
+This file provides deterministic Google Drive folder and file IDs to accelerate
+indexing, traversal, and bootstrap operations.
+
+This file is NOT a source of truth for:
+
+; - File contents
+; - Folder structure
+; - Ownership
+; - Logic
+; - Governance
+; - Verification outcomes
+
+All content authority, verification, and conflict resolution is governed by:
+
+; - AI_PROJECT_INSTRUCTIONS.txt
+; - _PROJECT_BLUEPRINT.txt
+; - _PROJECT_ANCHOR_MASTER.txt
+
+Content-Fingerprint verification and GEMINI MEM TAG path validation are mandatory
+for all files, even when Drive IDs are available.
+
+; ------------------------------------------------------------------
+VERIFIED COLUMN SEMANTICS (STRICT)
+; ------------------------------------------------------------------
+
+MICRO-RULE — NON-RESOLVABLE CONTENT CLASSIFICATION (MANDATORY)
+
+Runtime artifacts, binary assets, and opaque data files that are not
+opened, read, or governed as authoritative content MUST use:
+
+; - VERIFIED = N/A
+
+This includes, but is not limited to:
+
+; - .ahk runtime scripts
+; - .ini configuration files
+; - Binary assets (e.g. .png, .ico)
+; - Secrets or opaque data (e.g. license.key)
+
+VERIFIED = YES is RESERVED exclusively for items whose contents are
+meaningfully resolvable, inspectable, and auditable as governance inputs.
+
+Marking non-resolvable content as VERIFIED = YES is prohibited.
+
+The VERIFIED column indicates whether the listed Drive ID has been:
+
+; - Successfully resolved via Google Drive
+; - Confirmed to exist and be accessible
+; - Confirmed to correspond to the declared PATH and TYPE
+
+VERIFIED does NOT indicate:
+
+; - Content correctness
+; - Content freshness
+; - Fingerprint validity
+; - Governance compliance
+
+Allowed values:
+
+; - YES  → ID resolved and matched to declared path/type
+; - NO   → ID known but not yet revalidated
+; - N/A  → Non-resolvable content (e.g. runtime-only, ephemeral, or excluded)
+
+VERIFIED status MUST NOT override:
+
+; - GEMINI MEM TAG path declarations
+; - Content-Fingerprint checks
+; - Blueprint-defined structure
+; - AI_PROJECT_INSTRUCTIONS enforcement
+
+; ------------------------------------------------------------------
+ID USAGE & PRECEDENCE RULES (STRICT)
+; ------------------------------------------------------------------
+
+1. File and folder IDs listed here MAY be used to:
+
+   ; - Locate items deterministically
+   ; - Enumerate child contents of folders
+   ; - Accelerate indexing when Drive search is ambiguous or truncated
+
+2. File and folder IDs listed here MUST NOT:
+
+   ; - Override declared paths in GEMINI MEM TAG headers
+   ; - Override structure defined in _PROJECT_BLUEPRINT.txt
+   ; - Override verification rules defined in AI_PROJECT_INSTRUCTIONS.txt
+
+3. In all conflicts:
+
+   ; - Declared path wins over ID
+   ; - Content-Fingerprint wins over VERIFIED
+   ; - Blueprint structure wins over ID
+   ; - Governance rules win over all
+
+IDs and VERIFIED flags are acceleration signals only, never authority.
+
+; ------------------------------------------------------------------
+1. MASTER INDEX: GOOGLE DRIVE ID LIST (MUST BE MAINTAINED)
+; ------------------------------------------------------------------
+
+--------------------------------------------------|--------------------|-----------------------------------------------------------------------
+ PATH / FILE NAME                                 | TYPE               | ID                                                         | VERIFIED
+--------------------------------------------------|--------------------|------------------------------------------------------------|----------
+\Pipz_Project_V3                                  | ROOT               | 1OU-HBeg2w1p78Tk1xdzuBaAwc8ZA2YKe                          | YES
+  settings.ini                                    | Config (INI)       | 15XWeWyphygk0f9OqkbHmkPzEsex8rome                          | N/A
+  .gitignore                                      | Config (GIT)       | 1C5iGuX8qjSanONWJ26-r-5Bc7Ct81kGe                          | N/A
+  PipzScptzIcon.png                               | Asset (Image)      | 10NXIfmj1dw2CEd-i0beZC5_YD4MPPf4T                          | N/A
+  ORCH_PROTOCOL_SPEC.txt                          | Document           | 1odMqFaKPce80EgAx5AV-AYblg8SdiqsN                          | YES
+  settings.txt                                    | Document           | 1-1Vyt3gIEVRJkPxjmKIh4bjXHH07T_KZ                          | YES
+                                                  |                    |                                                            |
+--------------------------------------------------|--------------------|------------------------------------------------------------|----------
+\Registry                                         | SUB-DIRECTORY      | 1UEBagBflqD4ANRl8O6DpIGfN3bgte1CQ                          | YES
+  GLOBAL_REGISTRY_MASTER.gsheet                   | Google Sheet       | 1eGN-XnwHYXnFETdoTQ_ViO9m6O5gyHiLNoSVoZsetnc               | YES
+  GLOBAL_REGISTRY_MASTER.csv                      | CSV File           | 1svU14Gx_QuAuNIxE9YivvZfPY76OJkzd                          | YES
+                                                  |                    |                                                            |
+--------------------------------------------------|--------------------|------------------------------------------------------------|----------
+\Controller                                       | DIRECTORY          | 1pMBs6kKrGiQ7q1enVOF7yj3RkTu8g_xl                          | YES
+  Main_Controller.ahk                             | Main Script        | 1B_28wBPT2KJDd2DS06a089uSHMxqCj7l                          | N/A
+  Controller_Core.ahk                             | Core Container     | 1UTu3b7sIW0L50QUVIK-Zmn9avn8HqoaQ                          | N/A
+  Main_Controller.txt                             | Document           | 1r7TtMqQP-NHJm-1QtcjzScSX5a-9erdW                          | YES
+  Controller_Core.txt                             | Document           | 12pJNO_OaZ0468otfLgfsQMH4VViV5Uxs                          | YES
+                                                  |                    |                                                            |
+--------------------------------------------------|--------------------|------------------------------------------------------------|----------
+\Governance                                       | DIRECTORY          | 1iYz1-T6dS47O03mxYU8_FTg1Xbj7wJ_w                          | YES
+  _PROJECT_BLUEPRINT.txt                          | Document           | 17AWzFH4OqYmx9Mcxl4NosFGp-uhyGYMT                          | YES
+  _PROJECT_ANCHOR_MASTER.txt                      | Document           | 1TIanwt8JSNhI47vuN_-G4dFRjwNIf898                          | YES
+  AI_PROJECT_INSTRUCTIONS.txt                     | Document           | 1TLP6j1xASA9HEA4H2RHhwtvkYR_arU_P                          | YES
+  INDEXIDLIST.txt                                 | Document           | 16DivuRC5wBfbX8xnq5l_ksf8Q21TgBxA                          | YES
+  BOOTSTRAPv4.txt                                 | Document           | 1eHulS4CPEFAxzKeCEmqjw9T7CVGQ3rfP                          | YES
+  PHASE5_AUDIT_MASTER.txt                         | Document           | 1NSHdQ6972glz02knvic-7QNgFcDxbHxQ                          | YES
+  GOVERNANCE_LOCK.txt                             | Document           | 1lYiaKQ1LBJx3z2MoSoD3FirBtEyPVI_j                          | YES
+  PROJECT_LEARNED_CONSTRAINTS.txt                 | Document           | 12dk1sASojm6Cb9PBSeSoAI9Vchhgx4T3                          | YES
+  STANDARDIZED_HEADERS.txt                        | Document           | 1bHktPTzL2y6p79FCwIdQ1qr73LP1-VCF                          | YES
+                                                  |                    |                                                            |
+--------------------------------------------------|--------------------|------------------------------------------------------------|----------
+\Lib                                              | DIRECTORY          | 1D0zXwlTRljMLHs2x5eGNYeOFolCWZ2Be                          | YES
+  Interop.ahk                                     | Library            | 1Yyc_2bmL4aztBQSdt2jtwG7gnwrFMfaF                          | N/A
+  Core_Utils.ahk                                  | Core Container     | 1FKCB06_r3iiEfBv9q_DzuRMtKd-R3xJu                          | N/A
+  Humanoid.ahk                                    | Core Container     | 17Cmpgp4TdbLyqYomoOnMOISLoTGJ2Oc8                          | N/A
+  Core_Utils.txt                                  | Document           | 1TvRHVqGDT-WtjMJvPZxpki7TgFWP9Zfi                          | YES
+  Humanoid.txt                                    | Document           | 1Ypghf00O2O3rZkEMCti8fJ5JNtvsndOq                          | YES
+  Interop.txt                                     | Document           | 1zbdWhOzlKWHtSXSWLxHwEMfdG8I_cOI0                          | YES
+                                                  |                    |                                                            |
+--------------------------------------------------|--------------------|------------------------------------------------------------|----------
+\Worker                                           | DIRECTORY          | 173QG33oajyc07rGIH0h31tG3vbYsqocb                          | YES
+  Main_Worker.ahk                                 | Main Script        | 1sjeDGlRYLRAT-uIPSvi1LAx-v5ljtaWX                          | N/A
+  Worker_Core.ahk                                 | Core Container     | 1jD8jwd9wBGhOll-nxxATsvUa81Hv7iJS                          | N/A
+  license.key                                     | Data/Key           | 1tyifvKl0OK1N7XE_QXKcoJgOhTXXoDon                          | N/A
+  Main_Worker.txt                                 | Document           | 1beeVRi_U6Baw8wFEkSEP8SzcZ3WNEWmo                          | YES
+  Worker_Core.txt                                 | Document           | 1rSQlNPedw_tbKiUjPO66kytTSa_I8exq                          | YES
+                                                  |                    |                                                            |
+--------------------------------------------------|--------------------|------------------------------------------------------------|----------
+\orchestrator                                     | DIRECTORY          | 1UWaMLTTHP2Ye6sj7MomIWAWH3i8JLglP                          | YES
+  orch_bootstrap.js                               | Script             | 1yJG7qSDqzg-8PANyMYJL5t2p-aKW8PLA                          | N/A
+                                                  |                    |                                                            |
+--------------------------------------------------|--------------------|------------------------------------------------------------|----------
+\PipzOrchestratorExtension                        | DIRECTORY          | 1xJrd_pXJ9SgOKayUsG2LQJq-YJ-XOJiq                          | YES
+  package.json                                    | Config (JSON)      | 1ZcYKbLpPwyIrc_QErrhge0NUoJSuiRkM                          | N/A
+  tsconfig.json                                   | Config (JSON)      | 1Y5_38VfETTcu-xeMqb48PublZcsE834g                          | N/A
+  package.json.governance.txt                     | Document           | 1Po90G2nk4wIXuCHQjc3HeXH3wyv3AO4x                          | YES
+  tsconfig.json.governance.txt                    | Document           | 17wael1lkDdWAyYmeX1nbdzxpd5jiWQmU                          | YES
+  README.md                                       | Document           | 19yIEe4A8bgDuyN7PzaN2NNscAncgT4xr                          | YES
+  \src                                            | SUB-DIRECTORY      | 1mAszu0sAYJ_RvtyaZSqBBE7po6ECkoLb                          | YES
+    extension.ts                                  | Script             | 1TdL9EhG34T8zLbwD4G9zR3isS2u7X6iN                          | N/A
+                                                  |                    |                                                            |
+--------------------------------------------------|--------------------|------------------------------------------------------------|----------
+\pipz-mirror-governance                           | DIRECTORY          | 1iG82QgKEAB0_xSRT7uFog2ih77PuW9q-                          | YES
+  package.json                                    | Config (JSON)      | 1biisIAXFeqe5y0yGdcJA5T-7_akPvxi-                          | N/A
+  tsconfig.json                                   | Config (JSON)      | 1gjnig6YyeyfEOnDXT33RstG2cgCbBvR7                          | N/A
+  README.md                                       | Document           | 1JC7qmZZyGWktYvW32stOBjNbF_xmmYIU                          | YES
+  \src                                            | SUB-DIRECTORY      | 1-0dIctg_cGNMuuCMHJQYLY2kvvLFgfbE                          | YES
+    extension.ts                                  | Script             | 1UgblarfwhWob4r5Nh1A_WFbBZCIgkKCx                          | N/A
+  \.vscode                                        | SUB-DIRECTORY      | 1ltwlLX8CjynRrmxCDdJ7rrtqJ0-pWRk-                          | YES
+    extensions.json                               | Config (JSON)      | 1IvQ_FY_OYq3wAzmkmHQSfaO1p8L8DZeV                          | N/A
+    launch.json                                   | Config (JSON)      | 1V_LYXBocQdskfZOD1kjK29o5mCiOvUvK                          | N/A
+    settings.json                                 | Config (JSON)      | 1Mgt2X4a1QX9hy9qIUKP1GEEqJLfBWigN                          | N/A
+    tasks.json                                    | Config (JSON)      | 1EBh0WLFPNDI5l2IqCIzOGL4xTpqYM34T                          | N/A
+    extensions.json.governance.txt                | Document           | 1yq8GJ4mUhLtCb1dZya8unIjEkpfNqdtH                          | YES
+    launch.json.governance.txt                    | Document           | 1L0sy7iAQ8okrj_8zNkqE1HiGkxytQkWH                          | YES
+    settings.json.governance.txt                  | Document           | 1LIa7DtCH_H5JFgPE0Q3GWMOTww93Bgi6                          | YES
+    tasks.json.governance.txt                     | Document           | 1dhonC67pLRoVdY4DTlQP2dqGieS0RYdL                          | YES
+                                                  |                    |                                                            |
+--------------------------------------------------|--------------------|------------------------------------------------------------|----------
+\.ORCH_AUDITLOG                                   | DIRECTORY          | 1x6aXWyf0wyef4VGDaf_98RNvPim9KwI-                          | YES
+  \mirror                                         | SUB-DIRECTORY      | 1XGqYOrCjKoxWZ_PY1_ZzxBWDIKKGVsqd                          | YES
+                                                  |                    |                                                            |
+--------------------------------------------------|--------------------|------------------------------------------------------------|----------
+\PPAVP                                            | DIRECTORY          | 1Bukbng24bO0qSH-KuIL_n4uGarViwLRA                          | YES
+  AUDIT_RUNNER.txt                                | Document           | 1cFuPRTV39_GuGtwJM8Z1czYSPEodHga4                          | YES
+  PROJECT_STATUS_CHECKLIST.txt                    | Document           | 19q4AAo9dCIZqeGBea9Ap6kxMuoVU-KPn                          | YES
+                                                  |                    |                                                            |
+--------------------------------------------------|--------------------|------------------------------------------------------------|----------
+
+; ------------------------------------------------------------------
+2. MASTER ALIAS INDEX: COMMON NAME MAP (MUST BE MAINTAINED)
+; ------------------------------------------------------------------
+
+--------------------------------------------------|--------------------------------------------------------------------------------------------
+ PATH / FILE NAME                                 | ALIASES / ROLE
+--------------------------------------------------|--------------------------------------------------------------------------------------------
+\Pipz_Project_V3                                  | project root, project folder, project directory, root directory
+  settings.ini                                    | settings ini, runtime settings, user settings ini, config ini
+  PipzScptzIcon.png                               | app icon, application icon, tray icon, gui icon
+  .gitignore                                      | git ignore, git config, ignore list, git exclusion
+  ORCH_PROTOCOL_SPEC.txt                          | orchestrator protocol, orch protocol, orch contract, orchestrator spec
+  settings.txt                                    | settings mirror, settings text, settings txt
+                                                  |
+--------------------------------------------------|--------------------------------------------------------------------------------------------
+\Registry                                         | registry root, registry folder, registry directory
+  GLOBAL_REGISTRY_MASTER.gsheet                   | registry sheet, global registry sheet, state registry sheet, variable registry sheet, function registry sheet, logic registry sheet
+  GLOBAL_REGISTRY_MASTER.csv                      | registry, global registry, state registry, variable registry, function registry, logic registry
+                                                  |
+--------------------------------------------------|--------------------------------------------------------------------------------------------
+\Controller                                       | controller folder, gui controller, controller directory
+  Main_Controller.ahk                             | controller, main controller, gui controller script
+  Main_Controller.txt                             | controller mirror, controller txt
+  Controller_Core.ahk                             | controller core, controller core container, consolidated controller, controller subsystems
+  Controller_Core.txt                             | controller core mirror, controller core txt
+                                                  |
+--------------------------------------------------|--------------------------------------------------------------------------------------------
+\Lib                                              | lib, library, shared library, common library
+  Core_Utils.ahk                                  | core utils, settings io, defaults provider, security primitives
+  Core_Utils.txt                                  | core utils mirror, core utils txt
+  Humanoid.ahk                                    | humanoid, movement core, antiban core, break manager core, human simulation
+  Humanoid.txt                                    | humanoid mirror, humanoid txt
+  Interop.ahk                                     | interop, ipc, messaging core
+  Interop.txt                                     | interop mirror, interop txt
+                                                  |
+--------------------------------------------------|--------------------------------------------------------------------------------------------
+\Worker                                           | worker folder, background worker, engine
+  Main_Worker.ahk                                 | worker, main worker, engine script
+  Main_Worker.txt                                 | worker mirror, worker txt
+  Worker_Core.ahk                                 | worker core, worker core container, consolidated worker, overlay/core subsystems
+  Worker_Core.txt                                 | worker core mirror, worker core txt
+                                                  |
+--------------------------------------------------|--------------------------------------------------------------------------------------------
+\Governance                                       | governance folder, law folder, rule folder, authoritative folder, guidance folder, governance layer, governance root, governance root folder
+  _PROJECT_BLUEPRINT.txt                          | blueprint, project blueprint, architecture blueprint, folder blueprint, structure blueprint
+  _PROJECT_ANCHOR_MASTER.txt                      | anchor, project anchor, system prompt, ai anchor, governance anchor, working notes, project notes, design notes, sanity notes, intent log
+  AI_PROJECT_INSTRUCTIONS.txt                     | project instructions, instructions, ai instructions, governance rules, ai governance
+  INDEXIDLIST.txt                                 | index, id index, drive index, id list, index id list, master index
+  BOOTSTRAPv4.txt                                 | bootstrap, bootstrap v4, init protocol, initialization protocol
+  PHASE5_AUDIT_MASTER.txt                         | phase 5 template, phase 5 audit template, visibility audit template, phase 5 checklist, phase 5 execution checklist, phase 5 audit checklist
+  GOVERNANCE_LOCK.txt                             | governance lock, lock file, governance state, lock state
+  PROJECT_LEARNED_CONSTRAINTS.txt                 | plc, constraints, learned constraints, project constraints, invalidated approaches, learned approaches
+  STANDARDIZED_HEADERS.txt                        | header templates, header standards, file headers, license headers
+                                                  |
+--------------------------------------------------|--------------------------------------------------------------------------------------------
+\PipzOrchestratorExtension                        | orchestrator extension, vs code extension, orch extension
+  package.json                                    | orch package file, orch node config, orchestrator manifest
+  tsconfig.json                                   | orch typescript config, orch ts config, orchestrator compiler config
+  README.md                                       | orch extension readme, orchestrator documentation
+  package.json.governance.txt                     | package governance, package sidecar, npm governance
+  tsconfig.json.governance.txt                    | tsconfig governance, typescript governance sidecar
+  \src                                            | orch extension source, orch src folder, orchestrator source
+    extension.ts                                  | orch vs code entry, orch extension entry, orchestrator main
+--------------------------------------------------|--------------------------------------------------------------------------------------------
+\orchestrator                                     | orchestrator folder, orchestrator scripts, orchestration backend
+  orch_bootstrap.js                               | bootstrap script, orch bootstrap, orchestrator bootstrap, mvp bootstrap
+                                                  |
+--------------------------------------------------|--------------------------------------------------------------------------------------------
+\pipz-mirror-governance                           | mirror governance, mirror extension, governance extension
+  package.json                                    | mirror package, governance package, mirror manifest, governance manifest
+  tsconfig.json                                   | mirror tsconfig, mirror typescript config, governance tsconfig
+  README.md                                       | mirror readme, mirror docs, governance documentation
+  \src                                            | mirror src, mirror source, governance source
+    extension.ts                                  | mirror entry, governance entry, mirror main, governance script
+  \.vscode                                        | mirror vscode, governance vscode, mirror environment
+    extensions.json                               | mirror extensions config, mirror recommended extensions
+    launch.json                                   | mirror launch config, mirror debug config
+    settings.json                                 | mirror settings, mirror workspace settings
+    tasks.json                                    | mirror tasks, mirror build tasks
+    extensions.json.governance.txt                | mirror extensions governance, mirror extensions sidecar
+    launch.json.governance.txt                    | mirror launch governance, mirror launch sidecar
+    settings.json.governance.txt                  | mirror settings governance, mirror settings sidecar
+    tasks.json.governance.txt                     | mirror tasks governance, mirror tasks sidecar
+                                                  |
+--------------------------------------------------|--------------------------------------------------------------------------------------------
+\.ORCH_AUDITLOG                                   | orch logs, audit root, governance logs
+  \mirror                                         | mirror logs, save logs, audit mirror
+                                                  |
+--------------------------------------------------|--------------------------------------------------------------------------------------------
+\PPAVP                                            | project planning folder, project plan folder, plan folder, checklist folder, audit folder, protocol folder, verification folder, ppavp folder
+  PROJECT_STATUS_CHECKLIST.txt                    | project checklist, status checklist, task tracker, master checklist
+  AUDIT_RUNNER.txt                                | audit runner, audit plan, audit backlog, audit execution plan, audit runner file
+                                                  |
+--------------------------------------------------|--------------------------------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+
+END OF INDEXIDLIST

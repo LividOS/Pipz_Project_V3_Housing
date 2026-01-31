@@ -10,7 +10,7 @@
 ; MAINTEMPLATE - Humanoid.ahk (AHK v2)
 ; Version: 1.0.0
 ; Last change: Initial merging of Movement, AntiBan, and BreakManager modules. 
-; Content-Fingerprint: 2026-01-28T23-11-40Z-QYWGASK1
+; Content-Fingerprint: 2026-01-29T21-41-01Z-OM5HO76J
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -41,6 +41,7 @@
 ;       * g_MicroWigglesEnabled / g_WiggleIntensity
 ;       * g_BreaksEnabled / g_BreakChance / g_BreakSpacing
 ;       * g_WorkerState (optional gating)
+;       * g_AntiBanEnabled (mandatory gate for AntiBanCheckpoint)
 ;
 ; OUTPUTS / SIDE EFFECTS (files, settings, processes, IPC, UI):
 ;   - Input simulation:
@@ -162,6 +163,14 @@ global LastEvalTick := 0
 
 ; The primary "Checkpoint" to be called within the Worker's loop
 AntiBanCheckpoint() {
+    global g_AntiBanEnabled, g_WorkerState
+
+    if (!IsSet(g_AntiBanEnabled) || !g_AntiBanEnabled)
+        return
+
+    if (IsSet(g_WorkerState) && (g_WorkerState != "active"))
+        return
+
     MaybeMicroDelay()
     MaybeBreak()
 }
@@ -216,12 +225,11 @@ DoBreak(minMs, maxMs) {
     
     ; 1. Notify the Worker Overlay if significant
     if (duration > 5000) {
-        ; Check if the function exists globally by name
-        if (HasFunc("UpdateWorkerOverlay")) {
-            f := %"UpdateWorkerOverlay"%
-            f("Status - Break: " . Round(duration/1000) . "s", "Orange")
+        try {
+            if IsSet(UpdateWorkerOverlay) && (UpdateWorkerOverlay is Func)
+                UpdateWorkerOverlay("Status - Break: " . Round(duration/1000) . "s", "Orange")
         }
-        
+
         ; 2. Notify Controller Messenger (if the Messenger class exists)
         try {
             if IsSet(Messenger)
@@ -232,18 +240,10 @@ DoBreak(minMs, maxMs) {
     Sleep(duration)
     
     ; Revert status if we are in the Worker
-    if (HasFunc("UpdateWorkerOverlay")) {
-        f := %"UpdateWorkerOverlay"%
-        f("Status - Active", "00FF00")
-    }
-}
-
-; Helper to safely check for a global function's existence without reserved word errors
-HasFunc(fnName) {
     try {
-        return IsSet(%fnName%) && %fnName% is Func
+        if IsSet(UpdateWorkerOverlay) && (UpdateWorkerOverlay is Func)
+            UpdateWorkerOverlay("Status - Active", "00FF00")
     }
-    return false
 }
 
 ; ------------------------------------------------------------------

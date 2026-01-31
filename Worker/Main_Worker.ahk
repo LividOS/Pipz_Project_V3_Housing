@@ -4,9 +4,9 @@
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - Main_Worker.ahk (AHK v2)
-; Version: 2.0.6
-; Last change: Added #NoTrayIcon to hide worker from system tray.
-; Content-Fingerprint: 2026-01-28T23-10-58Z-AKRROZR4
+; Version: 2.0.7
+; Last change: Updated main signpost to reflect current file state.
+; Content-Fingerprint: 2026-01-29T21-20-45Z-1508RTUZ
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -24,52 +24,73 @@
 ;   - Overlay GUI construction and presentation
 ;   - Global runtime state initialization:
 ;       * g_Config map
-;       * g_WorkerState
-;       * runtime-only timing and physics state
+;       * g_WorkerState state machine
+;       * settings-driven runtime globals (loaded via Worker_Core)
+;       * runtime-only timing + physics state
 ;   - Entrypoints:
 ;       * WM_COPYDATA title updates
-;       * IPC listener startup
+;       * IPC listener startup (WM_TRIGGER_STATE)
 ;       * Timers (overlay physics + settings watchdog)
 ;       * Main execution loop
 ;
 ; INPUTS (events/messages/functions it responds to):
-;   - IPC messages from Controller:
-;       * WM_COPYDATA (0x004A) — title updates
-;       * WM_TRIGGER_STATE — running/paused/inactive transitions
+;   - GUI events: N/A
+;   - Windows messages:
+;       * OnMessage(0x004A, ReceiveWindowTitle) — title update ingestion
+;       * OnMessage(WM_TRIGGER_STATE, Worker_ReceiveSignal) — state transitions (via Interop SetupWorkerListener)
 ;   - Timers:
-;       * UpdateOverlayPosition() (high-frequency)
-;       * Watchdog_CheckSettings() (settings sync)
-;   - Runtime loop triggers:
-;       * g_WorkerState transitions
+;       * SetTimer(UpdateOverlayPosition, 10)
+;       * SetTimer(Watchdog_CheckSettings, 1000)
+;   - Direct calls:
+;       * LoadWorkerConfiguration() (Worker_Core) at startup and during watchdog reload
+;       * AntiBanCheckpoint() (Humanoid) while active (if enabled)
 ;
 ; OUTPUTS / SIDE EFFECTS (files, settings, processes, IPC, UI):
 ;   - UI:
 ;       * Shows, hides, moves overlay GUI
-;       * Updates overlay status and timer text
-;   - Settings:
-;       * Reads settings.ini via Core_Utils loaders (NOT per-tick)
-;   - Runtime behavior:
-;       * Executes Humanoid logic while active
-;       * Applies pause-time accounting and state transitions
+;       * Updates overlay status and timer text (txtStatus/txtTimer)
+;   - Settings / Files:
+;       * Reads: settings.ini via Core_Utils/Worker_Core (NOT per-tick)
+;       * Writes: N/A (writes originate in controller)
+;   - IPC:
+;       * Receives: WM_COPYDATA (0x004A) title updates
+;       * Receives: WM_TRIGGER_STATE state transitions (Interop)
+;       * Sends: N/A
+;   - Process control: N/A
 ;
 ; DEPENDENCIES (globals/functions it relies on):
-;   - Included modules:
+;   - Includes:
 ;       Core_Utils.ahk (defaults + settings + security)
 ;       Interop.ahk (IPC + state listener)
 ;       Humanoid.ahk (behavior engine)
-;       Worker_Core.ahk (worker subsystems)
-;   - Globals shared across worker runtime:
-;       g_Config, g_WorkerState, g_ShowOverlay,
-;       overlayGui, txtStatus, txtTimer,
-;       overlayCurX/Y, overlayVelX/Y,
+;       Worker_Core.ahk (config load + state helpers + overlay physics)
+;   - Globals it expects:
+;       g_Config, g_WorkerState, g_LastSettingsUpdate
+;       g_ShowOverlay
+;       g_AntiBanEnabled, g_FastDropEnabled, g_AutoHealEnabled, g_RandomClickEnable
+;       g_OvershootEnabled, g_OvershootPercent
+;       g_MicroDelayEnabled, g_MicroDelayMax, g_MicroDelayChance
+;       g_BreaksEnabled, g_BreakChance, g_BreakSpacing
+;       overlayGui, txtStatus, txtTimer
+;       overlayCurX/Y, overlayVelX/Y
 ;       g_StartTime, g_PausedTimeTotal, g_PauseStart
+;       ControllerHWND, InternalTitle
+;   - External APIs / DllCall: N/A
 ;
 ; GOVERNANCE NOTES (hard-stop rules, invariants, what must remain true):
-;   - This file is an **entrypoint** and part of the governed surface (Policy B).
 ;   - Overlay physics must never perform INI reads; watchdog is the only polling path.
 ;   - WM_COPYDATA handling for title updates must remain intact and discoverable.
+;   - Script toggles must be loaded via Worker_Core (not hardcoded here).
 ;   - Worker main loop must remain resilient (no blocking UI calls).
-;   - Any new timers or IPC handlers must be reflected in the governed registry.
+;   - Registry note:
+;       * If any new entrypoints/IPC/timers/lifecycle controls are added here,
+;         GLOBAL_REGISTRY_MASTER.csv must be updated (Policy-B surface area only).
+;
+; EXPORTED SURFACE (registry-relevant quicklist):
+;   - OnMessage(0x004A, ReceiveWindowTitle)
+;   - OnMessage(WM_TRIGGER_STATE, Worker_ReceiveSignal) via SetupWorkerListener()
+;   - SetTimer(UpdateOverlayPosition, 10)
+;   - SetTimer(Watchdog_CheckSettings, 1000)
 ; ------------------------------------------------------------------
 
 #Requires AutoHotkey >=2.0
@@ -102,7 +123,6 @@ global g_LastSettingsUpdate := 0 ; INITIALIZED TO 0: Forces Watchdog to trigger 
 global g_StartTime := 0
 global g_WorkerState := "inactive" 
 global InternalTitle := "Overlay_Worker_Internal"
-global g_GameTitle := ""
 
 ; Communication HWNDs
 global ControllerHWND := A_Args.Length > 0 ? Integer(A_Args[1]) : 0
@@ -112,18 +132,23 @@ defaults := GetDefaultSettings()
 
 ; --- Global Variables (Matching Controller) ---
 ; Initialized from single-source defaults; LoadWorkerConfiguration() will then load persisted values.
-global g_ShowOverlay       := defaults["UI|ShowOverlay"]
+global g_ShowOverlay         := defaults["UI|ShowOverlay"]
 
-global g_OvershootEnabled  := defaults["AntiBan|OvershootEnabled"]
-global g_OvershootPercent  := defaults["AntiBan|Overshoot"]
+global g_AntiBanEnabled      := defaults["Script|AntiBan"]
+global g_FastDropEnabled     := defaults["Script|FastDrop"]
+global g_AutoHealEnabled     := defaults["Script|AutoHeal"]
+global g_RandomClickEnabled  := defaults["Script|RandomClick"]
 
-global g_MicroDelayEnabled := defaults["AntiBan|MicroDelayEnabled"]
-global g_MicroDelayMax     := defaults["AntiBan|MicroDelayMax"]
-global g_MicroDelayChance  := defaults["AntiBan|MicroDelayChance"]
+global g_OvershootEnabled    := defaults["AntiBan|OvershootEnabled"]
+global g_OvershootPercent    := defaults["AntiBan|Overshoot"]
 
-global g_BreaksEnabled     := defaults["AntiBan|BreaksEnabled"]
-global g_BreakChance       := defaults["AntiBan|BreakChance"]
-global g_BreakSpacing      := defaults["AntiBan|BreakSpacing"]
+global g_MicroDelayEnabled   := defaults["AntiBan|MicroDelayEnabled"]
+global g_MicroDelayMax       := defaults["AntiBan|MicroDelayMax"]
+global g_MicroDelayChance    := defaults["AntiBan|MicroDelayChance"]
+
+global g_BreaksEnabled       := defaults["AntiBan|BreaksEnabled"]
+global g_BreakChance         := defaults["AntiBan|BreakChance"]
+global g_BreakSpacing        := defaults["AntiBan|BreakSpacing"]
 
 ; --- Runtime State (not persisted) ---
 global g_PausedTimeTotal := 0
@@ -172,7 +197,7 @@ WinSetTransparent(210, overlayGui)
 ; --- Start Systems ---
 SetupWorkerListener()
 SetTimer(UpdateOverlayPosition, 10)
-SetTimer(Watchdog_CheckSettings, 1000) ; Check for INI changes every second
+SetTimer(Watchdog_CheckSettings, 250) ; Check for INI changes four times a second
 
 ; ------------------------------------------------------------------
 ; MAIN EXECUTION LOOP

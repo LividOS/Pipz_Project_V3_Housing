@@ -8,9 +8,9 @@
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - Main_Controller.ahk (AHK v2)
-; Version: 2.1.9
-; Last change: Reverted to standard IconPath implementation for stable Tray and Taskbar icon inheritance + Final Fingerprinting Test.
-; Content-Fingerprint: 2026-01-28T23-10-18Z-LMVLEBA2
+; Version: 2.2.4
+; Last change: Added dynamic header app version functionality.
+; Content-Fingerprint: 2026-01-29T21-42-04Z-PAG83T6K
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -68,7 +68,7 @@
 ;   - This file is an **entrypoint** and part of the governed surface (Policy B).
 ;   - DEFAULTS must be sourced exclusively from GetDefaultSettings().
 ;   - License validation must occur before GUI show or worker launch.
-;   - All GUI events should route into Controller_Core logic (no deep logic here).
+;   - GUI events route into Controller_Core or local settings handler functions (which only update globals + INI).
 ;   - Any new OnMessage / OnExit / startup behavior must be reflected in the governed registry.
 ; ------------------------------------------------------------------
 
@@ -92,7 +92,24 @@ secret := "PIPSECMAX_LIREGKEY_11711503721976861054928319"
 keyFile := A_ScriptDir "\..\Worker\license.key"
 licData := ValidateLicense(secret, keyFile)
 AppName := "MAIN CONTROLLER TEMPLATE"
-AppVersion := "2.1.7"
+
+; Derive AppVersion from this script's header comment "; Version: x.y.z"
+AppVersion := "unknown"
+f := FileOpen(A_ScriptFullPath, "r")
+if f {
+    while !f.AtEOF {
+        line := f.ReadLine()
+        if InStr(line, "Version:") {
+            lineAfter := SubStr(line, InStr(line, "Version:") + StrLen("Version:"))
+            ver := RegExReplace(lineAfter, "^\s+|\s+$", "")
+            if ver != "" {
+                AppVersion := ver
+                break
+            }
+        }
+    }
+    f.Close()
+}
 
 ; --- Icon Implementation ---
 IconPath := A_ScriptDir "\..\PipzScptzIcon.png"
@@ -116,7 +133,7 @@ global g_WindowTitle         := LoadSetting("Game", "WindowTitle",            DE
 global g_AntiBanEnabled      := LoadSetting("Script", "AntiBan",              DEFAULTS["Script|AntiBan"])
 global g_FastDropEnabled     := LoadSetting("Script", "FastDrop",             DEFAULTS["Script|FastDrop"])
 global g_AutoHealEnabled     := LoadSetting("Script", "AutoHeal",             DEFAULTS["Script|AutoHeal"])
-global g_RandomClickEnable   := LoadSetting("Script", "RandomClick",          DEFAULTS["Script|RandomClick"])
+global g_RandomClickEnabled  := LoadSetting("Script", "RandomClick",          DEFAULTS["Script|RandomClick"])
 
 global g_OvershootEnabled    := LoadSetting("AntiBan", "OvershootEnabled",    DEFAULTS["AntiBan|OvershootEnabled"])
 global g_OvershootPercent    := LoadSetting("AntiBan", "Overshoot",           DEFAULTS["AntiBan|Overshoot"])
@@ -140,6 +157,109 @@ MyGui.BackColor := "1A1A1A"
 
 ; --- Dark Mode UI ---
 DllCall("dwmapi\DwmSetWindowAttribute", "Ptr", MyGui.Hwnd, "UInt", 20, "Int*", 1, "UInt", 4)
+
+; --- General Setting Handler Definitions ---
+OnToggleShowOverlay(ctrl, *) {
+    global g_ShowOverlay
+    g_ShowOverlay := ctrl.Value
+    SaveSetting("UI", "ShowOverlay", ctrl.Value)
+}
+
+OnToggleMinToTray(ctrl, *) {
+    global g_MinToTray
+    g_MinToTray := ctrl.Value
+    SaveSetting("UI", "MinimizeToTray", ctrl.Value)
+}
+
+; --- Anti-Ban Feature Setting Handler Definitions
+
+OnToggleOvershoot(ctrl, *) {
+    global g_OvershootEnabled
+    g_OvershootEnabled := ctrl.Value
+    SaveSetting("AntiBan", "OvershootEnabled", ctrl.Value)
+}
+
+OnToggleMicroDelay(ctrl, *) {
+    global g_MicroDelayEnabled
+    g_MicroDelayEnabled := ctrl.Value
+    SaveSetting("AntiBan", "MicroDelayEnabled", ctrl.Value)
+}
+
+OnToggleBreaks(ctrl, *) {
+    global g_BreaksEnabled
+    g_BreaksEnabled := ctrl.Value
+    SaveSetting("AntiBan", "BreaksEnabled", ctrl.Value)
+}
+
+OnToggleMicroWiggles(ctrl, *) {
+    global g_MicroWigglesEnabled
+    g_MicroWigglesEnabled := ctrl.Value
+    SaveSetting("AntiBan", "MicroWigglesEnabled", ctrl.Value)
+}
+
+; --- Script Feature Setting Handler Definitions ---
+
+OnToggleAntiBan(ctrl, *) {
+    global g_AntiBanEnabled
+    g_AntiBanEnabled := ctrl.Value
+    SaveSetting("Script", "AntiBan", ctrl.Value)
+}
+
+OnToggleFastDrop(ctrl, *) {
+    global g_FastDropEnabled
+    g_FastDropEnabled := ctrl.Value
+    SaveSetting("Script", "FastDrop", ctrl.Value)
+}
+
+OnToggleAutoHeal(ctrl, *) {
+    global g_AutoHealEnabled
+    g_AutoHealEnabled := ctrl.Value
+    SaveSetting("Script", "AutoHeal", ctrl.Value)
+}
+
+OnToggleRandomClick(ctrl, *) {
+    global g_RandomClickEnabled
+    g_RandomClickEnabled := ctrl.Value
+    SaveSetting("Script", "RandomClick", ctrl.Value)
+}
+
+; --- Anti-Ban Tuning Handler Definitions ---
+
+OnChangeOvershootPercent(ctrl, *) {
+    global g_OvershootPercent
+    g_OvershootPercent := ctrl.Value
+    SaveSetting("AntiBan", "Overshoot", ctrl.Value)
+}
+
+OnChangeMicroDelayMax(ctrl, *) {
+    global g_MicroDelayMax
+    g_MicroDelayMax := ctrl.Value
+    SaveSetting("AntiBan", "MicroDelayMax", ctrl.Value)
+}
+
+OnChangeMicroDelayChance(ctrl, *) {
+    global g_MicroDelayChance
+    g_MicroDelayChance := ctrl.Value
+    SaveSetting("AntiBan", "MicroDelayChance", ctrl.Value)
+}
+
+OnChangeWiggleIntensity(ctrl, *) {
+    global g_WiggleIntensity
+    g_WiggleIntensity := ctrl.Value
+    SaveSetting("AntiBan", "WiggleIntensity", ctrl.Value)
+}
+
+OnChangeBreakChance(ctrl, *) {
+    global g_BreakChance
+    g_BreakChance := ctrl.Value
+    SaveSetting("AntiBan", "BreakChance", ctrl.Value)
+}
+
+OnChangeBreakSpacing(ctrl, *) {
+    global g_BreakSpacing
+    g_BreakSpacing := ctrl.Value
+    SaveSetting("AntiBan", "BreakSpacing", ctrl.Value)
+}
 
 ; --- Navigation ---
 MyGui.SetFont("s10 Bold cBlack", "Segoe UI")
@@ -191,10 +311,10 @@ txtGenHeader := MyGui.Add("Text", "x20 y155 w510 Center Hidden", "General Settin
 MyGui.SetFont("s10 Norm cWhite")
 chkOverlay   := MyGui.Add("Checkbox", "x210 y185 Hidden", "Show Overlay")
 chkOverlay.Value := g_ShowOverlay
-chkOverlay.OnEvent("Click", (c, *) => (g_ShowOverlay := c.Value, SaveSetting("UI", "ShowOverlay", c.Value)))
+chkOverlay.OnEvent("Click", OnToggleShowOverlay)
 chkTray      := MyGui.Add("Checkbox", "x210 y210 Hidden", "Minimize to Tray")
 chkTray.Value := g_MinToTray
-chkTray.OnEvent("Click", (c, *) => (g_MinToTray := c.Value, SaveSetting("UI", "MinimizeToTray", c.Value)))
+chkTray.OnEvent("Click", OnToggleMinToTray)
 MyGui.SetFont("s13 Bold cWhite") 
 txtGameTitle := MyGui.Add("Text", "x20 y245 w510 Center Hidden", "Game Window Title")
 MyGui.SetFont("s10 Bold cWhite") 
@@ -205,16 +325,16 @@ EditTitle.OnEvent("Change", (ctrl, *) => Messenger.PushTitleUpdate(ctrl.Value))
 txtScrpHeader := MyGui.Add("Text", "x20 y155 w510 Center Hidden", "Script Settings")
 chkFeat1 := MyGui.Add("Checkbox", "x180 y190 Hidden", "Anti-Ban Patterns")
 chkFeat1.Value := g_AntiBanEnabled
-chkFeat1.OnEvent("Click", (c, *) => (g_AntiBanEnabled := c.Value, SaveSetting("Script", "AntiBan", c.Value)))
+chkFeat1.OnEvent("Click", OnToggleAntiBan)
 chkFeat2 := MyGui.Add("Checkbox", "x180 y220 Hidden", "Fast-Drop")
 chkFeat2.Value := g_FastDropEnabled
-chkFeat2.OnEvent("Click", (c, *) => (g_FastDropEnabled := c.Value, SaveSetting("Script", "FastDrop", c.Value)))
+chkFeat2.OnEvent("Click", OnToggleFastDrop)
 chkFeat3 := MyGui.Add("Checkbox", "x180 y250 Hidden", "Auto-Heal")
 chkFeat3.Value := g_AutoHealEnabled
-chkFeat3.OnEvent("Click", (c, *) => (g_AutoHealEnabled := c.Value, SaveSetting("Script", "AutoHeal", c.Value)))
+chkFeat3.OnEvent("Click", OnToggleAutoHeal)
 chkFeat4 := MyGui.Add("Checkbox", "x180 y280 Hidden", "Randomized Clicking")
-chkFeat4.Value := g_RandomClickEnable
-chkFeat4.OnEvent("Click", (c, *) => (g_RandomClickEnable := c.Value, SaveSetting("Script", "RandomClick", c.Value)))
+chkFeat4.Value := g_RandomClickEnabled
+chkFeat4.OnEvent("Click", OnToggleRandomClick)
 
 ; --- Anti-Ban Sub-Nav ---
 MyGui.SetFont("s10 Bold cBlack")
@@ -229,16 +349,16 @@ txtABFHeader := MyGui.Add("Text", "x20 y155 w510 Center Hidden", "Anti-Ban Featu
 MyGui.SetFont("s9 Bold cWhite")
 chkOver := MyGui.Add("Checkbox", "x180 y195 Hidden", "Overshoot")
 chkOver.Value := g_OvershootEnabled
-chkOver.OnEvent("Click", (c, *) => (g_OvershootEnabled := c.Value, SaveSetting("AntiBan", "OvershootEnabled", c.Value)))
+chkOver.OnEvent("Click", OnToggleOvershoot)
 chkMicroDelay := MyGui.Add("Checkbox", "x180 y225 Hidden", "Micro-Delays")
 chkMicroDelay.Value := g_MicroDelayEnabled
-chkMicroDelay.OnEvent("Click", (c, *) => (g_MicroDelayEnabled := c.Value, SaveSetting("AntiBan", "MicroDelayEnabled", c.Value)))
+chkMicroDelay.OnEvent("Click", OnToggleMicroDelay)
 chkBreaks := MyGui.Add("Checkbox", "x180 y255 Hidden", "Randomized Breaks")
 chkBreaks.Value := g_BreaksEnabled
-chkBreaks.OnEvent("Click", (c, *) => (g_BreaksEnabled := c.Value, SaveSetting("AntiBan", "BreaksEnabled", c.Value)))
+chkBreaks.OnEvent("Click", OnToggleBreaks)
 chkWiggle := MyGui.Add("Checkbox", "x180 y285 Hidden", "Micro-Wiggles")
 chkWiggle.Value := g_MicroWigglesEnabled
-chkWiggle.OnEvent("Click", (c, *) => (g_MicroWigglesEnabled := c.Value, SaveSetting("AntiBan", "MicroWigglesEnabled", c.Value)))
+chkWiggle.OnEvent("Click", OnToggleMicroWiggles)
 
 ; --- Anti-Ban: Tuning (DUAL COLUMN) ---
 MyGui.SetFont("s13 Bold cWhite")
@@ -251,22 +371,22 @@ MyGui.SetFont("s9 Bold cWhite")
 txtOverLbl   := MyGui.Add("Text", "x40 y225 Hidden", "Overshoot Chance (%):")
 EditOver     := MyGui.Add("Edit", "x190 y220 w60 h25 Center Hidden cBlack", g_OvershootPercent)
 UpDnOver     := MyGui.Add("UpDown", "Range1-100 Hidden", g_OvershootPercent)
-EditOver.OnEvent("Change", (ctrl, *) => (g_OvershootPercent := ctrl.Value, SaveSetting("AntiBan", "Overshoot", ctrl.Value)))
+EditOver.OnEvent("Change", OnChangeOvershootPercent)
 
 txtMDMaxLbl  := MyGui.Add("Text", "x40 y260 Hidden", "Micro-Delay Max (ms):")
 EditMDMax    := MyGui.Add("Edit", "x190 y255 w60 h25 Center Hidden cBlack", g_MicroDelayMax)
 UpDnMDMax    := MyGui.Add("UpDown", "Range10-5000 Hidden", g_MicroDelayMax)
-EditMDMax.OnEvent("Change", (ctrl, *) => (g_MicroDelayMax := ctrl.Value, SaveSetting("AntiBan", "MicroDelayMax", ctrl.Value)))
+EditMDMax.OnEvent("Change", OnChangeMicroDelayMax)
 
 txtMDChnLbl  := MyGui.Add("Text", "x40 y295 Hidden", "Micro-Delay Chance (%):")
 EditMDChn    := MyGui.Add("Edit", "x190 y290 w60 h25 Center Hidden cBlack", g_MicroDelayChance)
 UpDnMDChn    := MyGui.Add("UpDown", "Range1-100 Hidden", g_MicroDelayChance)
-EditMDChn.OnEvent("Change", (ctrl, *) => (g_MicroDelayChance := ctrl.Value, SaveSetting("AntiBan", "MicroDelayChance", ctrl.Value)))
+EditMDChn.OnEvent("Change", OnChangeMicroDelayChance)
 
 txtWiggleLbl := MyGui.Add("Text", "x40 y330 Hidden", "Wiggle Intensity (px):")
 EditWiggle   := MyGui.Add("Edit", "x190 y325 w60 h25 Center Hidden cBlack", g_WiggleIntensity)
 UpDnWiggle   := MyGui.Add("UpDown", "Range1-5 Hidden", g_WiggleIntensity)
-EditWiggle.OnEvent("Change", (ctrl, *) => (g_WiggleIntensity := ctrl.Value, SaveSetting("AntiBan", "WiggleIntensity", ctrl.Value)))
+EditWiggle.OnEvent("Change", OnChangeWiggleIntensity)
 
 ; --- COLUMN B (x290) - BREAK HANDLING ---
 MyGui.SetFont("s11 Bold cWhite")
@@ -275,12 +395,12 @@ MyGui.SetFont("s9 Bold cWhite")
 txtBrkChnLbl := MyGui.Add("Text", "x290 y225 Hidden", "Break Chance (%):")
 EditBrkChn   := MyGui.Add("Edit", "x440 y220 w60 h25 Center Hidden cBlack", g_BreakChance)
 UpDnBrkChn   := MyGui.Add("UpDown", "Range1-100 Hidden", g_BreakChance)
-EditBrkChn.OnEvent("Change", (ctrl, *) => (g_BreakChance := ctrl.Value, SaveSetting("AntiBan", "BreakChance", ctrl.Value)))
+EditBrkChn.OnEvent("Change", OnChangeBreakChance)
 
 txtBrkSpcLbl := MyGui.Add("Text", "x290 y260 Hidden", "Break Spacing (min):")
 EditBrkSpc   := MyGui.Add("Edit", "x440 y255 w60 h25 Center Hidden cBlack", g_BreakSpacing)
 UpDnBrkSpc   := MyGui.Add("UpDown", "Range1-120 Hidden", g_BreakSpacing)
-EditBrkSpc.OnEvent("Change", (ctrl, *) => (g_BreakSpacing := ctrl.Value, SaveSetting("AntiBan", "BreakSpacing", ctrl.Value)))
+EditBrkSpc.OnEvent("Change", OnChangeBreakSpacing)
 
 ; --- Logs & About ---
 MyGui.SetFont("s9 c00FF00", "Consolas")

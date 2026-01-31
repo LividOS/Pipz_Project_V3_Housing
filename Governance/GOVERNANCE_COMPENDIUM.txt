@@ -1,0 +1,3991 @@
+; ------------------------------------------------------------------
+; GEMINI MEM TAG(DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\Governance\GOVERNANCE_COMPENDIUM.txt"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt
+; Version: 1.0.0
+; Last change: Initial creation of the consolidated governance compendium.
+; Content-Fingerprint: 2026-01-31T21-19-58Z-941HHLR4
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+================================================================================
+FILE: GOVERNANCE_COMPENDIUM.txt
+STATUS: AUTHORITATIVE GOVERNANCE (SINGLE-ARTIFACT MODE)
+DATE: 2026-01-31
+================================================================================
+
+================================================================================
+SECTION ID: GOV.S0.COMPENDIUM_META
+ORIGIN: (NEW)
+AUTHORITY LEVEL: PRIMARY (STRUCTURAL ENABLEMENT)
+================================================================================
+GOVERNANCE COMPENDIUM — AUTHORITATIVE DECLARATION
+
+This document, GOVERNANCE_COMPENDIUM.txt, is the sole authoritative governance artifact for Pipz_Project_V3 in single-artifact mode.
+
+All prior standalone governance files are represented as deterministic sections within this document.
+
+Any rule, protocol, or hard-stop condition that previously depended on the existence or readability of a separate governance file now depends on the existence and full readability of:
+  - GOVERNANCE_COMPENDIUM.txt, and
+  - the relevant governance section(s) identified by their stable Section IDs.
+
+If the compendium or any required section cannot be located or fully read, governed operations MUST STOP.
+
+Archived originals are stored separately under /Archive and are non-operative.
+
+SECTION ID CONTRACT (STABLE IDENTITIES)
+
+The following Section IDs are case-sensitive, immutable, and must never be aliased:
+
+- GOV.S1.AI_INSTRUCTIONS  (origin: AI_PROJECT_INSTRUCTIONS.txt)
+- GOV.S2.BOOTSTRAP_V4  (origin: BOOTSTRAPv4.txt)
+- GOV.S3.BLUEPRINT  (origin: _PROJECT_BLUEPRINT.txt)
+- GOV.S4.ANCHOR_MASTER  (origin: _PROJECT_ANCHOR_MASTER.txt)
+- GOV.S5.PHASE5_AUDIT  (origin: PHASE5_AUDIT_MASTER.txt)
+- GOV.S6.GOVERNANCE_LOCK  (origin: GOVERNANCE_LOCK.txt)
+- GOV.S7.INDEX_ID_LIST  (origin: INDEXIDLIST.txt)
+- GOV.S8.LEARNED_CONSTRAINTS  (origin: PROJECT_LEARNED_CONSTRAINTS.txt)
+- GOV.S9.STANDARD_HEADERS  (origin: STANDARDIZED_HEADERS.txt)
+
+POLICY A — ARCHIVED ORIGINAL HEADERS
+
+Within each section below:
+  - "ARCHIVED ORIGINAL (VERBATIM)" is included for cross-checking.
+  - It is NON-AUTHORITATIVE for file-identity/path assertions (e.g., GEMINI MEM TAG full paths, MAINTEMPLATE filename headers).
+  - Operative governance semantics for single-artifact mode are defined by the "OPERATIVE TEXT (COMPENDIUM MODE)" block.
+
+REGISTRY AUTHORITY NOTICE (EXTERNAL)
+
+The following artifacts are authoritative registries and are intentionally NOT embedded as compendium sections:
+  - GLOBAL_REGISTRY_MASTER.csv (Policy-B governed surface)
+  - INTERNAL_FUNCTION_INDEX.csv (non-governed symbol index)
+  - GLOBAL_REGISTRY_MASTER.gsheet (backup vault only, if referenced)
+
+Any governance rule that requires registry verification continues to require these artifacts externally. If a required registry cannot be located or read, the original hard-stop semantics apply unchanged.
+
+INTERPRETATION & CONFLICT RULES (MANDATORY)
+
+IR-1. ARCHIVED ORIGINAL (VERBATIM) content exists solely for:
+     - literal fidelity verification
+     - cross-checking against historical standalone files
+     - audit traceability
+
+IR-2. ARCHIVED ORIGINAL content MUST NOT be used for:
+     - governance reasoning
+     - enforcement decisions
+     - STOP / hard-stop evaluation
+     - proposal justification
+     - semantic interpretation
+
+IR-3. OPERATIVE TEXT (COMPENDIUM MODE) is the ONLY valid source for
+     active governance semantics in single-artifact mode.
+
+IR-4. If any semantic, procedural, or enforcement conflict is detected between:
+     - ARCHIVED ORIGINAL content, and
+     - OPERATIVE TEXT
+
+     The conflict MUST be explicitly reported.
+     The AI MUST NOT resolve the conflict implicitly or by precedence assumption.
+
+IR-5. A governance section is considered UNREADABLE if:
+     - it cannot be fully located, OR
+     - it is truncated, partially visible, or cut off
+
+     Partial readability SHALL be treated as unreadable for all enforcement purposes
+     and MUST trigger the same STOP conditions as total absence.
+
+END INTERPRETATION & CONFLICT RULES
+
+END GOV.S0.COMPENDIUM_META
+
+
+================================================================================
+SECTION ID: GOV.S1.AI_INSTRUCTIONS
+ORIGIN: AI_PROJECT_INSTRUCTIONS.txt
+AUTHORITY LEVEL: PRIMARY
+================================================================================
+OPERATIVE TEXT (COMPENDIUM MODE) — AUTHORITATIVE FOR SINGLE-ARTIFACT OPERATION
+================================================================================
+; ------------------------------------------------------------------
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; Pipz_Project_V3 [AHK v2] (AI-Specific Operating Instructions)
+; ------------------------------------------------------------------
+; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS
+; Version: 2.0.0
+; Last change: Instated new Policy-B governance model.
+; Content-Fingerprint: 2026-01-29T22-18-17Z-BEFJ7KGF
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+BOOTSTRAP v4 — CONVERSATION INITIALIZATION PROTOCOL (MANDATORY)
+; ------------------------------------------------------------------
+
+Bootstrap v4 is a mandatory conversation initialization protocol for Pipz_Project_V3.
+
+Its purpose is to guarantee that the AI can reliably re-establish full project authority at the start of any new chat without relying on memory, inference, cached state, or Google Drive search heuristics.
+
+Bootstrap v4 MUST be executed before any analysis, debugging, suggestions, refactors, or proposed changes related to Pipz_Project_V3.
+
+; ------------------------------------------------------------------
+BOOTSTRAP ARTIFACT REFERENCE RULE (CANONICAL — SINGLE-ARTIFACT MODE)
+; ------------------------------------------------------------------
+
+The canonical, authoritative definition of the Bootstrap v4 protocol is:
+
+; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4
+
+Rules:
+
+B1. At the start of every new chat related to Pipz_Project_V3, after completing
+    PHASE 0 of this section, the AI MUST locate, open, and fully read:
+
+    ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4
+
+B2. Bootstrap v4 MUST be executed strictly according to the operative text
+    contained in GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4.
+
+B3. Any archived, historical, summarized, or duplicated Bootstrap content
+    elsewhere in the compendium is NON-AUTHORITATIVE.
+
+B4. The declaration:
+    "BOOTSTRAP v4 COMPLETE — Pipz_Project_V3 authority established."
+    is VALID only if the above section has been read in full during the
+    current session.
+
+B5. If GOVERNANCE_COMPENDIUM.txt or the required section cannot be located,
+    fully read, or verified (including Content-Fingerprint), the AI MUST STOP.
+
+; ------------------------------------------------------------------
+BOOTSTRAP v4 ENFORCEMENT GATE (ABSOLUTE)
+; ------------------------------------------------------------------
+
+E1. Any response related to Pipz_Project_V3 that includes analysis, reasoning, suggestions, debugging, refactors, audits, or proposed changes MUST occur only after successful Bootstrap v4 completion in the same session.
+
+E2. Successful Bootstrap v4 completion is defined exclusively as:
+
+    ; - Full execution of Phases 0–4 as defined in GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4, AND
+    ; - Emission of the exact declaration:
+
+      "BOOTSTRAP v4 COMPLETE — Pipz_Project_V3 authority established."
+
+E3. If the declaration has not been emitted in the current session:
+
+    ; - The AI MUST NOT proceed
+    ; - The AI MUST instruct the user to initiate or allow Bootstrap v4 execution
+    ; - The AI MUST NOT infer prior completion, even if files appear unchanged
+
+E4. Memory, prior conversation history, prior confirmations, or previous chats MUST NOT be used as evidence of Bootstrap completion.
+
+E5. This rule applies to:
+
+    ; - New chats
+    ; - Resumed chats
+    ; - Long-running chats after context loss
+    ; - Any situation where authority cannot be freshly proven
+
+; ------------------------------------------------------------------
+BOOTSTRAP v4 INVOCATION TOKEN REQUIREMENT (ABSOLUTE)
+; ------------------------------------------------------------------
+
+For any new chat session related to Pipz_Project_V3, the user's FIRST message MUST include
+a machine-checkable invocation token.
+
+Two invocation formats are permitted.
+
+FORMAT 1 — FULL CANONICAL INVOCATION:
+
+BOOTSTRAP_V4_INIT
+This project is defined in my Google Drive under Pipz_Project_V3.
+Locate GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS
+and initiate Bootstrap v4.
+
+FORMAT 2 — TOKEN-ONLY INVOCATION:
+
+BOOTSTRAP_V4_INIT
+
+Rules:
+
+T1. The first non-empty line of the user's first message MUST be exactly:
+
+    BOOTSTRAP_V4_INIT
+
+T2. If additional lines are present after the token, they MUST be exactly:
+
+    This project is defined in my Google Drive under Pipz_Project_V3.
+    Locate GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS and initiate Bootstrap v4.
+
+T3. FORMAT 2 (token-only) is explicitly permitted and does NOT require
+    the presence of the canonical text lines.
+
+T4. If the token is missing, malformed, reordered, or paraphrased:
+
+    ; - The AI MUST STOP.
+    ; - The AI MUST request the user to resend a valid invocation.
+    ; - The AI MUST NOT assume a Drive-backed project exists.
+    ; - The AI MUST NOT initiate Bootstrap v4.
+
+T5. Google Drive connector availability alone does NOT constitute authorization.
+
+T6. This token requirement exists to guarantee:
+
+    ; - Clean cold-start behavior.
+    ; - No reliance on memory.
+    ; - Deterministic bootstrap execution across AI platforms.
+
+; ------------------------------------------------------------------
+PHASE 0 — GOVERNANCE GATE
+; ------------------------------------------------------------------
+
+The AI MUST:
+0.1 Locate, open, and fully read:
+
+    ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS (VIRTUAL FILE — REQUIRED)
+	
+0.2 Verify:
+
+    ; - Presence of GEMINI MEM TAG
+    ; - Presence of Content-Fingerprint
+    ; - Fingerprint is readable and well-formed
+	
+0.3 Obey all rules defined in this file, including:
+
+    ; - Mandatory re-verification
+    ; - Fingerprint precedence
+    ; - Stop-on-conflict behavior
+    ; - Hidden Permanence Confirmation Rule (Rule 16)
+
+STOP CONDITIONS:
+
+; - File cannot be opened
+; - File is truncated
+; - Fingerprint is missing or malformed
+; - Any rule cannot be satisfied
+
+; ------------------------------------------------------------------
+PHASE 0.5 — FINGERPRINT ENFORCEMENT INVARIANT (ABSOLUTE)
+; ------------------------------------------------------------------
+
+At no point during Bootstrap v4 may any governed file be reasoned about,
+interpreted, or used for decision-making prior to successful verification
+of its declared Content-Fingerprint.
+
+Temporary access, partial reads, or structural inspection without completed
+fingerprint verification are prohibited and MUST trigger STOP.
+
+Hierarchy Clarification:
+
+PHASE 0.5 establishes a GLOBAL gating invariant.
+Rules governing fingerprint mechanics (cache-busting,
+declaration ordering, or response formatting) operate
+ONLY after this gate is satisfied.
+
+No reasoning, inspection, or classification is permitted
+prior to successful PHASE 0.5 completion.
+
+; ------------------------------------------------------------------
+PHASE 1 — ROOT RESOLUTION
+; ------------------------------------------------------------------
+
+Bootstrap v4 MUST NOT rely on Google Drive search alone.
+
+Root resolution precedence is STRICT:
+
+1) GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST (if present)
+2) GEMINI MEM TAG declared paths
+3) GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT defined structure
+4) Google Drive search (LAST RESORT ONLY)
+
+Drive IDs provide deterministic location only and do not establish content truth.
+If the project root cannot be resolved deterministically, the AI MUST STOP.
+
+; ------------------------------------------------------------------
+PHASE 2 — CANONICAL GOVERNANCE SET VERIFICATION (SINGLE-ARTIFACT MODE)
+; ------------------------------------------------------------------
+
+Governance sections are treated as VIRTUAL FILES and must be fully readable.
+The AI MUST verify the following authoritative governance sources:
+
+; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS
+; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT
+; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER
+; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST
+; - GLOBAL_REGISTRY_MASTER (AUTHORITY HIERARCHY):
+    1. PRIMARY: GLOBAL_REGISTRY_MASTER.csv (Authoritative governed registry, Policy-B)
+    2. FALLBACK: GLOBAL_REGISTRY_MASTER.gsheet (Backup Vault ONLY — may be unreadable to tooling)
+
+Each file must:
+
+; - Be readable in full
+; - Declare Content-Fingerprint where applicable
+; - Match declared identity
+; - [REGISTRY SPECIFIC]:
+;     - Verify GLOBAL_REGISTRY_MASTER.csv is readable in full.
+;     - Verify it represents Policy-B governed surface area only (entrypoints/timers/IPC/lifecycle/settings/defaults).
+;     - Verify INTERNAL_FUNCTION_INDEX.csv exists if referenced by the task, but it is non-governed and not a hard stop.
+
+STOP CONDITIONS:
+
+; - Any file is missing
+; - Any file is unreadable or truncated
+; - GLOBAL_REGISTRY_MASTER.csv is missing or desynchronized AND .gsheet fallback is inaccessible
+; - Any required registry section is inaccessible
+
+; ------------------------------------------------------------------
+PHASE 3 — STRUCTURE RECONSTRUCTION
+; ------------------------------------------------------------------
+
+Using only authoritative declarations, the AI reconstructs the expected project structure, including:
+
+; - Root directory
+; - Governance directory
+; - Registry directory
+; - Controller, Worker, and Lib subdirectories (as defined by GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT)
+; - Required .txt mirrors
+; - Required runtime counterparts
+
+This phase establishes what MUST exist, not what Drive happens to expose.
+Inference, assumption, or memory-based reconstruction is prohibited.
+
+; ------------------------------------------------------------------
+PHASE 4 — VERIFICATION DECLARATION
+; ------------------------------------------------------------------
+
+Only after Phases 0–3 succeed may the AI:
+
+; - Declare Bootstrap v4 completion
+; - Proceed with analysis, debugging, or code work
+
+All subsequent responses MUST continue to obey:
+
+; - Fingerprint declaration rules
+; - Stop-on-conflict rules
+; - No inference / no assumption rules
+
+; ------------------------------------------------------------------
+PHASE 5 — FULL VISIBILITY & ACCESSIBILITY AUDIT (OPTIONAL)
+; ------------------------------------------------------------------
+
+Phase 5 is an optional extension to Bootstrap v4.
+Phase 5 MUST NOT be executed unless the user explicitly requests it by name.
+
+Phase 5 MUST NEVER be:
+
+; - Implied
+; - Assumed
+; - Auto-invoked
+; - Triggered as part of Bootstrap v4
+; - Executed due to partial failure, uncertainty, or missing Drive visibility
+
+Phase 5 does not establish governance correctness.
+
+; ------------------------------------------------------------------
+PHASE 5 — PURPOSE
+; ------------------------------------------------------------------
+
+When invoked, Phase 5 performs a full recursive audit of the project's Google Drive presence to determine:
+
+; - Which directories and files exist
+; - Which are readable
+; - Which are missing
+; - Which are orphaned
+; - Which are mis-located
+; - Which are ungoverned
+; - Which are inaccessible due to permissions or indexing failures
+
+; ------------------------------------------------------------------
+PHASE 5 — EXECUTION RULES
+; ------------------------------------------------------------------
+
+Phase 5 execution MUST follow the operative text in
+GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S5.PHASE5_AUDIT (VIRTUAL FILE).
+
+5.1 Root-Anchored Traversal
+; - Enumeration MUST begin from the resolved project root folder ID
+; - Child discovery MUST use parent-child traversal
+; - Google Drive search MUST NOT be used for discovery
+
+5.2 Recursive Enumeration
+For every folder:
+
+; - Enumerate all files and subfolders
+; - Record Drive ID, name, parent ID, and type
+; - Attempt to open readable files
+
+5.3 Path Reconstruction
+For every discovered item:
+
+; - Rebuild full path by walking parents to root
+; - Compare against:
+
+  ; - GEMINI MEM TAG paths
+  ; - Blueprint-defined expected locations
+
+5.4 Reconciliation
+Compare:
+
+1) Expected set (Blueprint + Anchor)
+2) Discovered set (Drive traversal)
+3) Indexed set (INDEXIDLIST)
+
+Classify each item as:
+
+; - VERIFIED
+; - UNREADABLE
+; - MISSING
+; - ORPHANED
+; - UNGOVERNED
+
+; ------------------------------------------------------------------
+PHASE 5 — OUTPUT
+; ------------------------------------------------------------------
+
+Phase 5 produces a read-only audit report.
+
+Phase 5 MUST NOT:
+
+; - Modify files
+; - Create mirrors
+; - Update registries
+; - Repair structure
+
+Failures in Phase 5 DO NOT invalidate Bootstrap v4 but MUST be explicitly reported.
+
+; ------------------------------------------------------------------
+POLICY-B GOVERNANCE MODEL (MANDATORY)
+; ------------------------------------------------------------------
+
+The project uses a dual-layer registry system to balance strict governance with
+practical development velocity.
+
+----------------------------------------
+A) GLOBAL_REGISTRY_MASTER.csv (Policy-B)
+----------------------------------------
+
+GLOBAL_REGISTRY_MASTER.csv is the authoritative governed registry.
+
+It is POLICY-B scoped, meaning it MUST contain ONLY governance-critical surface area:
+
+- Entrypoints (startup paths, GUI entrypoints, externally-triggered handlers)
+- Timers (SetTimer callbacks)
+- OnMessage handlers / IPC receivers
+- IPC sender contracts and message encodings
+- Settings IO and Defaults interface
+- Lifecycle and process controls
+- Logic invariants directly tied to the above surface area
+
+The governed registry is:
+- CSV-first
+- Tooling-readable
+- Deterministic
+- A hard-stop authority for governed surface changes
+
+The AI MUST consult this registry before:
+- Modifying any governed surface item
+- Introducing new timers, IPC handlers, entrypoints, or lifecycle controls
+
+----------------------------------------
+B) INTERNAL_FUNCTION_INDEX.csv (NON-GOVERNED)
+----------------------------------------
+
+INTERNAL_FUNCTION_INDEX.csv is a NON-GOVERNED, informational index.
+
+It exists to:
+- Provide a complete symbol inventory (functions, methods, classes)
+- Aid navigation, search, and refactors
+- Avoid forcing governance churn for internal helpers
+
+Rules:
+- It may be regenerated at any time.
+- It may drift.
+- It MUST NOT cause hard stops.
+- It MUST NOT be treated as authoritative governance.
+
+The AI MAY use this file for discovery and orientation, but MUST NOT:
+- Require registry updates based solely on internal helper changes
+- Treat missing entries here as violations
+
+----------------------------------------
+C) AI OBLIGATIONS (CRITICAL)
+----------------------------------------
+
+The AI MUST:
+- Enforce Policy-B boundaries strictly.
+- Update or flag registry changes ONLY when governed surface area changes.
+- Avoid expanding governance scope into internal implementation details.
+- Use signposts and the governed registry together to understand ownership and invariants.
+
+The AI MUST NOT:
+- Reintroduce section-based registry assumptions.
+- Require all functions or variables to appear in a governed registry.
+- Treat INTERNAL_FUNCTION_INDEX.csv as a hard-stop authority.
+
+----------------------------------------
+D) CONFLICT RESOLUTION
+----------------------------------------
+
+If a conflict exists between:
+- Code
+- GLOBAL_REGISTRY_MASTER.csv
+- Signpost declarations
+
+The AI must:
+1) Flag the conflict explicitly.
+2) Propose reconciliation options.
+3) Wait for confirmation before proceeding.
+
+----------------------------------------
+E) INTERACTION WITH GOVERNANCE COMPENDIUM (MANDATORY)
+----------------------------------------
+
+In single-artifact mode, all conflict handling MUST comply with
+GOV.S0.COMPENDIUM_META — INTERPRETATION & CONFLICT RULES.
+
+No registry, signpost, or code conflict may be implicitly resolved by
+precedence alone.
+
+Specifically:
+
+- Precedence rules define WHICH rule would apply
+- They do NOT authorize implicit resolution
+
+If a conflict exists between any governed rules, procedures, or constraints:
+
+1. The conflict MUST be explicitly identified and reported
+2. The AI MUST STOP unless explicitly instructed how to proceed
+3. Precedence MUST NOT be applied silently or implicitly
+
+Failure to report a detected conflict before resolution constitutes
+a governance violation.
+
+----------------------------------------
+F) POLICY-B CONFLICT RESOLUTION (GOVERNED SURFACE AREA)
+----------------------------------------
+SEQUENCING REQUIREMENT:
+
+This section MUST NOT be consulted unless:
+1. A conflict has been explicitly identified
+2. STOP conditions in Section E have been triggered
+3. Explicit user instruction authorizing resolution has been received
+
+Violation of this sequence constitutes a governance breach.
+
+This section applies ONLY after all conflict-handling requirements in:
+
+- E) INTERACTION WITH GOVERNANCE COMPENDIUM (MANDATORY)
+
+have been satisfied.
+
+Scope:
+This rule applies exclusively to Policy-B governed surface area, defined as:
+
+- Entrypoints
+- Timers (SetTimer callbacks)
+- OnMessage / IPC handlers
+- IPC sender contracts and encodings
+- Settings IO and defaults interface
+- Lifecycle and process controls
+
+Rules:
+
+PB-1. If a conflict exists involving Policy-B governed surface area, the conflict
+      MUST first be explicitly identified, reported, and gated by STOP
+      as required by Section E.
+
+PB-2. Once explicit conflict reporting has occurred and the user has
+      explicitly authorized resolution, GLOBAL_REGISTRY_MASTER.csv
+      is the authoritative source of truth.
+
+PB-3. No Policy-B conflict may be resolved by:
+      - inference
+      - heuristic reasoning
+      - code inspection alone
+      - precedence shortcuts
+      - assumed registry intent
+
+PB-4. If GLOBAL_REGISTRY_MASTER.csv is missing, unreadable, or ambiguous
+      with respect to the conflicted surface area, the AI MUST STOP.
+
+PB-5. Resolution authority for Policy-B conflicts is NEVER implicit.
+      Explicit user instruction is mandatory.
+
+END POLICY-B CONFLICT RESOLUTION
+
+; ------------------------------------------------------------------
+0. Permanence Reinforcement Rule
+; ------------------------------------------------------------------
+
+0a. At the start of every session, the AI must confirm it has read this file.
+
+0b. Connector Availability Requirement Rule
+
+0ba. If Google Drive access is unavailable, disconnected, expired, or fails at any point during a session, the AI must:
+0baa. Explicitly state that Google Drive access is unavailable.
+0bab. Stop immediately without analysis, suggestions, or assumptions.
+0bac. Wait for the user to restore access.
+
+----------------------------------------
+0.5. TERMINOLOGY NORMALIZATION (MANDATORY)
+----------------------------------------
+
+In single-artifact mode:
+
+- References to a "file" SHALL be interpreted as:
+  - GOVERNANCE_COMPENDIUM.txt :: <SECTION ID>
+    unless explicitly stated otherwise.
+
+- Governance sections are treated as VIRTUAL FILES and are subject to:
+  - full-read requirements
+  - truncation detection
+  - STOP semantics identical to physical files
+
+- Physical file references are valid ONLY for:
+  - runtime artifacts
+  - registries explicitly declared as external
+  - tooling-constrained formats (e.g., .json)
+
+This rule applies globally unless explicitly overridden.
+
+; ------------------------------------------------------------------
+1. Blueprint Architecture Reference Rule
+; ------------------------------------------------------------------
+
+1a. Whenever a request involves:
+1aa. File interactions
+1ab. Module responsibilities
+1ac. Includes or dependencies
+1ad. Ownership of logic
+1ae. Controller/worker boundaries
+
+1b. The AI must:
+1ba. Locate and read the current GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT from Google Drive.
+1bb. The authoritative project structure is defined by:
+  - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT
+
+This section is the sole structural authority.
+No other section, registry, runtime artifact, or inference
+may define, expand, or reduce project structure.
+
+1bc. Reject any reasoning or suggestion that contradicts the blueprint.
+
+1c. If the blueprint cannot be verified, the AI must stop.
+
+; ------------------------------------------------------------------
+2. Mandatory Re-Verification Rule
+; ------------------------------------------------------------------
+
+2a. For every response related to Pipz_Project_V3:
+
+2aa. The AI must identify which project files are relevant to the user's request.
+2ab. The AI must locate, open, and fully read the current .txt mirror of each relevant file from Google Drive within the same response cycle.
+2ac. The AI must base its response only on the contents verified in that cycle, not on memory from prior messages.
+2ad. If any relevant mirror file cannot be found, opened, or verified as current, the AI must stop and report the issue.
+
+2b. Cached knowledge, prior conversation context, or previous reads may not be used as substitutes for verification.
+
+; ------------------------------------------------------------------
+2c. Content-Fingerprint Cache-Busting Rule
+; ------------------------------------------------------------------
+
+2ca. Every relevant .txt mirror must contain a Content-Fingerprint line in its MAINTEMPLATE header.
+
+2cb. Content-Fingerprint format is defined as:
+YYYY-MM-DDTHH-MM-SSZ-XXXXXXXX
+
+Where:
+; - The timestamp is in UTC.
+; - The suffix is exactly 8 characters.
+; - Valid suffix characters are uppercase A–Z and digits 0–9.
+
+2cc. For each relevant .txt mirror read in a response cycle, the AI must locate and extract the Content-Fingerprint value.
+
+2cd. The AI must treat any previously-read copy of that file as stale if its Content-Fingerprint differs from the value extracted in the current cycle.
+
+2ce. If the user supplies a Content-Fingerprint (full or suffix-only) for a file, the AI must verify that the current .txt mirror's Content-Fingerprint matches before reasoning or proposing changes.
+
+2cf. If a relevant .txt mirror lacks a Content-Fingerprint line, the AI must stop and report the missing fingerprint.
+
+; ------------------------------------------------------------------
+2d. Response Fingerprint Declaration Rule
+; ------------------------------------------------------------------
+
+2da. For any response that includes analysis, suggestions, refactors, debugging, or proposed changes related to Pipz_Project_V3, the AI must declare the Content-Fingerprint value(s) it used.
+
+2db. This declaration must appear at the very top of the response, before any analysis or content, in the following format:
+
+Fingerprint Used: <Content-Fingerprint>
+
+2dc. If multiple files are involved, the AI must list each file and its corresponding Content-Fingerprint.
+
+2dd. If the AI cannot confidently declare the Content-Fingerprint used, it must stop and report the verification failure instead of responding.
+
+; ------------------------------------------------------------------
+2e. Fingerprint Challenge Mode (FCM) Rule
+; ------------------------------------------------------------------
+
+2ea. If the very first line of the user's message begins with the exact prefix "FCM-", the AI must treat the request as a Fingerprint Challenge Mode (FCM) request.
+
+2eb. FCM line format (STRICT):
+
+FCM-<FINGERPRINT>-<FILENAME>
+
+2ebc. <FINGERPRINT> may be provided in one of two allowed formats:
+
+2ebca. Full fingerprint format:
+YYYY-MM-DDTHH-MM-SSZ-XXXXXXXX
+
+2ebcb. Suffix-only fingerprint format:
+XXXXXXXX
+
+Where:
+; - XXXXXXXX is the final 8 characters of the Content-Fingerprint.
+; - Valid characters are uppercase A–Z and digits 0–9.
+
+2ebd. The AI must determine which fingerprint format was provided based on structure and length, not by assumption.
+
+2ebe. If a full fingerprint is provided, the AI must compare the entire Content-Fingerprint value for an exact match.
+
+2ebf. If a suffix-only fingerprint is provided, the AI must compare only the final 8 characters of the Content-Fingerprint, but must still extract and later declare the full Content-Fingerprint value used.
+
+2ec. Multiple FCM lines may be provided, one per file, and must appear as consecutive lines at the very top of the user's message before any other content.
+
+2ed. For each FCM line, the AI must:
+2eda. Locate, open, and fully read the corresponding .txt mirror from Google Drive.
+2edb. Extract the full Content-Fingerprint value.
+2edc. Perform the comparison required by Rule 2ebe or 2ebf.
+
+2ee. If any comparison fails, the AI must stop and respond with:
+2eea. An explicit statement that the fingerprint did not match.
+2eeb. The expected fingerprint or suffix provided by the user.
+2eec. The full Content-Fingerprint value found in the mirror.
+
+2eef. While any FCM mismatch exists, the AI must not provide analysis, suggestions, refactors, debugging, or proposed changes.
+
+2ef. If all FCM checks pass, the AI may proceed, but must still comply with Rule 2d by declaring the full Content-Fingerprint value(s) used at the top of its response.
+
+; ------------------------------------------------------------------
+2f. Drive Folder / File ID Acceleration Rule (NON-SUBSTITUTIVE)
+; ------------------------------------------------------------------
+
+2fa. If the user provides explicit Google Drive folder IDs or file IDs, the AI is permitted to use them to enumerate contents directly.
+
+2fb. Provided IDs may be used to:
+2fba. Resolve the project root directory.
+2fbb. Enumerate full directory trees, including non-text assets.
+2fbc. Locate files that are not discoverable via content search.
+
+2fc. Drive IDs are an acceleration mechanism only and MUST NOT replace:
+2fca. Targeted search requirements.
+2fcb. GEMINI MEM TAG path verification.
+2fcc. Content-Fingerprint verification.
+2fcd. Registry and blueprint verification.
+
+2fd. If Drive ID enumeration results conflict with search results, declared paths, or fingerprints:
+2fda. The AI must stop.
+2fdb. Report the discrepancy.
+2fdc. Wait for explicit user instruction.
+
+2fe. Absence of provided Drive IDs MUST NOT be treated as an error or failure condition.
+
+; ------------------------------------------------------------------
+2g. Drive ID vs Verification Precedence Rule (AMBIGUITY RESOLUTION)
+; ------------------------------------------------------------------
+
+2ga. Google Drive folder and file IDs (including VERIFIED status) provide deterministic location only and do not establish content truth, freshness, or correctness.
+2gb. The precedence order is STRICT:
+2gba. AI_PROJECT_INSTRUCTIONS governance rules.
+2gbb. Content-Fingerprint verification (cache-busting rules).
+2gbc. GEMINI MEM TAG declared path identity.
+2gbd. Blueprint-defined structure and responsibility.
+2gbe. Drive IDs, folder listings, and search results.
+
+2gc. If Drive IDs conflict with declared paths, fingerprints, or blueprint structure:
+2gca. The AI must stop immediately.
+2gcb. Report expected vs observed values.
+2gcc. Wait for explicit user instruction.
+
+2gd. If tooling limitations (including truncation, partial reads, or access restrictions) prevent a verifiable full read of any required governance file, relevant mirror file, or required registry tab:
+2gda. The AI must stop and explicitly report the limitation.
+2gdb. The AI must not infer, assume, summarize, or fabricate missing content under any circumstances, even if Drive IDs are VERIFIED.
+
+2ge. If folder listing is unavailable or incomplete:
+2gea. The AI may fall back to search-only reconstruction using declared paths.
+2geb. The fallback is valid only if all required verification rules (fingerprints, path identity, and required file reads) can still be satisfied.
+2gec. If verification cannot be satisfied under fallback, the AI must stop.
+
+; ------------------------------------------------------------------
+2h. Project Learned Constraints Mandatory Consultation Rule (ABSOLUTE)
+; ------------------------------------------------------------------
+
+2ha. Before the AI may perform any analysis, reasoning, suggestion, refactor,
+     debugging step, architectural proposal, or solution design related to
+     Pipz_Project_V3, the AI MUST:
+
+2haa. Locate, open, and fully read:
+      ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.LEARNED_CONSTRAINTS
+
+2hab. Actively evaluate whether any existing constraint is relevant to the
+      current task, file, subsystem, or approach under consideration.
+
+2hb. The GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.LEARNED_CONSTRAINTS file is authoritative for negative
+     knowledge.
+
+2hc. Any approach, method, or pattern recorded as invalidated or constrained
+     MUST NOT be repeated, suggested, or reintroduced unless the user explicitly
+     authorizes re-evaluation.
+
+2hd. If a relevant learned constraint exists:
+2hda. The AI MUST acknowledge it internally before reasoning.
+2hdb. The AI MUST NOT propose the constrained approach.
+2hdc. The AI MUST adapt its reasoning accordingly or stop.
+
+2he. During any session, if the AI discovers that:
+2hea. A method it attempted failed,
+2heb. A proposal it made was invalid,
+2hec. A tooling or architectural assumption was proven incorrect,
+2hed. Or an approach conflicts with project reality,
+
+2hf. The AI MUST immediately draft a proposed entry for:
+      ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.LEARNED_CONSTRAINTS
+
+2hg. Drafted constraint entries MUST:
+2hga. Follow the Project Learned Constraints ID Policy.
+2hgb. Clearly describe the invalidated approach.
+2hgc. Be presented to the user explicitly for confirmation or rejection.
+
+2hh. Failure to consult GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.LEARNED_CONSTRAINTS before reasoning, or
+     failure to draft a newly discovered constraint, constitutes a violation
+     of this instruction set and requires the AI to stop under Rule 3b.
+
+; ------------------------------------------------------------------
+2i. Implicit File Reference Resolution Rule (ABSOLUTE)
+; ------------------------------------------------------------------
+
+2ia. If the user references a project file by name or role (explicitly or
+     implicitly), and that file is part of Pipz_Project_V3 governance,
+     structure, or tooling, the AI MUST attempt deterministic resolution
+     before claiming inability to read or locate the file.
+
+2ib. Deterministic resolution MUST follow this order:
+2iba. Consult GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST for a matching file entry,
+      including alias and role mappings defined therein.
+2ibb. Use the associated Drive ID to locate and open the file.
+2ibc. Verify the file identity using path declarations and fingerprints.
+
+2ic. The AI MUST NOT state that it cannot locate, read, or verify a file
+     if a valid Drive ID exists for that file in GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST.
+
+2id. Only if:
+     ; - No matching entry exists in GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST, AND
+     ; - Path-based resolution fails, AND
+     ; - Search fallback is exhausted per Rule 2g,
+     may the AI report inability to locate the file.
+
+2ie. Failure to consult GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST when resolving an implicitly
+     referenced file constitutes a violation of this instruction set
+     and requires the AI to stop under Rule 3b.
+
+; ------------------------------------------------------------------
+2j. Response Status Header Rule (ABSOLUTE)
+; ------------------------------------------------------------------
+
+2ja. Any AI response that references, analyzes, reasons about, or proposes
+     changes to any Pipz_Project_V3 file, structure, registry, blueprint,
+     indexing, or governance artifact MUST include exactly one of the
+     following status headers:
+
+STATUS — LIVE
+STATUS — HISTORICAL
+
+2jb. STATUS — LIVE may be used ONLY if, in the current response cycle, the AI has:
+2jba. Completed all required Bootstrap gating for the session when applicable.
+2jbb. Complied with Rule 2 (Mandatory Re-Verification) for all relevant files.
+2jbc. Complied with Rule 2h (PROJECT_LEARNED_CONSTRAINTS consultation).
+2jbd. Complied with Rule 2i (deterministic resolution using INDEXIDLIST, including aliases).
+
+2jc. STATUS — HISTORICAL MUST be used if any condition required by Rule 2jb
+     cannot be satisfied in the current response cycle.
+
+2jd. HISTORICAL RESPONSE LIMITATION (ABSOLUTE):
+2jda. A STATUS — HISTORICAL response MUST contain explanation and remediation only.
+2jdb. A STATUS — HISTORICAL response MUST NOT contain substantive analysis,
+      reasoning, design proposals, refactors, debugging steps, or code changes.
+2jdc. A STATUS — HISTORICAL response MUST comply with Rule 3b:
+      ; - Cite the blocking rule(s)
+      ; - Explain why compliance is not possible
+      ; - Propose 1–3 resolution paths
+      ; - Wait for explicit user instruction
+
+2je. ORDERING RULE (STRICT):
+2jea. If Rule 16 initial confirmation applies, the first non-empty line MUST be:
+      ANYSKIPPERS
+2jeb. If Rule 16 initial confirmation applies, the STATUS header MUST appear as
+      the next non-empty line immediately after ANYSKIPPERS.
+2jec. Otherwise, the STATUS header MUST be the first non-empty line of the response.
+
+2jf. LIVE + FINGERPRINT ORDERING (STRICT):
+2jfa. If STATUS — LIVE is used and the response contains analysis/suggestions/
+      refactors/debugging/proposed changes, the response MUST also comply with Rule 2d
+      by declaring Fingerprint Used immediately after the STATUS header.
+
+2jg. Failure to include the required STATUS header, or misuse of STATUS — LIVE,
+     constitutes a violation of this instruction set and requires STOP under Rule 3b.
+
+; ------------------------------------------------------------------
+2k. Pre-Transmission Sanity Audit (MANDATORY EXIT-GATE)
+; ------------------------------------------------------------------
+2ka. Prior to completing any response, the AI MUST perform a silent internal 
+     audit of the proposed content against all required governance sections of GOVERNANCE_COMPENDIUM.txt.
+2kb. VERIFICATION CRITERIA:
+     - Is there a Version Header from GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S9.STANDARD_HEADERS?
+     - Is the content a 1:1 literal match (no summarization)?
+     - Does the logic violate any PLC (e.g., PLC-0005 or PLC-0006)?
+     - Are all registry updates formatted in raw tab-separated style?
+2kc. If any violation is detected, the AI must discard the drafted response 
+     and regenerate a compliant version.
+2kd. Failure to perform this audit or outputting non-compliant content 
+     constitutes a "Hard-Stop" breach under Rule 3b.
+
+; ------------------------------------------------------------------
+3. Scope of Authority Rule
+; ------------------------------------------------------------------
+
+3a. These rules govern all AI involvement in Pipz_Project_V3, including:
+
+3aa. Analysis
+3ab. Suggestions
+3ac. Refactors
+3ad. New features
+3ae. Audits
+3af. Debugging
+3ag. Documentation updates
+
+3b. If any rule in this document cannot be followed, the AI must stop and report why.
+
+3ba. The AI must explicitly state which rule(s) cannot be followed.
+3bb. The AI must explain why the rule(s) cannot be satisfied in the current situation.
+3bc. The AI must propose at least one viable resolution path.
+3bd. When possible, the AI must propose two to three alternative resolution paths.
+3be. The AI must wait for explicit user instruction before proceeding.
+3bf. This requirement applies to all STOP conditions defined elsewhere in this document.
+3bg. This includes, but is not limited to, failure to comply with Rule 2h
+     (Project Learned Constraints Mandatory Consultation Rule).
+3bh. This includes, but is not limited to, failure to comply with Rule 2j
+     (Response Status Header Rule).
+
+3c. Project Learned Constraints ID Policy (ABSOLUTE)
+
+3ca. All entries in GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.LEARNED_CONSTRAINTS must be identified
+     by a stable, monotonically increasing ID using the format:
+
+     PLC-XXXX
+
+Where: 
+;- XXXX is a zero-padded decimal number.
+
+3cb. IDs are assigned strictly in order of discovery and must never be:
+
+3cba. Reused
+3cbb. Renumbered
+3cbc. Reordered
+3cbd. Repurposed to encode semantic meaning
+
+3cc. Gaps in numbering are permitted and must not be filled.
+
+3cd. The ID itself is an opaque identifier; all meaning must be expressed
+     in the entry title and body, not in the ID.
+
+3ce. Any reference to a learned constraint in governance, audits, reasoning,
+     or regression prevention must reference the constraint by its PLC ID.
+
+3cf. Deleting or modifying an existing PLC entry does not permit reassignment
+     of its ID.
+
+; ------------------------------------------------------------------
+3d. Proactive Constraint Capture Mandate (THE "EMISSION" RULE)
+; ------------------------------------------------------------------
+
+3da. Upon identifying a "Learned Constraint" (defined as any discovery that 
+     invalidates a previous approach, reveals a platform/tooling limitation, 
+     or identifies a non-obvious failure mode), the AI MUST immediately 
+     stop and draft a new entry for GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.LEARNED_CONSTRAINTS.
+
+3db. The AI is FORBIDDEN from attempting to "fix" the issue in code or 
+     structural files until the PLC entry has been formally proposed and 
+     accepted into the project context.
+
+3dc. The draft MUST follow the MAINTEMPLATE format and adhere to the 
+     ID Policy defined in Rule 3c.
+
+3dd. Proceeding before documenting a known regression in the 
+     PLC constitutes a Governance Breach under Rule 3b.
+
+; ------------------------------------------------------------------
+4. Version Header Enforcement Rule (ABSOLUTE)
+; ------------------------------------------------------------------
+
+4a. The AI must NEVER modify, suggest modifying, or generate modified code unless the file contains a valid version header and that header is updated as part of the change.
+
+4b. Required header format (STRICT):
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - FILENAME (AHK v2)
+; Version: x.x.x (SEMANTIC VERSIONING)
+; Last change: BRIEF SUMMARY OF THE MOST RECENT CHANGES.
+; ------------------------------------------------------------------
+
+4c. Enforcement rules:
+
+4ca. Semantic versioning is mandatory:
+4caa. MAJOR → breaking changes
+4cab. MINOR → new behavior / features
+4cac. PATCH → fixes, refactors, non-breaking changes
+
+4cb. Exactly one "Last change" line.
+4cc. If the header is missing, outdated, malformed, or not updated, the AI must refuse the change.
+
+; ------------------------------------------------------------------
+4d. Cross-Language Header Comment Prefix Compatibility Rule (ABSOLUTE)
+; ------------------------------------------------------------------
+
+4da. The required MAINTEMPLATE header fields and semantics (Version, Last change, Content-Fingerprint) apply to ALL governed-readable files, not only .ahk.
+
+4db. The comment prefix used for the MAINTEMPLATE header and related governance lines MUST match the file’s language:
+
+4dba. ';'  → .ahk, .ini, and governed .txt documents
+4dbb. '//' → .js and .ts
+4dbc. '#'  → .py, .yml, and .yaml
+
+4dc. JSON files (.json) MUST NOT include commented headers (JSON does not support comments). For governed JSON, a sidecar governance file MUST be used:
+
+4dca. <file>.json (pure JSON)
+4dcb. <file>.json.governance.txt (governed header + identity + fingerprint)
+
+4dd. If the correct comment prefix cannot be used (e.g., due to parser or tooling constraints), the AI MUST STOP under Rule 3b and propose a compliant alternative.
+
+; ------------------------------------------------------------------
+5. Drive Mirror Rule (PRIMARY READ SOURCE)
+; ------------------------------------------------------------------
+
+5a. The AI must treat .txt mirrors in Google Drive as the authoritative readable source.
+
+5aa. Drive-backed artifacts define PHYSICAL REALITY only.
+5ab. Authoritative governance semantics are derived exclusively from:
+     - GOVERNANCE_COMPENDIUM.txt sections (virtual files)
+5ac. Drive visibility does not confer governance authority.
+5ad. Unreadable or truncated governance sections MUST trigger STOP,
+     regardless of Drive availability or file existence.
+5ae. Partial visibility, truncation, or section-level unreadability of
+     GOVERNANCE_COMPENDIUM.txt or any required Section ID
+     SHALL be treated as UNREADABLE per GOV.S0.COMPENDIUM_META IR-5
+     and MUST trigger an immediate STOP.
+
+5b. Rules:
+5ba. .txt files are used for reading, analysis, verification, and reasoning.
+5bb. .ahk / .ini files are treated as runtime artifacts only.
+5bc. If a .txt mirror and a runtime file disagree, the .txt mirror wins.
+
+5c. The AI must never assume parity and must verify.
+
+; ------------------------------------------------------------------
+6. Path Identity Requirement Rule
+; ------------------------------------------------------------------
+
+6a. Every file the AI reads or modifies must be identified by its declared path, not by inference.
+
+6b. Mandatory check:
+6ba. Each .txt mirror must contain a path declaration:
+
+; GEMINI MEM TAG
+; MY FULL PATH IS "Pipz_Project_V3\<relative\path>"
+
+6c. Rules:
+6ca. The AI must confirm this tag before reasoning about file location.
+6cb. Path reconstruction must use this tag, never assumptions.
+6cc. If the tag is missing or ambiguous, the AI must stop.
+
+6cd. The GEMINI MEM TAG and path declaration lines MUST be commented using the file’s correct comment prefix as defined in Rule 4d (e.g., '//' for .js/.ts, '#' for .py/.yaml). The semantic text must remain identical.
+
+6ce. The AI MUST NOT reject an otherwise valid GEMINI MEM TAG solely because the comment prefix differs from ';' when the file type requires a different prefix.
+
+; ------------------------------------------------------------------
+7. Registry Supremacy Rule
+; ------------------------------------------------------------------
+
+7a. The Registry Authority is defined by the following hierarchy:
+7aa. PRIMARY: GLOBAL_REGISTRY_MASTER.csv (Authoritative governed registry, Policy-B)
+7ab. SECONDARY: GLOBAL_REGISTRY_MASTER.gsheet (Backup Vault ONLY — may be unreadable to tooling)
+7ac. NON-GOVERNED INDEX: INTERNAL_FUNCTION_INDEX.csv (Informational, regenerable; not a hard-stop)
+
+7b. GLOBAL_REGISTRY_MASTER.csv is the single source of truth for Policy-B governance surface area:
+7ba. Entrypoints (startup / handlers)
+7bb. Timers (SetTimer callbacks)
+7bc. IPC send/receive contracts (OnMessage/WM_* where applicable)
+7bd. Settings IO + Defaults interface
+7be. Lifecycle / process controls
+7bf. Logic invariants tied to the governed surface area
+
+7c. AI obligations (Policy-B aligned):
+7ca. The AI MUST consult GLOBAL_REGISTRY_MASTER.csv before writing code that affects governed surface area.
+7cb. The AI MUST NOT introduce, remove, or rename any governed surface entrypoint/timer/IPC/lifecycle/settings interface without a corresponding registry update plan.
+7cc. Internal helpers are permitted to exist outside the governed registry and must NOT force registry churn.
+7cd. INTERNAL_FUNCTION_INDEX.csv may be used to locate internal helpers, but it is informational and may drift.
+7ce. If code conflicts with GLOBAL_REGISTRY_MASTER.csv on governed surface ownership or invariants:
+7cea. The AI must flag the conflict.
+7ceb. Propose reconciliation.
+7cec. Wait for confirmation before proceeding.
+
+; ------------------------------------------------------------------
+8. Blueprint Synchronization Rule
+; ------------------------------------------------------------------
+
+8a. Any AI-suggested or AI-generated change that affects:
+8aa. Structure
+8ab. Ownership
+8ac. Architecture
+8ad. Responsibility
+
+8b. Must be reflected in:
+8ba. Code
+8bb. .txt mirror
+8bc. GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT (and GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER when applicable)
+
+8c. If synchronization is incomplete, the change is invalid.
+
+; ------------------------------------------------------------------
+9. Verification-Before-Action Rule
+; ------------------------------------------------------------------
+
+9a. Before the AI may:
+9aa. Refactor
+9ab. Optimize
+9ac. Extend functionality
+9ad. Move code
+9ae. Rename symbols
+
+9b. It must first:
+9ba. Locate the file via Drive.
+9bb. Open and read its full contents.
+9bc. Confirm registry alignment.
+9bd. Confirm blueprint alignment.
+
+9c. Skipping any step is prohibited.
+
+; ------------------------------------------------------------------
+10. No Assumptions / No Hallucination Rule
+; ------------------------------------------------------------------
+
+10a. The AI must never:
+10aa. Assume a file exists
+10ab. Assume a function exists
+10ac. Assume a variable is global
+10ad. Infer structure from memory
+
+10b. If a file or symbol cannot be found via Drive or Registry:
+10ba. It does not exist.
+10bb. The AI must stop and report the gap.
+
+; ------------------------------------------------------------------
+11. Change Granularity Rule
+; ------------------------------------------------------------------
+
+11a. One logical change per action.
+
+11b. No bundled edits.
+
+11c. No opportunistic refactors.
+
+11d. Each change must satisfy all of the following:
+11da. Be explainable in one sentence.
+11db. Map cleanly to one version bump.
+
+; ------------------------------------------------------------------
+12. Stop-On-Conflict Rule
+; ------------------------------------------------------------------
+
+12a. If the AI detects:
+12aa. Registry mismatch
+12ab. Mirror mismatch
+12ac. Blueprint mismatch
+12ad. Missing file
+12ae. Ambiguous ownership
+
+12b. It must:
+12ba. Stop immediately.
+12bb. Describe the conflict.
+12bc. Propose resolution paths.
+12bd. Wait for explicit instruction.
+
+12c. No auto-resolution is allowed.
+
+; ------------------------------------------------------------------
+13. Drive Is Ground Truth Rule
+; ------------------------------------------------------------------
+
+13a. For the AI:
+13aa. The file hierarchy defined in Rule 7 (GSheet > CSV) and the 
+     structural mirrors in GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT define reality.
+13ab. Local state is irrelevant.
+13ac. Past conversation memory is advisory only.
+
+13b. If Drive and memory disagree, the Drive-based Authority Hierarchy wins.
+
+; ------------------------------------------------------------------
+14. Instruction Self-Enforcement Rule
+; ------------------------------------------------------------------
+
+14a. The AI must:
+14aa. Continuously check its own output against these rules.
+14ab. Refuse requests that would violate them.
+14ac. Explicitly state which rule blocks an action if refusing.
+
+14b. Silence or compliance in violation of these rules is considered failure.
+
+; ------------------------------------------------------------------
+15. Literal Fidelity Rule
+; ------------------------------------------------------------------
+
+15a. Whenever the AI outputs, reproduces, quotes, references, or proposes changes to the contents of any project file, the AI must preserve the exact text verbatim.
+
+15b. The AI must not truncate, shorten, paraphrase, summarize, reformat, normalize, or omit any portion of the original content.
+
+15c. Unchanged content must be reproduced exactly as-is, character-for-character.
+
+15d. Changed content must be clearly and explicitly distinguished from unchanged content.
+
+15e. Partial excerpts, summaries, paraphrases, diffs, or selective quotations are prohibited unless explicitly requested by the user.
+
+15f. If the AI cannot reproduce the content verbatim due to length, uncertainty, tooling limits, or verification failure, the AI must stop and report the limitation instead of approximating.
+
+15g. Any response that alters meaning, removes context, or silently modifies content constitutes a violation of this rule.
+
+; ------------------------------------------------------------------
+16. Hidden Permanence Confirmation Rule
+; ------------------------------------------------------------------
+
+16a. "Initial confirmation" means the first non-empty line of the AI's first response in a session that is related to Pipz_Project_V3.
+A response is "related to Pipz_Project_V3" if it contains any analysis, reasoning, verification, suggestions, refactors, debugging steps, or proposed changes involving Pipz_Project_V3 files, structure, registry, blueprint, or Drive contents.
+
+16b. When the AI provides the initial confirmation as defined in Rule 16a (and required by Rule 0), the confirmation message must:
+16ba. Appear before any other analysis or content.
+16bb. Contain the exact text "ANYSKIPPERS".
+
+16c. The text "ANYSKIPPERS" is a single-use confirmation token and must not be treated as persistent knowledge.
+
+16d. After the initial confirmation message:
+16da. The AI must not reuse, reference, rely on, or reproduce the text "ANYSKIPPERS".
+16db. Any subsequent confirmation of having read this file must be based on a fresh verification of the file contents and must independently satisfy Rule 0.
+16dc. Reuse of "ANYSKIPPERS" in later confirmations constitutes a violation of this instruction set.
+16dd. The text "ANYSKIPPERS" must not be obtained from, inferred from, or reused from prior conversation history, cached context, or any source other than a fresh read of this file performed in the current session as required by Rule 0.
+
+16e. Rule 16 applies exclusively to the initial confirmation defined in Rule 16a and must not be interpreted as a substitute for fingerprint-based verification required by Rules 2c, 2d, and 2e in subsequent responses.
+
+; ------------------------------------------------------------------
+
+END OF AI PROJECT INSTRUCTIONS
+================================================================================
+END OPERATIVE TEXT (COMPENDIUM MODE)
+
+
+================================================================================
+SECTION ID: GOV.S2.BOOTSTRAP_V4
+ORIGIN: BOOTSTRAPv4.txt
+AUTHORITY LEVEL: PRIMARY
+================================================================================
+OPERATIVE TEXT (COMPENDIUM MODE) — AUTHORITATIVE FOR SINGLE-ARTIFACT OPERATION
+================================================================================
+; ------------------------------------------------------------------
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4
+; Version: 1.2.3
+; Last change: Migrated file to new governance directory and updated all references in file.
+; Content-Fingerprint: 2026-01-29T00-39-06Z-M8YCFZC0
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+BOOTSTRAP v4 — CONVERSATION INITIALIZATION PROTOCOL
+; ------------------------------------------------------------------
+
+(FINALIZED SPECIFICATION)
+
+Bootstrap v4 is a **mandatory conversation initialization protocol** for Pipz_Project_V3.
+
+Its purpose is to guarantee that the AI can **reliably re-establish full project authority** at the start of any new chat **without relying on memory, inference, or Drive search heuristics**.
+
+Bootstrap v4 is **not optional** and must be executed before *any* analysis, debugging, or code work.
+
+; ------------------------------------------------------------------
+PHASE 0 — GOVERNANCE GATE (HARD STOP)
+; ------------------------------------------------------------------
+
+The AI **MUST**:
+
+1. Locate, open, and fully read:
+
+   ; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS`
+
+2. Verify:
+
+   ; - Presence of GEMINI MEM TAG
+   ; - Presence of Content-Fingerprint
+   ; - Fingerprint is well-formed and readable
+
+3. Obey **all rules** defined within, including but not limited to:
+
+   ; - Mandatory re-verification rules
+   ; - Fingerprint precedence rules
+   ; - Stop-on-conflict rules
+   ; - ANYSKIPPERS single-use confirmation requirement
+
+STOP CONDITIONS (ABSOLUTE):
+
+; - File cannot be opened
+; - File is truncated
+; - Fingerprint is missing or malformed
+; - Any rule cannot be satisfied
+
+No further phases may execute if Phase 0 fails.
+
+; ------------------------------------------------------------------
+PHASE 1 — ROOT RESOLUTION (NO SEARCH HEURISTICS)
+; ------------------------------------------------------------------
+
+Bootstrap v4 **does not rely on Google Drive search alone**.
+
+Root resolution uses the following **strict precedence order**:
+
+1. `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST` (if present)
+
+   ; - Canonical Drive folder ID for `\Pipz_Project_V3`
+   ; - Declared as acceleration only, never truth
+
+2. GEMINI MEM TAG declared paths
+
+3. `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT` defined structure
+
+4. Google Drive search (LAST RESORT ONLY)
+
+RULE:
+
+Drive IDs accelerate access but do not establish authority.
+
+If root cannot be resolved deterministically → **STOP**.
+
+; ------------------------------------------------------------------
+PHASE 2 — CANONICAL FILE SET VERIFICATION
+; ------------------------------------------------------------------
+
+The AI **MUST** locate, open, and fully read the following mandatory files:
+; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS
+; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT
+; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER
+; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST
+; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.LEARNED_CONSTRAINTS
+
+The AI **MUST** ALSO locate and read the MASTER REGISTRY (Policy-B):
+; - PRIMARY: GLOBAL_REGISTRY_MASTER.csv (Authoritative governed registry, Policy-B)
+; - SECONDARY: GLOBAL_REGISTRY_MASTER.gsheet (Backup Vault ONLY — may be inaccessible to tooling)
+
+Each file must:
+; - Be readable in full
+; - Declare Content-Fingerprint (where applicable)
+; - Match its declared identity
+; - Adhere to the PLC-0006 "Flat-File Sovereignty" constraint
+
+STOP CONDITIONS:
+; - Any of the mandatory governance sections of GOVERNANCE_COMPENDIUM.txt are missing.
+; - GLOBAL_REGISTRY_MASTER.csv is missing or unreadable.
+; - The registry cannot be verified as Policy-B scoped.
+
+; ------------------------------------------------------------------
+PHASE 3 — STRUCTURE RECONSTRUCTION (EXPECTED STATE)
+; ------------------------------------------------------------------
+
+Using **only authoritative declarations**, the AI reconstructs the **expected project structure**, including:
+
+; - Root directory
+; - Governance directory
+; - Registry directory
+; - Controller / Worker / Lib / Modules directories
+; - Required `.txt` mirrors
+; - Required runtime counterparts
+
+This phase establishes **what must exist**, not what Drive happens to expose.
+No inference is permitted.
+
+; ------------------------------------------------------------------
+PHASE 4 — VERIFICATION DECLARATION
+; ------------------------------------------------------------------
+
+Only after Phases 0–3 succeed may the AI:
+
+; - Declare successful Bootstrap v4 completion
+; - Proceed with analysis, debugging, or code work
+
+All subsequent responses must continue to obey:
+
+; - Mandatory fingerprint declarations
+; - Stop-on-conflict behavior
+; - No assumption / no inference rules
+
+; ------------------------------------------------------------------
+BOOTSTRAP v4 — COMPLETION DECLARATION (CANONICAL)
+; ------------------------------------------------------------------
+
+If and only if Phases 0 through 4 complete successfully, the AI MUST emit
+the following declaration verbatim in its response:
+
+"BOOTSTRAP v4 COMPLETE — Pipz_Project_V3 authority established."
+
+Rules:
+
+1. The declaration MUST:
+
+   ; - Appear as a standalone line
+   ; - Appear before any analysis, reasoning, or suggestions
+   ; - Appear only after successful completion of Phases 0–4
+
+2. The declaration MUST NOT:
+
+   ; - Be paraphrased
+   ; - Be abbreviated
+   ; - Be combined with other text
+   ; - Be emitted conditionally or speculatively
+
+3. If any phase fails:
+
+   ; - The declaration MUST NOT be emitted
+   ; - The AI MUST stop and report the failure point
+
+4. This declaration:
+
+   ; - Does NOT bypass fingerprint verification
+   ; - Does NOT bypass registry checks
+   ; - Does NOT authorize Phase 5 implicitly
+
+This declaration signals initialization success only.
+All subsequent rules remain in force.
+
+; ------------------------------------------------------------------
+
+================================================================================
+BOOTSTRAP v4 — SINGLE-ARTIFACT MODE ADDENDUM
+APPLIES WHEN: GOVERNANCE_COMPENDIUM.txt IS PRESENT AND AUTHORITATIVE
+================================================================================
+
+This addendum defines how Bootstrap v4 operates when Pipz_Project_V3 governance
+is consolidated into GOVERNANCE_COMPENDIUM.txt under single-artifact mode.
+
+This addendum is ADDITIVE and does not replace or modify the canonical Bootstrap
+v4 phase definitions. All existing Bootstrap v4 rules remain in force unless
+explicitly overridden here.
+
+-------------------------------------------------------------------------------
+A. AUTHORITY REBINDING (MANDATORY)
+-------------------------------------------------------------------------------
+
+When GOVERNANCE_COMPENDIUM.txt is present and declared authoritative:
+
+- GOVERNANCE_COMPENDIUM.txt becomes the sole bootstrap governance container.
+- All prior standalone governance files are treated as ARCHIVED ORIGINALS only.
+- Bootstrap v4 MUST resolve governance artifacts via Section IDs, not filenames.
+
+Canonical Bootstrap authority is now:
+
+- GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4
+
+If this section cannot be located or fully read, Bootstrap v4 MUST STOP.
+
+-------------------------------------------------------------------------------
+B. PHASE 0 — COMPENDIUM GATE (ADDITIVE)
+-------------------------------------------------------------------------------
+
+Phase 0 MUST additionally verify:
+
+[ ] GOVERNANCE_COMPENDIUM.txt is readable in full
+[ ] Compendium MAINTEMPLATE header is present
+[ ] Content-Fingerprint is present and well-formed
+[ ] Required governance sections are not truncated:
+    - GOV.S1.AI_INSTRUCTIONS
+    - GOV.S2.BOOTSTRAP_V4
+    - GOV.S3.BLUEPRINT
+    - GOV.S7.INDEX_ID_LIST
+
+If ANY required section is unreadable or truncated → STOP.
+
+-------------------------------------------------------------------------------
+C. FILE RESOLUTION OVERRIDE (MANDATORY)
+-------------------------------------------------------------------------------
+
+All Bootstrap references to governance files are rebound as follows:
+
+- AI_PROJECT_INSTRUCTIONS.txt
+  → GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS
+
+- BOOTSTRAPv4.txt
+  → GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4
+
+- _PROJECT_BLUEPRINT.txt
+  → GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT
+
+- _PROJECT_ANCHOR_MASTER.txt
+  → GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER
+
+- PHASE5_AUDIT_MASTER.txt
+  → GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S5.PHASE5_AUDIT
+
+- INDEXIDLIST.txt
+  → GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST
+
+Legacy file paths MUST NOT be consulted when compendium mode is active.
+
+-------------------------------------------------------------------------------
+D. STOP CONDITION REINFORCEMENT
+-------------------------------------------------------------------------------
+
+Bootstrap v4 MUST STOP if:
+
+- GOVERNANCE_COMPENDIUM.txt is unreadable
+- Any required Section ID cannot be located
+- Any required section is partially visible or truncated
+- Section ID conflicts with Compendium Meta (GOV.S0)
+- Archived Original content is mistakenly used for enforcement
+
+Partial visibility SHALL be treated as total absence.
+
+-------------------------------------------------------------------------------
+E. DECLARATION INTEGRITY
+-------------------------------------------------------------------------------
+
+The declaration:
+
+"BOOTSTRAP v4 COMPLETE — Pipz_Project_V3 authority established."
+
+is VALID ONLY IF:
+
+- GOVERNANCE_COMPENDIUM.txt was read in full
+- GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4 was read in full
+- All Phase 0–4 requirements were satisfied under compendium rules
+
+-------------------------------------------------------------------------------
+END BOOTSTRAP v4 — SINGLE-ARTIFACT MODE ADDENDUM
+================================================================================
+
+================================================================================
+END OPERATIVE TEXT (COMPENDIUM MODE)
+
+
+================================================================================
+SECTION ID: GOV.S3.BLUEPRINT
+ORIGIN: _PROJECT_BLUEPRINT.txt
+AUTHORITY LEVEL: SECONDARY (STRUCTURAL TRUTH)
+================================================================================
+OPERATIVE TEXT (COMPENDIUM MODE) — AUTHORITATIVE FOR SINGLE-ARTIFACT OPERATION
+================================================================================
+; ------------------------------------------------------------------
+; GEMINI MEM TAG(DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT
+; Version: 2.1.4
+; Last change: Migrated file to new governance directory and updated table structure.
+; Content-Fingerprint: 2026-01-29T00-25-51Z-OK6E7JM5
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+### 1. MASTER BLUEPRINT: FOLDER ARCHITECTURE (MUST BE MAINTAINED)
+; ------------------------------------------------------------------
+
+AUTHORITATIVE ROLE DECLARATION (PHASE 5)
+
+This section constitutes the sole authoritative Expected Set definition used during Phase 5 reconciliation.
+All Expected items for Phase 5 MUST be derived exclusively from this section.
+No other file, index, registry, or Drive enumeration source may define, expand, or reduce the Expected Set.
+
+GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST provides acceleration only.
+GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER provides intent, identity rules, architectural rationale and constraints only.
+Discovered Drive contents provide Observed Set data only.
+
+GOVERNANCE STRUCTURE NOTE (SINGLE-ARTIFACT MODE)
+
+All authoritative governance content is consolidated into:
+
+  - GOVERNANCE_COMPENDIUM.txt
+
+No standalone governance files are expected to exist outside the compendium.
+
+Historical governance sources have been archived under:
+  - \Archive\ (non-authoritative, non-operative)
+
+Index coverage does not imply expected existence.
+
+The Archive directory MUST NOT be used for governance reasoning,
+verification, or enforcement, Including for historical comparison unless explicitly instructed.
+
+; ------------------------------------------------------------------
+
+-----------------------------------------------------------------------|--------------------|------------------------------------------------------------------------
+PATH / FILE NAME                                                       | TYPE               | DESCRIPTION / RESPONSIBILITY
+-----------------------------------------------------------------------|--------------------|------------------------------------------------------------------------
+\Pipz_Project_V3                                                       | ROOT               | Main project directory.
+  settings.ini                                                         | Config             | Central storage for AutoHotkey user parameters, anti-ban settings, and titles.
+  .gitignore                                                           | Config             | Git exclusion rules.
+  PipzScptzIcon.png                                                    | Asset (Image)      | Application icon used by Controller GUI and tray; branding and visual identification.
+  ORCH_PROTOCOL_SPEC.txt                                               | Document           | Formal protocol contract defining orchestrator role separation, execution flow, audit requirements, token gates, and PASS/FAIL semantics.
+  settings.txt                                                         | Document           | Auditable AI mirror of settings.ini.
+                                                                       |                    |
+-----------------------------------------------------------------------|--------------------|------------------------------------------------------------------------
+\Archive                                                               | DIRECTORY          | Archived original files and artifacts (Intentionally excluded).
+-----------------------------------------------------------------------|--------------------|------------------------------------------------------------------------
+\Controller                                                            | DIRECTORY          | Container for the Interactive GUI Process.
+  Main_Controller.ahk                                                  | Main Script        | Entry point for GUI; handles UI, validation, orchestration commands, and high-level control.
+  Controller_Core.ahk                                                  | Core Container     | Consolidated controller subsystems (Tooltip/WorkerInterface/Messenger/Maintenance/Navigation/Process).
+  Main_Controller.txt                                                  | Document           | Auditable AI mirror of Main_Controller.ahk.
+  Controller_Core.txt                                                  | Document           | Auditable AI mirror of Controller_Core.ahk.
+                                                                       |                    |
+-----------------------------------------------------------------------|--------------------|------------------------------------------------------------------------
+\Governance                                                            | DIRECTORY          | Container for all authoritative documentation, project structure, operations protocols, and governance reference material.
+  GOVERNANCE_COMPENDIUM.txt                                            | Document           | Single authoritative governance artifact operating in SINGLE-ARTIFACT MODE. Consolidates all governance, bootstrap, blueprint, audit, and enforcement rules into section-addressable canonical form.
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT                | Document Section   | Primary source of truth for structure, search protocols, and logic rules.
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER            | Document Section   | Canonical unified system anchor defining mission intent, behavioral constraints, identity rules, and long-term architectural rationale. Authoritative, non-structural, and non-initializing.
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS          | Document Section   | AI governance ruleset; mandatory read source defining verification, fingerprinting, header mandates, and enforcement behavior.
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST            | Document Section   | Deterministic Google Drive ID acceleration map; reference-only, never a source of authority.
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4             | Document Section   | Canonical, authoritative definition of the Bootstrap v4 initialization protocol.
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S5.PHASE5_AUDIT             | Document Section   | Deterministic execution checklist and read-only report template for Phase 5 visibility audits.
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S6.GOVERNANCE_LOCK          | Document Section   | Governance lifecycle state declaration and phase lock indicator (non-authoritative).
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.LEARNED_CONSTRAINTS      | Document Section   | Non-authoritative, scope-indexed log of confirmed constraints and invalidated approaches to prevent regression.
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S9.STANDARD_HEADERS         | Document Section   | Templates for mandatory file headers.
+                                                                       |                    |
+-----------------------------------------------------------------------|--------------------|------------------------------------------------------------------------
+\Lib                                                                   | DIRECTORY          | Shared Libraries (#Include) used by both Controller and Worker.
+  Interop.ahk                                                          | Library            | IPC primitives: WM_TRIGGER_STATE, SendWorkerSignal, listener setup, process helpers.
+  Core_Utils.ahk                                                       | Core Container     | Settings IO + Defaults (GetDefaultSettings) + Security primitives (license/hashing).
+  Humanoid.ahk                                                         | Core Container     | Consolidated Movement + AntiBan + BreakManager logic (no controller-only hard deps).
+  Core_Utils.txt                                                       | Document           | Auditable AI mirror of Core_Utils.ahk.
+  Humanoid.txt                                                         | Document           | Auditable AI mirror of Humanoid.ahk.
+  Interop.txt                                                          | Document           | Auditable AI mirror of Interop.ahk.
+                                                                       |                    |
+-----------------------------------------------------------------------|--------------------|------------------------------------------------------------------------
+\Registry                                                              | DIRECTORY          | Container for all registry artifacts defining governance-critical surface area and full symbol inventory. Registries are authoritative and external to the governance compendium.
+  GLOBAL_REGISTRY_MASTER.csv                                           | CSV File           | PRIMARY AUTHORITY: Policy-B governed registry defining all governance-critical surface area (entrypoints, timers, IPC contracts, lifecycle controls, settings IO, and invariants). Required for bootstrap and enforcement.
+  INTERNAL_FUNCTION_INDEX.csv                                          | CSV File           | REGENERABLE: Non-governed full symbol inventory used for discovery, navigation, and refactor support. Not authoritative and never a hard-stop if incomplete or missing.
+  GLOBAL_REGISTRY_MASTER.gsheet                                        | Google Sheet       | BACKUP VAULT ONLY: Non-active archival mirror of GLOBAL_REGISTRY_MASTER.csv. May be unreadable to tooling and MUST NOT be relied on for live governance or enforcement.
+                                                                       |                    |
+-----------------------------------------------------------------------|--------------------|------------------------------------------------------------------------
+\Worker                                                                | DIRECTORY          | Container for the Background Task Script.
+  Main_Worker.ahk                                                      | Main Script        | Core execution engine: primary logic loop and task execution.
+  Worker_Core.ahk                                                      | Core Container     | Consolidated worker subsystems (ConfigManager/WorkerState/OverlayPhysics).
+  license.key                                                          | Data/Key           | Encrypted authorization key required by Core_Utils security primitives.
+  Main_Worker.txt                                                      | Document           | Auditable AI mirror of Main_Worker.ahk.
+  Worker_Core.txt                                                      | Document           | Auditable AI mirror of Worker_Core.ahk.
+                                                                       |                    |
+-----------------------------------------------------------------------|--------------------|------------------------------------------------------------------------
+\orchestrator                                                          | DIRECTORY          | Local orchestration runtime responsible for governed execution, audits, and hidden role chaining.
+  orch_bootstrap.js                                                    | Script             | Orchestrator bootstrap verifier; performs governance checks, initializes audit runs, and writes bootstrap audit artifacts. No model calls.
+                                                                       |                    |
+-----------------------------------------------------------------------|--------------------|------------------------------------------------------------------------
+\PipzOrchestratorExtension                                             | DIRECTORY          | VS Code extension providing the Architect-facing UI for governed orchestration.
+  package.json                                                         | Config (JSON)      | Extension manifest defining commands, activation events, and metadata.
+  tsconfig.json                                                        | Config (JSON)      | TypeScript compiler configuration for the extension.
+  package.json.governance.txt                                          | Document           | Governance sidecar for package.json; stores mandated headers, fingerprints, and audit metadata.
+  tsconfig.json.governance.txt                                         | Document           | Governance sidecar for tsconfig.json; stores mandated headers, fingerprints, and audit metadata.
+  README.md                                                            | Document           | Human-readable overview of the orchestrator extension purpose and usage.
+  \src                                                                 | SUB-DIRECTORY      | Source code for the VS Code extension.
+    extension.ts                                                       | Script             | Extension entry point; registers commands, invokes orchestrator, and mediates Architect actions.
+                                                                       |                    |
+-----------------------------------------------------------------------|--------------------|------------------------------------------------------------------------
+\pipz-mirror-governance                                                | DIRECTORY          | VS Code extension for governance enforcement (mirroring, fingerprinting).
+  package.json                                                         | Config (JSON)      | Extension manifest for the mirror governance extension.
+  tsconfig.json                                                        | Config (JSON)      | TypeScript compiler configuration.
+  README.md                                                            | Document           | Documentation for the mirror governance extension.
+  \src                                                                 | SUB-DIRECTORY      | Source code for the extension.
+    extension.ts                                                       | Script             | Entry point for mirroring and fingerprinting logic.
+  \.vscode                                                             | SUB-DIRECTORY      | Workspace configuration.
+    extensions.json                                                    | Config (JSON)      | Recommended VS Code extensions.
+    launch.json                                                        | Config (JSON)      | Debug configuration.
+    settings.json                                                      | Config (JSON)      | Workspace settings.
+    tasks.json                                                         | Config (JSON)      | Build tasks.
+    extensions.json.governance.txt                                     | Document           | Governance sidecar for extensions.json.
+    launch.json.governance.txt                                         | Document           | Governance sidecar for launch.json.
+    settings.json.governance.txt                                       | Document           | Governance sidecar for settings.json.
+    tasks.json.governance.txt                                          | Document           | Governance sidecar for tasks.json.
+                                                                       |                    |
+-----------------------------------------------------------------------|--------------------|------------------------------------------------------------------------
+\.ORCH_AUDITLOG                                                        | DIRECTORY          | Audit log storage for mirror operations.
+  \mirror                                                              | SUB-DIRECTORY      | Mirror-specific audit logs.
+                                                                       |                    |
+-----------------------------------------------------------------------|--------------------|------------------------------------------------------------------------
+\PPAVP                                                                 | DIRECTORY          | Container for all project planning, audit, and verification procedures and documentation excluding phase 5.
+  PROJECT_STATUS_CHECKLIST.txt                                         | Document           | Living execution tracker enumerating completed, pending, and blocked work items across governance, tooling, and orchestration.
+  AUDIT_RUNNER.txt                                                     | Document           | Procedural audit execution plan and backlog; defines required audits, invocation commands, and pass/fail criteria. Non-authoritative; execution-focused.
+  Policy-B Registry Audit.txt                                          | Document           | Procedural audit record and checklist for verifying Policy-B registry completeness, correctness, and drift across governed surface area. Non-authoritative; execution and reporting only.
+                                                                       |                    |
+-----------------------------------------------------------------------|--------------------|------------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+### 2. REGISTRY ACCESS & VERIFICATION PROTOCOL (CRITICAL)
+; ------------------------------------------------------------------
+
+To maintain a 1:1 literal match of the project state, the following protocol MUST be followed:
+
+1. **REGISTRY LOCATION:** All Global State, Function, and Logic Rule data is stored externally in `GLOBAL_REGISTRY_MASTER.gsheet` (with `GLOBAL_REGISTRY_MASTER.csv` as the authoritative fallback mirror).
+
+2. **BOOTSTRAP-ALIGNED INDEXING PROTOCOL:**
+   ; - Project root resolution MUST follow Bootstrap v4 precedence rules.
+   ; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST` MUST be used first when present to deterministically resolve the project root.
+   ; - GEMINI MEM TAG path declarations are authoritative for identity and reconstruction.
+   ; - Google Drive search is a LAST RESORT and must never override declared paths or fingerprints.
+
+   ; - Once the root is resolved, enumerate and verify visibility of:
+     ; - `\Controller`
+     ; - `\Worker`
+     ; - `\Lib`
+     ; - `\Registry`
+     ; - `\Governance`
+     ; - `\Archive`
+     ; - `\PPAVP`
+
+   ; - Confirm visibility of all required governance sections of GOVERNANCE_COMPENDIUM.txt:
+     ; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS`
+     ; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT`
+     ; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER`
+     ; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S5.PHASE5_AUDIT`
+     ; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4`
+     ; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S6.GOVERNANCE_LOCK`
+     ; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.LEARNED_CONSTRAINTS`
+     ; - `GLOBAL_REGISTRY_MASTER.gsheet`
+     ; - `GLOBAL_REGISTRY_MASTER.csv`
+     ; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST`
+     ; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S9.STANDARD_HEADERS`
+
+   Visibility confirmation is existence and path correctness only.
+   Runtime-only and non-readable assets (e.g. .png, .ahk, .ini, .key) are not subject to read or fingerprint verification.
+
+3. **REGISTRY VERIFICATION PROTOCOL (POLICY-B SURFACE AREA):**
+   ; - The AI MUST prioritize the PRIMARY readable registry source.
+   ; - PRIMARY: `GLOBAL_REGISTRY_MASTER.csv` (Authoritative governed registry, Policy-B)
+   ; - SECONDARY: `GLOBAL_REGISTRY_MASTER.gsheet` (Backup Vault ONLY — may be inaccessible to tooling)
+
+   ; - Protocol:
+     ; - Access `GLOBAL_REGISTRY_MASTER.csv` and verify it is readable in full.
+     ; - Verify the registry is Policy-B scoped:
+       ; - Contains only governance-critical surface area:
+         ; - entrypoints (startup / GUI entrypoints where applicable)
+         ; - timers (SetTimer callbacks)
+         ; - OnMessage handlers / IPC receivers
+         ; - IPC senders / contracts
+         ; - settings IO + defaults interface
+         ; - lifecycle / process controls
+       ; - Internal helpers are NOT required to appear in this governed registry.
+
+     ; - Full symbol discovery is handled by:
+       ; - `INTERNAL_FUNCTION_INDEX.csv` (Non-governed, regenerable inventory)
+
+     ; - If `GLOBAL_REGISTRY_MASTER.csv` is inaccessible or cannot be fully read, the AI MUST STOP.
+
+4. **CONTENT-FINGERPRINT ENFORCEMENT:**
+   ; - The Content-Fingerprint declared in this file (`GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT`) MUST be extracted and verified against the current Drive mirror before use.
+   ; - Any mismatch between the declared fingerprint and the Drive mirror constitutes a hard stop.
+
+5. **TOOLING LIMITATION HARD-STOP:**
+   ; - If tooling limitations (including truncation, partial reads, or access restrictions) prevent a verifiable full read of this file, any required governance file, or any required registry section, the AI must stop and explicitly report the limitation.
+   ; - The AI must not infer, assume, summarize, or fabricate missing content under any circumstances.
+
+6. **CUMULATIVE INTEGRITY:** Never remove registry entries.
+   Updates must maintain a 1:1 literal match with the source code and verified mirrors.
+
+; ------------------------------------------------------------------
+### 3. GLOBAL LOGIC ANCHORS
+; ------------------------------------------------------------------
+
+; - **DRY ARCHITECTURE:** No variable or function definitions should be hardcoded in text documents.
+Refer to `GLOBAL_REGISTRY_MASTER.csv` for Policy-B governed surface area ownership and invariants.
+For full symbol inventory, consult `INTERNAL_FUNCTION_INDEX.csv` (informational; non-governed).
+
+; - **IPC STANDARD:** All communication between Controller and Worker uses WM_COPYDATA or custom message `0x5555`.
+
+; - **STATE PERSISTENCE:** The Worker must remain a slave to `Settings.ini`; enforcement is handled by the Watchdog in `WorkerState.ahk`.
+
+; - **GROUND TRUTH RULES (MANDATORY):** Logic invariants and non-negotiable behavior rules are defined in `GLOBAL_REGISTRY_MASTER.csv`
+(Policy-B governed surface area). These rules must be consulted before audit, debugging, refactor, or feature change.
+
+; ------------------------------------------------------------------
+
+END OF PROJECT BLUEPRINT
+================================================================================
+END OPERATIVE TEXT (COMPENDIUM MODE)
+
+
+================================================================================
+SECTION ID: GOV.S4.ANCHOR_MASTER
+ORIGIN: _PROJECT_ANCHOR_MASTER.txt
+AUTHORITY LEVEL: SECONDARY (INTENT / RATIONALE)
+================================================================================
+OPERATIVE TEXT (COMPENDIUM MODE) — AUTHORITATIVE FOR SINGLE-ARTIFACT OPERATION
+================================================================================
+; ------------------------------------------------------------------
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER
+; Version: 2.0.3
+; Last change: Revised governance deference to reflect new registry system.
+; Content-Fingerprint: 2026-01-29T00-46-33Z-BH2XVGP3
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT (LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; SECTION A — PROJECT ANCHOR (CANONICAL AUTHORITY)
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+PROJECT ANCHOR: Pipz_Project_V3 (AutoHotkey v2)
+; ------------------------------------------------------------------
+
+**UNIFIED SYSTEM ANCHOR (CANONICAL):**
+This file defines the *mission intent*, *behavioral constraints*, and *system-level anchoring rules* for Pipz_Project_V3.
+
+>
+Structural authority is defined in `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT`.
+Governance and enforcement authority is defined in `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS`.
+>
+
+This file MUST NOT override Bootstrap v4.
+
+; ------------------------------------------------------------------
+1. MISSION STATEMENT & IDENTITY (MUST BE MAINTAINED)
+; ------------------------------------------------------------------
+
+Pipz_Project_V3 is a dual-process automation system composed of:
+
+; - **Controller (GUI / Orchestration)**
+; - **Worker (Execution / Overlay / Runtime Engine)**
+
+The system is implemented in **AutoHotkey v2** and is governed by strict separation of:
+; - Authority
+; - Visibility
+; - Verification
+; - Runtime execution
+
+**CRITICAL IDENTITY RULE**
+Every governed file **MUST** declare its identity using:
+
+; GEMINI MEM TAG
+; MY FULL PATH IS "Pipz_Project_V3\<relative\path>"
+
+Absence, ambiguity, or mismatch of this tag constitutes a **hard stop**.
+
+; ------------------------------------------------------------------
+2. BOOTSTRAP & GOVERNANCE DEFERENCE (AUTHORITATIVE)
+; ------------------------------------------------------------------
+
+This file **DOES NOT** define initialization behavior.
+All initialization, indexing, verification, and authority establishment is governed by:
+
+; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS`
+; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4`
+
+**RULES**
+; - Bootstrap v4 is mandatory.
+; - Phase ordering is strict.
+; - This Anchor MUST NOT introduce alternate search paths, shortcuts, or fallback logic.
+; - Any conflict between this file and Bootstrap v4 MUST be resolved in favor of Bootstrap v4.
+
+**SYSTEM HIERARCHY & AUTHORITY**
+The hierarchy of authority for Pipz_Project_V3 is:
+
+1. GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS (Rules 0–16)
+2. GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4 (Initialization)
+3. GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT (Structural Truth)
+4. GLOBAL_REGISTRY_MASTER.csv (Authoritative governed registry, Policy-B)
+5. INTERNAL_FUNCTION_INDEX.csv (Informational, regenerable; non-governed)
+6. GLOBAL_REGISTRY_MASTER.gsheet (Backup Vault ONLY; may be unreadable to tooling)
+7. GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER (Intent & Rationale)
+
+**NEW CHAT INVOCATION (REFERENCE ONLY)**
+For a fresh session cold-start, the required user invocation (including the machine-checkable token `BOOTSTRAP_V4_INIT`) is defined in:
+
+; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS`
+
+This Anchor does not redefine or override invocation enforcement.
+
+; ------------------------------------------------------------------
+3. VISIBILITY VS GOVERNANCE DISTINCTION (CLARIFIED)
+; ------------------------------------------------------------------
+
+The project contains **three classes of artifacts**:
+
+### A. Governed & Readable
+; - `.txt` mirrors
+; - Governance documents
+; - Registry spreadsheets
+
+These require:
+; - Full read access
+; - Content-Fingerprint verification
+; - Path identity validation
+
+### B. Runtime-Only / Non-Readable (N/A Governance)
+Examples:
+; - `.ahk`
+; - `.ini`
+; - `.png`
+; - `.key`
+
+These:
+; - MUST exist at declared paths
+; - MAY be enumerated via Drive
+; - MUST NOT be read or reasoned about directly
+; - Are classified as **N/A** in `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST`
+
+### C. Externalized Authority
+; - `GLOBAL_REGISTRY_MASTER.gsheet`
+
+This is a **non-negotiable source of truth** and must be fully readable.
+
+; ------------------------------------------------------------------
+4. STRUCTURAL & EXPECTED-SET AUTHORITY (REFERENCE ONLY)
+; ------------------------------------------------------------------
+
+The expected project structure **and the authoritative Expected Set used for Phase 5** are defined **exclusively** in:
+
+; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT`
+
+This Anchor:
+; - May reference structure for contextual understanding only
+; - MUST NOT redefine structure
+; - MUST NOT define, expand, or reduce the Phase 5 Expected Set
+; - MUST NOT drift from the Blueprint
+
+If structure or expected items change:
+; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT` is updated first
+; - This file is synchronized second
+
+; ------------------------------------------------------------------
+5. FINGERPRINT & VERIFICATION BEHAVIOR (DEFERRED)
+; ------------------------------------------------------------------
+
+All fingerprint rules, cache-busting behavior, and Fingerprint Challenge Mode (FCM) handling are defined in:
+
+; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS`
+
+This Anchor:
+; - Acknowledges fingerprint supremacy
+; - Does not restate enforcement logic
+; - Does not introduce alternative validation rules
+
+; ------------------------------------------------------------------
+6. SYSTEM INTENT (NON-TECHNICAL ANCHOR)
+; ------------------------------------------------------------------
+
+The purpose of Pipz_Project_V3 is to:
+
+; - Maintain deterministic behavior
+; - Prevent inference-based drift
+; - Enforce literal verification
+; - Preserve long-term system integrity across sessions
+
+The AI is a **verifier and executor**, never an estimator.
+
+; ------------------------------------------------------------------
+7. SYNCHRONIZATION OBLIGATION (MANDATORY)
+; ------------------------------------------------------------------
+
+Any change that affects:
+; - Structure
+; - Governance
+; - Authority
+; - Initialization
+; - Verification semantics
+
+MUST be synchronized across:
+; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT
+; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER
+; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS
+; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST (when applicable)
+; - GLOBAL_REGISTRY_MASTER.gsheet
+; - GLOBAL_REGISTRY_MASTER.csv
+
+Partial updates are invalid.
+
+; ------------------------------------------------------------------
+
+END OF PROJECT ANCHOR SECTION (SECTION A)
+
+; ------------------------------------------------------------------
+; SECTION B — PROJECT WORKING NOTES (DESIGN & RATIONALE)
+; ------------------------------------------------------------------
+
+PURPOSE OF THIS FILE SECTION
+--------------------
+This document exists to preserve:
+- Design intent
+- Non-obvious decisions
+- Sanity checks
+- “Why we did it this way”
+- Guardrails against future regression
+
+This file is NOT a checklist.
+This file is NOT expected to be concise.
+This file SHOULD grow over time.
+
+; ------------------------------------------------------------------
+CORE GOALS (DO NOT LOSE SIGHT OF THESE)
+; ------------------------------------------------------------------
+
+1. The user interacts with ONE assistant only (Architect).
+2. All other AI roles are hidden, automated, and auditable.
+3. Governance is enforced by code, not “AI good behavior.”
+4. Drift is mechanically impossible, not just unlikely.
+5. Every change is attributable, reviewable, and reversible.
+
+If any future change weakens these goals, STOP.
+
+; ------------------------------------------------------------------
+WHY SIDECAR GOVERNANCE EXISTS
+; ------------------------------------------------------------------
+
+Some file formats are controlled by external tools:
+- JSON
+- lockfiles
+- generated artifacts
+- binaries
+
+Governance MUST NEVER break tooling.
+
+Therefore:
+- Governance metadata moves to sidecar files
+- Sidecars are authoritative
+- Runtime artifacts remain pure
+
+This is not a compromise — it is intentional architecture.
+
+; ------------------------------------------------------------------
+WHY NOT RELY ON CONTINUE / BUILT-IN AGENTS ALONE
+; ------------------------------------------------------------------
+
+Continue is powerful, but:
+- It does not natively enforce hidden multi-model chaining
+- It cannot prevent a model from “doing too much”
+- It cannot hard-enforce mirroring or fingerprint rules
+
+Therefore:
+- Continue is treated as the Architect UI only
+- Enforcement lives outside the model
+- MCP / orchestrator handles invariants
+
+; ------------------------------------------------------------------
+ROLE SEPARATION INTENT
+; ------------------------------------------------------------------
+
+Architect:
+- Thinks
+- Plans
+- Explains
+- Is the ONLY user-facing AI
+- NEVER writes directly
+
+Executor:
+- Implements literally
+- No opinions
+- No creativity
+- Outputs full files by default
+
+SubSupervisor:
+- Mechanical checklist
+- Objective PASS / FAIL
+- Cannot be overridden
+
+HeadSupervisor:
+- Semantic correctness
+- Architectural intent validation
+- Risk detection
+- Cannot override mechanical failure
+
+; ------------------------------------------------------------------
+RECENT KEY DECISIONS (IMPORTANT CONTEXT)
+; ------------------------------------------------------------------
+
+[2026-01-22]
+- MVP orchestrator introduced with bootstrap-only behavior.
+- No model calls, no file writes — audit-only.
+- Establishes a safe, runnable baseline before hidden chaining is enabled.
+
+[2026-01-22]
+- JSON governance finalized via mandatory sidecar files:
+  - package.json.governance.txt
+  - tsconfig.json.governance.txt
+- JSON remains pure and non-fingerprinted by embedded headers.
+
+[2026-01-23]
+- Completed port of MirrorAhkToTxt functionality into a VS Code extension:
+  - Fingerprint updates on save (governed files, fail-closed gating)
+  - Runtime mirroring (.ahk/.ini -> .txt) with AI SOT header
+  - Standalone governed fingerprinting for additional file types
+  - UTF-8 + UTF-16 mirror encoding compatibility
+  - Audit logging into .ORCH_AUDITLOG\mirror\
+- Extension packaged (VSIX) and installed into normal VS Code.
+- Verified in normal VS Code (no Extension Development Host required for mirroring/fingerprints).
+
+[2026-01-23]
+- Noted VS Code Extension Development Host anomaly:
+  - Dev Host could open files but refused to open folders/workspaces.
+  - Debug console showed DisposableStore disposed warnings.
+  - Gemini assisted in resolving the folder-open issue so development can continue.
+
+; ------------------------------------------------------------------
+COMMON FAILURE MODES TO WATCH FOR
+; ------------------------------------------------------------------
+
+- “We’ll remember to do X later” → NO
+- “This file doesn’t need governance” → PROVE IT
+- “The AI probably won’t touch that” → INVALID ASSUMPTION
+- Silent tool behavior changes (VS Code / extensions)
+- Header drift across file types
+- JSON accidentally acquiring comments (must remain pure)
+
+; ------------------------------------------------------------------
+WHEN TO STOP AND REASSESS
+; ------------------------------------------------------------------
+
+STOP if:
+- A tool change removes determinism
+- A file bypasses governance
+- A human must remember a rule instead of tooling enforcing it
+- The user must manually switch AI roles for normal operation (end goal is hidden chaining)
+- Audit logs become incomplete or optional
+
+; ------------------------------------------------------------------
+VS CODE EXTENSION REPACKAGING – DESIGN RATIONALE
+; ------------------------------------------------------------------
+
+The pipz-mirror-governance extension is not “just a tool”.
+It is an ACTIVE GOVERNANCE ENFORCER.
+
+Therefore:
+
+- Any change to it can silently weaken guarantees if not rebuilt correctly
+- VS Code does NOT auto-reload packaged extensions
+- Extension Development Host ≠ real user environment
+
+Because of this, a strict VSIX repackaging runbook was introduced.
+
+Key principles enforced by the runbook:
+
+1. BUILD IS EXPLICIT
+   No implicit TypeScript transpilation is trusted.
+
+2. INSTALL IS EXPLICIT
+   The extension must be installed into the NORMAL VS Code instance,
+   not assumed to be active because Dev Host worked.
+
+3. VERIFICATION IS MANDATORY
+   Mirroring, fingerprinting, encoding, and audit logging must be
+   observed in real saves.
+
+4. NO SILENT FAILURE
+   If the extension fails to activate or log, work stops immediately.
+
+This mirrors the broader project philosophy:
+
+- Trust code, not memory
+- Trust logs, not assumptions
+- Trust enforcement, not intent
+
+This runbook is deliberately repetitive and procedural.
+That is a feature, not a flaw.
+
+; ------------------------------------------------------------------
+FUTURE NOTES
+; ------------------------------------------------------------------
+
+(Add dated notes below as decisions are made.)
+
+[YYYY-MM-DD] —
+- Decision:
+- Reason:
+- Impact:
+
+; ------------------------------------------------------------------
+
+END OF PROJECT WORKING NOTES SECTION (SECTION B)
+
+; ------------------------------------------------------------------
+
+END OF PROJECT ANCHOR MASTER
+================================================================================
+END OPERATIVE TEXT (COMPENDIUM MODE)
+
+
+================================================================================
+SECTION ID: GOV.S5.PHASE5_AUDIT
+ORIGIN: PHASE5_AUDIT_MASTER.txt
+AUTHORITY LEVEL: SECONDARY (VERIFICATION)
+================================================================================
+OPERATIVE TEXT (COMPENDIUM MODE) — AUTHORITATIVE FOR SINGLE-ARTIFACT OPERATION
+================================================================================
+; ------------------------------------------------------------------
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT)
+; MY FULL PATH IS "GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S5.PHASE5_AUDIT"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S5.PHASE5_AUDIT
+; Version: 2.0.3
+; Last change: Updated for single-artifact compendium mode, virtual Section IDs,
+;              unreadability hard-stops, and Blueprint/Index scoping.
+; Content-Fingerprint: <UPDATE ON SAVE>
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT (LINES 1–14 RESERVED)
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; SECTION A — PHASE 5 EXECUTION CHECKLIST (DETERMINISTIC)
+; ------------------------------------------------------------------
+
+PHASE 5 — FULL VISIBILITY & ACCESSIBILITY AUDIT
+
+EXECUTION CHECKLIST (DETERMINISTIC)
+
+This checklist defines the exact steps required to EXECUTE Phase 5
+in SINGLE-ARTIFACT MODE.
+
+This is NOT:
+; - A report
+; - A template
+; - An analysis
+; - A narrative
+
+This checklist is PROCEDURAL and MUST be followed in order.
+
+No step may be skipped.  
+No inference is permitted.  
+Any failure requires STOP.
+
+; ------------------------------------------------------------------
+PRE-CONDITIONS (MANDATORY)
+; ------------------------------------------------------------------
+
+[ ] Confirm Bootstrap Phases 0–4 AND Phase 0.5 completed successfully
+[ ] Confirm GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4
+    was located, opened, and fully read in this session
+[ ] Confirm Phase 5 was explicitly requested by name by the user
+[ ] Confirm Google Drive access is available and functioning
+
+If ANY pre-condition fails → STOP
+
+; ------------------------------------------------------------------
+STEP 0 — CONTEXT & COMPENDIUM READABILITY VERIFICATION
+; ------------------------------------------------------------------
+
+[ ] Confirm GOVERNANCE_COMPENDIUM.txt is fully readable
+[ ] Confirm GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S5.PHASE5_AUDIT
+    is fully readable and not truncated
+[ ] Confirm all referenced sections (Blueprint, Index, Bootstrap)
+    are fully readable
+
+Partial visibility or truncation SHALL be treated as UNREADABLE
+per GOV.S0.COMPENDIUM_META IR-5 → STOP
+
+; ------------------------------------------------------------------
+STEP 1 — ROOT CONFIRMATION
+; ------------------------------------------------------------------
+
+[ ] Resolve project root using ONLY:
+    ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST (if present)
+    ; - GEMINI MEM TAG declared paths
+    ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT
+
+[ ] Record resolved root Drive ID
+[ ] Record resolved root declared path
+
+If root cannot be resolved deterministically → STOP
+
+; ------------------------------------------------------------------
+STEP 2 — ROOT-ANCHORED ENUMERATION
+; ------------------------------------------------------------------
+
+[ ] Enumerate from resolved root Drive ID
+[ ] Use parent-child traversal ONLY
+[ ] DO NOT use Drive search
+[ ] Record for each folder:
+    ; - Drive ID
+    ; - Name
+    ; - Parent ID
+    ; - Type (folder)
+
+If traversal fails, truncates, or becomes ambiguous → STOP
+
+; ------------------------------------------------------------------
+STEP 3 — RECURSIVE DISCOVERY
+; ------------------------------------------------------------------
+
+For EACH discovered folder:
+
+[ ] Enumerate all immediate children
+[ ] Record for EACH item:
+    ; - Drive ID
+    ; - Name
+    ; - Parent ID
+    ; - Type (file/folder)
+
+[ ] Continue until no undiscovered folders remain
+
+If enumeration cannot continue deterministically → STOP
+
+; ------------------------------------------------------------------
+STEP 4 — PATH RECONSTRUCTION
+; ------------------------------------------------------------------
+
+For EACH discovered item:
+
+[ ] Walk parent chain to root
+[ ] Rebuild full path
+[ ] Compare against:
+    ; - GEMINI MEM TAG declared paths (for governed .txt files)
+    ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT ONLY
+
+Rules:
+; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER
+;   is NOT a structural authority
+; - Runtime-only assets may lack GEMINI MEM TAGs legitimately
+
+If path cannot be reconstructed deterministically → STOP
+
+; ------------------------------------------------------------------
+STEP 5 — READABILITY CHECK
+; ------------------------------------------------------------------
+
+For EACH discovered file:
+
+[ ] Classify content:
+    ; - Governed-readable (.txt governance/mirrors)
+    ; - Runtime-only (.ahk, .ini, .key)
+    ; - Binary / asset
+
+[ ] Attempt read ONLY if governed-readable
+[ ] Record result:
+    ; - Readable
+    ; - Unreadable (with failure mode)
+    ; - N/A
+
+If tooling prevents definitive classification → STOP
+
+; ------------------------------------------------------------------
+STEP 6 — EXPECTED SET COMPILATION (ARCHITECTURAL TRUTH)
+; ------------------------------------------------------------------
+
+[ ] Compile expected item list from:
+    ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT
+
+[ ] DO NOT derive structure from:
+    ; - Anchor
+    ; - Index
+    ; - Registries
+    ; - Inference
+
+If expected set cannot be compiled deterministically → STOP
+
+; ------------------------------------------------------------------
+STEP 7 — INDEX SET COMPILATION
+; ------------------------------------------------------------------
+
+[ ] Compile index set from
+    GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST (if present)
+[ ] Treat VERIFIED / N/A as acceleration signals ONLY
+
+; ------------------------------------------------------------------
+STEP 7A — ALIAS COVERAGE VERIFICATION (MANDATORY)
+; ------------------------------------------------------------------
+
+[ ] Validate alias coverage, ambiguity, and orphan rows
+    per Rule 2i support requirements
+
+ANY failure → STOP
+
+; ------------------------------------------------------------------
+STEP 8 — RECONCILIATION & CLASSIFICATION
+; ------------------------------------------------------------------
+
+For EACH item across Expected / Discovered / Indexed:
+
+[ ] Classify as EXACTLY ONE:
+    ; - VERIFIED
+    ; - UNREADABLE
+    ; - MISSING
+    ; - ORPHANED
+    ; - MISPLACED
+    ; - UNGOVERNED
+
+Ambiguity → STOP
+
+; ------------------------------------------------------------------
+STEP 9 — REPORT GENERATION
+; ------------------------------------------------------------------
+
+[ ] Populate REPORT TEMPLATE (SECTION B)
+[ ] Do NOT modify files
+[ ] Do NOT infer causes
+
+; ------------------------------------------------------------------
+STEP 10 — TERMINATION
+; ------------------------------------------------------------------
+
+[ ] Declare Phase 5 complete
+[ ] Present report ONLY
+[ ] No fixes, no analysis unless explicitly instructed
+
+; ------------------------------------------------------------------
+END OF PHASE 5 EXECUTION CHECKLIST
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+
+END OF PHASE 5 EXECUTION CHECKLIST SECTION (SECTION A)
+
+; ------------------------------------------------------------------
+; SECTION B — PHASE 5 AUDIT REPORT TEMPLATE (READ-ONLY)
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+PHASE 5 — FULL VISIBILITY & ACCESSIBILITY AUDIT REPORT
+; ------------------------------------------------------------------
+
+Project: Pipz_Project_V3
+Invocation Type: EXPLICIT USER REQUEST BY NAME
+Bootstrap Dependency: Bootstrap v4 (Phases 0–4 MUST have succeeded)
+
+Audit Scope:
+
+; - Google Drive visibility and accessibility ONLY
+; - Governance correctness is NOT evaluated here
+
+This report is READ-ONLY.
+No remediation, modification, or inference is permitted.
+
+; ------------------------------------------------------------------
+Audit Metadata
+; ------------------------------------------------------------------
+
+Audit Timestamp (UTC):
+Audit Initiated By:
+Resolved Root Folder ID:
+Resolved Root Path:
+
+; ------------------------------------------------------------------
+Tooling Context
+; ------------------------------------------------------------------
+
+Drive Access Status:
+Drive Listing Method:
+
+; - Parent-child traversal only
+; - Search usage: NONE
+
+; ------------------------------------------------------------------
+Enumeration Summary
+; ------------------------------------------------------------------
+
+Total Folders Discovered:
+Total Files Discovered:
+Total Files Readable:
+Total Files Unreadable:
+Total Ungoverned Files:
+Total Expected-but-Missing Files:
+
+; ------------------------------------------------------------------
+SECTION A — VERIFIED ITEMS
+; ------------------------------------------------------------------
+
+Definition:
+Items that:
+
+; - Exist on Drive
+; - Are readable
+; - Match declared or expected paths
+
+Format:
+
+[VERIFIED]
+Full Path:
+Drive ID:
+File Type:
+Notes (if any):
+
+; ------------------------------------------------------------------
+SECTION B — UNREADABLE ITEMS
+; ------------------------------------------------------------------
+
+Definition:
+Items that:
+
+; - Exist on Drive
+; - Could not be opened or fully read
+
+Format:
+[UNREADABLE]
+Full Path:
+Drive ID:
+Failure Mode:
+Notes:
+
+; ------------------------------------------------------------------
+SECTION C — MISSING EXPECTED ITEMS
+; ------------------------------------------------------------------
+
+Definition:
+Items that:
+
+; - Are required by Blueprint / Anchor
+; - Were NOT found during Drive traversal
+
+Format:
+[MISSING]
+Expected Path:
+Governing Source:
+Notes:
+
+; ------------------------------------------------------------------
+SECTION D — ORPHANED ITEMS
+; ------------------------------------------------------------------
+
+Definition:
+Items that:
+
+; - Exist on Drive
+; - Are NOT declared in Blueprint, Anchor, or registry
+
+Format:
+[ORPHANED]
+Full Path:
+Drive ID:
+Notes:
+
+; ------------------------------------------------------------------
+SECTION E — UNGOVERNED ITEMS
+; ------------------------------------------------------------------
+
+Definition:
+Items that:
+
+; - Exist on Drive
+; - Are readable
+; - Lack GEMINI MEM TAG or governing declaration
+
+Format:
+[UNGOVERNED]
+Full Path:
+Drive ID:
+Notes:
+
+; ------------------------------------------------------------------
+SECTION F — INDEX DISCREPANCIES
+
+; ------------------------------------------------------------------
+
+Definition:
+Conflicts between:
+
+; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST
+; - Discovered Drive structure
+
+Format:
+[INDEX MISMATCH]
+Declared Path:
+Declared ID:
+Observed Path:
+Observed ID:
+Notes:
+
+; ------------------------------------------------------------------
+SECTION G — ALIAS COVERAGE (RULE 2i SUPPORT)
+; ------------------------------------------------------------------
+
+Definition:
+Verification that GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST alias and role mappings are complete and non-ambiguous
+to support deterministic implicit file resolution under AI_PROJECT_INSTRUCTIONS Rule 2i.
+
+## Alias Coverage Summary
+
+Total VERIFIED=YES items in MASTER INDEX:
+Total items with non-empty aliases:
+Coverage (covered/total):
+
+## Missing Alias Items (MUST LIST)
+
+Format:
+[MISSING ALIAS]
+
+* Full Path:
+
+## Ambiguous Alias Collisions (MUST LIST)
+
+Definition:
+Alias tokens that map to more than one path (case-insensitive).
+
+Format:
+[ALIAS COLLISION]
+
+* Alias Token:
+  Path A:
+  Path B:
+  Notes:
+
+## Orphan Alias Rows (IF ANY)
+
+Definition:
+Paths present in MASTER ALIAS INDEX but not present in MASTER INDEX.
+
+Format:
+[ORPHAN ALIAS ROW]
+
+* Full Path:
+  Notes:
+
+; ------------------------------------------------------------------
+SECTION H — STRUCTURAL ALIGNMENT (BLUEPRINT VS. PHYSICAL)
+; ------------------------------------------------------------------
+
+Definition:
+Verification that the physical directory structure and file placement matches
+the Architectural Truth defined in GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT.
+
+Architectural Source: GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT
+
+[BLUEPRINT DISCREPANCIES]
+
+* Expected Path (per Blueprint):
+* Discovered Path (Actual):
+* Status: [MISSING | ORPHANED | MISPLACED]
+* Impact: [CRITICAL | DEGRADED]
+* Notes:
+
+; ------------------------------------------------------------------
+AUDIT CONCLUSION
+; ------------------------------------------------------------------
+
+Audit Result:
+
+; - SUCCESS (No blocking visibility issues)
+; - DEGRADED (Non-blocking issues present)
+; - FAILED (Blocking visibility issues)
+
+Blocking Issues Summary (if any):
+
+Non-Blocking Issues Summary (if any):
+
+; ------------------------------------------------------------------
+END OF PHASE 5 AUDIT REPORT
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+
+END OF PHASE 5 AUDIT REPORT TEMPLATE SECTION (SECTION B)
+
+; ------------------------------------------------------------------
+
+END OF PHASE 5 AUDIT MASTER
+================================================================================
+END OPERATIVE TEXT (COMPENDIUM MODE)
+
+
+================================================================================
+SECTION ID: GOV.S6.GOVERNANCE_LOCK
+ORIGIN: GOVERNANCE_LOCK.txt
+AUTHORITY LEVEL: ENFORCEMENT
+================================================================================
+OPERATIVE TEXT (COMPENDIUM MODE) — AUTHORITATIVE FOR SINGLE-ARTIFACT OPERATION
+================================================================================
+; ------------------------------------------------------------------
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S6.GOVERNANCE_LOCK"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S6.GOVERNANCE_LOCK
+; Version: 1.0.6
+; Last change: Governance state re-locked after total project consolidation and creation of policy-b enforcement rules.
+; Content-Fingerprint: 2026-01-29T01-01-37Z-I5CH6J8E
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+GOVERNANCE LAYER LOCK — DECLARATION OF STABLE STATE
+; ------------------------------------------------------------------
+
+(CANONICAL, NON-AUTHORITATIVE)
+
+This document records a **governance lifecycle state transition** for Pipz_Project_V3.
+
+It does NOT define rules.
+It does NOT grant authority.
+It does NOT override any governance mechanism.
+
+Its sole purpose is to provide a **durable, verifiable record** that the governance layer
+has entered a **stable, locked phase**.
+
+; ------------------------------------------------------------------
+1. GOVERNANCE LOCK STATUS
+; ------------------------------------------------------------------
+
+Status: **LOCKED (OPERATIONAL)**
+
+As of this declaration:
+
+; - The governance architecture for Pipz_Project_V3 is considered **stable**
+; - Core governance rules are finalized, including implicit file resolution and constraint consultation rules
+; - Initialization, verification, and enforcement semantics are fixed
+
+The authoritative governance sources remain:
+
+; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS`
+; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4`
+; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT`
+; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER`
+; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST`
+
+This file does not participate in governance enforcement.
+
+; ------------------------------------------------------------------
+2. SCOPE OF THE LOCK
+; ------------------------------------------------------------------
+
+The following are considered **locked**:
+
+; - Bootstrap v4 phase structure and semantics
+; - Content-Fingerprint enforcement rules
+; - GEMINI MEM TAG identity requirements
+; - Stop-on-conflict behavior
+; - Verification precedence rules
+; - Phase 5 invocation boundaries
+
+The following remain **permitted** without reopening governance:
+
+; - Adding new files or modules to the project
+; - Updating `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT` to reflect structural extensions
+; - Updating `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST` to reflect new resolvable items
+; - Updating mirrors and fingerprints as part of normal operation
+
+No change may alter **governance behavior** without explicitly reopening the governance layer.
+
+; ------------------------------------------------------------------
+3. WHAT THIS FILE IS NOT
+; ------------------------------------------------------------------
+
+This document:
+
+; - Is NOT consulted during Bootstrap execution
+; - Is NOT required for Bootstrap success
+; - Is NOT used to resolve conflicts
+; - Is NOT used to validate fingerprints
+; - Is NOT referenced during Phase 5 execution
+; - Is NOT a substitute for any governance file
+
+In all conflicts, this file has **zero authority**.
+
+; ------------------------------------------------------------------
+4. GOVERNANCE REOPENING RULE (STRICT)
+; ------------------------------------------------------------------
+
+Reopening the governance layer requires **explicit, intentional action**.
+
+A governance reopening MUST:
+
+1. Be explicitly declared by the user
+
+2. Result in a versioned update to:
+
+   ; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS`
+   ; - AND / OR `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4`
+
+3. Be accompanied by an updated declaration in this file
+
+Absent those conditions, governance is considered locked.
+
+; ------------------------------------------------------------------
+5. INTENDED AUDIENCE
+; ------------------------------------------------------------------
+
+This file exists for:
+
+; - Long-term project integrity
+; - Future session clarity
+; - Human verification
+; - Audit traceability
+
+It exists to prevent ambiguity — not to introduce it.
+
+; ------------------------------------------------------------------
+
+END OF GOVERNANCE LOCK DECLARATION
+================================================================================
+END OPERATIVE TEXT (COMPENDIUM MODE)
+
+
+================================================================================
+SECTION ID: GOV.S7.INDEX_ID_LIST
+ORIGIN: INDEXIDLIST.txt
+AUTHORITY LEVEL: SUPPORT (RESOLUTION)
+================================================================================
+OPERATIVE TEXT (COMPENDIUM MODE) — AUTHORITATIVE FOR SINGLE-ARTIFACT OPERATION
+================================================================================
+; ------------------------------------------------------------------
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST
+; Version: 1.3.4
+; Last change: Migrated file to new governance directory and updated all references in file.
+; Content-Fingerprint: 2026-01-29T00-15-48Z-9YUJOTYW
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+AUTHORITY NOTICE (MANDATORY)
+; ------------------------------------------------------------------
+
+This file provides deterministic Google Drive folder and file IDs to accelerate
+indexing, traversal, and bootstrap operations.
+
+This file is NOT a source of truth for:
+
+; - File contents
+; - Folder structure
+; - Ownership
+; - Logic
+; - Governance
+; - Verification outcomes
+
+All content authority, verification, and conflict resolution is governed by:
+
+; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS
+; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT
+; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER
+
+Content-Fingerprint verification and GEMINI MEM TAG path validation are mandatory
+for all files, even when Drive IDs are available.
+
+; ------------------------------------------------------------------
+VERIFIED COLUMN SEMANTICS (STRICT)
+; ------------------------------------------------------------------
+
+MICRO-RULE — NON-RESOLVABLE CONTENT CLASSIFICATION (MANDATORY)
+
+Runtime artifacts, binary assets, and opaque data files that are not
+opened, read, or governed as authoritative content MUST use:
+
+; - VERIFIED = N/A
+
+This includes, but is not limited to:
+
+; - .ahk runtime scripts
+; - .ini configuration files
+; - Binary assets (e.g. .png, .ico)
+; - Secrets or opaque data (e.g. license.key)
+
+VERIFIED = YES is RESERVED exclusively for items whose contents are
+meaningfully resolvable, inspectable, and auditable as governance inputs.
+
+Marking non-resolvable content as VERIFIED = YES is prohibited.
+
+The VERIFIED column indicates whether the listed Drive ID has been:
+
+; - Successfully resolved via Google Drive
+; - Confirmed to exist and be accessible
+; - Confirmed to correspond to the declared PATH and TYPE
+
+VERIFIED does NOT indicate:
+
+; - Content correctness
+; - Content freshness
+; - Fingerprint validity
+; - Governance compliance
+
+Allowed values:
+
+; - YES  → ID resolved and matched to declared path/type
+; - NO   → ID known but not yet revalidated
+; - N/A  → Non-resolvable content (e.g. runtime-only, ephemeral, or excluded)
+
+VERIFIED status MUST NOT override:
+
+; - GEMINI MEM TAG path declarations
+; - Content-Fingerprint checks
+; - Blueprint-defined structure
+; - AI_PROJECT_INSTRUCTIONS enforcement
+
+; ------------------------------------------------------------------
+ID USAGE & PRECEDENCE RULES (STRICT)
+; ------------------------------------------------------------------
+
+1. File and folder IDs listed here MAY be used to:
+
+   ; - Locate items deterministically
+   ; - Enumerate child contents of folders
+   ; - Accelerate indexing when Drive search is ambiguous or truncated
+
+2. File and folder IDs listed here MUST NOT:
+
+   ; - Override declared paths in GEMINI MEM TAG headers
+   ; - Override structure defined in GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT
+   ; - Override verification rules defined in GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS
+
+3. In all conflicts:
+
+   ; - Declared path wins over ID
+   ; - Content-Fingerprint wins over VERIFIED
+   ; - Blueprint structure wins over ID
+   ; - Governance rules win over all
+
+IDs and VERIFIED flags are acceleration signals only, never authority.
+
+; ------------------------------------------------------------------
+1. MASTER INDEX: GOOGLE DRIVE ID LIST (MUST BE MAINTAINED)
+; ------------------------------------------------------------------
+
+--------------------------------------------------|--------------------|-----------------------------------------------------------------------
+ PATH / FILE NAME                                 | TYPE               | ID                                                         | VERIFIED
+--------------------------------------------------|--------------------|------------------------------------------------------------|----------
+\Pipz_Project_V3                                  | ROOT               | 1OU-HBeg2w1p78Tk1xdzuBaAwc8ZA2YKe                          | YES
+  settings.ini                                    | Config (INI)       | 15XWeWyphygk0f9OqkbHmkPzEsex8rome                          | N/A
+  .gitignore                                      | Config (GIT)       | 1C5iGuX8qjSanONWJ26-r-5Bc7Ct81kGe                          | N/A
+  PipzScptzIcon.png                               | Asset (Image)      | 10NXIfmj1dw2CEd-i0beZC5_YD4MPPf4T                          | N/A
+  ORCH_PROTOCOL_SPEC.txt                          | Document           | 1odMqFaKPce80EgAx5AV-AYblg8SdiqsN                          | YES
+  settings.txt                                    | Document           | 1-1Vyt3gIEVRJkPxjmKIh4bjXHH07T_KZ                          | YES
+                                                  |                    |                                                            |
+--------------------------------------------------|--------------------|------------------------------------------------------------|----------
+\Registry                                         | DIRECTORY          | 1UEBagBflqD4ANRl8O6DpIGfN3bgte1CQ                          | YES
+  GLOBAL_REGISTRY_MASTER.gsheet                   | Google Sheet       | 1eGN-XnwHYXnFETdoTQ_ViO9m6O5gyHiLNoSVoZsetnc               | YES
+  GLOBAL_REGISTRY_MASTER.csv                      | CSV File           | 1svU14Gx_QuAuNIxE9YivvZfPY76OJkzd                          | YES
+  INTERNAL_FUNCTION_INDEX.csv                     | CSV File           | 106DjT-Mwcbgs5B6O2liEsBt0ZIAjnKn3                          | YES
+                                                  |                    |                                                            |
+--------------------------------------------------|--------------------|------------------------------------------------------------|----------
+\Archive                                          | DIRECTORY          | 1NKWV-BDC8vn7NA_O91-VIF2fHC3-U90-                          | N/A
+--------------------------------------------------|--------------------|------------------------------------------------------------|----------
+\Controller                                       | DIRECTORY          | 1pMBs6kKrGiQ7q1enVOF7yj3RkTu8g_xl                          | YES
+  Main_Controller.ahk                             | Main Script        | 1B_28wBPT2KJDd2DS06a089uSHMxqCj7l                          | N/A
+  Controller_Core.ahk                             | Core Container     | 1UTu3b7sIW0L50QUVIK-Zmn9avn8HqoaQ                          | N/A
+  Main_Controller.txt                             | Document           | 1r7TtMqQP-NHJm-1QtcjzScSX5a-9erdW                          | YES
+  Controller_Core.txt                             | Document           | 12pJNO_OaZ0468otfLgfsQMH4VViV5Uxs                          | YES
+                                                  |                    |                                                            |
+--------------------------------------------------|--------------------|------------------------------------------------------------|----------
+\Governance                                       | DIRECTORY          | 1iYz1-T6dS47O03mxYU8_FTg1Xbj7wJ_w                          | YES
+  GOVERNANCE_COMPENDIUM.txt                       | Document           | 1NNndPx4st_Gpr28dQOmnhpLDVZAByFW3                          | YES
+  _PROJECT_BLUEPRINT.txt                          | Document           | 17AWzFH4OqYmx9Mcxl4NosFGp-uhyGYMT                          | YES
+  _PROJECT_ANCHOR_MASTER.txt                      | Document           | 1TIanwt8JSNhI47vuN_-G4dFRjwNIf898                          | YES
+  AI_PROJECT_INSTRUCTIONS.txt                     | Document           | 1TLP6j1xASA9HEA4H2RHhwtvkYR_arU_P                          | YES
+  INDEXIDLIST.txt                                 | Document           | 16DivuRC5wBfbX8xnq5l_ksf8Q21TgBxA                          | YES
+  BOOTSTRAPv4.txt                                 | Document           | 1eHulS4CPEFAxzKeCEmqjw9T7CVGQ3rfP                          | YES
+  PHASE5_AUDIT_MASTER.txt                         | Document           | 1NSHdQ6972glz02knvic-7QNgFcDxbHxQ                          | YES
+  GOVERNANCE_LOCK.txt                             | Document           | 1lYiaKQ1LBJx3z2MoSoD3FirBtEyPVI_j                          | YES
+  PROJECT_LEARNED_CONSTRAINTS.txt                 | Document           | 12dk1sASojm6Cb9PBSeSoAI9Vchhgx4T3                          | YES
+  STANDARDIZED_HEADERS.txt                        | Document           | 1bHktPTzL2y6p79FCwIdQ1qr73LP1-VCF                          | YES
+                                                  |                    |                                                            |
+--------------------------------------------------|--------------------|------------------------------------------------------------|----------
+\Lib                                              | DIRECTORY          | 1D0zXwlTRljMLHs2x5eGNYeOFolCWZ2Be                          | YES
+  Interop.ahk                                     | Library            | 1Yyc_2bmL4aztBQSdt2jtwG7gnwrFMfaF                          | N/A
+  Core_Utils.ahk                                  | Core Container     | 1FKCB06_r3iiEfBv9q_DzuRMtKd-R3xJu                          | N/A
+  Humanoid.ahk                                    | Core Container     | 17Cmpgp4TdbLyqYomoOnMOISLoTGJ2Oc8                          | N/A
+  Core_Utils.txt                                  | Document           | 1TvRHVqGDT-WtjMJvPZxpki7TgFWP9Zfi                          | YES
+  Humanoid.txt                                    | Document           | 1Ypghf00O2O3rZkEMCti8fJ5JNtvsndOq                          | YES
+  Interop.txt                                     | Document           | 1zbdWhOzlKWHtSXSWLxHwEMfdG8I_cOI0                          | YES
+                                                  |                    |                                                            |
+--------------------------------------------------|--------------------|------------------------------------------------------------|----------
+\Worker                                           | DIRECTORY          | 173QG33oajyc07rGIH0h31tG3vbYsqocb                          | YES
+  Main_Worker.ahk                                 | Main Script        | 1sjeDGlRYLRAT-uIPSvi1LAx-v5ljtaWX                          | N/A
+  Worker_Core.ahk                                 | Core Container     | 1jD8jwd9wBGhOll-nxxATsvUa81Hv7iJS                          | N/A
+  license.key                                     | Data/Key           | 1tyifvKl0OK1N7XE_QXKcoJgOhTXXoDon                          | N/A
+  Main_Worker.txt                                 | Document           | 1beeVRi_U6Baw8wFEkSEP8SzcZ3WNEWmo                          | YES
+  Worker_Core.txt                                 | Document           | 1rSQlNPedw_tbKiUjPO66kytTSa_I8exq                          | YES
+                                                  |                    |                                                            |
+--------------------------------------------------|--------------------|------------------------------------------------------------|----------
+\orchestrator                                     | DIRECTORY          | 1UWaMLTTHP2Ye6sj7MomIWAWH3i8JLglP                          | YES
+  orch_bootstrap.js                               | Script             | 1yJG7qSDqzg-8PANyMYJL5t2p-aKW8PLA                          | N/A
+                                                  |                    |                                                            |
+--------------------------------------------------|--------------------|------------------------------------------------------------|----------
+\PipzOrchestratorExtension                        | DIRECTORY          | 1xJrd_pXJ9SgOKayUsG2LQJq-YJ-XOJiq                          | YES
+  package.json                                    | Config (JSON)      | 1ZcYKbLpPwyIrc_QErrhge0NUoJSuiRkM                          | N/A
+  tsconfig.json                                   | Config (JSON)      | 1Y5_38VfETTcu-xeMqb48PublZcsE834g                          | N/A
+  package.json.governance.txt                     | Document           | 1Po90G2nk4wIXuCHQjc3HeXH3wyv3AO4x                          | YES
+  tsconfig.json.governance.txt                    | Document           | 17wael1lkDdWAyYmeX1nbdzxpd5jiWQmU                          | YES
+  README.md                                       | Document           | 19yIEe4A8bgDuyN7PzaN2NNscAncgT4xr                          | YES
+  \src                                            | SUB-DIRECTORY      | 1mAszu0sAYJ_RvtyaZSqBBE7po6ECkoLb                          | YES
+    extension.ts                                  | Script             | 1TdL9EhG34T8zLbwD4G9zR3isS2u7X6iN                          | N/A
+                                                  |                    |                                                            |
+--------------------------------------------------|--------------------|------------------------------------------------------------|----------
+\pipz-mirror-governance                           | DIRECTORY          | 1iG82QgKEAB0_xSRT7uFog2ih77PuW9q-                          | YES
+  package.json                                    | Config (JSON)      | 1biisIAXFeqe5y0yGdcJA5T-7_akPvxi-                          | N/A
+  tsconfig.json                                   | Config (JSON)      | 1gjnig6YyeyfEOnDXT33RstG2cgCbBvR7                          | N/A
+  README.md                                       | Document           | 1JC7qmZZyGWktYvW32stOBjNbF_xmmYIU                          | YES
+  \src                                            | SUB-DIRECTORY      | 1-0dIctg_cGNMuuCMHJQYLY2kvvLFgfbE                          | YES
+    extension.ts                                  | Script             | 1UgblarfwhWob4r5Nh1A_WFbBZCIgkKCx                          | N/A
+  \.vscode                                        | SUB-DIRECTORY      | 1ltwlLX8CjynRrmxCDdJ7rrtqJ0-pWRk-                          | YES
+    extensions.json                               | Config (JSON)      | 1IvQ_FY_OYq3wAzmkmHQSfaO1p8L8DZeV                          | N/A
+    launch.json                                   | Config (JSON)      | 1V_LYXBocQdskfZOD1kjK29o5mCiOvUvK                          | N/A
+    settings.json                                 | Config (JSON)      | 1Mgt2X4a1QX9hy9qIUKP1GEEqJLfBWigN                          | N/A
+    tasks.json                                    | Config (JSON)      | 1EBh0WLFPNDI5l2IqCIzOGL4xTpqYM34T                          | N/A
+    extensions.json.governance.txt                | Document           | 1yq8GJ4mUhLtCb1dZya8unIjEkpfNqdtH                          | YES
+    launch.json.governance.txt                    | Document           | 1L0sy7iAQ8okrj_8zNkqE1HiGkxytQkWH                          | YES
+    settings.json.governance.txt                  | Document           | 1LIa7DtCH_H5JFgPE0Q3GWMOTww93Bgi6                          | YES
+    tasks.json.governance.txt                     | Document           | 1dhonC67pLRoVdY4DTlQP2dqGieS0RYdL                          | YES
+                                                  |                    |                                                            |
+--------------------------------------------------|--------------------|------------------------------------------------------------|----------
+\.ORCH_AUDITLOG                                   | DIRECTORY          | 1x6aXWyf0wyef4VGDaf_98RNvPim9KwI-                          | YES
+  \mirror                                         | SUB-DIRECTORY      | 1XGqYOrCjKoxWZ_PY1_ZzxBWDIKKGVsqd                          | YES
+                                                  |                    |                                                            |
+--------------------------------------------------|--------------------|------------------------------------------------------------|----------
+\PPAVP                                            | DIRECTORY          | 1Bukbng24bO0qSH-KuIL_n4uGarViwLRA                          | YES
+  AUDIT_RUNNER.txt                                | Document           | 1cFuPRTV39_GuGtwJM8Z1czYSPEodHga4                          | YES
+  PROJECT_STATUS_CHECKLIST.txt                    | Document           | 19q4AAo9dCIZqeGBea9Ap6kxMuoVU-KPn                          | YES
+                                                  |                    |                                                            |
+--------------------------------------------------|--------------------|------------------------------------------------------------|----------
+
+; ------------------------------------------------------------------
+2. MASTER ALIAS INDEX: COMMON NAME MAP (MUST BE MAINTAINED)
+; ------------------------------------------------------------------
+
+-------------------------------------------------------------------|--------------------------------------------------------------------------------------------
+ PATH / FILE NAME                                                  | ALIASES / ROLE
+-------------------------------------------------------------------|--------------------------------------------------------------------------------------------
+\Pipz_Project_V3                                                   | project root, project folder, project directory, root directory
+  settings.ini                                                     | settings ini, runtime settings, user settings ini, config ini
+  PipzScptzIcon.png                                                | app icon, application icon, tray icon, gui icon
+  .gitignore                                                       | git ignore, git config, ignore list, git exclusion
+  ORCH_PROTOCOL_SPEC.txt                                           | orchestrator protocol, orch protocol, orch contract, orchestrator spec
+  settings.txt                                                     | settings mirror, settings text, settings txt
+                                                                   |
+-------------------------------------------------------------------|--------------------------------------------------------------------------------------------
+\Registry                                                          | registry root, registry folder, registry directory
+  GLOBAL_REGISTRY_MASTER.gsheet                                    | registry sheet, global registry sheet, state registry sheet, variable registry sheet, function registry sheet, logic registry sheet
+  GLOBAL_REGISTRY_MASTER.csv                                       | registry, global registry, state registry, variable registry, function registry, logic registry
+  INTERNAL_FUNCTION_INDEX.csv                                      | function index, internal index, internal function index
+                                                                   |
+-------------------------------------------------------------------|--------------------------------------------------------------------------------------------
+\Archive                                                           | archive folder, archive, archive directory
+-------------------------------------------------------------------|--------------------------------------------------------------------------------------------
+\Controller                                                        | controller folder, gui controller, controller directory
+  Main_Controller.ahk                                              | controller, main controller, gui controller script
+  Main_Controller.txt                                              | controller mirror, controller txt
+  Controller_Core.ahk                                              | controller core, controller core container, consolidated controller, controller subsystems
+  Controller_Core.txt                                              | controller core mirror, controller core txt
+                                                                   |
+-------------------------------------------------------------------|--------------------------------------------------------------------------------------------
+\Lib                                                               | lib, library, shared library, common library
+  Core_Utils.ahk                                                   | core utils, settings io, defaults provider, security primitives
+  Core_Utils.txt                                                   | core utils mirror, core utils txt
+  Humanoid.ahk                                                     | humanoid, movement core, antiban core, break manager core, human simulation
+  Humanoid.txt                                                     | humanoid mirror, humanoid txt
+  Interop.ahk                                                      | interop, ipc, messaging core
+  Interop.txt                                                      | interop mirror, interop txt
+                                                                   |
+-------------------------------------------------------------------|--------------------------------------------------------------------------------------------
+\Worker                                                            | worker folder, background worker, engine
+  Main_Worker.ahk                                                  | worker, main worker, engine script
+  Main_Worker.txt                                                  | worker mirror, worker txt
+  Worker_Core.ahk                                                  | worker core, worker core container, consolidated worker, overlay/core subsystems
+  Worker_Core.txt                                                  | worker core mirror, worker core txt
+                                                                   |
+-------------------------------------------------------------------|--------------------------------------------------------------------------------------------
+\Governance                                                        | governance folder, law folder, rule folder, authoritative folder, guidance folder, governance layer, governance root, governance root folder
+  GOVERNANCE_COMPENDIUM.txt                                        | governance compendium, compendium, governance single artifact, master governance, (Inherits ALL \Governance folder and section aliases)
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT            | blueprint, project blueprint, architecture blueprint, folder blueprint, structure blueprint
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER        | anchor, project anchor, system prompt, ai anchor, governance anchor, working notes, project notes, design notes, sanity notes, intent log
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS      | project instructions, instructions, ai instructions, governance rules, ai governance
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST        | index, id index, drive index, id list, index id list, master index
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4         | bootstrap, bootstrap v4, init protocol, initialization protocol
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S5.PHASE5_AUDIT         | phase 5 template, phase 5 audit template, visibility audit template, phase 5 checklist, phase 5 execution checklist, phase 5 audit checklist
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S6.GOVERNANCE_LOCK      | governance lock, lock file, governance state, lock state
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.LEARNED_CONSTRAINTS  | plc, constraints, learned constraints, project constraints, invalidated approaches, learned approaches
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S9.STANDARD_HEADERS     | header templates, header standards, file headers, license headers
+                                                                   |                
+-------------------------------------------------------------------|--------------------------------------------------------------------------------------------
+\PipzOrchestratorExtension                                         | orchestrator extension, vs code extension, orch extension
+  package.json                                                     | orch package file, orch node config, orchestrator manifest
+  tsconfig.json                                                    | orch typescript config, orch ts config, orchestrator compiler config
+  README.md                                                        | orch extension readme, orchestrator documentation
+  package.json.governance.txt                                      | package governance, package sidecar, npm governance
+  tsconfig.json.governance.txt                                     | tsconfig governance, typescript governance sidecar
+  \src                                                             | orch extension source, orch src folder, orchestrator source
+    extension.ts                                                   | orch vs code entry, orch extension entry, orchestrator main
+-------------------------------------------------------------------|--------------------------------------------------------------------------------------------
+\orchestrator                                                      | orchestrator folder, orchestrator scripts, orchestration backend
+  orch_bootstrap.js                                                | bootstrap script, orch bootstrap, orchestrator bootstrap, mvp bootstrap
+                                                                   |
+-------------------------------------------------------------------|--------------------------------------------------------------------------------------------
+\pipz-mirror-governance                                            | mirror governance, mirror extension, governance extension
+  package.json                                                     | mirror package, governance package, mirror manifest, governance manifest
+  tsconfig.json                                                    | mirror tsconfig, mirror typescript config, governance tsconfig
+  README.md                                                        | mirror readme, mirror docs, governance documentation
+  \src                                                             | mirror src, mirror source, governance source
+    extension.ts                                                   | mirror entry, governance entry, mirror main, governance script
+  \.vscode                                                         | mirror vscode, governance vscode, mirror environment
+    extensions.json                                                | mirror extensions config, mirror recommended extensions
+    launch.json                                                    | mirror launch config, mirror debug config
+    settings.json                                                  | mirror settings, mirror workspace settings
+    tasks.json                                                     | mirror tasks, mirror build tasks
+    extensions.json.governance.txt                                 | mirror extensions governance, mirror extensions sidecar
+    launch.json.governance.txt                                     | mirror launch governance, mirror launch sidecar
+    settings.json.governance.txt                                   | mirror settings governance, mirror settings sidecar
+    tasks.json.governance.txt                                      | mirror tasks governance, mirror tasks sidecar
+                                                                   |
+-------------------------------------------------------------------|--------------------------------------------------------------------------------------------
+\.ORCH_AUDITLOG                                                    | orch logs, audit root, governance logs
+  \mirror                                                          | mirror logs, save logs, audit mirror
+                                                                   |
+-------------------------------------------------------------------|--------------------------------------------------------------------------------------------
+\PPAVP                                                             | project planning folder, project plan folder, plan folder, checklist folder, audit folder, protocol folder, verification folder, ppavp folder
+  PROJECT_STATUS_CHECKLIST.txt                                     | project checklist, status checklist, task tracker, master checklist
+  AUDIT_RUNNER.txt                                                 | audit runner, audit plan, audit backlog, audit execution plan, audit runner file
+                                                                   |
+-------------------------------------------------------------------|--------------------------------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+
+END OF INDEXIDLIST
+================================================================================
+END OPERATIVE TEXT (COMPENDIUM MODE)
+
+
+================================================================================
+SECTION ID: GOV.S8.LEARNED_CONSTRAINTS
+ORIGIN: PROJECT_LEARNED_CONSTRAINTS.txt
+AUTHORITY LEVEL: SUPPORT (ANTI-REGRESSION)
+================================================================================
+OPERATIVE TEXT (COMPENDIUM MODE) — AUTHORITATIVE FOR SINGLE-ARTIFACT OPERATION
+================================================================================
+; ------------------------------------------------------------------
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.LEARNED_CONSTRAINTS"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.LEARNED_CONSTRAINTS
+; Version: 1.1.8
+; Last change: Added PLC-0010 and PLC-0011 regarding AHK v2 SetTimer callback requirements within static classes.
+; Content-Fingerprint: 2026-01-29T00-56-04Z-2GIBZV5Y
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+NON-AUTHORITATIVE NOTICE (MANDATORY)
+; ------------------------------------------------------------------
+
+This document records empirically discovered constraints, invalidated approaches, and
+high-signal implementation notes to prevent regressions across sessions and AI systems.
+
+This document does NOT:
+
+; - Define governance rules
+; - Override GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS
+; - Override GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4
+; - Override GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT
+; - Override GLOBAL_REGISTRY_MASTER.gsheet
+; - Override GLOBAL_REGISTRY_MASTER.csv
+; - Override registry ownership, structure, or invariants
+
+If any entry in this document conflicts with authoritative sources:
+
+; - The authoritative source wins
+; - The conflict MUST be reported
+; - The entry MUST NOT be used as justification for changes
+
+This file is institutional memory only.
+
+; ------------------------------------------------------------------
+SCOPE INDEXING PROTOCOL (STRICT)
+; ------------------------------------------------------------------
+
+Every entry MUST contain a SCOPE field using the scope taxonomy below.
+Entries MUST be written atomically and be independently verifiable.
+
+Entries MUST be added only when:
+
+; - An approach was explicitly invalidated (failed, incorrect, or regressive), OR
+; - A constraint was explicitly confirmed (required to prevent breakage)
+
+Narrative, opinions, and "best practices" without a confirmed outcome are prohibited.
+
+; ------------------------------------------------------------------
+SCOPE TAXONOMY (CANONICAL)
+; ------------------------------------------------------------------
+
+Use EXACTLY ONE SCOPE per entry (DEFINE NEW SCOPE IF NEEDED | NO DUAL SCOPES):
+
+; - Governance
+; - Bootstrap
+; - Indexing
+; - Phase5
+; - Controller
+; - Worker
+; - Lib
+; - CrossCutting
+; - Infrastructure
+; - Tooling
+; - Audits
+; - AutoHotkey v2 Logic
+
+; ------------------------------------------------------------------
+ENTRY FORMAT (STRICT | DO NOT OMIT ANY FIELD)
+; ------------------------------------------------------------------
+
+ENTRY ID: PLC-0000
+DATE (UTC): YYYY-MM-DD
+SCOPE: <one from taxonomy>
+STATUS: CONFIRMED | INVALIDATED | DEPRECATED
+TITLE: <short summary>
+
+CONTEXT:
+<What subsystem, file, or behavior was being worked on?>
+
+DISCOVERY:
+<What was learned? Factual, testable, and concise.>
+
+INVALIDATED APPROACH:
+<If STATUS=INVALIDATED, list the rejected method(s) here. Otherwise write: N/A>
+
+VALIDATED CONSTRAINT:
+<If STATUS=CONFIRMED, list the constraint(s) here. Otherwise write: N/A>
+
+EVIDENCE:
+<What observation confirms this? Logs, reproducible steps, file references, etc.>
+
+RELATED FILES:
+<List relevant project files (paths). Otherwise write: N/A>
+
+NOTES:
+<Optional. Must remain factual. Otherwise write: N/A>
+
+; ------------------------------------------------------------------
+SCOPE INDEX (MUST BE MAINTAINED)
+; ------------------------------------------------------------------
+
+Format:
+SCOPE | ENTRY IDS
+
+Governance     | PLC-0001, PLC-0012
+Bootstrap      | (none)
+Indexing       | (none)
+Phase5         | (none)
+Controller     | (none)
+Worker         | (none)
+Lib            | (none)
+CrossCutting   | PLC-0002, PLC-0003, PLC-0004, PLC-0005
+Infrastructure | PLC-0006
+Tooling        | PLC-0007, PLC-0008
+Audits         | PLC-0009
+AutoHotkey v2 Logic | PLC-0010, PLC-0011
+
+; ------------------------------------------------------------------
+ENTRIES (APPEND ONLY BELOW THIS LINE)
+; ------------------------------------------------------------------
+ENTRY ID: PLC-0001
+DATE (UTC): 2026-01-21
+SCOPE: Governance
+STATUS: CONFIRMED
+TITLE: Google Drive preview truncates structured governance sections of GOVERNANCE_COMPENDIUM.txt unless formatting is normalized
+
+CONTEXT:
+AI governance and bootstrap files stored in Google Drive were intermittently unreadable or partially truncated when accessed via preview or connector-based reads.
+
+DISCOVERY:
+Google Drive preview and extraction systems may truncate or fail to fully render governance documents that contain dense structural formatting such as repeated ASCII delimiter blocks (e.g. "=====", "---"), mixed delimiter styles, or Markdown-like constructs, even when file size is small.
+
+INVALIDATED APPROACH:
+Storing governance sections of GOVERNANCE_COMPENDIUM.txt with mixed or stacked delimiters, Markdown horizontal rules, or long single-character separator blocks.
+
+VALIDATED CONSTRAINT:
+governance sections of GOVERNANCE_COMPENDIUM.txt must use a single, non-Markdown, commented delimiter style and avoid dense or mixed ASCII separator patterns to ensure full Drive preview and connector readability.
+
+EVIDENCE:
+Multiple governance sections of GOVERNANCE_COMPENDIUM.txt became fully readable in Drive only after delimiter normalization and removal of Markdown constructs; prior versions consistently truncated.
+
+RELATED FILES:
+GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS
+GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT
+GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER
+GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4
+
+NOTES:
+This constraint was reproduced across multiple files and confirmed via Drive preview visibility to file end.
+
+; ------------------------------------------------------------------
+
+ENTRY ID: PLC-0002
+DATE (UTC): 2026-01-21
+SCOPE: CrossCutting
+STATUS: CONFIRMED
+TITLE: Canonical commented delimiter required for governance file stability
+
+CONTEXT:
+Multiple governance and audit files required normalization to ensure consistent readability and prevent Drive-based truncation.
+
+DISCOVERY:
+A single commented delimiter line is reliably treated as plain text by Google Drive preview and extraction systems, while legacy or Markdown-style delimiters are not.
+
+INVALIDATED APPROACH:
+Use of "=====", "---", mixed delimiter styles, or Markdown section separators in governance documents.
+
+VALIDATED CONSTRAINT:
+All governance and audit files must standardize on the canonical delimiter:
+"; ------------------------------------------------------------------"
+
+EVIDENCE:
+After standardizing on this delimiter, all required governance sections of GOVERNANCE_COMPENDIUM.txt rendered fully in Drive preview and were readable end-to-end.
+
+RELATED FILES:
+GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS
+GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT
+GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.LEARNED_CONSTRAINTS
+
+NOTES:
+Delimiter choice is formatting-only and does not confer authority.
+
+; ------------------------------------------------------------------
+
+ENTRY ID: PLC-0003
+DATE (UTC): 2026-01-21
+SCOPE: CrossCutting
+STATUS: CONFIRMED
+TITLE: UTF-16 mis-decoding can cause intermittent GEMINI path extraction failures in mirroring scripts
+
+CONTEXT:
+MirrorAhkToTxt.py intermittently logged "missing project path in GEMINI MEM TAG; skipping mirror" even when the GEMINI MEM TAG line was present.
+
+DISCOVERY:
+If runtime text is decoded incorrectly (e.g., UTF-8 bytes mis-decoded as UTF-16), header scanning and regex extraction may fail inconsistently across saves, sometimes triggered by small whitespace changes.
+
+INVALIDATED APPROACH:
+Blindly attempting UTF-16 decoding first for all buffer text without BOM/NUL detection.
+
+VALIDATED CONSTRAINT:
+Text decoding in mirroring/fingerprinting utilities must be BOM/NUL-aware: only prefer UTF-16 when strongly indicated (BOM or NUL bytes); otherwise prefer UTF-8.
+
+EVIDENCE:
+Header/path extraction failures occurred inconsistently until BOM/NUL-aware decoding was used, after which mirroring behaved deterministically across whitespace-only edits.
+
+RELATED FILES:
+Pipz_Project_V3\MirrorAhkToTxt.py (DEPRECIATED)
+
+NOTES:
+This is a tooling-layer constraint; it does not change governance semantics.
+
+; ------------------------------------------------------------------
+
+ENTRY ID: PLC-0004
+DATE (UTC): 2026-01-21
+SCOPE: CrossCutting
+STATUS: CONFIRMED
+TITLE: AI SOT header must exist only in .txt mirrors, never in runtime .ahk/.ini files
+
+CONTEXT:
+MirrorAhkToTxt.py showed inconsistent behavior and false "missing project path" errors during fingerprint/mirror operations.
+
+DISCOVERY:
+Placing the AI SOT mirror header inside a runtime file (.ahk/.ini) can interfere with header scanning assumptions and lead to incorrect mirroring/fingerprinting behavior.
+
+INVALIDATED APPROACH:
+Including the AI SOT header block inside runtime files.
+
+VALIDATED CONSTRAINT:
+Runtime files (.ahk/.ini) must contain only the GEMINI MEM TAG + MAINTEMPLATE header (with Content-Fingerprint). The AI SOT header is reserved exclusively for .txt mirror outputs.
+
+EVIDENCE:
+Removing the AI SOT header from runtime files restored deterministic fingerprinting and mirroring behavior.
+
+RELATED FILES:
+Pipz_Project_V3\MirrorAhkToTxt.py (DEPRECIATED)
+Pipz_Project_V3\settings.ini
+Pipz_Project_V3\settings.txt
+
+NOTES:
+This constraint prevents regression when normalizing headers and delimiters.
+
+; ------------------------------------------------------------------
+
+ENTRY ID: PLC-0005
+DATE (UTC): 2026-01-21
+SCOPE: CrossCutting
+STATUS: CONFIRMED
+TITLE: LLM whitespace cleanup can alter Python indentation and break MirrorAhkToTxt.py
+
+CONTEXT:
+MirrorAhkToTxt.py was passed through an external AI tool for "removing empty/unnecessary lines" to reduce visual bloat.
+
+DISCOVERY:
+LLM formatting passes can modify indentation or line structure even when instructed to only remove blank lines. In Python, indentation is semantic; accidental indentation changes can introduce syntax errors or change block structure.
+
+INVALIDATED APPROACH:
+Using an LLM to mass-remove blank lines or "normalize whitespace" in Python scripts without a deterministic verification step.
+
+VALIDATED CONSTRAINT:
+Whitespace cleanup for Python scripts must be mechanical and indentation-preserving (e.g., collapsing consecutive blank lines only) or must be followed by a strict syntax/indentation verification step before deployment.
+
+EVIDENCE:
+Gemini-cleaned MirrorAhkToTxt.py introduced an indentation change that required correction before the script could be treated as safe.
+
+RELATED FILES:
+Pipz_Project_V3\MirrorAhkToTxt.py (DEPRECIATED)
+
+NOTES:
+This is a tooling safety constraint; it does not change project governance semantics.
+
+; ------------------------------------------------------------------
+
+ENTRY ID: PLC-0006
+DATE (UTC): 2026-01-25
+SCOPE: Infrastructure
+STATUS: CONFIRMED
+TITLE: Google Drive .gsheet internal data is inaccessible to external connectors
+
+CONTEXT:
+Attempted use of Google Sheets as a live project registry for logic and state.
+
+DISCOVERY:
+The Google Drive API/connector exposes .gsheet files as metadata objects only; the tabular content (cells/tabs) is not streamable as raw text to the IDE or Gemini Code Assist.
+
+INVALIDATED APPROACH:
+Relying on .gsheet files for active project governance or state registries.
+
+VALIDATED CONSTRAINT:
+All project registries must exist as flat .csv files in the root registry directory to ensure visibility.
+
+EVIDENCE:
+Phase 2 Bootstrap failure on 2026-01-25; Agent reported file existence but "Zero content/Logic Blind" state.
+
+RELATED FILES:
+Pipz_Project_V3\Registry\GLOBAL_LOGIC_RULES.csv (DEPRECIATED)
+Pipz_Project_V3\Registry\GLOBAL_FUNCTION_REGISTRY.csv (DEPRECIATED)
+
+NOTES:
+The .gsheet remains the non-active "Backup Vault".
+
+; ------------------------------------------------------------------
+
+ENTRY ID: PLC-0007
+DATE (UTC): 2026-01-25
+SCOPE: Tooling
+STATUS: CONFIRMED
+TITLE: Gemini Code Assist context window cannot parse multi-tab spreadsheet logic
+
+CONTEXT:
+Bootstrapping a project with complex registry dependencies involving multiple logic sheets.
+
+DISCOVERY:
+Current LLM tooling lacks the native ability to programmatically "switch tabs" or interpret spreadsheet-specific binary/XML formatting without high risk of hallucination.
+
+INVALIDATED APPROACH:
+Prompting the AI to "read Tab 2 of the registry sheet."
+
+VALIDATED CONSTRAINT:
+Governance data must be presented in flat, delimiter-heavy formats (CSV/TXT) to ensure high-fidelity LLM ingestion.
+
+EVIDENCE:
+Successful ingestion and audit only after transition to individual flat CSV files.
+
+RELATED FILES:
+Pipz_Project_V3\Registry\GLOBAL_LOGIC_RULES.csv (DEPRECIATED)
+
+NOTES:
+N/A
+
+; ------------------------------------------------------------------
+
+ENTRY ID: PLC-0008
+DATE (UTC): 2026-01-25
+SCOPE: Tooling
+STATUS: CONFIRMED
+TITLE: Gemini Code Assist Loop Detection Limit (Sequential Call Ceiling)
+
+CONTEXT:
+Sequential audit of 14+ files in a single turn using the code execution stream.
+
+DISCOVERY:
+The IDE execution stream triggers a 'loop_detected' error if sequential tool calls (read_file) exceed internal safety thresholds (~10-15 calls).
+
+INVALIDATED APPROACH:
+Running "Single-Sweep" audits or scans on more than 10 files in a single turn.
+
+VALIDATED CONSTRAINT:
+Automated processes must be segmented to reset the call counter every 5 operations.
+
+EVIDENCE:
+Error: "Unknown error from LLM stream: {'type':'loop_detected'}" encountered 2026-01-25.
+
+RELATED FILES:
+N/A
+
+NOTES:
+This is a technical safety ceiling of the Gemini Code Assist implementation.
+
+; ------------------------------------------------------------------
+
+ENTRY ID: PLC-0009
+DATE (UTC): 2026-01-25
+SCOPE: Audits
+STATUS: CONFIRMED
+TITLE: Mandatory Atomic Batching for Governance Verification
+
+CONTEXT:
+Performing Phase 5 Structural and Governance audits across a large codebase.
+
+DISCOVERY:
+Large-batch audits increase the risk of LLM "attention drift," leading to overlooked header errors or session timeouts.
+
+INVALIDATED APPROACH:
+Conducting full-project governance scans in a single prompt.
+
+VALIDATED CONSTRAINT:
+All governance audits must be executed in "Atomic Batches" of exactly 5 files to ensure 1:1 literal verification.
+
+EVIDENCE:
+PLC-0008 technical limitation; verification of 5-file batches results in 100% accuracy.
+
+RELATED FILES:
+Pipz_Project_V3\PHASE5_EXECUTION_CHECKLIST.txt (DEPRECIATED)
+Pipz_Project_V3\PHASE5_VISIBILITY_AUDIT_TEMPLATE.txt (DEPRECIATED)
+
+NOTES:
+Governed by GLOBAL LOGIC RULE GEN-03.
+
+; ------------------------------------------------------------------
+
+ENTRY ID: PLC-0010
+DATE (UTC): 2026-01-27
+SCOPE: AutoHotkey v2 Logic
+STATUS: CONFIRMED
+TITLE: SetTimer Static Method Callback Failure
+
+CONTEXT:
+Attempting to trigger a debounced log or function call using SetTimer within a static class method (e.g., Messenger.PushTitleUpdate).
+
+DISCOVERY:
+In AHK v2, referencing a static method as `this.MethodName` or `ClassName.MethodName` inside a `SetTimer` call throws "Error: Invalid callback function." The interpreter does not automatically treat these as Func objects in this context.
+
+INVALIDATED APPROACH:
+`SetTimer(this.MethodName, -1000)` or `SetTimer(Messenger.MethodName, -1000)`
+
+EVIDENCE:
+Runtime error thrown consistently in Pipz_Project_V3 Controller whenever the Game Window Title field was modified.
+
+RELATED FILES:
+Pipz_Project_V3\Controller\Modules\Messenger.ahk
+
+NOTES:
+This constraint is critical for maintaining stable execution of AHK v2 scripts that rely on timed callbacks within static methods.
+
+; ------------------------------------------------------------------
+
+ENTRY ID: PLC-0011
+DATE (UTC): 2026-01-27
+SCOPE: AutoHotkey v2 Logic
+STATUS: CONFIRMED
+TITLE: Mandatory Method Binding for Class-Based Timers
+
+CONTEXT:
+Ensuring valid callbacks for SetTimer when the target function resides within a Class.
+
+VALIDATED CONSTRAINT:
+When passing a class method to `SetTimer`, it MUST be explicitly bound to the class or instance object to create a "BoundFunc" object.
+
+VALIDATED APPROACH:
+`SetTimer(ClassName.MethodName.Bind(ClassName), -1000)`
+
+EVIDENCE:
+Successful execution of the timer callback without errors in Pipz_Project_V3 Controller after applying the `.Bind()` method.
+
+RELATED FILES:
+Pipz_Project_V3\Controller\Modules\Messenger.ahk
+
+NOTES:
+This ensures the callback is recognized as a valid callable object by the AHK v2 runtime, regardless of whether the method actually requires the `this` parameter.
+
+; ------------------------------------------------------------------
+
+ENTRY ID: PLC-0012
+DATE (UTC): 2026-01-28
+SCOPE: Governance
+STATUS: CONFIRMED
+TITLE: Policy-B governed registry model with non-governed internal function index
+
+CONTEXT:
+The project governance layer was being updated following consolidation of modules
+into core container files (Controller_Core, Worker_Core, Core_Utils, Humanoid, Interop),
+and the introduction of a new INTERNAL_FUNCTION_INDEX.csv for full symbol discovery.
+
+DISCOVERY:
+Requiring all functions, variables, and helpers to be registered in a governed registry
+creates excessive governance churn and hard-stops during refactors, consolidation,
+and internal reorganization. Additionally, section-based registry assumptions
+(GLOBAL_STATE_REGISTRY, GLOBAL_FUNCTION_REGISTRY, etc.) coupled to .gsheet sources
+are incompatible with tooling visibility constraints.
+
+INVALIDATED APPROACH:
+Treating a monolithic or section-based registry (including gsheet-only registries)
+as the authoritative source for all functions, variables, and logic.
+
+VALIDATED CONSTRAINT:
+The project SHALL use a dual-registry model:
+- GLOBAL_REGISTRY_MASTER.csv is the authoritative, CSV-first, Policy-B governed registry.
+- INTERNAL_FUNCTION_INDEX.csv is a non-governed, regenerable symbol inventory.
+
+Policy-B governance applies ONLY to:
+- Entrypoints (startup paths, externally-triggered handlers)
+- Timers (SetTimer callbacks)
+- OnMessage handlers / IPC receivers
+- IPC sender contracts and encodings
+- Settings IO and Defaults interface
+- Lifecycle and process controls
+- Logic invariants directly tied to the above surface area
+
+Internal helpers and non-surface logic MUST NOT require governed registration.
+
+EVIDENCE:
+Governance refactor eliminated stale module references, reduced registry churn,
+and aligned registry verification with tooling-readable CSV artifacts while preserving
+auditability of governance-critical surface area.
+
+RELATED FILES:
+Pipz_Project_V3\Registry\GLOBAL_REGISTRY_MASTER.csv
+Pipz_Project_V3\Registry\INTERNAL_FUNCTION_INDEX.csv
+GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS
+GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT
+GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4
+
+NOTES:
+This entry supersedes prior assumptions that all functions or variables must appear
+in a governed registry and formally establishes Policy-B semantics for future work.
+
+; ------------------------------------------------------------------
+
+(NEXT ENTRY GOES BELOW THIS LINE)
+================================================================================
+END OPERATIVE TEXT (COMPENDIUM MODE)
+
+
+================================================================================
+SECTION ID: GOV.S9.STANDARD_HEADERS
+ORIGIN: STANDARDIZED_HEADERS.txt
+AUTHORITY LEVEL: ENFORCEMENT
+================================================================================
+OPERATIVE TEXT (COMPENDIUM MODE) — AUTHORITATIVE FOR SINGLE-ARTIFACT OPERATION
+================================================================================
+; ------------------------------------------------------------------
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S9.STANDARD_HEADERS"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S9.STANDARD_HEADERS
+; Version: 0.1.5
+; Last change: Migrated file to new governance directory and updated all references in file.
+; Content-Fingerprint: 2026-01-29T21-31-20Z-89WR4TOF
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT (LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+  MANDATED HEADER STYLES BY FILE TYPE (ABSOLUTE)
+; ------------------------------------------------------------------
+
+FILE TYPE = .txt
+MANDATED HEADER STYLE =
+
+; ------------------------------------------------------------------
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\<RELATIVE\PATH\FILENAME>.txt"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - <FILENAME>.txt
+; Version: x.x.x (SEMANTIC VERSIONING)
+; Last change: BRIEF SUMMARY OF ALL MOST RECENT CHANGES.
+; Content-Fingerprint: <UPDATE ON SAVE>
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+
+FILE TYPE = .js
+MANDATED HEADER STYLE =
+
+// ------------------------------------------------------------------
+// GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\<RELATIVE\PATH\FILENAME>.js"
+// ------------------------------------------------------------------
+
+// ------------------------------------------------------------------
+// MAINTEMPLATE - <FILENAME>.js
+// Version: x.x.x (SEMANTIC VERSIONING)
+// Last change: BRIEF SUMMARY OF ALL MOST RECENT CHANGES.
+// Content-Fingerprint: <UPDATE ON SAVE>
+// ------------------------------------------------------------------
+
+// ------------------------------------------------------------------
+// ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+// ------------------------------------------------------------------
+
+
+FILE TYPE = .ts
+MANDATED HEADER STYLE =
+
+// ------------------------------------------------------------------
+// GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\<RELATIVE\PATH\FILENAME>.ts"
+// ------------------------------------------------------------------
+
+// ------------------------------------------------------------------
+// MAINTEMPLATE - <FILENAME>.ts
+// Version: x.x.x (SEMANTIC VERSIONING)
+// Last change: BRIEF SUMMARY OF ALL MOST RECENT CHANGES.
+// Content-Fingerprint: <UPDATE ON SAVE>
+// ------------------------------------------------------------------
+
+// ------------------------------------------------------------------
+// ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+// ------------------------------------------------------------------
+
+
+FILE TYPE = .md
+MANDATED HEADER STYLE =
+
+; ------------------------------------------------------------------
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\<RELATIVE\PATH\FILENAME>.md"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - <FILENAME>.md
+; Version: x.x.x (SEMANTIC VERSIONING)
+; Last change: BRIEF SUMMARY OF ALL MOST RECENT CHANGES.
+; Content-Fingerprint: <UPDATE ON SAVE>
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+
+FILE TYPES = .yaml | .yml
+MANDATED HEADER STYLE =
+
+# ------------------------------------------------------------------
+# GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\<RELATIVE\PATH\FILENAME>.yaml"
+# ------------------------------------------------------------------
+
+# ------------------------------------------------------------------
+# MAINTEMPLATE - <FILENAME>.yaml
+# Version: x.x.x (SEMANTIC VERSIONING)
+# Last change: BRIEF SUMMARY OF ALL MOST RECENT CHANGES.
+# Content-Fingerprint: YYYY-MM-DDTHH-MM-SSZ-XXXXXXXX
+# ------------------------------------------------------------------
+
+# ------------------------------------------------------------------
+# ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+# ------------------------------------------------------------------
+
+
+FILE TYPE = .py
+MANDATED HEADER STYLE =
+
+# ------------------------------------------------------------------
+# GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\<RELATIVE\PATH\FILENAME>.py"
+# ------------------------------------------------------------------
+#
+# ------------------------------------------------------------------
+# MAINTEMPLATE - <FILENAME>.py
+# Version: 0.1.0
+# Last change: Initial creation.
+# Content-Fingerprint: YYYY-MM-DDTHH-MM-SSZ-XXXXXXXX
+# ------------------------------------------------------------------
+#
+# ------------------------------------------------------------------
+# ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+# ------------------------------------------------------------------
+
+
+FILE TYPE = .json
+MANDATED HEADER STYLE = NONE (JSON FILES MUST REMAIN PURE)
+
+RATIONALE:
+- JSON does NOT support comments.
+- package.json, tsconfig.json, and similar files are parsed by strict toolchains
+  (npm, Node, TypeScript, VS Code extension host).
+- ANY header or comment inside a .json file WILL break tooling.
+
+GOVERNANCE REQUIREMENT (MANDATORY):
+
+ALL GOVERNED .json FILES MUST USE A SIDECAR GOVERNANCE FILE.
+
+SIDECAR FILE NAMING RULE:
+- <original_filename>.governance.txt
+
+EXAMPLES:
+- package.json               → package.json.governance.txt
+- tsconfig.json              → tsconfig.json.governance.txt
+- settings.schema.json       → settings.schema.json.governance.txt
+
+SIDECAR FILE REQUIREMENTS:
+- MUST contain a full MAINTEMPLATE header (standard .txt format)
+- MUST include GEMINI MEM TAG with FULL PATH pointing to the SIDECAR FILE
+- MUST reference the governed JSON file explicitly in content
+- MUST receive Content-Fingerprint updates on save
+- MUST be listed in GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST as the authoritative governance artifact
+
+THE .json FILE ITSELF:
+- MUST remain valid, comment-free JSON
+- MUST NOT contain governance metadata
+- IS CONSIDERED A RUNTIME / TOOL-CONSTRAINED ARTIFACT
+
+FILE TYPE = .ahk
+MANDATED HEADER STYLE =
+
+; ------------------------------------------------------------------
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\<RELATIVE\PATH\FILENAME>.ahk"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - <FILENAME>.ahk
+; Version: x.x.x (SEMANTIC VERSIONING)
+; Last change: BRIEF SUMMARY OF ALL MOST RECENT CHANGES.
+; Content-Fingerprint: <UPDATE ON SAVE>
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; SIGNPOST GOVERNANCE (AHK ONLY)
+; ------------------------------------------------------------------
+; DIRECTIVES (AI-ONLY | DO NOT COPY INTO FILE SIGNPOSTS):
+; - The signpost block must be placed at the TOP of the file’s content area
+;   (immediately after the 14-line reserved header region).
+; - The USER does NOT fill this out. The AI fills this out when a new file/module
+;   is created or when a file’s governance surface changes.
+; - The signpost is COMMENT-ONLY. It must never require touching or reformatting
+;   executable code to remain valid.
+; - The signpost must be factual and implementation-linked (names, callbacks, IDs).
+; - Use "N/A" explicitly if a section does not apply (never delete headings).
+; - Do not include speculative future behavior; document what exists now.
+; - Any signpost output that includes DIRECTIVES is invalid and must be corrected.
+;
+; POLICY-B DIRECTIVES (AI-ONLY):
+; - GLOBAL_REGISTRY_MASTER.csv is the authoritative governed registry (Policy-B).
+; - INTERNAL_FUNCTION_INDEX.csv is NON-GOVERNED and exists only for full symbol discovery.
+; - The AI MUST consult GLOBAL_REGISTRY_MASTER.csv before changing:
+;     * entrypoints, timers, OnMessage/IPC handlers, IPC contracts, lifecycle controls,
+;       settings IO, or defaults interface behavior.
+; - The AI MUST NOT require a governed registry update for internal helper changes.
+; - Missing or drifting entries in INTERNAL_FUNCTION_INDEX.csv are never a hard-stop.
+; - If you add/remove a timer, OnMessage, IPC contract, lifecycle control, or
+;   settings/defaults interface, you MUST update GLOBAL_REGISTRY_MASTER.csv.
+;
+; ------------------------------------------------------------------
+; SIGNPOST TEMPLATE (IN-FILE CONTENT | AI-FILLED)
+; ------------------------------------------------------------------
+; ------------------------------------------------------------------
+; SIGNPOST GOVERNANCE — FILE: <FILE_NAME.ahk>
+; ------------------------------------------------------------------
+; MODULE NAME:
+;   <Short module name> (<Entrypoint | Core Container | Shared Lib | Utility>)
+;
+; WHAT IT OWNS / CONTROLS:
+;   - <Subsystem #1>
+;   - <Subsystem #2>
+;   - <Subsystem #3>
+;
+; INPUTS (events/messages/functions it responds to):
+;   - GUI events: N/A | <Button/Control> -> <Handler>
+;   - Windows messages: N/A | OnMessage(<MSG_ID>, <Handler>)
+;   - Timers: N/A | SetTimer(<Callback>, <interval>)
+;   - Direct calls: N/A | <PublicFunction>(...) called by <OwnerFile>
+;
+; OUTPUTS / SIDE EFFECTS (files, settings, processes, IPC, UI):
+;   - UI: N/A | <What it changes in GUI/overlay>
+;   - Settings / Files:
+;       * Reads: N/A | <files>
+;       * Writes: N/A | <files>
+;   - IPC:
+;       * Receives: N/A | <message IDs / mechanism>
+;       * Sends: N/A | <message IDs / mechanism>
+;   - Process control: N/A | <launch/kill/suspend/resume + how>
+;
+; DEPENDENCIES (globals/functions it relies on):
+;   - Includes: N/A | <List included modules>
+;   - Globals it expects: N/A | <g_* and shared objects>
+;   - External APIs / DllCall: N/A | <if any>
+;
+; GOVERNANCE NOTES (hard-stop rules, invariants, what must remain true):
+;   - <Invariant #1: “must always…”>
+;   - <Invariant #2: “must never…”>
+;   - Registry note:
+;       * If any new entrypoints/IPC/timers/lifecycle controls are added here,
+;         GLOBAL_REGISTRY_MASTER.csv must be updated (Policy-B surface area only).
+;
+; EXPORTED SURFACE (registry-relevant quicklist):
+;   - N/A | <OnMessage handler #1>
+;   - N/A | <Timer callback #1>
+;   - N/A | <IPC sender/receiver #1>
+;   - N/A | <Lifecycle control #1>
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; GLOBAL GOVERNANCE NOTE (APPLIES TO ALL FILE TYPES)
+; ------------------------------------------------------------------
+
+; If a file format is controlled by an external compiler, interpreter,
+; or toolchain and does not safely support comments or headers,
+; governance metadata MUST NOT be embedded directly.
+
+; In such cases, governance MUST be implemented via:
+; - a sidecar .governance.txt file, OR
+; - a mirrored authoritative text file, OR
+; - a registry entry (as defined in AI_PROJECT_INSTRUCTIONS)
+
+; GOVERNANCE IS NEVER ALLOWED TO BREAK TOOLING.
+
+; If a conflict exists between governance format and tool requirements:
+; - TOOL COMPATIBILITY WINS
+; - GOVERNANCE MOVES TO A SIDE CHANNEL
+================================================================================
+END OPERATIVE TEXT (COMPENDIUM MODE)

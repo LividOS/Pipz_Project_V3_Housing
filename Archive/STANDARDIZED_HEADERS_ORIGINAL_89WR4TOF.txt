@@ -1,0 +1,279 @@
+; ------------------------------------------------------------------
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\Governance\STANDARDIZED_HEADERS.txt"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - STANDARDIZED_HEADERS.txt
+; Version: 0.1.5
+; Last change: Migrated file to new governance directory and updated all references in file.
+; Content-Fingerprint: 2026-01-29T21-31-20Z-89WR4TOF
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT (LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+  MANDATED HEADER STYLES BY FILE TYPE (ABSOLUTE)
+; ------------------------------------------------------------------
+
+FILE TYPE = .txt
+MANDATED HEADER STYLE =
+
+; ------------------------------------------------------------------
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\<RELATIVE\PATH\FILENAME>.txt"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - <FILENAME>.txt
+; Version: x.x.x (SEMANTIC VERSIONING)
+; Last change: BRIEF SUMMARY OF ALL MOST RECENT CHANGES.
+; Content-Fingerprint: <UPDATE ON SAVE>
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+
+FILE TYPE = .js
+MANDATED HEADER STYLE =
+
+// ------------------------------------------------------------------
+// GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\<RELATIVE\PATH\FILENAME>.js"
+// ------------------------------------------------------------------
+
+// ------------------------------------------------------------------
+// MAINTEMPLATE - <FILENAME>.js
+// Version: x.x.x (SEMANTIC VERSIONING)
+// Last change: BRIEF SUMMARY OF ALL MOST RECENT CHANGES.
+// Content-Fingerprint: <UPDATE ON SAVE>
+// ------------------------------------------------------------------
+
+// ------------------------------------------------------------------
+// ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+// ------------------------------------------------------------------
+
+
+FILE TYPE = .ts
+MANDATED HEADER STYLE =
+
+// ------------------------------------------------------------------
+// GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\<RELATIVE\PATH\FILENAME>.ts"
+// ------------------------------------------------------------------
+
+// ------------------------------------------------------------------
+// MAINTEMPLATE - <FILENAME>.ts
+// Version: x.x.x (SEMANTIC VERSIONING)
+// Last change: BRIEF SUMMARY OF ALL MOST RECENT CHANGES.
+// Content-Fingerprint: <UPDATE ON SAVE>
+// ------------------------------------------------------------------
+
+// ------------------------------------------------------------------
+// ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+// ------------------------------------------------------------------
+
+
+FILE TYPE = .md
+MANDATED HEADER STYLE =
+
+; ------------------------------------------------------------------
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\<RELATIVE\PATH\FILENAME>.md"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - <FILENAME>.md
+; Version: x.x.x (SEMANTIC VERSIONING)
+; Last change: BRIEF SUMMARY OF ALL MOST RECENT CHANGES.
+; Content-Fingerprint: <UPDATE ON SAVE>
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+
+FILE TYPES = .yaml | .yml
+MANDATED HEADER STYLE =
+
+# ------------------------------------------------------------------
+# GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\<RELATIVE\PATH\FILENAME>.yaml"
+# ------------------------------------------------------------------
+
+# ------------------------------------------------------------------
+# MAINTEMPLATE - <FILENAME>.yaml
+# Version: x.x.x (SEMANTIC VERSIONING)
+# Last change: BRIEF SUMMARY OF ALL MOST RECENT CHANGES.
+# Content-Fingerprint: YYYY-MM-DDTHH-MM-SSZ-XXXXXXXX
+# ------------------------------------------------------------------
+
+# ------------------------------------------------------------------
+# ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+# ------------------------------------------------------------------
+
+
+FILE TYPE = .py
+MANDATED HEADER STYLE =
+
+# ------------------------------------------------------------------
+# GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\<RELATIVE\PATH\FILENAME>.py"
+# ------------------------------------------------------------------
+#
+# ------------------------------------------------------------------
+# MAINTEMPLATE - <FILENAME>.py
+# Version: 0.1.0
+# Last change: Initial creation.
+# Content-Fingerprint: YYYY-MM-DDTHH-MM-SSZ-XXXXXXXX
+# ------------------------------------------------------------------
+#
+# ------------------------------------------------------------------
+# ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+# ------------------------------------------------------------------
+
+
+FILE TYPE = .json
+MANDATED HEADER STYLE = NONE (JSON FILES MUST REMAIN PURE)
+
+RATIONALE:
+- JSON does NOT support comments.
+- package.json, tsconfig.json, and similar files are parsed by strict toolchains
+  (npm, Node, TypeScript, VS Code extension host).
+- ANY header or comment inside a .json file WILL break tooling.
+
+GOVERNANCE REQUIREMENT (MANDATORY):
+
+ALL GOVERNED .json FILES MUST USE A SIDECAR GOVERNANCE FILE.
+
+SIDECAR FILE NAMING RULE:
+- <original_filename>.governance.txt
+
+EXAMPLES:
+- package.json               → package.json.governance.txt
+- tsconfig.json              → tsconfig.json.governance.txt
+- settings.schema.json       → settings.schema.json.governance.txt
+
+SIDECAR FILE REQUIREMENTS:
+- MUST contain a full MAINTEMPLATE header (standard .txt format)
+- MUST include GEMINI MEM TAG with FULL PATH pointing to the SIDECAR FILE
+- MUST reference the governed JSON file explicitly in content
+- MUST receive Content-Fingerprint updates on save
+- MUST be listed in INDEXIDLIST.txt as the authoritative governance artifact
+
+THE .json FILE ITSELF:
+- MUST remain valid, comment-free JSON
+- MUST NOT contain governance metadata
+- IS CONSIDERED A RUNTIME / TOOL-CONSTRAINED ARTIFACT
+
+FILE TYPE = .ahk
+MANDATED HEADER STYLE =
+
+; ------------------------------------------------------------------
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\<RELATIVE\PATH\FILENAME>.ahk"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - <FILENAME>.ahk
+; Version: x.x.x (SEMANTIC VERSIONING)
+; Last change: BRIEF SUMMARY OF ALL MOST RECENT CHANGES.
+; Content-Fingerprint: <UPDATE ON SAVE>
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; SIGNPOST GOVERNANCE (AHK ONLY)
+; ------------------------------------------------------------------
+; DIRECTIVES (AI-ONLY | DO NOT COPY INTO FILE SIGNPOSTS):
+; - The signpost block must be placed at the TOP of the file’s content area
+;   (immediately after the 14-line reserved header region).
+; - The USER does NOT fill this out. The AI fills this out when a new file/module
+;   is created or when a file’s governance surface changes.
+; - The signpost is COMMENT-ONLY. It must never require touching or reformatting
+;   executable code to remain valid.
+; - The signpost must be factual and implementation-linked (names, callbacks, IDs).
+; - Use "N/A" explicitly if a section does not apply (never delete headings).
+; - Do not include speculative future behavior; document what exists now.
+; - Any signpost output that includes DIRECTIVES is invalid and must be corrected.
+;
+; POLICY-B DIRECTIVES (AI-ONLY):
+; - GLOBAL_REGISTRY_MASTER.csv is the authoritative governed registry (Policy-B).
+; - INTERNAL_FUNCTION_INDEX.csv is NON-GOVERNED and exists only for full symbol discovery.
+; - The AI MUST consult GLOBAL_REGISTRY_MASTER.csv before changing:
+;     * entrypoints, timers, OnMessage/IPC handlers, IPC contracts, lifecycle controls,
+;       settings IO, or defaults interface behavior.
+; - The AI MUST NOT require a governed registry update for internal helper changes.
+; - Missing or drifting entries in INTERNAL_FUNCTION_INDEX.csv are never a hard-stop.
+; - If you add/remove a timer, OnMessage, IPC contract, lifecycle control, or
+;   settings/defaults interface, you MUST update GLOBAL_REGISTRY_MASTER.csv.
+;
+; ------------------------------------------------------------------
+; SIGNPOST TEMPLATE (IN-FILE CONTENT | AI-FILLED)
+; ------------------------------------------------------------------
+; ------------------------------------------------------------------
+; SIGNPOST GOVERNANCE — FILE: <FILE_NAME.ahk>
+; ------------------------------------------------------------------
+; MODULE NAME:
+;   <Short module name> (<Entrypoint | Core Container | Shared Lib | Utility>)
+;
+; WHAT IT OWNS / CONTROLS:
+;   - <Subsystem #1>
+;   - <Subsystem #2>
+;   - <Subsystem #3>
+;
+; INPUTS (events/messages/functions it responds to):
+;   - GUI events: N/A | <Button/Control> -> <Handler>
+;   - Windows messages: N/A | OnMessage(<MSG_ID>, <Handler>)
+;   - Timers: N/A | SetTimer(<Callback>, <interval>)
+;   - Direct calls: N/A | <PublicFunction>(...) called by <OwnerFile>
+;
+; OUTPUTS / SIDE EFFECTS (files, settings, processes, IPC, UI):
+;   - UI: N/A | <What it changes in GUI/overlay>
+;   - Settings / Files:
+;       * Reads: N/A | <files>
+;       * Writes: N/A | <files>
+;   - IPC:
+;       * Receives: N/A | <message IDs / mechanism>
+;       * Sends: N/A | <message IDs / mechanism>
+;   - Process control: N/A | <launch/kill/suspend/resume + how>
+;
+; DEPENDENCIES (globals/functions it relies on):
+;   - Includes: N/A | <List included modules>
+;   - Globals it expects: N/A | <g_* and shared objects>
+;   - External APIs / DllCall: N/A | <if any>
+;
+; GOVERNANCE NOTES (hard-stop rules, invariants, what must remain true):
+;   - <Invariant #1: “must always…”>
+;   - <Invariant #2: “must never…”>
+;   - Registry note:
+;       * If any new entrypoints/IPC/timers/lifecycle controls are added here,
+;         GLOBAL_REGISTRY_MASTER.csv must be updated (Policy-B surface area only).
+;
+; EXPORTED SURFACE (registry-relevant quicklist):
+;   - N/A | <OnMessage handler #1>
+;   - N/A | <Timer callback #1>
+;   - N/A | <IPC sender/receiver #1>
+;   - N/A | <Lifecycle control #1>
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; GLOBAL GOVERNANCE NOTE (APPLIES TO ALL FILE TYPES)
+; ------------------------------------------------------------------
+
+; If a file format is controlled by an external compiler, interpreter,
+; or toolchain and does not safely support comments or headers,
+; governance metadata MUST NOT be embedded directly.
+
+; In such cases, governance MUST be implemented via:
+; - a sidecar .governance.txt file, OR
+; - a mirrored authoritative text file, OR
+; - a registry entry (as defined in AI_PROJECT_INSTRUCTIONS)
+
+; GOVERNANCE IS NEVER ALLOWED TO BREAK TOOLING.
+
+; If a conflict exists between governance format and tool requirements:
+; - TOOL COMPATIBILITY WINS
+; - GOVERNANCE MOVES TO A SIDE CHANNEL
