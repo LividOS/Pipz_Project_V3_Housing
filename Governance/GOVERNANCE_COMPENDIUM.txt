@@ -4,9 +4,9 @@
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt
-; Version: 1.0.8
-; Last change: Completed standalone constraint and working notes file rehousing.
-; Content-Fingerprint: 2026-02-03T17-58-22Z-AUZWES9M
+; Version: 1.0.9
+; Last change: Converted to header class normalization for standardized file headers.
+; Content-Fingerprint: 2026-02-03T19-16-38Z-V8RZU97P
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -2849,9 +2849,9 @@ OPERATIVE TEXT (COMPENDIUM MODE) — AUTHORITATIVE FOR SINGLE-ARTIFACT OPERATION
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S9.STANDARD_HEADERS
-; Version: 0.1.5
-; Last change: Migrated file to new governance directory and updated all references in file.
-; Content-Fingerprint: 2026-01-29T21-31-20Z-89WR4TOF
+; Version: 0.1.6
+; Last change: Converted to header class normalization instead of per-file iteration.
+; Content-Fingerprint: 2026-01-29T21-31-20Z-749GHD8U
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -2859,120 +2859,104 @@ OPERATIVE TEXT (COMPENDIUM MODE) — AUTHORITATIVE FOR SINGLE-ARTIFACT OPERATION
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
-  MANDATED HEADER STYLES BY FILE TYPE (ABSOLUTE)
+MANDATED HEADER STYLES (ABSOLUTE)
 ; ------------------------------------------------------------------
 
-FILE TYPE = .txt
-MANDATED HEADER STYLE =
+Headers are defined by HEADER CLASS.
+Each file type MUST use the header class it is bound to.
+All header content is literal unless explicitly parameterized.
+
+<EXT> MUST match the actual file extension.
+All other fields MUST NOT be altered.
 
 ; ------------------------------------------------------------------
-; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\<RELATIVE\PATH\FILENAME>.txt"
+HEADER CLASS: SEMICOLON_COMMENT_HEADER
+; ------------------------------------------------------------------
+
+APPLIES TO FILE TYPES:
+- .txt
+- .md
+
+SPECIAL CASE:
+- .ahk MUST use SEMICOLON_COMMENT_HEADER for its 14-line reserved header region,
+  and MUST additionally comply with the AHK-specific signpost rules defined below.
+  The AHK-specific rules do not redefine the header; they extend requirements
+  immediately after the reserved header region.
+
+COMMENT PREFIX: ;
+
+MANDATED HEADER TEMPLATE:
+
+; ------------------------------------------------------------------
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\<RELATIVE\PATH\FILENAME><EXT>"
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
-; MAINTEMPLATE - <FILENAME>.txt
+; MAINTEMPLATE - <FILENAME><EXT>
 ; Version: x.x.x (SEMANTIC VERSIONING)
 ; Last change: BRIEF SUMMARY OF ALL MOST RECENT CHANGES.
 ; Content-Fingerprint: <UPDATE ON SAVE>
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
-; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+; ALL CONTENT MUST GO BELOW THIS POINT (LINES 1-14 RESERVED)
 ; ------------------------------------------------------------------
 
 
-FILE TYPE = .js
-MANDATED HEADER STYLE =
+; ------------------------------------------------------------------
+HEADER CLASS: SLASH_COMMENT_HEADER
+; ------------------------------------------------------------------
+
+APPLIES TO FILE TYPES:
+- .js
+- .ts
+
+COMMENT PREFIX: //
+
+MANDATED HEADER TEMPLATE:
 
 // ------------------------------------------------------------------
-// GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\<RELATIVE\PATH\FILENAME>.js"
+// GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\<RELATIVE\PATH\FILENAME><EXT>"
 // ------------------------------------------------------------------
 
 // ------------------------------------------------------------------
-// MAINTEMPLATE - <FILENAME>.js
+// MAINTEMPLATE - <FILENAME><EXT>
 // Version: x.x.x (SEMANTIC VERSIONING)
 // Last change: BRIEF SUMMARY OF ALL MOST RECENT CHANGES.
 // Content-Fingerprint: <UPDATE ON SAVE>
 // ------------------------------------------------------------------
 
 // ------------------------------------------------------------------
-// ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+// ALL CONTENT MUST GO BELOW THIS POINT (LINES 1-14 RESERVED)
 // ------------------------------------------------------------------
 
-
-FILE TYPE = .ts
-MANDATED HEADER STYLE =
-
-// ------------------------------------------------------------------
-// GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\<RELATIVE\PATH\FILENAME>.ts"
-// ------------------------------------------------------------------
-
-// ------------------------------------------------------------------
-// MAINTEMPLATE - <FILENAME>.ts
-// Version: x.x.x (SEMANTIC VERSIONING)
-// Last change: BRIEF SUMMARY OF ALL MOST RECENT CHANGES.
-// Content-Fingerprint: <UPDATE ON SAVE>
-// ------------------------------------------------------------------
-
-// ------------------------------------------------------------------
-// ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
-// ------------------------------------------------------------------
-
-
-FILE TYPE = .md
-MANDATED HEADER STYLE =
 
 ; ------------------------------------------------------------------
-; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\<RELATIVE\PATH\FILENAME>.md"
+HEADER CLASS: HASH_COMMENT_HEADER
 ; ------------------------------------------------------------------
 
-; ------------------------------------------------------------------
-; MAINTEMPLATE - <FILENAME>.md
-; Version: x.x.x (SEMANTIC VERSIONING)
-; Last change: BRIEF SUMMARY OF ALL MOST RECENT CHANGES.
-; Content-Fingerprint: <UPDATE ON SAVE>
-; ------------------------------------------------------------------
+APPLIES TO FILE TYPES:
+- .yaml
+- .yml
+- .py
 
-; ------------------------------------------------------------------
-; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
-; ------------------------------------------------------------------
+COMMENT PREFIX: #
 
-
-FILE TYPES = .yaml | .yml
-MANDATED HEADER STYLE =
+MANDATED HEADER TEMPLATE:
 
 # ------------------------------------------------------------------
-# GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\<RELATIVE\PATH\FILENAME>.yaml"
+# GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\<RELATIVE\PATH\FILENAME><EXT>"
 # ------------------------------------------------------------------
 
 # ------------------------------------------------------------------
-# MAINTEMPLATE - <FILENAME>.yaml
+# MAINTEMPLATE - <FILENAME><EXT>
 # Version: x.x.x (SEMANTIC VERSIONING)
 # Last change: BRIEF SUMMARY OF ALL MOST RECENT CHANGES.
 # Content-Fingerprint: YYYY-MM-DDTHH-MM-SSZ-XXXXXXXX
 # ------------------------------------------------------------------
 
 # ------------------------------------------------------------------
-# ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
-# ------------------------------------------------------------------
-
-
-FILE TYPE = .py
-MANDATED HEADER STYLE =
-
-# ------------------------------------------------------------------
-# GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\<RELATIVE\PATH\FILENAME>.py"
-# ------------------------------------------------------------------
-#
-# ------------------------------------------------------------------
-# MAINTEMPLATE - <FILENAME>.py
-# Version: 0.1.0
-# Last change: Initial creation.
-# Content-Fingerprint: YYYY-MM-DDTHH-MM-SSZ-XXXXXXXX
-# ------------------------------------------------------------------
-#
-# ------------------------------------------------------------------
-# ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+# ALL CONTENT MUST GO BELOW THIS POINT (LINES 1-14 RESERVED)
 # ------------------------------------------------------------------
 
 
@@ -3010,22 +2994,9 @@ THE .json FILE ITSELF:
 - IS CONSIDERED A RUNTIME / TOOL-CONSTRAINED ARTIFACT
 
 FILE TYPE = .ahk
-MANDATED HEADER STYLE =
+MANDATED HEADER STYLE = SEMICOLON_COMMENT_HEADER (INHERITED)
 
-; ------------------------------------------------------------------
-; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\<RELATIVE\PATH\FILENAME>.ahk"
-; ------------------------------------------------------------------
-
-; ------------------------------------------------------------------
-; MAINTEMPLATE - <FILENAME>.ahk
-; Version: x.x.x (SEMANTIC VERSIONING)
-; Last change: BRIEF SUMMARY OF ALL MOST RECENT CHANGES.
-; Content-Fingerprint: <UPDATE ON SAVE>
-; ------------------------------------------------------------------
-
-; ------------------------------------------------------------------
-; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
-; ------------------------------------------------------------------
+ADDITIONAL AHK-SPECIFIC REQUIREMENTS (MANDATORY):
 
 ; ------------------------------------------------------------------
 ; SIGNPOST GOVERNANCE (AHK ONLY)
