@@ -5,10 +5,9 @@
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - PROJECT_WORKING_NOTES.txt
-; Version: 1.0.0
-; Last change: Initial extraction of Section B from
-;              GOVERNANCE_COMPENDIUM.txt :: GOV.S4.ANCHOR_MASTER.
-; Content-Fingerprint: 2026-02-03T17-35-24Z-3KG1CL3I
+; Version: 1.0.3
+; Last change: Instated canonical mandatory entry formatting guidelines.
+; Content-Fingerprint: 2026-02-03T18-44-15Z-X4HBLGAK
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -34,10 +33,10 @@ It does NOT:
 This file exists to preserve context and intent over time.
 
 ; ------------------------------------------------------------------
-SECTION — PROJECT WORKING NOTES (DESIGN & RATIONALE)
+PROJECT WORKING NOTES (DESIGN & RATIONALE)
 ; ------------------------------------------------------------------
 
-PURPOSE OF THIS FILE SECTION
+PURPOSE OF THIS FILE
 --------------------
 This document exists to preserve:
 - Design intent
@@ -49,6 +48,30 @@ This document exists to preserve:
 This file is NOT a checklist.
 This file is NOT expected to be concise.
 This file SHOULD grow over time.
+
+; ------------------------------------------------------------------
+CANONICAL NOTE FORMATTING (MANDATORY)
+; ------------------------------------------------------------------
+
+This formatting standard applies to all entries in
+PROJECT_WORKING_NOTES.txt only.
+
+It exists to preserve consistency, readability, and historical clarity.
+It does NOT introduce governance authority and does NOT apply to
+governance documents, PLCs, registries, or runbooks.
+
+Format:
+
+[YYYY-MM-DD]
+- ID:
+- Decision:
+- Reason:
+- Impact:
+
+ID NOTES:
+- IDs are local to this file only.
+- IDs are sequential and informational.
+- IDs do NOT imply authority, precedence, or enforcement.
 
 ; ------------------------------------------------------------------
 CORE GOALS (DO NOT LOSE SIGHT OF THESE)
@@ -128,28 +151,87 @@ RECENT KEY DECISIONS (IMPORTANT CONTEXT)
 ; ------------------------------------------------------------------
 
 [2026-01-22]
-- MVP orchestrator introduced with bootstrap-only behavior.
-- No model calls, no file writes — audit-only.
-- Establishes a safe, runnable baseline before hidden chaining is enabled.
+- ID: 0001
+- Decision: Introduced an MVP orchestrator with bootstrap-only behavior.
+- Reason: Establish a safe, runnable baseline to validate governance, bootstrap, and audit flows before enabling hidden role chaining or execution authority.
+- Impact:
+  - Orchestrator performs verification and audit initialization only.
+  - No model calls or file writes are permitted at this stage.
+  - Governance and tooling assumptions could be validated early without risk.
 
 [2026-01-22]
-- JSON governance finalized via mandatory sidecar files:
-  - package.json.governance.txt
-  - tsconfig.json.governance.txt
-- JSON remains pure and non-fingerprinted by embedded headers.
+- ID: 0002
+- Decision: Finalized JSON governance via mandatory sidecar files.
+- Reason: JSON does not support comments and is parsed by strict toolchains; embedding headers or governance metadata directly would break tooling.
+- Impact:
+  - Introduced mandatory sidecar files (e.g., package.json.governance.txt, tsconfig.json.governance.txt).
+  - JSON runtime artifacts remain pure and tooling-safe.
+  - Governance metadata is enforced without compromising external parsers.
 
 [2026-01-23]
-- Completed port of MirrorAhkToTxt functionality into a VS Code extension:
-  - Fingerprint updates on save (governed files, fail-closed gating)
-  - Runtime mirroring (.ahk/.ini -> .txt) with AI SOT header
-  - Standalone governed fingerprinting for additional file types
-  - UTF-8 + UTF-16 mirror encoding compatibility
-  - Audit logging into .ORCH_AUDITLOG\mirror\
-- Extension packaged (VSIX) and installed into normal VS Code.
-- Verified in normal VS Code (no Extension Development Host required).
+- ID: 0003
+- Decision: Completed port of MirrorAhkToTxt functionality into a VS Code extension.
+- Reason: File mirroring, fingerprinting, and audit enforcement needed to operate continuously within the normal developer environment rather than as an external script.
+- Impact:
+  - Fingerprint updates enforced on save with fail-closed gating.
+  - Runtime mirroring (.ahk/.ini → .txt) implemented with AI SOT headers.
+  - Standalone governed fingerprinting enabled for additional file types.
+  - UTF-8 and UTF-16 mirror encoding compatibility implemented.
+  - Audit logging written to .ORCH_AUDITLOG\mirror\.
+  - Extension packaged (VSIX) and installed into normal VS Code.
 
 [2026-01-23]
-- VS Code Extension Development Host anomaly documented and resolved.
+- ID: 0004
+- Decision: Documented and resolved VS Code Extension Development Host limitations.
+- Reason: The Extension Development Host exhibited behavior inconsistent with the real user environment, risking false confidence during testing.
+- Impact:
+  - Identified inability of Dev Host to reliably open folders/workspaces.
+  - DisposableStore disposal warnings were observed and investigated.
+  - Development and validation workflows were adjusted to prioritize testing in normal VS Code.
+
+[2026-02-03]
+- ID: 0005
+- Decision: Externalized Project Learned Constraints into a standalone canonical file.
+- Reason: The learned constraints list was expected to grow indefinitely and did not belong in the governance compendium long-term. A standalone, append-only file allows scalability without introducing shadow authority.
+- Impact:
+  - PROJECT_LEARNED_CONSTRAINTS.txt is now the canonical PLC store.
+  - GOV.S8.LEARNED_CONSTRAINTS was converted to a pointer + optional snapshot.
+  - Learned constraints are now clearly separated from governance authority.
+
+[2026-02-03]
+- ID: 0006
+- Decision: Formalized a dedicated PLC Externalization & Emission Runbook.
+- Reason: PLC creation needed a deterministic, auditable process to prevent silent constraint drift or retroactive rationalization.
+- Impact:
+  - New PLC entries require explicit confirmation and strict formatting.
+  - PLCs are append-only, non-authoritative, and scope-indexed.
+  - PLC emission is now mechanically governed rather than discretionary.
+
+[2026-02-03]
+- ID: 0007
+- Decision: Externalized GOV.S4 Section B (Project Working Notes) into a standalone file.
+- Reason: Section B was explicitly designed to grow over time and contained narrative rationale, which conflicted with the compendium’s role as a stable single-artifact authority.
+- Impact:
+  - PROJECT_WORKING_NOTES.txt introduced as a non-authoritative, append-only rationale log.
+  - GOV.S4.ANCHOR_MASTER now contains only stable anchor content and a pointer stub.
+  - Compendium growth pressure reduced without loss of context.
+
+[2026-02-03]
+- ID: 0008
+- Decision: Clarified “single-artifact mode” semantics in the Blueprint.
+- Reason: The original wording implied no external governance-adjacent files could exist, which became false after introducing canonical support artifacts (PLCs, working notes, runbooks).
+- Impact:
+  - Blueprint now distinguishes authoritative governance from non-authoritative canonical support artifacts.
+  - Phase-5 Expected Set logic remains deterministic and unambiguous.
+
+[2026-02-03]
+- ID: 0009
+- Decision: Standardized alias resolution to distinguish constraint indexes from canonical constraint storage.
+- Reason: Overlapping aliases between GOV.S8 and PROJECT_LEARNED_CONSTRAINTS.txt risked semantic ambiguity for both humans and tooling.
+- Impact:
+  - GOV.S8 aliases now resolve to an index/gateway role only.
+  - Canonical constraint terminology maps exclusively to the standalone PLC file.
+  - Future automation and search behavior is safer and deterministic.
 
 ; ------------------------------------------------------------------
 COMMON FAILURE MODES TO WATCH FOR
@@ -218,11 +300,6 @@ FUTURE NOTES
 ; ------------------------------------------------------------------
 
 (Add dated notes below as decisions are made.)
-
-[YYYY-MM-DD] —
-- Decision:
-- Reason:
-- Impact:
 
 ; ------------------------------------------------------------------
 END OF PROJECT WORKING NOTES
