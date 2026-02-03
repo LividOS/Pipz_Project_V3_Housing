@@ -4,9 +4,9 @@
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - PROTOCOL_RUNBOOK.txt
-; Version: 1.0.5
-; Last change: Creation of canonical runbook number 4 `PHASE 5 RESULT DECLARATION RUNBOOK`.
-; Content-Fingerprint: 2026-02-03T00-16-46Z-2PD7WXXN
+; Version: 1.0.8
+; Last change: Creation of canonical runbook number 7 `PLC EXTERNALIZATION & EMISSION RUNBOOK`.
+; Content-Fingerprint: 2026-02-03T16-20-00Z-HBBEG70L
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -117,6 +117,9 @@ SECTION | TITLE
 2       | Policy-B Registry Audit Runbook
 3       | Phase 5 Audit Execution Runbook
 4       | Phase 5 Result Declaration Runbook
+5       | Governance Compendium Update Runbook
+6       | Registry Regeneration & Validation Runbook
+7       | PLC Externalization & Emission Runbook
 --------------------------------------------------------------------
 
 Notes:
@@ -314,7 +317,7 @@ Format:
 
 PURPOSE:
 <single concise description>
----
+----
 
 Rules:
 - PURPOSE text MUST flow directly into the section divider (`---`)
@@ -330,7 +333,7 @@ Format:
 
 APPLIES WHEN:
 <single declarative condition>
----
+----
 
 Rules:
 - One condition only
@@ -392,10 +395,10 @@ No shortcuts. No partial execution. No “I already know this part.”
 ; ------------------------------------------------------------------
 PURPOSE:  
 Ensure any updates to the pipz-mirror-governance VS Code extension are rebuilt, packaged, and installed deterministically with no drift.
----
+----
 APPLIES WHEN:
 Any change is made to the pipz-mirror-governance VS Code extension source, configuration, or metadata that could affect its runtime behavior, packaging, or distribution.
----
+----
 FAILURE RULE(S):
 If ANY verification step fails, STOP.  
 Do NOT continue project work until resolved.
@@ -442,10 +445,10 @@ RUNBOOK STEPS:
 ; ------------------------------------------------------------------
 PURPOSE:  
 Keep `GLOBAL_REGISTRY_MASTER.csv` authoritative for **governance-surface changes only** (entrypoints, timers, OnMessage/IPC, lifecycle, settings/defaults interface).
----
+----
 APPLIES WHEN:
 Any code change is made that may introduce, modify, move, or remove Policy-B governed surface area, including entrypoints, timers, IPC contracts, lifecycle controls, or settings/defaults interfaces.
----
+----
 FAILURE RULE(S):
 If any required registry entry cannot be verified for accuracy, ownership, or scope, STOP.
 If GLOBAL_REGISTRY_MASTER.csv is missing, unreadable, or incomplete, STOP.
@@ -617,11 +620,11 @@ PURPOSE:
 Execute the Phase 5 audit to deterministically verify that the Observed
 Project State exactly matches the Expected Set defined by governance,
 with no omissions, additions, or ambiguity.
----
+----
 APPLIES WHEN:
 A Phase 5 audit is initiated to assert project completeness, structural
 correctness, or readiness for declaration of Phase 5 PASS or FAIL.
----
+----
 FAILURE RULE(S):
 If any Expected Set item is missing from the Observed Set, STOP.
 If any Observed item exists outside the Expected Set, STOP.
@@ -702,11 +705,11 @@ RUNBOOK STEPS:
 PURPOSE:
 Define the mandatory, deterministic format and rules for declaring and
 presenting the results of a completed Phase 5 audit.
----
+----
 APPLIES WHEN:
 A Phase 5 audit execution has completed without STOP conditions and a
 formal Phase 5 outcome must be declared or reported.
----
+----
 FAILURE RULE(S):
 If results cannot be declared using the required format → STOP.
 If any classification is ambiguous or inferred → STOP.
@@ -770,6 +773,289 @@ RUNBOOK STEPS:
 [ ] 8. Terminate declaration
       - State Phase 5 declaration complete
       - Await further instruction
+
+; ------------------------------------------------------------------
+; 5. GOVERNANCE COMPENDIUM UPDATE RUNBOOK (MANDATORY PROCEDURE)
+; ------------------------------------------------------------------
+PURPOSE:
+Ensure that any modification to GOVERNANCE_COMPENDIUM.txt is performed
+atomically, deterministically, and without introducing authority drift,
+section ID instability, fingerprint desynchronization, or archival misuse.
+----
+APPLIES WHEN:
+Any change is proposed to GOVERNANCE_COMPENDIUM.txt, including adding,
+modifying, rehousing, rewording, or reordering any governance section.
+----
+FAILURE RULE(S):
+If any required verification step fails, STOP.
+If any Section ID is modified, reused, or reordered, STOP.
+If Content-Fingerprint updates cannot be verified deterministically, STOP.
+If archival originals are consulted for enforcement or reasoning, STOP.
+; ------------------------------------------------------------------
+RUNBOOK STEPS:
+
+[ ] 0. PRE-FLIGHT — Authority confirmation:
+      Confirm that GOVERNANCE_COMPENDIUM.txt is the active
+      single-artifact governance authority.
+      Confirm no parallel governance source is being referenced.
+
+[ ] 1. SCOPE DECLARATION — Identify the change class:
+      Explicitly classify the change as ONE of the following:
+      - Add new section
+      - Modify existing section
+      - Rehouse content between sections
+      - Clarify wording without semantic change
+
+      If more than one class applies → STOP and split the change.
+
+[ ] 2. SECTION ID SAFETY CHECK:
+      Verify that:
+      - All existing Section IDs remain unchanged
+      - No Section ID is renamed, reused, or repurposed
+      - No Section ID ordering is altered unless explicitly structural
+
+      Section IDs are immutable identities.
+      Violations here are unrecoverable.
+
+[ ] 3. ARCHIVED ORIGINALS BOUNDARY CHECK:
+      Confirm that:
+      - Archived original governance files (under /Archive)
+        are used ONLY for:
+          - historical reference
+          - literal fidelity comparison
+      - Archived originals are NOT used for:
+          - enforcement
+          - reasoning
+          - justification
+          - conflict resolution
+
+      If any archived content influences decisions → STOP.
+
+[ ] 4. OPERATIVE TEXT UPDATE:
+      Perform the required edit within:
+      GOVERNANCE_COMPENDIUM.txt :: SECTION <TARGET_SECTION>
+
+      Rules:
+      - Maintain MAINTEMPLATE header
+      - Update Version and Last change appropriately
+      - Do NOT summarize or paraphrase unrelated content
+      - Preserve all unchanged content verbatim
+
+[ ] 5. CONTENT-FINGERPRINT UPDATE:
+      Regenerate the Content-Fingerprint for the modified section.
+
+      Verify:
+      - Timestamp is UTC
+      - Suffix is exactly 8 characters
+      - Format matches governance specification
+
+      If fingerprint cannot be regenerated deterministically → STOP.
+
+[ ] 6. CROSS-SECTION CONSISTENCY CHECK:
+      Scan for references to the modified section in:
+      - GOV.S1.AI_INSTRUCTIONS
+      - GOV.S2.BOOTSTRAP_V4
+      - GOV.S3.BLUEPRINT
+      - GOV.S7.INDEX_ID_LIST
+      - PROTOCOL_RUNBOOK.txt
+
+      This list represents authority-bearing dependency hubs; other sections need only be scanned if the change directly affects their stated scope.
+      If any reference is now stale or contradictory → STOP.
+
+[ ] 7. STRUCTURAL IMPACT CHECK:
+      If the change affects:
+      - structure
+      - authority hierarchy
+      - bootstrap behavior
+      - registry interaction
+
+      Then confirm required synchronization updates are staged
+      (Blueprint / Anchor / Registry where applicable).
+
+[ ] 8. FINAL READABILITY VERIFICATION:
+      Re-open GOVERNANCE_COMPENDIUM.txt and confirm:
+      - File is fully readable
+      - No section is truncated
+      - All required sections remain present
+
+[ ] 9. DECLARATION:
+      Declare the update complete ONLY after all steps pass.
+      Resume project work.
+
+; ------------------------------------------------------------------
+; 6. REGISTRY REGENERATION & VALIDATION RUNBOOK (MANDATORY PROCEDURE)
+; ------------------------------------------------------------------
+PURPOSE:
+Safely regenerate and validate non-governed registry artifacts while
+preventing accidental modification, expansion, or erosion of
+Policy-B governed surface area.
+----
+APPLIES WHEN:
+The INTERNAL_FUNCTION_INDEX.csv is regenerated, refreshed, validated,
+or audited for completeness, accuracy, or drift.
+----
+FAILURE RULE(S):
+If any Policy-B governed surface area is added, removed, or modified, STOP.
+If GLOBAL_REGISTRY_MASTER.csv is altered as part of regeneration, STOP.
+If regeneration cannot be proven non-governance-impacting, STOP.
+; ------------------------------------------------------------------
+RUNBOOK STEPS:
+
+[ ] 0. PRE-FLIGHT — Registry role confirmation:
+      Confirm the distinct roles of registry artifacts:
+      - GLOBAL_REGISTRY_MASTER.csv → Policy-B authoritative (governed)
+      - INTERNAL_FUNCTION_INDEX.csv → Informational, regenerable (non-governed)
+
+      Confirm that regeneration will be performed by a deterministic
+      tool or script, not by inference or interpretation.
+
+      If scope boundaries or execution method are unclear → STOP.
+
+[ ] 1. SCOPE DECLARATION — Regeneration intent:
+      Explicitly declare the purpose of regeneration as ONE of:
+      - Symbol discovery
+      - Navigation support
+      - Refactor assistance
+      - Drift inspection
+
+      If the intent involves enforcement, authority, invariants,
+      or classification → STOP.
+
+[ ] 2. GOVERNED SURFACE GUARD:
+      Before regeneration, confirm that NO changes are being proposed to:
+      - Entrypoints
+      - Timers (SetTimer callbacks)
+      - OnMessage / IPC handlers
+      - IPC message encodings
+      - Settings IO or defaults interface
+      - Lifecycle or process controls
+
+      If any governed surface change exists:
+      → STOP and invoke the Policy-B Registry Audit Runbook instead.
+
+[ ] 3. REGENERATION EXECUTION:
+      Regenerate INTERNAL_FUNCTION_INDEX.csv using the chosen
+      deterministic method.
+
+      Rules:
+      - No inference or heuristic classification
+      - No ownership, authority, or risk labeling
+      - No filtering based on perceived importance
+
+      This step is mechanical only.
+
+[ ] 4. POST-GENERATION VALIDATION:
+      Verify that the regenerated index:
+      - Contains only symbol inventory (functions, classes, helpers)
+      - Does NOT introduce governance semantics
+      - Does NOT redefine ownership, authority, scope, or invariants
+
+      If any ambiguity or implied authority exists → STOP.
+
+[ ] 5. POLICY-B INTEGRITY CHECK:
+      Re-open GLOBAL_REGISTRY_MASTER.csv and confirm:
+      - No rows were added, removed, or modified
+      - No scope expansion occurred
+      - Policy-B surface remains unchanged
+
+      If any discrepancy is detected → STOP.
+
+[ ] 6. OPTIONAL DRIFT REVIEW (NON-BINDING):
+      Differences observed between:
+      - INTERNAL_FUNCTION_INDEX.csv
+      - Codebase symbols
+
+      MAY be noted for refactor or cleanup planning ONLY.
+
+      These observations MUST NOT:
+      - Trigger registry edits
+      - Trigger governance changes
+      - Be treated as enforcement signals
+
+[ ] 7. FINAL CONFIRMATION:
+      Confirm regeneration is complete.
+      Resume normal project work.
+
+; ------------------------------------------------------------------
+; 7. PLC EXTERNALIZATION & EMISSION RUNBOOK (MANDATORY PROCEDURE)
+; ------------------------------------------------------------------
+PURPOSE:
+Ensure Project Learned Constraints (PLC) are recorded deterministically,
+confirmed explicitly, stored in a scalable standalone file, and kept
+non-divergent from the compendium view while remaining non-authoritative.
+----
+APPLIES WHEN:
+A new constraint is discovered, an approach is invalidated, or a
+confirmed limitation must be recorded to prevent regression.
+----
+FAILURE RULE(S):
+If a PLC entry is added without explicit confirmation, STOP.
+If PLC format or scope taxonomy is altered, STOP.
+If PLC content is treated as authoritative or enforcement-capable, STOP.
+If compendium PLC content diverges from the canonical PLC file, STOP.
+; ------------------------------------------------------------------
+RUNBOOK STEPS:
+
+[ ] 0. PRE-FLIGHT — Confirm PLC role:
+      PLCs are institutional memory only.
+      PLCs MUST NOT override governance, bootstrap, runbooks, or registry.
+
+[ ] 1. CANONICAL FILE CHECK:
+      Confirm canonical PLC file exists:
+      Pipz_Project_V3\Governance\PROJECT_LEARNED_CONSTRAINTS.txt
+
+      If missing → STOP and create it via a governed file creation step.
+
+[ ] 2. DRAFT ENTRY (NO WRITES):
+      Draft a complete PLC entry using the strict PLC format:
+      - ENTRY ID (placeholder only)
+      - DATE (UTC)
+      - SCOPE (exactly one, from canonical taxonomy)
+      - STATUS
+      - TITLE
+      - CONTEXT
+      - DISCOVERY
+      - INVALIDATED APPROACH
+      - VALIDATED CONSTRAINT
+      - EVIDENCE
+      - RELATED FILES
+      - NOTES
+
+      Present the draft for explicit accept / reject.
+
+[ ] 3. CONFIRMATION GATE:
+      If the draft is rejected → STOP and discard.
+      If accepted → proceed.
+
+[ ] 4. ID ASSIGNMENT:
+      Assign the next sequential PLC-#### identifier.
+      IDs are monotonic and MUST NOT be reused.
+
+[ ] 5. COMMIT (APPEND ONLY):
+      Append the confirmed entry below the append-only boundary
+      in PROJECT_LEARNED_CONSTRAINTS.txt.
+
+      Existing entries MUST NOT be edited or reordered.
+      Status changes require explicit STATUS updates only.
+
+[ ] 6. SCOPE INDEX UPDATE:
+      Update the scope index to include the new PLC ID.
+      If a new scope is required, add it to the taxonomy explicitly.
+
+[ ] 7. COMPENDIUM SYNC (IF SNAPSHOT PRESENT):
+      If GOV.S8 includes a snapshot:
+      - Copy entries mechanically from the canonical PLC file
+      - Update the “Last Synced (UTC)” marker
+      - Do NOT summarize or reinterpret content
+
+[ ] 8. FINAL VERIFICATION:
+      Confirm:
+      - Canonical PLC file contains the new entry
+      - Scope index is accurate
+      - Compendium snapshot (if present) matches canonical
+      - No authority claims were introduced
+
+      Resume normal project work.
 
 ; ------------------------------------------------------------------
 
