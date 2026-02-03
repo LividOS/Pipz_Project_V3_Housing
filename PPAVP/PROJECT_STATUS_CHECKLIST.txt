@@ -4,9 +4,9 @@
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - PROJECT_STATUS_CHECKLIST.txt
-; Version: 0.1.7
-; Last change: Migrated file to new project planning directory and updated all references in file.
-; Content-Fingerprint: 2026-01-27T18-25-51Z-MITLTN3K
+; Version: 1.0.0
+; Last change: Stripped checklist down to skeleton in preparation for next project phase.
+; Content-Fingerprint: 2026-02-02T17-19-52Z-MODIOTXN
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -14,8 +14,8 @@
 ; ------------------------------------------------------------------
 
 PROJECT: Pipz_Project_V3
-PURPOSE: Track all remaining, in-progress, and completed work items.
-STATUS: LIVING DOCUMENT — MUST BE UPDATED AS WORK PROGRESSES.
+PURPOSE: Minimal, living task tracker (intentionally empty placeholders)
+STATUS: ACTIVE / GOVERNED
 
 LEGEND:
 [✓] DONE / CONFIRMED
@@ -25,233 +25,85 @@ LEGEND:
 [!] BLOCKER / HIGH RISK
 
 ; ------------------------------------------------------------------
-A. GOVERNANCE & AUTHORITY LAYER
+A. GOVERNANCE & AUTHORITY
 ; ------------------------------------------------------------------
 
-[✓] Core governance files exist:
-    - _PROJECT_ANCHOR_MASTER.txt
-    - _PROJECT_BLUEPRINT.txt
-    - AI_PROJECT_INSTRUCTIONS.txt
-    - PROJECT_LEARNED_CONSTRAINTS.txt
-    - INDEXIDLIST.txt
-
-[✓] AI_PROJECT_INSTRUCTIONS.txt updated to include:
-    - Multi-language header styles
-    - JSON sidecar governance rule
-
-[~] INDEXIDLIST.txt updated to include:
-    - MVP orchestrator files
-    - VS Code extension files
-    - JSON governance sidecars
-    - PROJECT_STATUS_CHECKLIST.txt
-    (Final verification pass still required)
-
-[ ] Verify ALL governed files contain:
-    - GEMINI MEM TAG
-    - Correct FULL PATH
-    - Version / Last change
-    - Content-Fingerprint
+[ ] PLACEHOLDER
 
 ; ------------------------------------------------------------------
-B. HEADER STANDARDIZATION
+B. POLICY-B SURFACE (REGISTRY)
 ; ------------------------------------------------------------------
 
-[✓] Mandated header templates defined for:
-    - .txt
-    - .js
-    - .ts
-    - .md
-    - .yaml / .yml
-    - .py
-
-[✓] JSON explicitly excluded from embedded headers
-[✓] JSON governance is handled via sidecar files:
-    - package.json.governance.txt
-    - tsconfig.json.governance.txt
-
-[ ] Verify every existing file conforms to its mandated header style
+[ ] PLACEHOLDER
 
 ; ------------------------------------------------------------------
-C. JSON & SIDECAR GOVERNANCE
+C. CORE FILES & SIGNPOSTS
 ; ------------------------------------------------------------------
 
-[✓] Rule established: JSON files must remain pure (no comments)
-[✓] Sidecar rule defined:
-    - <filename>.json.governance.txt
-
-[✓] JSON governance sidecars created for:
-    - package.json (Orchestrator)
-    - tsconfig.json (Orchestrator)
-
-[~] Confirm JSON sidecar files are referenced in:
-    - INDEXIDLIST.txt
-    - _PROJECT_BLUEPRINT.txt
-    (Blueprint update drafted; final confirmation still required)
+[ ] PLACEHOLDER
 
 ; ------------------------------------------------------------------
 D. MIRRORING & FINGERPRINTING
 ; ------------------------------------------------------------------
 
-[✓] MirrorAhkToTxt.py reviewed and preserved (no functionality loss) as legacy reference
-[✓] Header detection generalized across comment styles
-
-[✓] Mirroring system migrated to VS Code as extension:
-    - Runtime mirroring (.ahk/.ini -> .txt)
-    - Fingerprint updates on save (governed files)
-    - Standalone governed fingerprinting (extra file types list)
-    - UTF-8 + UTF-16 compatibility
-    - Audit logging to .ORCH_AUDITLOG/mirror/
-
-[✓] Audit logging verified as live:
-    - fingerprint_stage logs created
-    - mirror_write logs created (includes encoding)
-
-[✓] Notepad++ retirement status:
-    - MirrorAhkToTxt.py no longer required for mirroring/fingerprints
-    - Decision whether to fully stop using Notepad++ for any editing decided by user.
-    - Status (RETIRED)
+[ ] PLACEHOLDER
 
 ; ------------------------------------------------------------------
-E. VS CODE ENVIRONMENT
+E. CONTROLLER (GUI / LIFECYCLE)
 ; ------------------------------------------------------------------
 
-[✓] VS Code installed
-[✓] Git installed and initialized
-[✓] Continue extension installed
-[✓] Continue YAML config loads successfully
-
-[?] Confirm Continue system message ALWAYS forces read of:
-    - _PROJECT_ANCHOR_MASTER.txt
-    - _PROJECT_BLUEPRINT.txt
-    - AI_PROJECT_INSTRUCTIONS.txt
-    - PROJECT_LEARNED_CONSTRAINTS.txt
-    - INDEXIDLIST.txt
-    - PROJECT_STATUS_CHECKLIST.txt
+[ ] PLACEHOLDER
 
 ; ------------------------------------------------------------------
-E.1 VS CODE EXTENSION REPACKAGING RUNBOOK (MANDATORY PROCEDURE)
+F. WORKER (RUNTIME / OVERLAY)
 ; ------------------------------------------------------------------
 
-PURPOSE:
-Ensure any updates to the pipz-mirror-governance VS Code extension
-are rebuilt, packaged, and installed deterministically with no drift.
-
-This procedure MUST be followed for every extension change.
-
-RUNBOOK STEPS:
-
-[ ] 1. Make code changes ONLY inside:
-      pipz-mirror-governance/
-
-[ ] 2. Verify required metadata files exist and are up to date:
-      - README.md (non-template, accurate)
-      - LICENSE.txt (PIPZ GOVERNANCE LICENSE)
-      - package.json (repository field present)
-
-[ ] 3. Build the extension (from extension root):
-      > npm run compile
-
-[ ] 4. Package the extension:
-      > vsce package
-
-      Expected output:
-      - pipz-mirror-governance-<version>.vsix
-
-[ ] 5. Install VSIX into NORMAL VS Code (not Extension Dev Host):
-      - Extensions → ⋯ → Install from VSIX
-      - Select the newly generated .vsix
-      - Reload VS Code window
-
-[ ] 6. Verification checklist (REQUIRED):
-      [ ] Extension shows as Installed & Enabled
-      [ ] Output panel shows "Pipz Mirror Governance: activated"
-      [ ] Saving governed .txt updates Content-Fingerprint
-      [ ] Saving .ahk/.ini updates mirror .txt
-      [ ] UTF-8 and UTF-16 behavior confirmed
-      [ ] Audit logs written to:
-          Pipz_Project_V3\.ORCH_AUDITLOG\mirror\
-
-[ ] 7. Only AFTER verification:
-      - Resume normal project work
-      - Extension Development Host may be closed for this component
-
-FAILURE RULE:
-If ANY verification step fails, STOP.
-Do NOT continue project work until resolved.
-
-This runbook exists to prevent silent tooling drift.
+[ ] PLACEHOLDER
 
 ; ------------------------------------------------------------------
-F. ORCHESTRATOR (HIDDEN CHAINING)
+G. INTEROP / IPC
 ; ------------------------------------------------------------------
 
-[✓] Architectural decision: User only interacts with Architect
-[✓] Full-file output default (diff optional)
-[✓] Audit log path fixed:
-    Pipz_Project_V3\.ORCH_AUDITLOG
-
-[~] ORCH_PROTOCOL_SPEC.txt drafted
-[~] Orchestrator MVP skeleton exists (bootstrap-only, no model calls)
-
-[?] Confirm MVP bootstrap command:
-    - Executes successfully
-    - Creates .ORCH_AUDITLOG/<run_id>/
-    - Outputs bootstrap_report.json
-    - Reports PASS
+[ ] PLACEHOLDER
 
 ; ------------------------------------------------------------------
-G. ROLE SEPARATION
+H. ORCHESTRATOR / MCP
 ; ------------------------------------------------------------------
 
-[✓] Architect (GPT-5.2) — user-facing
-[✓] Executor (GPT-4.1) — implementation
-[✓] SubSupervisor (GPT-4.1) — mechanical checks
-[✓] HeadSupervisor (GPT-5.2) — semantic review
-
-[ ] Formalize:
-    - Tool contracts between roles
-    - PASS / FAIL schemas
-    - Token gates:
-        - CONFIRM_EXECUTION
-        - CONFIRM_APPLY
-
-; ------------------------------------------------------------------
-H. MCP / HIDDEN EXECUTION INFRASTRUCTURE
-; ------------------------------------------------------------------
-
-[~] Decision leaning toward custom MCP server / orchestrator extension
-
-[ ] Decide implementation language (Node vs Python)
-
-[ ] Implement governed tools:
-    - Read
-    - Write
-    - Mirror (may call/assume VS Code mirror extension or replicate logic)
-    - Fingerprint (may call/assume VS Code mirror extension or replicate logic)
-
-[ ] Wire MCP tools so user NEVER interacts with Executor/Supervisors
+[ ] PLACEHOLDER
 
 ; ------------------------------------------------------------------
 I. AUDITABILITY
 ; ------------------------------------------------------------------
 
-[✓] .ORCH_AUDITLOG directory structure defined
-[✓] Mirror extension audit logs confirmed live under:
-    .ORCH_AUDITLOG\mirror\
-
-[ ] Define mandatory artifacts per orchestrator run (separate from mirror logs):
-    - Work order
-    - Executor output
-    - Supervisor checklist
-    - Semantic review
-
-[ ] Ensure orchestrator logs are append-only and non-overwritable
+[ ] PLACEHOLDER
 
 ; ------------------------------------------------------------------
-J. FINAL CONFIRMATION CHECKPOINTS
+J. TOOLING / ENVIRONMENT
 ; ------------------------------------------------------------------
 
-[✓] VS Code mirror behavior matches intended runtime requirements (mirroring + fingerprints + encoding + audit logs)
-[ ] No governed file is missing from INDEXIDLIST.txt
-[ ] No file bypasses orchestrator for changes (future; requires MCP/orchestrator completion)
-[ ] User interacts with exactly ONE AI surface (future; requires MCP/orchestrator completion)
+[ ] PLACEHOLDER
+
+; ------------------------------------------------------------------
+K. OPEN QUESTIONS / DECISIONS
+; ------------------------------------------------------------------
+
+[ ] PLACEHOLDER
+
+; ------------------------------------------------------------------
+L. NEXT ACTIONS (SHORT-TERM)
+; ------------------------------------------------------------------
+
+[ ] PLACEHOLDER
+
+---
+
+## NOTES
+
+* Keep sections intentionally sparse.
+* Add tasks only when they are concrete, testable, and governed.
+* Avoid historical narrative; track *what’s next*.
+
+; ------------------------------------------------------------------
+
+END OF PROJECT STATUS CHECKLIST

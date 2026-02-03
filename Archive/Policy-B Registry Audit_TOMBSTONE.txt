@@ -1,0 +1,68 @@
+; ------------------------------------------------------------------
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\PPAVP\Policy-B Registry Audit.txt"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - Policy-B Registry Audit.txt
+; Version: 1.0.1
+; Last change: Formally tombstoned and superseded by PROTOCOL_RUNBOOK.txt.
+; Content-Fingerprint: 2026-02-02T17-03-41Z-6UV5E3QK
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT (LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+###############################################################################
+#                            ⚠️  TOMBSTONED FILE  ⚠️
+###############################################################################
+
+THIS FILE IS NO LONGER AUTHORITATIVE.
+
+The Policy-B Registry Audit procedure has been **fully migrated** into the
+canonical procedural authority file:
+
+    Pipz_Project_V3\PPAVP\PROTOCOL_RUNBOOK.txt
+        → Section 2: POLICY-B REGISTRY AUDIT RUNBOOK
+
+---
+
+### STATUS
+
+- ❌ This file MUST NOT be used as a checklist
+- ❌ This file MUST NOT be updated with procedures
+- ❌ This file MUST NOT be referenced for governance decisions
+
+It exists ONLY as a historical redirect to prevent:
+- Accidental reuse
+- Duplicate or diverging procedures
+- Silent governance drift
+
+---
+
+### GOVERNANCE RULE
+
+> Any execution of a Policy-B Registry Audit MUST follow the procedure
+> defined in **PROTOCOL_RUNBOOK.txt**, Section 2.
+
+If this file is encountered during work:
+- STOP
+- Open PROTOCOL_RUNBOOK.txt
+- Follow the canonical runbook instead
+
+---
+
+### RATIONALE (NON-NORMATIVE)
+
+This tombstone exists because procedural authority in Pipz_Project_V3 is
+centralized by design.
+
+All mandatory procedures live in exactly ONE place:
+    PROTOCOL_RUNBOOK.txt
+
+This file is retained only to preserve audit traceability and historical
+context.
+
+###############################################################################
+#                          END OF TOMBSTONED FILE
+###############################################################################

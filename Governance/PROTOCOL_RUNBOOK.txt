@@ -1,0 +1,776 @@
+; ------------------------------------------------------------------
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\Governance\PROTOCOL_RUNBOOK.txt"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - PROTOCOL_RUNBOOK.txt
+; Version: 1.0.5
+; Last change: Creation of canonical runbook number 4 `PHASE 5 RESULT DECLARATION RUNBOOK`.
+; Content-Fingerprint: 2026-02-03T00-16-46Z-2PD7WXXN
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT (LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+---
+
+### **PROTOCOL_RUNBOOK.txt — DESCRIPTION / INTENT**
+
+**PROTOCOL_RUNBOOK.txt** is a **canonical procedural authority file**.
+
+Its purpose is to house **mandatory, repeatable, non-optional runbooks** that govern *how* specific high-risk or drift-prone project operations must be performed. Unlike task trackers or planning documents, this file does **not** describe *what work is pending* — it defines *how certain work must be executed* whenever it occurs.
+
+This file exists to prevent:
+
+* Silent process drift
+* Partial or informal execution of critical procedures
+* “Tribal knowledge” dependencies
+* Accidental governance violations caused by skipped steps
+
+---
+
+### **Scope & Characteristics**
+
+* **Cumulative by design**  
+  This file grows over time. Each runbook added represents a *standing obligation*, not a temporary checklist.
+
+* **Procedure, not status**  
+  Entries here never expire and are not marked “done.”  
+  If an operation matches a runbook’s scope, the runbook **must be followed in full**.
+
+* **Deterministic and auditable**  
+  Every runbook is written to be:
+  * Step-ordered
+  * Verifiable
+  * Unambiguous
+  * Safe to execute without inference
+
+* **STOP-oriented**  
+  Each runbook includes explicit **failure rules**.
+  Failure semantics are non-negotiable.  
+  If any step fails, work must halt until resolved.
+
+---
+
+### Audit Domains (INFORMATIONAL)
+
+This section is informational only.
+
+It enumerates common audit domains used to reason about system correctness,
+coverage, and governance hygiene. These domains do NOT define procedures and
+do NOT impose execution requirements by themselves.
+
+Concrete audit behavior is defined exclusively by:
+- GOVERNANCE_COMPENDIUM.txt (what must be true)
+- Numbered runbooks in this file (how mandatory procedures are executed)
+
+The domains below serve as conceptual groupings only.
+
+Typical audit domains include:
+
+- Bootstrap & Authority Establishment  
+  (initialization correctness, phase gating, authority declaration)
+
+- Governance Surface Integrity (Policy-B)  
+  (entrypoints, timers, IPC contracts, lifecycle controls, settings interfaces)
+
+- Mirroring & Fingerprinting  
+  (text mirrors, content-fingerprint updates, encoding stability)
+
+- Controller / Worker Lifecycle  
+  (startup, health monitoring, shutdown, process boundaries)
+
+- Orchestrator & Tooling Readiness  
+  (orchestrator bootstrap checks, extension activation, packaging integrity)
+
+- Auditability & Trace Emission  
+  (log presence, determinism, trace completeness)
+
+Presence of a domain here does NOT imply:
+- an active audit
+- a mandatory check
+- a required runbook
+
+Domains become enforceable only when expressed as a numbered runbook section
+or as an explicit governance rule elsewhere.
+
+---
+
+### RUNBOOK INDEX (AUTHORITATIVE NAVIGATION)
+
+This index enumerates all mandatory runbook sections contained in this file.
+
+The index is authoritative for:
+- navigation
+- reference
+- cross-linking
+- audit discussion
+
+The index is NOT a procedure and does not define execution behavior.
+Execution requirements are defined only within the numbered runbook sections themselves.
+
+--------------------------------------------------------------------
+SECTION | TITLE
+--------------------------------------------------------------------
+1       | VS Code Extension Repackaging Runbook
+2       | Policy-B Registry Audit Runbook
+3       | Phase 5 Audit Execution Runbook
+4       | Phase 5 Result Declaration Runbook
+--------------------------------------------------------------------
+
+Notes:
+- Section numbers are stable identifiers.
+- New runbooks MUST be added to this index.
+- Removed or deprecated runbooks MUST be removed from this index.
+- Index presence does NOT imply execution unless the corresponding
+  runbook section exists and applies to the task at hand.
+
+---
+
+### **What Belongs in This File**
+
+Only procedures that meet **all** of the following criteria should be added:
+
+* The operation is **governance-critical**, **tooling-critical**, or **high-risk**
+* Skipping steps could cause:
+  * Audit failure
+  * Silent desynchronization
+  * Governance erosion
+* The procedure must be followed **every time**, not “most of the time”
+
+Examples:
+
+* Tooling rebuild / repackaging procedures
+* Orchestrator or MCP lifecycle operations
+* Governance lock / unlock flows
+* Environment migration protocols
+* Recovery or rollback procedures
+
+---
+
+### **What Does *Not* Belong Here**
+
+* Project status or progress tracking
+* One-off experiments
+* Informal notes or reminders
+* Design rationale or architecture discussion
+* Tasks that can be safely adapted or skipped
+
+Those belong in:
+
+* `PROJECT_STATUS_CHECKLIST.txt`
+* Blueprint or anchor documents
+* Audit reports
+
+---
+
+### **Relationship to Other Artifacts**
+
+* **PROJECT_STATUS_CHECKLIST.txt**  
+  Tracks *what needs doing right now*. Non-authoritative and time-bound.
+
+* **PROTOCOL_RUNBOOK.txt**  
+  Defines *how certain operations must always be performed*.  
+  This file is authoritative for mandatory procedures only.
+
+* **GOVERNANCE_COMPENDIUM.txt**  
+  Defines *what must be true*, including governance rules, structure,
+  bootstrap requirements, and enforcement semantics.
+
+This separation is intentional and enforced.
+
+---
+
+### **Runbook Applicability Gate (MANDATORY)**
+
+Every numbered runbook section in this file MUST include an
+**APPLIES WHEN** clause.
+
+The APPLIES WHEN clause defines the exact condition under which the
+runbook is mandatory.
+
+If the condition is met, the runbook MUST be executed in full.
+If the condition is not met, the runbook MUST NOT be executed.
+
+Applicability is declared by the runbook itself and must not be inferred.
+
+This requirement is enforced structurally by the Mandatory Runbook Format
+defined below.
+
+---
+
+### **Mandatory Runbook Format (ENFORCED)**
+
+Every numbered runbook section in this file MUST follow the format
+defined below.
+
+Runbooks that do not conform to this structure are invalid and must
+not be executed.
+
+The format exists to ensure determinism, auditability, and consistent
+interpretation across time, tooling, and operators.
+
+---
+
+REQUIRED ORDER (NO EXCEPTIONS):
+
+1. PURPOSE
+2. APPLIES WHEN
+3. FAILURE RULE(S)
+4. RUNBOOK STEPS
+
+---
+
+#### 1. PURPOSE
+
+A concise statement describing:
+- what the procedure exists to accomplish
+- why it is necessary
+
+The PURPOSE describes intent only.
+It MUST NOT include steps, conditions, or enforcement logic.
+
+---
+
+#### 2. APPLIES WHEN
+
+A single declarative condition that defines exactly when the runbook
+is mandatory.
+
+Rules:
+- Must be explicit and unambiguous
+- Must not rely on inference or judgment calls
+- Must not include examples or step logic
+
+If the condition is met, the runbook MUST be executed in full.
+If the condition is not met, the runbook MUST NOT be executed.
+
+---
+
+#### 3. FAILURE RULE(S)
+
+Explicit STOP conditions.
+
+This section defines what constitutes failure and what must happen
+when failure occurs.
+
+Rules:
+- At least one failure rule is mandatory
+- Failure rules MUST include an explicit STOP directive
+- Failure rules MUST NOT include recovery steps (recovery belongs in
+  a separate runbook)
+
+Failure semantics are non-negotiable.
+
+---
+
+#### 4. RUNBOOK STEPS
+
+The ordered execution steps required to perform the procedure.
+
+Rules:
+- Steps MUST be sequential and numbered
+- Steps MUST be complete and self-sufficient
+- Steps MUST be written so they can be executed without inference
+- Verification steps MUST be explicit and checkable
+
+Optional verification sub-checklists may be included within steps,
+but do not replace step ordering.
+
+---
+
+### **Runbook Formatting Standard (MANDATORY)**
+
+This section governs visual and structural presentation only.
+It supplements (but does not replace) the Mandatory Runbook Format above.
+
+All numbered runbook sections in this file MUST follow the visual and
+structural formatting rules defined below.
+
+Formatting consistency is enforced to ensure readability, scanability,
+and deterministic interpretation across operators and time.
+
+---
+
+#### Runbook Header
+
+Each runbook MUST begin with the following header block:
+
+; ------------------------------------------------------------------
+; <RUNBOOK_NUMBER>. <RUNBOOK NAME> RUNBOOK (MANDATORY PROCEDURE)
+; ------------------------------------------------------------------
+
+Rules:
+- RUNBOOK_NUMBER MUST match the index entry
+- RUNBOOK NAME MUST match the index title verbatim
+- The phrase "(MANDATORY PROCEDURE)" is required and must not be altered
+
+---
+
+#### PURPOSE
+
+Format:
+
+PURPOSE:
+<single concise description>
+---
+
+Rules:
+- PURPOSE text MUST flow directly into the section divider (`---`)
+- Purpose MUST be brief and intent-focused
+- No steps, conditions, or enforcement language
+- No line wrapping unless necessary
+
+---
+
+#### APPLIES WHEN
+
+Format:
+
+APPLIES WHEN:
+<single declarative condition>
+---
+
+Rules:
+- One condition only
+- No bullet points
+- No examples
+- No procedural language
+
+---
+
+#### FAILURE RULE(S)
+
+Format:
+
+FAILURE RULE(S):
+<one failure rule per line>
+
+Rules:
+- At least one rule is mandatory
+- Each rule MUST describe a STOP condition
+- Recovery steps are not allowed in this section
+
+---
+
+#### RUNBOOK STEPS
+
+Format:
+
+; ------------------------------------------------------------------
+RUNBOOK STEPS:
+
+[ ] <STEP_NUMBER>. <step description>
+      <optional indented detail>
+
+Rules:
+- Steps MUST be numbered sequentially starting at 0 or 1
+- Each step MUST begin with a checklist box `[ ]`
+- Step descriptions MUST be imperative and unambiguous
+- Verification sub-checklists MAY be nested within a step
+- Do NOT skip numbers or reuse step numbers
+
+---
+
+Any deviation from this formatting standard constitutes a runbook
+violation and must be corrected before the runbook is considered valid.
+
+---
+
+### **Normative Rule**
+
+> If a task invokes a procedure documented in `PROTOCOL_RUNBOOK.txt`,  
+> **that procedure is mandatory and non-negotiable.**
+
+No shortcuts. No partial execution. No “I already know this part.”
+
+---
+
+; ------------------------------------------------------------------
+; 1. VS CODE EXTENSION REPACKAGING RUNBOOK (MANDATORY PROCEDURE)
+; ------------------------------------------------------------------
+PURPOSE:  
+Ensure any updates to the pipz-mirror-governance VS Code extension are rebuilt, packaged, and installed deterministically with no drift.
+---
+APPLIES WHEN:
+Any change is made to the pipz-mirror-governance VS Code extension source, configuration, or metadata that could affect its runtime behavior, packaging, or distribution.
+---
+FAILURE RULE(S):
+If ANY verification step fails, STOP.  
+Do NOT continue project work until resolved.
+; ------------------------------------------------------------------
+RUNBOOK STEPS:
+
+[ ] 1. Make code changes ONLY inside:  
+      pipz-mirror-governance/
+
+[ ] 2. Verify required metadata files exist and are up to date:
+      - README.md (non-template, accurate)
+      - LICENSE.txt (PIPZ GOVERNANCE LICENSE)
+      - package.json (repository field present)
+
+[ ] 3. Build the extension (from extension root):  
+      > npm run compile
+
+[ ] 4. Package the extension:  
+      > vsce package
+
+      Expected output:
+      - pipz-mirror-governance-<version>.vsix
+
+[ ] 5. Install VSIX into NORMAL VS Code (not Extension Dev Host):
+      - Extensions → ⋯ → Install from VSIX
+      - Select the newly generated .vsix
+      - Reload VS Code window
+
+[ ] 6. Verification checklist (REQUIRED):
+      [ ] Extension shows as Installed & Enabled
+      [ ] Output panel shows "Pipz Mirror Governance: activated"
+      [ ] Saving governed .txt updates Content-Fingerprint
+      [ ] Saving .ahk/.ini updates mirror .txt
+      [ ] UTF-8 and UTF-16 behavior confirmed
+      [ ] Audit logs written to:
+          Pipz_Project_V3\.ORCH_AUDITLOG\mirror\
+
+[ ] 7. Only AFTER verification:
+      - Resume normal project work
+      - Extension Development Host may be closed for this component
+
+; ------------------------------------------------------------------
+; 2. POLICY-B REGISTRY AUDIT RUNBOOK (MANDATORY PROCEDURE)
+; ------------------------------------------------------------------
+PURPOSE:  
+Keep `GLOBAL_REGISTRY_MASTER.csv` authoritative for **governance-surface changes only** (entrypoints, timers, OnMessage/IPC, lifecycle, settings/defaults interface).
+---
+APPLIES WHEN:
+Any code change is made that may introduce, modify, move, or remove Policy-B governed surface area, including entrypoints, timers, IPC contracts, lifecycle controls, or settings/defaults interfaces.
+---
+FAILURE RULE(S):
+If any required registry entry cannot be verified for accuracy, ownership, or scope, STOP.
+If GLOBAL_REGISTRY_MASTER.csv is missing, unreadable, or incomplete, STOP.
+Do NOT proceed with code changes or registry edits until the failure condition is resolved.
+; ------------------------------------------------------------------
+RUNBOOK STEPS:
+
+[ ] 0. Confirm scope of change:
+      This runbook applies to changes in the following files:
+      - Controller/Main_Controller.ahk
+      - Controller/Controller_Core.ahk
+      - Worker/Main_Worker.ahk
+      - Worker/Worker_Core.ahk
+      - Lib/Core_Utils.ahk
+      - Lib/Interop.ahk
+      - Lib/Humanoid.ahk
+
+[ ] 1. PRE-FLIGHT — Scope guard:
+      Confirm you are auditing **Policy-B surface only**, limited to:
+      - Entrypoints / lifecycle
+      - Timers
+      - OnMessage handlers
+      - IPC send/receive contracts
+      - Settings IO + defaults interface
+      - Process lifecycle controls
+
+      If reviewing internal helpers only:
+      → DO NOT touch the governed registry
+      → Use `INTERNAL_FUNCTION_INDEX.csv` instead
+
+[ ] 2. ENTRYPOINTS AUDIT (Controller + Worker):
+
+      Controller Entrypoints:
+      - OnExit(<fn>)
+      - OnMessage(<msg>, <fn>)
+      - Gui.OnEvent("<event>", <fn>) or Control.OnEvent(...)
+      - Initial boot actions that cause governance-surface effects:
+        - worker warm-start calls
+        - license gate call
+        - settings/defaults load call
+
+      Worker Entrypoints:
+      - OnMessage(<msg>, <fn>)
+      - SetTimer(<fn>, <interval>)
+      - Listener bootstrap calls (e.g., SetupWorkerListener())
+      - Main runtime loop (Loop { ... })
+        *Not usually a registry item unless it exposes new controls*
+
+      Registry MUST list:
+      - Entrypoint type (GUI / OnMessage / OnExit / Startup)
+      - Exact handler name
+      - Owner file
+
+[ ] 3. TIMERS AUDIT (SetTimer surface):
+
+      For each SetTimer(...) occurrence, verify:
+      - Callback name
+      - Interval (including negative one-shot semantics)
+      - Owner file
+      - Purpose label (e.g., Health monitor, Overlay physics, Settings watchdog)
+
+      Policy-B rule of thumb:
+      Timers that:
+      - check settings / reload config
+      - monitor worker health
+      - move overlay
+      - create user-visible or cross-process behavior
+      → MUST be in the governed registry
+
+      Purely internal math timers usually should not be.
+
+[ ] 4. ONMESSAGE AUDIT (IPC + OS message surface):
+
+      For each OnMessage(MSG_ID, Handler), record:
+      - MSG_ID (hex)
+      - Handler function name
+      - Owner file
+      - What the handler does at surface level
+
+      Registry MUST include:
+      - Message ID
+      - Handler name
+      - Direction (OS → controller, controller → worker, etc.)
+
+      Typical mandatory examples:
+      - 0x0200 (mouse move tooltip processing) — controller
+      - 0x004A (WM_COPYDATA title update) — worker
+      - WM_TRIGGER_STATE (custom state signal) — worker
+
+[ ] 5. IPC CONTRACT AUDIT (Interop contract stability):
+
+      In Interop.ahk, verify:
+      - Custom message IDs / constants (e.g., WM_TRIGGER_STATE := 0x....)
+      - Encoding contract (wParam meanings: 1 / 0 / 2, etc.)
+      - Sender helpers (e.g., SendWorkerSignal(state))
+      - Receiver handlers (e.g., Worker_ReceiveSignal(...))
+
+      Registry MUST reflect:
+      - Message constant name + value
+      - Sender function(s)
+      - Receiver handler(s)
+      - Encoding contract summary
+
+      If encoding changes:
+      → Registry update is mandatory
+
+[ ] 6. SETTINGS / DEFAULTS INTERFACE AUDIT (Core_Utils):
+
+      Confirm registry coverage for:
+      - GetDefaultSettings()
+      - GetSettingsPath()
+      - LoadSetting(section, key, default)
+      - SaveSetting(section, key, value)
+      - ValidateLicense(...) (if treated as governed surface)
+
+      Registry MUST identify these as:
+      - Settings IO
+      - Defaults Interface
+      - Security Gate
+
+      Owner file: Core_Utils.ahk
+
+[ ] 7. LIFECYCLE / PROCESS CONTROL AUDIT:
+
+      Scan for any function that:
+      - launches worker (Run(...))
+      - monitors worker (health checks)
+      - kills worker (ProcessClose(...))
+      - shuts down / exit hooks (OnExit(...))
+
+      These lifecycle controls MUST be present in the governed registry.
+
+[ ] 8. OWNERSHIP AUDIT (no stale owner entries):
+
+      For each governed registry row, confirm:
+      - Function exists in the file
+      - Name matches exactly (case-sensitive per project convention)
+      - Owner file is still correct after refactors
+
+      If owner moved:
+      - Update owner column only
+      - Do NOT expand scope
+
+[ ] 9. “NO NEW SURFACE” ASSERTION (final check):
+
+      If code changes were intended to be internal-only, confirm NO new:
+      - OnMessage handlers
+      - SetTimer calls
+      - OnExit hooks
+      - process launch / kill paths
+      - settings IO interface functions
+      - IPC constants, senders, or receivers
+
+      If none added:
+      → DO NOT update the governed registry
+
+[ ] 10. REQUIRED OUTPUT (when something changes):
+
+      When a registry-required change is found, write a delta like:
+      - ADD: OnMessage 0x1234 → NewHandler (Owner: Worker_Core.ahk) — purpose: <…>
+      - ADD: SetTimer(NewTimerCb, 500) (Owner: Main_Worker.ahk) — purpose: <…>
+      - MOVE: UpdateWorkerOverlay from Main_Worker.ahk → Worker_Core.ahk
+      - MODIFY: WM_TRIGGER_STATE encoding changed → <…> (registry update required)
+
+; ------------------------------------------------------------------
+; 3. PHASE 5 AUDIT EXECUTION RUNBOOK (MANDATORY PROCEDURE)
+; ------------------------------------------------------------------
+PURPOSE:
+Execute the Phase 5 audit to deterministically verify that the Observed
+Project State exactly matches the Expected Set defined by governance,
+with no omissions, additions, or ambiguity.
+---
+APPLIES WHEN:
+A Phase 5 audit is initiated to assert project completeness, structural
+correctness, or readiness for declaration of Phase 5 PASS or FAIL.
+---
+FAILURE RULE(S):
+If any Expected Set item is missing from the Observed Set, STOP.
+If any Observed item exists outside the Expected Set, STOP.
+If any required governance artifact cannot be fully read, STOP.
+If tooling limitations prevent deterministic verification, STOP.
+; ------------------------------------------------------------------
+RUNBOOK STEPS:
+
+[ ] 0. Confirm Phase 5 intent:
+      Verify that execution of a Phase 5 audit is explicitly intended
+      and not being triggered implicitly by unrelated work or tooling.
+
+[ ] 1. Load authoritative Phase 5 contract:
+      Fully read and confirm understanding of:
+      GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S5.PHASE5_AUDIT.
+
+[ ] 2. Establish Expected Set:
+      Derive the Expected Set exclusively from:
+      - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT
+      - All virtual governance sections referenced therein
+
+      Do NOT derive expected items from:
+      - directory listings
+      - previous audit runs
+      - memory
+      - tooling heuristics
+
+[ ] 3. Establish Observed Set:
+      Enumerate the Observed Project State using deterministic visibility:
+      - project root resolution via Bootstrap v4
+      - directory and file presence only
+      - no inference or extrapolation
+
+[ ] 4. Verify governance artifact readability:
+      Confirm full readability and integrity of all required artifacts,
+      including but not limited to:
+      - GOVERNANCE_COMPENDIUM.txt
+      - all required virtual governance sections
+      - GLOBAL_REGISTRY_MASTER.csv
+
+[ ] 5. Compare Expected vs Observed (Expected → Observed):
+      For each Expected Set item:
+      - Confirm it exists in the Observed Set
+      - Confirm its path and identity are exact
+
+[ ] 6. Compare Observed vs Expected (Observed → Expected):
+      For each Observed item:
+      - Confirm it is present in the Expected Set
+      - Confirm it is not extraneous or unaccounted for
+
+[ ] 7. Verify Policy-B registry consistency:
+      Confirm that all governance-surface elements observed in code
+      are represented accurately in GLOBAL_REGISTRY_MASTER.csv.
+
+[ ] 8. Verify mirror and fingerprint integrity:
+      Confirm required mirror artifacts exist and that declared
+      Content-Fingerprints match observed mirrors where applicable.
+
+[ ] 9. Declare audit result:
+      Declare Phase 5 audit outcome as one of:
+      - PASS — Observed Set exactly matches Expected Set
+      - FAIL — One or more discrepancies detected
+
+      All discrepancies MUST be explicitly recorded if FAIL.
+
+[ ] 10. Enforce outcome:
+      If PASS:
+      - Phase 5 may be declared complete.
+
+      If FAIL:
+      - Do NOT declare Phase 5 complete.
+      - Do NOT proceed with dependent actions.
+      - Resolve discrepancies before re-running this runbook.
+
+; ------------------------------------------------------------------
+; 4. PHASE 5 RESULT DECLARATION RUNBOOK (MANDATORY PROCEDURE)
+; ------------------------------------------------------------------
+PURPOSE:
+Define the mandatory, deterministic format and rules for declaring and
+presenting the results of a completed Phase 5 audit.
+---
+APPLIES WHEN:
+A Phase 5 audit execution has completed without STOP conditions and a
+formal Phase 5 outcome must be declared or reported.
+---
+FAILURE RULE(S):
+If results cannot be declared using the required format → STOP.
+If any classification is ambiguous or inferred → STOP.
+If remediation, analysis, or speculation is introduced → STOP.
+If Phase 5 execution was incomplete or invalid → STOP.
+; ------------------------------------------------------------------
+RUNBOOK STEPS:
+
+[ ] 1. Confirm execution eligibility
+      - Confirm PROTOCOL_RUNBOOK §3 (Phase 5 Audit Execution) completed
+      - Confirm no STOP conditions were encountered
+      - Confirm Bootstrap v4 Phases 0–4 succeeded
+
+[ ] 2. Declare report scope
+      - State that the report is READ-ONLY
+      - State that no remediation or analysis is permitted
+      - State that results reflect visibility and structure only
+
+[ ] 3. Emit required metadata
+      - Project name
+      - Invocation type (explicit user request)
+      - Timestamp (UTC)
+      - Resolved root Drive ID
+      - Resolved root path
+
+[ ] 4. Emit enumeration summary
+      - Total folders discovered
+      - Total files discovered
+      - Total readable files
+      - Total unreadable files
+      - Total expected-but-missing files
+      - Total ungoverned files
+
+[ ] 5. Emit classification sections in order
+      - VERIFIED
+      - UNREADABLE
+      - MISSING
+      - ORPHANED
+      - UNGOVERNED
+      - INDEX DISCREPANCIES
+      - ALIAS COVERAGE
+      - STRUCTURAL ALIGNMENT
+
+      Each item MUST include:
+      - Full path
+      - Drive ID (if applicable)
+      - Governing source (Blueprint / Index / Registry)
+      - Notes (optional, factual only)
+
+[ ] 6. Declare Phase 5 outcome
+      - SUCCESS (no blocking issues)
+      - DEGRADED (non-blocking issues present)
+      - FAILED (blocking issues present)
+
+[ ] 7. Enforce output constraints
+      - Do NOT suggest fixes
+      - Do NOT infer causes
+      - Do NOT modify files
+      - Do NOT extend beyond defined sections
+
+[ ] 8. Terminate declaration
+      - State Phase 5 declaration complete
+      - Await further instruction
+
+; ------------------------------------------------------------------
+
+END OF PROTOCOL RUNBOOK

@@ -4,9 +4,9 @@
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt
-; Version: 1.0.0
-; Last change: Initial creation of the consolidated governance compendium.
-; Content-Fingerprint: 2026-01-31T21-19-58Z-941HHLR4
+; Version: 1.0.3
+; Last change: Completed inclusion of new authoritative runbook and redesignation of directory authority level.
+; Content-Fingerprint: 2026-02-03T00-13-50Z-Z0DKRI7K
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -54,10 +54,27 @@ The following Section IDs are case-sensitive, immutable, and must never be alias
 
 POLICY A — ARCHIVED ORIGINAL HEADERS
 
-Within each section below:
-  - "ARCHIVED ORIGINAL (VERBATIM)" is included for cross-checking.
-  - It is NON-AUTHORITATIVE for file-identity/path assertions (e.g., GEMINI MEM TAG full paths, MAINTEMPLATE filename headers).
-  - Operative governance semantics for single-artifact mode are defined by the "OPERATIVE TEXT (COMPENDIUM MODE)" block.
+ARCHIVED ORIGINAL CONTENT (EXTERNAL — NON-OPERATIVE)
+
+Original standalone governance files have been removed from this document and
+are preserved exclusively under the project-level /Archive directory.
+
+Archived originals exist solely for:
+  - historical reference
+  - literal fidelity cross-checking
+  - audit traceability against prior standalone artifacts (now represented as sections)
+
+Archived originals are NON-AUTHORITATIVE and MUST NOT be used for:
+  - governance reasoning
+  - enforcement decisions
+  - STOP / hard-stop evaluation
+  - semantic interpretation
+  - proposal justification
+  - path, identity, or file-existence assertions
+
+Operative governance semantics for single-artifact mode are defined
+exclusively by the OPERATIVE TEXT (COMPENDIUM MODE) sections
+within this document.
 
 REGISTRY AUTHORITY NOTICE (EXTERNAL)
 
@@ -70,29 +87,32 @@ Any governance rule that requires registry verification continues to require the
 
 INTERPRETATION & CONFLICT RULES (MANDATORY)
 
-IR-1. ARCHIVED ORIGINAL (VERBATIM) content exists solely for:
+IR-1. Archived original governance content exists exclusively outside this document
+     (under the project-level /Archive directory) and solely for:
+     - historical reference
      - literal fidelity verification
-     - cross-checking against historical standalone files
-     - audit traceability
+     - audit traceability against prior standalone artifacts (now represented as sections)
 
-IR-2. ARCHIVED ORIGINAL content MUST NOT be used for:
+IR-2. Archived original content MUST NOT be used for:
      - governance reasoning
      - enforcement decisions
      - STOP / hard-stop evaluation
      - proposal justification
      - semantic interpretation
+     - path, identity, or file-existence assertions
 
-IR-3. OPERATIVE TEXT (COMPENDIUM MODE) is the ONLY valid source for
-     active governance semantics in single-artifact mode.
+IR-3. OPERATIVE TEXT (COMPENDIUM MODE) within this document is the ONLY valid source
+     for active governance semantics in single-artifact mode.
 
 IR-4. If any semantic, procedural, or enforcement conflict is detected between:
-     - ARCHIVED ORIGINAL content, and
-     - OPERATIVE TEXT
+     - archived original content (external), and
+     - OPERATIVE TEXT (COMPENDIUM MODE)
 
      The conflict MUST be explicitly reported.
-     The AI MUST NOT resolve the conflict implicitly or by precedence assumption.
+     The AI MUST NOT resolve the conflict implicitly, heuristically,
+     or by precedence assumption.
 
-IR-5. A governance section is considered UNREADABLE if:
+IR-5. A governance section within GOVERNANCE_COMPENDIUM.txt is considered UNREADABLE if:
      - it cannot be fully located, OR
      - it is truncated, partially visible, or cut off
 
@@ -1505,7 +1525,7 @@ A. AUTHORITY REBINDING (MANDATORY)
 When GOVERNANCE_COMPENDIUM.txt is present and declared authoritative:
 
 - GOVERNANCE_COMPENDIUM.txt becomes the sole bootstrap governance container.
-- All prior standalone governance files are treated as ARCHIVED ORIGINALS only.
+- All prior standalone governance files (now represented as sections) are treated as ARCHIVED ORIGINALS only.
 - Bootstrap v4 MUST resolve governance artifacts via Section IDs, not filenames.
 
 Canonical Bootstrap authority is now:
@@ -1641,109 +1661,137 @@ Historical governance sources have been archived under:
   - \Archive\ (non-authoritative, non-operative)
 
 Index coverage does not imply expected existence.
+Expected existence is defined exclusively by this Blueprint section.
+
+Virtual Section Semantics (MANDATORY):
+
+Sections addressed using the form:
+  GOVERNANCE_COMPENDIUM.txt :: SECTION <SECTION_ID>
+
+are treated as virtual governance artifacts for the purposes of:
+  - verification
+  - readability checks
+  - STOP enforcement
+  - audit determinism
+
+Failure to fully read a required section is equivalent to failure
+to read a standalone governance file.
+
+This section defines architectural structure ONLY.
+
+Structural authority includes:
+  - required directories
+  - required files
+  - required virtual governance sections
+  - their canonical relationships
+
+Structural authority explicitly excludes:
+  - runtime behavior
+  - logic flow
+  - enforcement rules
+  - registry semantics
 
 The Archive directory MUST NOT be used for governance reasoning,
 verification, or enforcement, Including for historical comparison unless explicitly instructed.
 
 ; ------------------------------------------------------------------
 
------------------------------------------------------------------------|--------------------|------------------------------------------------------------------------
-PATH / FILE NAME                                                       | TYPE               | DESCRIPTION / RESPONSIBILITY
------------------------------------------------------------------------|--------------------|------------------------------------------------------------------------
-\Pipz_Project_V3                                                       | ROOT               | Main project directory.
-  settings.ini                                                         | Config             | Central storage for AutoHotkey user parameters, anti-ban settings, and titles.
-  .gitignore                                                           | Config             | Git exclusion rules.
-  PipzScptzIcon.png                                                    | Asset (Image)      | Application icon used by Controller GUI and tray; branding and visual identification.
-  ORCH_PROTOCOL_SPEC.txt                                               | Document           | Formal protocol contract defining orchestrator role separation, execution flow, audit requirements, token gates, and PASS/FAIL semantics.
-  settings.txt                                                         | Document           | Auditable AI mirror of settings.ini.
-                                                                       |                    |
------------------------------------------------------------------------|--------------------|------------------------------------------------------------------------
-\Archive                                                               | DIRECTORY          | Archived original files and artifacts (Intentionally excluded).
------------------------------------------------------------------------|--------------------|------------------------------------------------------------------------
-\Controller                                                            | DIRECTORY          | Container for the Interactive GUI Process.
-  Main_Controller.ahk                                                  | Main Script        | Entry point for GUI; handles UI, validation, orchestration commands, and high-level control.
-  Controller_Core.ahk                                                  | Core Container     | Consolidated controller subsystems (Tooltip/WorkerInterface/Messenger/Maintenance/Navigation/Process).
-  Main_Controller.txt                                                  | Document           | Auditable AI mirror of Main_Controller.ahk.
-  Controller_Core.txt                                                  | Document           | Auditable AI mirror of Controller_Core.ahk.
-                                                                       |                    |
------------------------------------------------------------------------|--------------------|------------------------------------------------------------------------
-\Governance                                                            | DIRECTORY          | Container for all authoritative documentation, project structure, operations protocols, and governance reference material.
-  GOVERNANCE_COMPENDIUM.txt                                            | Document           | Single authoritative governance artifact operating in SINGLE-ARTIFACT MODE. Consolidates all governance, bootstrap, blueprint, audit, and enforcement rules into section-addressable canonical form.
-  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT                | Document Section   | Primary source of truth for structure, search protocols, and logic rules.
-  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER            | Document Section   | Canonical unified system anchor defining mission intent, behavioral constraints, identity rules, and long-term architectural rationale. Authoritative, non-structural, and non-initializing.
-  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS          | Document Section   | AI governance ruleset; mandatory read source defining verification, fingerprinting, header mandates, and enforcement behavior.
-  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST            | Document Section   | Deterministic Google Drive ID acceleration map; reference-only, never a source of authority.
-  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4             | Document Section   | Canonical, authoritative definition of the Bootstrap v4 initialization protocol.
-  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S5.PHASE5_AUDIT             | Document Section   | Deterministic execution checklist and read-only report template for Phase 5 visibility audits.
-  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S6.GOVERNANCE_LOCK          | Document Section   | Governance lifecycle state declaration and phase lock indicator (non-authoritative).
-  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.LEARNED_CONSTRAINTS      | Document Section   | Non-authoritative, scope-indexed log of confirmed constraints and invalidated approaches to prevent regression.
-  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S9.STANDARD_HEADERS         | Document Section   | Templates for mandatory file headers.
-                                                                       |                    |
------------------------------------------------------------------------|--------------------|------------------------------------------------------------------------
-\Lib                                                                   | DIRECTORY          | Shared Libraries (#Include) used by both Controller and Worker.
-  Interop.ahk                                                          | Library            | IPC primitives: WM_TRIGGER_STATE, SendWorkerSignal, listener setup, process helpers.
-  Core_Utils.ahk                                                       | Core Container     | Settings IO + Defaults (GetDefaultSettings) + Security primitives (license/hashing).
-  Humanoid.ahk                                                         | Core Container     | Consolidated Movement + AntiBan + BreakManager logic (no controller-only hard deps).
-  Core_Utils.txt                                                       | Document           | Auditable AI mirror of Core_Utils.ahk.
-  Humanoid.txt                                                         | Document           | Auditable AI mirror of Humanoid.ahk.
-  Interop.txt                                                          | Document           | Auditable AI mirror of Interop.ahk.
-                                                                       |                    |
------------------------------------------------------------------------|--------------------|------------------------------------------------------------------------
-\Registry                                                              | DIRECTORY          | Container for all registry artifacts defining governance-critical surface area and full symbol inventory. Registries are authoritative and external to the governance compendium.
-  GLOBAL_REGISTRY_MASTER.csv                                           | CSV File           | PRIMARY AUTHORITY: Policy-B governed registry defining all governance-critical surface area (entrypoints, timers, IPC contracts, lifecycle controls, settings IO, and invariants). Required for bootstrap and enforcement.
-  INTERNAL_FUNCTION_INDEX.csv                                          | CSV File           | REGENERABLE: Non-governed full symbol inventory used for discovery, navigation, and refactor support. Not authoritative and never a hard-stop if incomplete or missing.
-  GLOBAL_REGISTRY_MASTER.gsheet                                        | Google Sheet       | BACKUP VAULT ONLY: Non-active archival mirror of GLOBAL_REGISTRY_MASTER.csv. May be unreadable to tooling and MUST NOT be relied on for live governance or enforcement.
-                                                                       |                    |
------------------------------------------------------------------------|--------------------|------------------------------------------------------------------------
-\Worker                                                                | DIRECTORY          | Container for the Background Task Script.
-  Main_Worker.ahk                                                      | Main Script        | Core execution engine: primary logic loop and task execution.
-  Worker_Core.ahk                                                      | Core Container     | Consolidated worker subsystems (ConfigManager/WorkerState/OverlayPhysics).
-  license.key                                                          | Data/Key           | Encrypted authorization key required by Core_Utils security primitives.
-  Main_Worker.txt                                                      | Document           | Auditable AI mirror of Main_Worker.ahk.
-  Worker_Core.txt                                                      | Document           | Auditable AI mirror of Worker_Core.ahk.
-                                                                       |                    |
------------------------------------------------------------------------|--------------------|------------------------------------------------------------------------
-\orchestrator                                                          | DIRECTORY          | Local orchestration runtime responsible for governed execution, audits, and hidden role chaining.
-  orch_bootstrap.js                                                    | Script             | Orchestrator bootstrap verifier; performs governance checks, initializes audit runs, and writes bootstrap audit artifacts. No model calls.
-                                                                       |                    |
------------------------------------------------------------------------|--------------------|------------------------------------------------------------------------
-\PipzOrchestratorExtension                                             | DIRECTORY          | VS Code extension providing the Architect-facing UI for governed orchestration.
-  package.json                                                         | Config (JSON)      | Extension manifest defining commands, activation events, and metadata.
-  tsconfig.json                                                        | Config (JSON)      | TypeScript compiler configuration for the extension.
-  package.json.governance.txt                                          | Document           | Governance sidecar for package.json; stores mandated headers, fingerprints, and audit metadata.
-  tsconfig.json.governance.txt                                         | Document           | Governance sidecar for tsconfig.json; stores mandated headers, fingerprints, and audit metadata.
-  README.md                                                            | Document           | Human-readable overview of the orchestrator extension purpose and usage.
-  \src                                                                 | SUB-DIRECTORY      | Source code for the VS Code extension.
-    extension.ts                                                       | Script             | Extension entry point; registers commands, invokes orchestrator, and mediates Architect actions.
-                                                                       |                    |
------------------------------------------------------------------------|--------------------|------------------------------------------------------------------------
-\pipz-mirror-governance                                                | DIRECTORY          | VS Code extension for governance enforcement (mirroring, fingerprinting).
-  package.json                                                         | Config (JSON)      | Extension manifest for the mirror governance extension.
-  tsconfig.json                                                        | Config (JSON)      | TypeScript compiler configuration.
-  README.md                                                            | Document           | Documentation for the mirror governance extension.
-  \src                                                                 | SUB-DIRECTORY      | Source code for the extension.
-    extension.ts                                                       | Script             | Entry point for mirroring and fingerprinting logic.
-  \.vscode                                                             | SUB-DIRECTORY      | Workspace configuration.
-    extensions.json                                                    | Config (JSON)      | Recommended VS Code extensions.
-    launch.json                                                        | Config (JSON)      | Debug configuration.
-    settings.json                                                      | Config (JSON)      | Workspace settings.
-    tasks.json                                                         | Config (JSON)      | Build tasks.
-    extensions.json.governance.txt                                     | Document           | Governance sidecar for extensions.json.
-    launch.json.governance.txt                                         | Document           | Governance sidecar for launch.json.
-    settings.json.governance.txt                                       | Document           | Governance sidecar for settings.json.
-    tasks.json.governance.txt                                          | Document           | Governance sidecar for tasks.json.
-                                                                       |                    |
------------------------------------------------------------------------|--------------------|------------------------------------------------------------------------
-\.ORCH_AUDITLOG                                                        | DIRECTORY          | Audit log storage for mirror operations.
-  \mirror                                                              | SUB-DIRECTORY      | Mirror-specific audit logs.
-                                                                       |                    |
------------------------------------------------------------------------|--------------------|------------------------------------------------------------------------
-\PPAVP                                                                 | DIRECTORY          | Container for all project planning, audit, and verification procedures and documentation excluding phase 5.
-  PROJECT_STATUS_CHECKLIST.txt                                         | Document           | Living execution tracker enumerating completed, pending, and blocked work items across governance, tooling, and orchestration.
-  AUDIT_RUNNER.txt                                                     | Document           | Procedural audit execution plan and backlog; defines required audits, invocation commands, and pass/fail criteria. Non-authoritative; execution-focused.
-  Policy-B Registry Audit.txt                                          | Document           | Procedural audit record and checklist for verifying Policy-B registry completeness, correctness, and drift across governed surface area. Non-authoritative; execution and reporting only.
-                                                                       |                    |
------------------------------------------------------------------------|--------------------|------------------------------------------------------------------------
+-----------------------------------------------------------------------|---------------------------------------------------|------------------------------------------------------------------------
+PATH / FILE NAME                                                       | TYPE                                              | DESCRIPTION / RESPONSIBILITY
+-----------------------------------------------------------------------|---------------------------------------------------|------------------------------------------------------------------------
+\Pipz_Project_V3                                                       | ROOT                                              | Main project directory.
+  settings.ini                                                         | Config                                            | Central storage for AutoHotkey user parameters, anti-ban settings, and titles.
+  .gitignore                                                           | Config                                            | Git exclusion rules.
+  PipzScptzIcon.png                                                    | Asset (Image)                                     | Application icon used by Controller GUI and tray; branding and visual identification.
+  ORCH_PROTOCOL_SPEC.txt                                               | Document                                          | Formal protocol contract defining orchestrator role separation, execution flow, audit requirements, token gates, and PASS/FAIL semantics.
+  settings.txt                                                         | Document                                          | Auditable AI mirror of settings.ini.
+                                                                       |                                                   |
+-----------------------------------------------------------------------|---------------------------------------------------|------------------------------------------------------------------------
+\Archive                                                               | DIRECTORY                                         | Archived prior standalone governance files and artifacts (Intentionally excluded).
+-----------------------------------------------------------------------|---------------------------------------------------|------------------------------------------------------------------------
+\Controller                                                            | DIRECTORY                                         | Container for the Interactive GUI Process.
+  Main_Controller.ahk                                                  | Main Script                                       | Entry point for GUI; handles UI, validation, orchestration commands, and high-level control.
+  Controller_Core.ahk                                                  | Core Container                                    | Consolidated controller subsystems (Tooltip/WorkerInterface/Messenger/Maintenance/Navigation/Process).
+  Main_Controller.txt                                                  | Document                                          | Auditable AI mirror of Main_Controller.ahk.
+  Controller_Core.txt                                                  | Document                                          | Auditable AI mirror of Controller_Core.ahk.
+                                                                       |                                                   |
+-----------------------------------------------------------------------|---------------------------------------------------|------------------------------------------------------------------------
+\Governance                                                            | DIRECTORY                                         | Authoritative governance container. Holds the single-artifact governance compendium and other canonical AI-facing authority documents (procedural runbooks, header templates, bootstrap, blueprint, and learned constraints via compendium sections). Contents here define binding rules or mandatory protocols.
+  GOVERNANCE_COMPENDIUM.txt                                            | Document                                          | Single authoritative governance artifact operating in SINGLE-ARTIFACT MODE. Consolidates all governance, bootstrap, blueprint, audit, and enforcement rules into section-addressable canonical form.
+  PROTOCOL_RUNBOOK.txt                                                 | Document                                          | Canonical procedural authority file defining mandatory, repeatable runbooks for governance-critical, tooling-critical, and high-risk project operations. Houses non-optional execution protocols (e.g., extension repackaging, Policy-B registry audits). Cumulative by design; defines how specific operations must always be performed. Location subject to future consolidation under governance directory.
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT                | Virtual Document Section (Single-Artifact Mode)   | Primary source of truth for structure, search protocols, and logic rules.
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER            | Virtual Document Section (Single-Artifact Mode)   | Canonical unified system anchor defining mission intent, behavioral constraints, identity rules, and long-term architectural rationale. Authoritative, non-structural, and non-initializing.
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS          | Virtual Document Section (Single-Artifact Mode)   | AI governance ruleset; mandatory read source defining verification, fingerprinting, header mandates, and enforcement behavior.
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST            | Virtual Document Section (Single-Artifact Mode)   | Deterministic Google Drive ID acceleration map; reference-only, never a source of authority.
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4             | Virtual Document Section (Single-Artifact Mode)   | Canonical, authoritative definition of the Bootstrap v4 initialization protocol.
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S5.PHASE5_AUDIT             | Virtual Document Section (Single-Artifact Mode)   | Deterministic execution checklist and read-only report template for Phase 5 visibility audits.
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S6.GOVERNANCE_LOCK          | Virtual Document Section (Single-Artifact Mode)   | Governance lifecycle state declaration and phase lock indicator (non-authoritative).
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.LEARNED_CONSTRAINTS      | Virtual Document Section (Single-Artifact Mode)   | Non-authoritative, scope-indexed log of confirmed constraints and invalidated approaches to prevent regression.
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S9.STANDARD_HEADERS         | Virtual Document Section (Single-Artifact Mode)   | Templates for mandatory file headers.
+                                                                       |                                                   |
+-----------------------------------------------------------------------|---------------------------------------------------|------------------------------------------------------------------------
+\Lib                                                                   | DIRECTORY                                         | Shared Libraries (#Include) used by both Controller and Worker.
+  Interop.ahk                                                          | Library                                           | IPC primitives: WM_TRIGGER_STATE, SendWorkerSignal, listener setup, process helpers.
+  Core_Utils.ahk                                                       | Core Container                                    | Settings IO + Defaults (GetDefaultSettings) + Security primitives (license/hashing).
+  Humanoid.ahk                                                         | Core Container                                    | Consolidated Movement + AntiBan + BreakManager logic (no controller-only hard deps).
+  Core_Utils.txt                                                       | Document                                          | Auditable AI mirror of Core_Utils.ahk.
+  Humanoid.txt                                                         | Document                                          | Auditable AI mirror of Humanoid.ahk.
+  Interop.txt                                                          | Document                                          | Auditable AI mirror of Interop.ahk.
+                                                                       |                                                   |
+-----------------------------------------------------------------------|---------------------------------------------------|------------------------------------------------------------------------
+\Registry                                                              | DIRECTORY                                         | Container for all registry artifacts defining governance-critical surface area and full symbol inventory. Registries are authoritative and external to the governance compendium.
+  GLOBAL_REGISTRY_MASTER.csv                                           | CSV File                                          | PRIMARY AUTHORITY: Policy-B governed registry defining all governance-critical surface area (entrypoints, timers, IPC contracts, lifecycle controls, settings IO, and invariants). Required for bootstrap and enforcement.
+  INTERNAL_FUNCTION_INDEX.csv                                          | CSV File                                          | REGENERABLE: Non-governed full symbol inventory used for discovery, navigation, and refactor support. Not authoritative and never a hard-stop if incomplete or missing.
+  GLOBAL_REGISTRY_MASTER.gsheet                                        | Google Sheet                                      | BACKUP VAULT ONLY: Non-active archival mirror of GLOBAL_REGISTRY_MASTER.csv. May be unreadable to tooling and MUST NOT be relied on for live governance or enforcement.
+                                                                       |                                                   |
+-----------------------------------------------------------------------|---------------------------------------------------|------------------------------------------------------------------------
+\Worker                                                                | DIRECTORY                                         | Container for the Background Task Script.
+  Main_Worker.ahk                                                      | Main Script                                       | Core execution engine: primary logic loop and task execution.
+  Worker_Core.ahk                                                      | Core Container                                    | Consolidated worker subsystems (ConfigManager/WorkerState/OverlayPhysics).
+  license.key                                                          | Data/Key                                          | Encrypted authorization key required by Core_Utils security primitives.
+  Main_Worker.txt                                                      | Document                                          | Auditable AI mirror of Main_Worker.ahk.
+  Worker_Core.txt                                                      | Document                                          | Auditable AI mirror of Worker_Core.ahk.
+                                                                       |                                                   |
+-----------------------------------------------------------------------|---------------------------------------------------|------------------------------------------------------------------------
+\orchestrator                                                          | DIRECTORY                                         | Local orchestration runtime responsible for governed execution, audits, and hidden role chaining.
+  orch_bootstrap.js                                                    | Script                                            | Orchestrator bootstrap verifier; performs governance checks, initializes audit runs, and writes bootstrap audit artifacts. No model calls.
+                                                                       |                                                   |
+-----------------------------------------------------------------------|---------------------------------------------------|------------------------------------------------------------------------
+\PipzOrchestratorExtension                                             | DIRECTORY                                         | VS Code extension providing the Architect-facing UI for governed orchestration.
+  package.json                                                         | Config (JSON)                                     | Extension manifest defining commands, activation events, and metadata.
+  tsconfig.json                                                        | Config (JSON)                                     | TypeScript compiler configuration for the extension.
+  package.json.governance.txt                                          | Document                                          | Governance sidecar for package.json; stores mandated headers, fingerprints, and audit metadata.
+  tsconfig.json.governance.txt                                         | Document                                          | Governance sidecar for tsconfig.json; stores mandated headers, fingerprints, and audit metadata.
+  README.md                                                            | Document                                          | Human-readable overview of the orchestrator extension purpose and usage.
+  \src                                                                 | SUB-DIRECTORY                                     | Source code for the VS Code extension.
+    extension.ts                                                       | Script                                            | Extension entry point; registers commands, invokes orchestrator, and mediates Architect actions.
+                                                                       |                                                   |
+-----------------------------------------------------------------------|---------------------------------------------------|------------------------------------------------------------------------
+\pipz-mirror-governance                                                | DIRECTORY                                         | VS Code extension for governance enforcement (mirroring, fingerprinting).
+  package.json                                                         | Config (JSON)                                     | Extension manifest for the mirror governance extension.
+  tsconfig.json                                                        | Config (JSON)                                     | TypeScript compiler configuration.
+  README.md                                                            | Document                                          | Documentation for the mirror governance extension.
+  \src                                                                 | SUB-DIRECTORY                                     | Source code for the extension.
+    extension.ts                                                       | Script                                            | Entry point for mirroring and fingerprinting logic.
+  \.vscode                                                             | SUB-DIRECTORY                                     | Workspace configuration.
+    extensions.json                                                    | Config (JSON)                                     | Recommended VS Code extensions.
+    launch.json                                                        | Config (JSON)                                     | Debug configuration.
+    settings.json                                                      | Config (JSON)                                     | Workspace settings.
+    tasks.json                                                         | Config (JSON)                                     | Build tasks.
+    extensions.json.governance.txt                                     | Document                                          | Governance sidecar for extensions.json.
+    launch.json.governance.txt                                         | Document                                          | Governance sidecar for launch.json.
+    settings.json.governance.txt                                       | Document                                          | Governance sidecar for settings.json.
+    tasks.json.governance.txt                                          | Document                                          | Governance sidecar for tasks.json.
+                                                                       |                                                   |
+-----------------------------------------------------------------------|---------------------------------------------------|------------------------------------------------------------------------
+\.ORCH_AUDITLOG                                                        | DIRECTORY                                         | Audit log storage for mirror operations.
+  \mirror                                                              | SUB-DIRECTORY                                     | Mirror-specific audit logs.
+                                                                       |                                                   |
+-----------------------------------------------------------------------|---------------------------------------------------|------------------------------------------------------------------------
+\PPAVP                                                                 | DIRECTORY                                         | Non-authoritative planning and execution support workspace. Holds living task/status tracking and optional procedural aids used to run audits or verify work, but does not define binding governance. Long-term intent: migrate any mandatory, repeatable, or enforcement-relevant procedures into PROTOCOL_RUNBOOK.txt, leaving PPAVP as a transient, non-authoritative planning and proof-staging area only.
+  PROJECT_STATUS_CHECKLIST.txt                                         | Document                                          | Living execution tracker enumerating completed, pending, and blocked work items across governance, tooling, and orchestration.
+                                                                       |                                                   |
+-----------------------------------------------------------------------|---------------------------------------------------|------------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
 
@@ -1756,35 +1804,44 @@ To maintain a 1:1 literal match of the project state, the following protocol MUS
 1. **REGISTRY LOCATION:** All Global State, Function, and Logic Rule data is stored externally in `GLOBAL_REGISTRY_MASTER.gsheet` (with `GLOBAL_REGISTRY_MASTER.csv` as the authoritative fallback mirror).
 
 2. **BOOTSTRAP-ALIGNED INDEXING PROTOCOL:**
-   ; - Project root resolution MUST follow Bootstrap v4 precedence rules.
-   ; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST` MUST be used first when present to deterministically resolve the project root.
-   ; - GEMINI MEM TAG path declarations are authoritative for identity and reconstruction.
-   ; - Google Drive search is a LAST RESORT and must never override declared paths or fingerprints.
+  ; - Project root resolution MUST follow Bootstrap v4 precedence rules.
+  ; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST` MUST be used first when present to deterministically resolve the project root.
+  ; - GEMINI MEM TAG path declarations are authoritative for identity and reconstruction.
+  ; - Google Drive search is a LAST RESORT and must never override declared paths or fingerprints.
 
-   ; - Once the root is resolved, enumerate and verify visibility of:
-     ; - `\Controller`
-     ; - `\Worker`
-     ; - `\Lib`
-     ; - `\Registry`
-     ; - `\Governance`
-     ; - `\Archive`
-     ; - `\PPAVP`
+  ; - Once the root is resolved, enumerate and verify visibility of:
+    ; - `\Controller`
+    ; - `\Worker`
+    ; - `\Lib`
+    ; - `\Registry`
+    ; - `\Governance`
+    ; - `\Archive`
+    ; - `\PPAVP`
 
-   ; - Confirm visibility of all required governance sections of GOVERNANCE_COMPENDIUM.txt:
-     ; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS`
-     ; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT`
-     ; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER`
-     ; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S5.PHASE5_AUDIT`
-     ; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4`
-     ; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S6.GOVERNANCE_LOCK`
-     ; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.LEARNED_CONSTRAINTS`
-     ; - `GLOBAL_REGISTRY_MASTER.gsheet`
-     ; - `GLOBAL_REGISTRY_MASTER.csv`
-     ; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST`
-     ; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S9.STANDARD_HEADERS`
+  ; - Confirm visibility of required GOVERNANCE_COMPENDIUM virtual sections (Section IDs):
+    ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS
+    ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4
+    ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT
+    ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER
+    ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S5.PHASE5_AUDIT
+    ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S6.GOVERNANCE_LOCK
+    ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST
+    ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.LEARNED_CONSTRAINTS
+    ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S9.STANDARD_HEADERS
 
-   Visibility confirmation is existence and path correctness only.
-   Runtime-only and non-readable assets (e.g. .png, .ahk, .ini, .key) are not subject to read or fingerprint verification.
+  ; - Confirm visibility of required EXTERNAL REGISTRY ARTIFACTS (Policy-B):
+    ; - GLOBAL_REGISTRY_MASTER.csv (PRIMARY — MUST be readable)
+    ; - GLOBAL_REGISTRY_MASTER.gsheet (BACKUP VAULT — visibility only)
+
+  ; - Visibility confirms existence and correct path resolution only.
+  ; - Visibility does NOT imply readability, authority, or governance validity.
+  ; - Runtime-only and non-readable assets (e.g. .png, .ahk, .ini, .key) are not subject to read or fingerprint verification.
+
+  ; - External artifacts are not compendium sections and are governed by
+      REGISTRY VERIFICATION PROTOCOL (Policy-B), not compendium truncation rules.
+  ; - External registries are NOT virtual sections, are NOT part of
+      GOVERNANCE_COMPENDIUM.txt, and are governed exclusively by
+      Policy-B availability and readability rules.
 
 3. **REGISTRY VERIFICATION PROTOCOL (POLICY-B SURFACE AREA):**
    ; - The AI MUST prioritize the PRIMARY readable registry source.
@@ -2249,7 +2306,7 @@ END OPERATIVE TEXT (COMPENDIUM MODE)
 ================================================================================
 SECTION ID: GOV.S5.PHASE5_AUDIT
 ORIGIN: PHASE5_AUDIT_MASTER.txt
-AUTHORITY LEVEL: SECONDARY (VERIFICATION)
+AUTHORITY LEVEL: PRIMARY (GOVERNANCE CONTRACT)
 ================================================================================
 OPERATIVE TEXT (COMPENDIUM MODE) — AUTHORITATIVE FOR SINGLE-ARTIFACT OPERATION
 ================================================================================
@@ -2260,9 +2317,9 @@ OPERATIVE TEXT (COMPENDIUM MODE) — AUTHORITATIVE FOR SINGLE-ARTIFACT OPERATION
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S5.PHASE5_AUDIT
-; Version: 2.0.3
-; Last change: Updated for single-artifact compendium mode, virtual Section IDs,
-;              unreadability hard-stops, and Blueprint/Index scoping.
+; Version: 3.0.0
+; Last change: Converted Phase 5 from procedural checklist into declarative
+;              governance contract; execution fully delegated to Protocol Runbook.
 ; Content-Fingerprint: <UPDATE ON SAVE>
 ; ------------------------------------------------------------------
 
@@ -2271,451 +2328,105 @@ OPERATIVE TEXT (COMPENDIUM MODE) — AUTHORITATIVE FOR SINGLE-ARTIFACT OPERATION
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
-; SECTION A — PHASE 5 EXECUTION CHECKLIST (DETERMINISTIC)
+; PHASE 5 — GOVERNANCE AUDIT CONTRACT
 ; ------------------------------------------------------------------
 
-PHASE 5 — FULL VISIBILITY & ACCESSIBILITY AUDIT
+Phase 5 is the **final governance verification stage**.
 
-EXECUTION CHECKLIST (DETERMINISTIC)
+Its purpose is to assert, with determinism and without inference, that the
+**Observed Project State** exactly matches the **Expected Set** defined by
+governance.
 
-This checklist defines the exact steps required to EXECUTE Phase 5
-in SINGLE-ARTIFACT MODE.
+Phase 5 governs **visibility, accessibility, and structural correctness** only.
+It does not authorize remediation, modification, refactor, or interpretation.
 
-This is NOT:
-; - A report
-; - A template
-; - An analysis
-; - A narrative
+---
 
-This checklist is PROCEDURAL and MUST be followed in order.
+### AUTHORITATIVE DEFINITIONS
 
-No step may be skipped.  
-No inference is permitted.  
-Any failure requires STOP.
+**Expected Set**
+The complete and exclusive set of directories, files, and virtual governance
+sections defined in:
 
-; ------------------------------------------------------------------
-PRE-CONDITIONS (MANDATORY)
-; ------------------------------------------------------------------
+- GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT
 
-[ ] Confirm Bootstrap Phases 0–4 AND Phase 0.5 completed successfully
-[ ] Confirm GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4
-    was located, opened, and fully read in this session
-[ ] Confirm Phase 5 was explicitly requested by name by the user
-[ ] Confirm Google Drive access is available and functioning
+No other artifact may define, expand, or reduce the Expected Set.
 
-If ANY pre-condition fails → STOP
+**Observed Set**
+The set of items discovered via deterministic enumeration of the project root,
+using Bootstrap-aligned resolution rules and parent-child traversal only.
 
-; ------------------------------------------------------------------
-STEP 0 — CONTEXT & COMPENDIUM READABILITY VERIFICATION
-; ------------------------------------------------------------------
+---
 
-[ ] Confirm GOVERNANCE_COMPENDIUM.txt is fully readable
-[ ] Confirm GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S5.PHASE5_AUDIT
-    is fully readable and not truncated
-[ ] Confirm all referenced sections (Blueprint, Index, Bootstrap)
-    are fully readable
+### EXECUTION AUTHORITY
 
-Partial visibility or truncation SHALL be treated as UNREADABLE
-per GOV.S0.COMPENDIUM_META IR-5 → STOP
+Phase 5 execution is **mandatory** and **non-optional** when invoked.
 
-; ------------------------------------------------------------------
-STEP 1 — ROOT CONFIRMATION
-; ------------------------------------------------------------------
+Execution of Phase 5 MUST be performed **exclusively** via:
 
-[ ] Resolve project root using ONLY:
-    ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST (if present)
-    ; - GEMINI MEM TAG declared paths
-    ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT
+  PROTOCOL_RUNBOOK.txt :: Runbook §3  
+  "PHASE 5 AUDIT EXECUTION RUNBOOK"
 
-[ ] Record resolved root Drive ID
-[ ] Record resolved root declared path
+No procedural steps for Phase 5 exist in this compendium section.
 
-If root cannot be resolved deterministically → STOP
+Any Phase 5 audit not executed via the runbook is **invalid by definition**.
 
-; ------------------------------------------------------------------
-STEP 2 — ROOT-ANCHORED ENUMERATION
-; ------------------------------------------------------------------
+---
 
-[ ] Enumerate from resolved root Drive ID
-[ ] Use parent-child traversal ONLY
-[ ] DO NOT use Drive search
-[ ] Record for each folder:
-    ; - Drive ID
-    ; - Name
-    ; - Parent ID
-    ; - Type (folder)
+### PASS / FAIL SEMANTICS
 
-If traversal fails, truncates, or becomes ambiguous → STOP
+Phase 5 is considered **FAILED** if **any** of the following occur:
 
-; ------------------------------------------------------------------
-STEP 3 — RECURSIVE DISCOVERY
-; ------------------------------------------------------------------
+- Any Expected Set item is missing from the Observed Set
+- Any Observed item exists outside the Expected Set
+- Any required governance artifact or virtual section cannot be fully read
+- Deterministic verification cannot be achieved due to tooling limitations
+- Any ambiguity exists in classification or reconciliation
 
-For EACH discovered folder:
+Phase 5 is considered **PASSED** only when:
 
-[ ] Enumerate all immediate children
-[ ] Record for EACH item:
-    ; - Drive ID
-    ; - Name
-    ; - Parent ID
-    ; - Type (file/folder)
+- The Observed Set exactly matches the Expected Set
+- All required governance artifacts are readable
+- No extraneous, missing, misplaced, or ungoverned items exist
+- Execution completed without triggering a STOP condition
 
-[ ] Continue until no undiscovered folders remain
+---
 
-If enumeration cannot continue deterministically → STOP
+### REPORTING CONSTRAINTS
 
-; ------------------------------------------------------------------
-STEP 4 — PATH RECONSTRUCTION
-; ------------------------------------------------------------------
+Phase 5 reporting is **read-only**.
 
-For EACH discovered item:
+The Phase 5 audit may produce:
+- classification results
+- discrepancy listings
+- PASS / FAIL declaration
 
-[ ] Walk parent chain to root
-[ ] Rebuild full path
-[ ] Compare against:
-    ; - GEMINI MEM TAG declared paths (for governed .txt files)
-    ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT ONLY
+The audit MUST NOT:
+- modify project files
+- propose fixes
+- infer causes
+- perform remediation
 
-Rules:
-; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER
-;   is NOT a structural authority
-; - Runtime-only assets may lack GEMINI MEM TAGs legitimately
+Results MUST be declared **exclusively** via:
 
-If path cannot be reconstructed deterministically → STOP
+  PROTOCOL_RUNBOOK.txt :: Runbook §4  
+  "PHASE 5 RESULT DECLARATION RUNBOOK"
 
-; ------------------------------------------------------------------
-STEP 5 — READABILITY CHECK
-; ------------------------------------------------------------------
+---
 
-For EACH discovered file:
+### GOVERNANCE BINDING
 
-[ ] Classify content:
-    ; - Governed-readable (.txt governance/mirrors)
-    ; - Runtime-only (.ahk, .ini, .key)
-    ; - Binary / asset
+A Phase 5 PASS declaration is authoritative only if:
 
-[ ] Attempt read ONLY if governed-readable
-[ ] Record result:
-    ; - Readable
-    ; - Unreadable (with failure mode)
-    ; - N/A
+- Bootstrap v4 (Phases 0–4) completed successfully
+- This section was fully readable
+- PROTOCOL_RUNBOOK.txt :: Runbook §3 was executed in full
+- No STOP conditions were encountered
 
-If tooling prevents definitive classification → STOP
+Any claimed Phase 5 result that violates these constraints is void.
 
-; ------------------------------------------------------------------
-STEP 6 — EXPECTED SET COMPILATION (ARCHITECTURAL TRUTH)
-; ------------------------------------------------------------------
-
-[ ] Compile expected item list from:
-    ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT
-
-[ ] DO NOT derive structure from:
-    ; - Anchor
-    ; - Index
-    ; - Registries
-    ; - Inference
-
-If expected set cannot be compiled deterministically → STOP
-
-; ------------------------------------------------------------------
-STEP 7 — INDEX SET COMPILATION
-; ------------------------------------------------------------------
-
-[ ] Compile index set from
-    GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST (if present)
-[ ] Treat VERIFIED / N/A as acceleration signals ONLY
-
-; ------------------------------------------------------------------
-STEP 7A — ALIAS COVERAGE VERIFICATION (MANDATORY)
-; ------------------------------------------------------------------
-
-[ ] Validate alias coverage, ambiguity, and orphan rows
-    per Rule 2i support requirements
-
-ANY failure → STOP
-
-; ------------------------------------------------------------------
-STEP 8 — RECONCILIATION & CLASSIFICATION
-; ------------------------------------------------------------------
-
-For EACH item across Expected / Discovered / Indexed:
-
-[ ] Classify as EXACTLY ONE:
-    ; - VERIFIED
-    ; - UNREADABLE
-    ; - MISSING
-    ; - ORPHANED
-    ; - MISPLACED
-    ; - UNGOVERNED
-
-Ambiguity → STOP
-
-; ------------------------------------------------------------------
-STEP 9 — REPORT GENERATION
-; ------------------------------------------------------------------
-
-[ ] Populate REPORT TEMPLATE (SECTION B)
-[ ] Do NOT modify files
-[ ] Do NOT infer causes
-
-; ------------------------------------------------------------------
-STEP 10 — TERMINATION
-; ------------------------------------------------------------------
-
-[ ] Declare Phase 5 complete
-[ ] Present report ONLY
-[ ] No fixes, no analysis unless explicitly instructed
-
-; ------------------------------------------------------------------
-END OF PHASE 5 EXECUTION CHECKLIST
-; ------------------------------------------------------------------
-
-; ------------------------------------------------------------------
-
-END OF PHASE 5 EXECUTION CHECKLIST SECTION (SECTION A)
-
-; ------------------------------------------------------------------
-; SECTION B — PHASE 5 AUDIT REPORT TEMPLATE (READ-ONLY)
-; ------------------------------------------------------------------
-
-; ------------------------------------------------------------------
-PHASE 5 — FULL VISIBILITY & ACCESSIBILITY AUDIT REPORT
-; ------------------------------------------------------------------
-
-Project: Pipz_Project_V3
-Invocation Type: EXPLICIT USER REQUEST BY NAME
-Bootstrap Dependency: Bootstrap v4 (Phases 0–4 MUST have succeeded)
-
-Audit Scope:
-
-; - Google Drive visibility and accessibility ONLY
-; - Governance correctness is NOT evaluated here
-
-This report is READ-ONLY.
-No remediation, modification, or inference is permitted.
-
-; ------------------------------------------------------------------
-Audit Metadata
-; ------------------------------------------------------------------
-
-Audit Timestamp (UTC):
-Audit Initiated By:
-Resolved Root Folder ID:
-Resolved Root Path:
-
-; ------------------------------------------------------------------
-Tooling Context
-; ------------------------------------------------------------------
-
-Drive Access Status:
-Drive Listing Method:
-
-; - Parent-child traversal only
-; - Search usage: NONE
-
-; ------------------------------------------------------------------
-Enumeration Summary
-; ------------------------------------------------------------------
-
-Total Folders Discovered:
-Total Files Discovered:
-Total Files Readable:
-Total Files Unreadable:
-Total Ungoverned Files:
-Total Expected-but-Missing Files:
-
-; ------------------------------------------------------------------
-SECTION A — VERIFIED ITEMS
-; ------------------------------------------------------------------
-
-Definition:
-Items that:
-
-; - Exist on Drive
-; - Are readable
-; - Match declared or expected paths
-
-Format:
-
-[VERIFIED]
-Full Path:
-Drive ID:
-File Type:
-Notes (if any):
-
-; ------------------------------------------------------------------
-SECTION B — UNREADABLE ITEMS
-; ------------------------------------------------------------------
-
-Definition:
-Items that:
-
-; - Exist on Drive
-; - Could not be opened or fully read
-
-Format:
-[UNREADABLE]
-Full Path:
-Drive ID:
-Failure Mode:
-Notes:
-
-; ------------------------------------------------------------------
-SECTION C — MISSING EXPECTED ITEMS
-; ------------------------------------------------------------------
-
-Definition:
-Items that:
-
-; - Are required by Blueprint / Anchor
-; - Were NOT found during Drive traversal
-
-Format:
-[MISSING]
-Expected Path:
-Governing Source:
-Notes:
-
-; ------------------------------------------------------------------
-SECTION D — ORPHANED ITEMS
-; ------------------------------------------------------------------
-
-Definition:
-Items that:
-
-; - Exist on Drive
-; - Are NOT declared in Blueprint, Anchor, or registry
-
-Format:
-[ORPHANED]
-Full Path:
-Drive ID:
-Notes:
-
-; ------------------------------------------------------------------
-SECTION E — UNGOVERNED ITEMS
-; ------------------------------------------------------------------
-
-Definition:
-Items that:
-
-; - Exist on Drive
-; - Are readable
-; - Lack GEMINI MEM TAG or governing declaration
-
-Format:
-[UNGOVERNED]
-Full Path:
-Drive ID:
-Notes:
-
-; ------------------------------------------------------------------
-SECTION F — INDEX DISCREPANCIES
-
-; ------------------------------------------------------------------
-
-Definition:
-Conflicts between:
-
-; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST
-; - Discovered Drive structure
-
-Format:
-[INDEX MISMATCH]
-Declared Path:
-Declared ID:
-Observed Path:
-Observed ID:
-Notes:
-
-; ------------------------------------------------------------------
-SECTION G — ALIAS COVERAGE (RULE 2i SUPPORT)
-; ------------------------------------------------------------------
-
-Definition:
-Verification that GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST alias and role mappings are complete and non-ambiguous
-to support deterministic implicit file resolution under AI_PROJECT_INSTRUCTIONS Rule 2i.
-
-## Alias Coverage Summary
-
-Total VERIFIED=YES items in MASTER INDEX:
-Total items with non-empty aliases:
-Coverage (covered/total):
-
-## Missing Alias Items (MUST LIST)
-
-Format:
-[MISSING ALIAS]
-
-* Full Path:
-
-## Ambiguous Alias Collisions (MUST LIST)
-
-Definition:
-Alias tokens that map to more than one path (case-insensitive).
-
-Format:
-[ALIAS COLLISION]
-
-* Alias Token:
-  Path A:
-  Path B:
-  Notes:
-
-## Orphan Alias Rows (IF ANY)
-
-Definition:
-Paths present in MASTER ALIAS INDEX but not present in MASTER INDEX.
-
-Format:
-[ORPHAN ALIAS ROW]
-
-* Full Path:
-  Notes:
-
-; ------------------------------------------------------------------
-SECTION H — STRUCTURAL ALIGNMENT (BLUEPRINT VS. PHYSICAL)
-; ------------------------------------------------------------------
-
-Definition:
-Verification that the physical directory structure and file placement matches
-the Architectural Truth defined in GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT.
-
-Architectural Source: GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT
-
-[BLUEPRINT DISCREPANCIES]
-
-* Expected Path (per Blueprint):
-* Discovered Path (Actual):
-* Status: [MISSING | ORPHANED | MISPLACED]
-* Impact: [CRITICAL | DEGRADED]
-* Notes:
-
-; ------------------------------------------------------------------
-AUDIT CONCLUSION
-; ------------------------------------------------------------------
-
-Audit Result:
-
-; - SUCCESS (No blocking visibility issues)
-; - DEGRADED (Non-blocking issues present)
-; - FAILED (Blocking visibility issues)
-
-Blocking Issues Summary (if any):
-
-Non-Blocking Issues Summary (if any):
-
-; ------------------------------------------------------------------
-END OF PHASE 5 AUDIT REPORT
-; ------------------------------------------------------------------
-
-; ------------------------------------------------------------------
-
-END OF PHASE 5 AUDIT REPORT TEMPLATE SECTION (SECTION B)
-
-; ------------------------------------------------------------------
-
-END OF PHASE 5 AUDIT MASTER
+================================================================================
+END SECTION GOV.S5.PHASE5_AUDIT
 ================================================================================
 END OPERATIVE TEXT (COMPENDIUM MODE)
 
@@ -2733,9 +2444,9 @@ OPERATIVE TEXT (COMPENDIUM MODE) — AUTHORITATIVE FOR SINGLE-ARTIFACT OPERATION
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S6.GOVERNANCE_LOCK
-; Version: 1.0.6
-; Last change: Governance state re-locked after total project consolidation and creation of policy-b enforcement rules.
-; Content-Fingerprint: 2026-01-29T01-01-37Z-I5CH6J8E
+; Version: 1.0.7
+; Last change: Governance state re-locked after total governance layer consolidation and creation of compendium for single-artifact mode.
+; Content-Fingerprint: 2026-01-29T01-01-37Z-873JDKIP
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -3008,15 +2719,7 @@ IDs and VERIFIED flags are acceleration signals only, never authority.
 --------------------------------------------------|--------------------|------------------------------------------------------------|----------
 \Governance                                       | DIRECTORY          | 1iYz1-T6dS47O03mxYU8_FTg1Xbj7wJ_w                          | YES
   GOVERNANCE_COMPENDIUM.txt                       | Document           | 1NNndPx4st_Gpr28dQOmnhpLDVZAByFW3                          | YES
-  _PROJECT_BLUEPRINT.txt                          | Document           | 17AWzFH4OqYmx9Mcxl4NosFGp-uhyGYMT                          | YES
-  _PROJECT_ANCHOR_MASTER.txt                      | Document           | 1TIanwt8JSNhI47vuN_-G4dFRjwNIf898                          | YES
-  AI_PROJECT_INSTRUCTIONS.txt                     | Document           | 1TLP6j1xASA9HEA4H2RHhwtvkYR_arU_P                          | YES
-  INDEXIDLIST.txt                                 | Document           | 16DivuRC5wBfbX8xnq5l_ksf8Q21TgBxA                          | YES
-  BOOTSTRAPv4.txt                                 | Document           | 1eHulS4CPEFAxzKeCEmqjw9T7CVGQ3rfP                          | YES
-  PHASE5_AUDIT_MASTER.txt                         | Document           | 1NSHdQ6972glz02knvic-7QNgFcDxbHxQ                          | YES
-  GOVERNANCE_LOCK.txt                             | Document           | 1lYiaKQ1LBJx3z2MoSoD3FirBtEyPVI_j                          | YES
-  PROJECT_LEARNED_CONSTRAINTS.txt                 | Document           | 12dk1sASojm6Cb9PBSeSoAI9Vchhgx4T3                          | YES
-  STANDARDIZED_HEADERS.txt                        | Document           | 1bHktPTzL2y6p79FCwIdQ1qr73LP1-VCF                          | YES
+  PROTOCOL_RUNBOOK.txt                            | Document           | 1oIQfSds-AoaiTyRe4q_5RGoAe1sVosiP                          | YES
                                                   |                    |                                                            |
 --------------------------------------------------|--------------------|------------------------------------------------------------|----------
 \Lib                                              | DIRECTORY          | 1D0zXwlTRljMLHs2x5eGNYeOFolCWZ2Be                          | YES
@@ -3072,7 +2775,6 @@ IDs and VERIFIED flags are acceleration signals only, never authority.
                                                   |                    |                                                            |
 --------------------------------------------------|--------------------|------------------------------------------------------------|----------
 \PPAVP                                            | DIRECTORY          | 1Bukbng24bO0qSH-KuIL_n4uGarViwLRA                          | YES
-  AUDIT_RUNNER.txt                                | Document           | 1cFuPRTV39_GuGtwJM8Z1czYSPEodHga4                          | YES
   PROJECT_STATUS_CHECKLIST.txt                    | Document           | 19q4AAo9dCIZqeGBea9Ap6kxMuoVU-KPn                          | YES
                                                   |                    |                                                            |
 --------------------------------------------------|--------------------|------------------------------------------------------------|----------
@@ -3123,56 +2825,56 @@ IDs and VERIFIED flags are acceleration signals only, never authority.
   Worker_Core.txt                                                  | worker core mirror, worker core txt
                                                                    |
 -------------------------------------------------------------------|--------------------------------------------------------------------------------------------
-\Governance                                                        | governance folder, law folder, rule folder, authoritative folder, guidance folder, governance layer, governance root, governance root folder
-  GOVERNANCE_COMPENDIUM.txt                                        | governance compendium, compendium, governance single artifact, master governance, (Inherits ALL \Governance folder and section aliases)
+\Governance                                                        | governance folder, governance directory, authoritative folder, governance layer, governance root
+  GOVERNANCE_COMPENDIUM.txt                                        | governance compendium, compendium, governance single artifact, master governance, (inherits all Governance folder and section aliases)
   GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT            | blueprint, project blueprint, architecture blueprint, folder blueprint, structure blueprint
-  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER        | anchor, project anchor, system prompt, ai anchor, governance anchor, working notes, project notes, design notes, sanity notes, intent log
-  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS      | project instructions, instructions, ai instructions, governance rules, ai governance
-  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST        | index, id index, drive index, id list, index id list, master index
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER        | anchor, project anchor, system anchor, ai anchor, governance anchor, intent log, design notes
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS      | ai instructions, governance rules, project instructions, ai governance
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST        | index, id index, drive index, id list, master index
   GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4         | bootstrap, bootstrap v4, init protocol, initialization protocol
-  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S5.PHASE5_AUDIT         | phase 5 template, phase 5 audit template, visibility audit template, phase 5 checklist, phase 5 execution checklist, phase 5 audit checklist
-  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S6.GOVERNANCE_LOCK      | governance lock, lock file, governance state, lock state
-  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.LEARNED_CONSTRAINTS  | plc, constraints, learned constraints, project constraints, invalidated approaches, learned approaches
-  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S9.STANDARD_HEADERS     | header templates, header standards, file headers, license headers
-                                                                   |                
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S5.PHASE5_AUDIT         | phase 5 template, phase 5 audit template, visibility audit template
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S6.GOVERNANCE_LOCK      | governance lock, lock state, governance state
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.LEARNED_CONSTRAINTS  | learned constraints, constraints log, invalidated approaches
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S9.STANDARD_HEADERS     | header templates, header standards, file headers
+  PROTOCOL_RUNBOOK.txt                                             | runbook, protocol runbook, mandatory procedures, execution protocols
+                                                                   |
 -------------------------------------------------------------------|--------------------------------------------------------------------------------------------
 \PipzOrchestratorExtension                                         | orchestrator extension, vs code extension, orch extension
-  package.json                                                     | orch package file, orch node config, orchestrator manifest
-  tsconfig.json                                                    | orch typescript config, orch ts config, orchestrator compiler config
-  README.md                                                        | orch extension readme, orchestrator documentation
-  package.json.governance.txt                                      | package governance, package sidecar, npm governance
+  package.json                                                     | orch package file, orchestrator manifest
+  tsconfig.json                                                    | orch typescript config, orchestrator compiler config
+  README.md                                                        | orchestrator documentation, extension readme
+  package.json.governance.txt                                      | package governance, package sidecar
   tsconfig.json.governance.txt                                     | tsconfig governance, typescript governance sidecar
-  \src                                                             | orch extension source, orch src folder, orchestrator source
-    extension.ts                                                   | orch vs code entry, orch extension entry, orchestrator main
+  \src                                                             | orchestrator source, extension source
+    extension.ts                                                   | orchestrator entry, extension main
 -------------------------------------------------------------------|--------------------------------------------------------------------------------------------
-\orchestrator                                                      | orchestrator folder, orchestrator scripts, orchestration backend
-  orch_bootstrap.js                                                | bootstrap script, orch bootstrap, orchestrator bootstrap, mvp bootstrap
+\orchestrator                                                      | orchestrator folder, orchestration backend, orchestrator runtime
+  orch_bootstrap.js                                                | bootstrap script, orchestrator bootstrap
                                                                    |
 -------------------------------------------------------------------|--------------------------------------------------------------------------------------------
-\pipz-mirror-governance                                            | mirror governance, mirror extension, governance extension
-  package.json                                                     | mirror package, governance package, mirror manifest, governance manifest
-  tsconfig.json                                                    | mirror tsconfig, mirror typescript config, governance tsconfig
-  README.md                                                        | mirror readme, mirror docs, governance documentation
-  \src                                                             | mirror src, mirror source, governance source
-    extension.ts                                                   | mirror entry, governance entry, mirror main, governance script
-  \.vscode                                                         | mirror vscode, governance vscode, mirror environment
-    extensions.json                                                | mirror extensions config, mirror recommended extensions
-    launch.json                                                    | mirror launch config, mirror debug config
-    settings.json                                                  | mirror settings, mirror workspace settings
-    tasks.json                                                     | mirror tasks, mirror build tasks
-    extensions.json.governance.txt                                 | mirror extensions governance, mirror extensions sidecar
-    launch.json.governance.txt                                     | mirror launch governance, mirror launch sidecar
-    settings.json.governance.txt                                   | mirror settings governance, mirror settings sidecar
-    tasks.json.governance.txt                                      | mirror tasks governance, mirror tasks sidecar
+\pipz-mirror-governance                                            | mirror governance, governance enforcement extension
+  package.json                                                     | mirror manifest, governance manifest
+  tsconfig.json                                                    | mirror typescript config
+  README.md                                                        | mirror documentation
+  \src                                                             | mirror source
+    extension.ts                                                   | mirror entry, governance mirror main
+  \.vscode                                                         | mirror vscode workspace
+    extensions.json                                                | mirror recommended extensions
+    launch.json                                                    | mirror debug config
+    settings.json                                                  | mirror workspace settings
+    tasks.json                                                     | mirror build tasks
+    extensions.json.governance.txt                                 | mirror extensions governance
+    launch.json.governance.txt                                     | mirror launch governance
+    settings.json.governance.txt                                   | mirror settings governance
+    tasks.json.governance.txt                                      | mirror tasks governance
                                                                    |
 -------------------------------------------------------------------|--------------------------------------------------------------------------------------------
-\.ORCH_AUDITLOG                                                    | orch logs, audit root, governance logs
-  \mirror                                                          | mirror logs, save logs, audit mirror
+\.ORCH_AUDITLOG                                                    | orch logs, audit logs, mirror logs
+  \mirror                                                          | mirror audit logs
                                                                    |
 -------------------------------------------------------------------|--------------------------------------------------------------------------------------------
-\PPAVP                                                             | project planning folder, project plan folder, plan folder, checklist folder, audit folder, protocol folder, verification folder, ppavp folder
-  PROJECT_STATUS_CHECKLIST.txt                                     | project checklist, status checklist, task tracker, master checklist
-  AUDIT_RUNNER.txt                                                 | audit runner, audit plan, audit backlog, audit execution plan, audit runner file
+\PPAVP                                                             | planning folder, project planning, work ledger, status workspace, ppavp folder
+  PROJECT_STATUS_CHECKLIST.txt                                     | project checklist, status checklist, task tracker
                                                                    |
 -------------------------------------------------------------------|--------------------------------------------------------------------------------------------
 
