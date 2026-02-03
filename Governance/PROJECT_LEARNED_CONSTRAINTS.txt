@@ -4,9 +4,9 @@
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - PROJECT_LEARNED_CONSTRAINTS.txt
-; Version: 0.1.1
-; Last change: Populated with actual current plc entries.
-; Content-Fingerprint: 2026-02-03T16-19-58Z-ZW4W1IAZ
+; Version: 0.1.2
+; Last change: Creation of PLC-0013.
+; Content-Fingerprint: 2026-02-03T16-52-36Z-FXYSGMNV
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -127,7 +127,7 @@ Orchestration         | (none)
 State_Management      | (none)
 Encoding              | (none)
 Audits                | PLC-0009
-AI_Tooling_Limitation | (none)
+AI_Tooling_Limitation | PLC-0013
 AutoHotkey_v2_Logic   | PLC-0010, PLC-0011
 
 ; ------------------------------------------------------------------
@@ -503,9 +503,9 @@ auditability of governance-critical surface area.
 RELATED FILES:
 Pipz_Project_V3\Registry\GLOBAL_REGISTRY_MASTER.csv
 Pipz_Project_V3\Registry\INTERNAL_FUNCTION_INDEX.csv
-GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS
-GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT
-GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4
+Pipz_Project_V3\Governance\GOVERNANCE_COMPENDIUM.txt :: SECTION "GOV.S1.AI_INSTRUCTIONS"
+Pipz_Project_V3\Governance\GOVERNANCE_COMPENDIUM.txt :: SECTION "GOV.S3.BLUEPRINT"
+Pipz_Project_V3\Governance\GOVERNANCE_COMPENDIUM.txt :: SECTION "GOV.S2.BOOTSTRAP_V4"
 
 NOTES:
 This entry supersedes prior assumptions that all functions or variables must appear
@@ -513,4 +513,34 @@ in a governed registry and formally establishes Policy-B semantics for future wo
 
 ; ------------------------------------------------------------------
 
+ENTRY ID: PLC-0013
+DATE (UTC): 2026-02-03
+SCOPE: AI_Tooling_Limitation
+STATUS: CONFIRMED
+TITLE: Derivative governance artifacts must be drafted only after literal source re-hydration
+
+CONTEXT:
+Drafting a canonical PLC skeleton and taxonomy derived from GOV.S8.LEARNED_CONSTRAINTS.
+
+DISCOVERY:
+Even after Bootstrap, drafting a structured derivative artifact from memory can introduce schema drift (invented scopes / omitted scopes) unless the literal source section is re-read immediately before drafting.
+
+INVALIDATED APPROACH:
+Drafting “strict mirror” derivative structures (taxonomy lists, entry-format blocks, scope-index tables) without first re-reading the literal authoritative source section.
+
+VALIDATED CONSTRAINT:
+When producing any derivative artifact that claims to “mirror” structured governance content, the source section MUST be re-read in-session immediately before drafting; otherwise STOP and re-hydrate first.
+
+EVIDENCE:
+Observed taxonomy drift during the first PLC skeleton attempt in this session; resolved only after a deliberate re-hydration pass and strict mirroring.
+
+RELATED FILES:
+Pipz_Project_V3\Governance\PROJECT_LEARNED_CONSTRAINTS.txt
+Pipz_Project_V3\Governance\GOVERNANCE_COMPENDIUM.txt :: SECTION "GOV.S8.LEARNED_CONSTRAINTS"
+Pipz_Project_V3\Governance\PROTOCOL_RUNBOOK.txt :: SECTION "PLC EXTERNALIZATION & EMISSION RUNBOOK"
+
+NOTES:
+This constraint is about preventing “schema bleed” and false claims of strict mirroring, not about changing governance authority.
+
+; ------------------------------------------------------------------
 (NEXT ENTRY GOES BELOW THIS LINE)
