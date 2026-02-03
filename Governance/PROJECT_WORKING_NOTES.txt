@@ -1,0 +1,229 @@
+; ------------------------------------------------------------------
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT)
+; MY FULL PATH IS "Pipz_Project_V3\Governance\PROJECT_WORKING_NOTES.txt"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - PROJECT_WORKING_NOTES.txt
+; Version: 1.0.0
+; Last change: Initial extraction of Section B from
+;              GOVERNANCE_COMPENDIUM.txt :: GOV.S4.ANCHOR_MASTER.
+; Content-Fingerprint: 2026-02-03T17-35-24Z-3KG1CL3I
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT (LINES 1–14 RESERVED)
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+NON-AUTHORITATIVE NOTICE (MANDATORY)
+; ------------------------------------------------------------------
+
+This file records project design intent, architectural rationale,
+guardrails, and long-form working notes for Pipz_Project_V3.
+
+This file is NOT authoritative.
+
+It does NOT:
+- Define governance rules
+- Override GOVERNANCE_COMPENDIUM.txt
+- Override PROTOCOL_RUNBOOK.txt
+- Override bootstrap requirements
+- Override registry invariants
+
+This file exists to preserve context and intent over time.
+
+; ------------------------------------------------------------------
+SECTION — PROJECT WORKING NOTES (DESIGN & RATIONALE)
+; ------------------------------------------------------------------
+
+PURPOSE OF THIS FILE SECTION
+--------------------
+This document exists to preserve:
+- Design intent
+- Non-obvious decisions
+- Sanity checks
+- “Why we did it this way”
+- Guardrails against future regression
+
+This file is NOT a checklist.
+This file is NOT expected to be concise.
+This file SHOULD grow over time.
+
+; ------------------------------------------------------------------
+CORE GOALS (DO NOT LOSE SIGHT OF THESE)
+; ------------------------------------------------------------------
+
+1. The user interacts with ONE assistant only (Architect).
+2. All other AI roles are hidden, automated, and auditable.
+3. Governance is enforced by code, not “AI good behavior.”
+4. Drift is mechanically impossible, not just unlikely.
+5. Every change is attributable, reviewable, and reversible.
+
+If any future change weakens these goals, STOP.
+
+; ------------------------------------------------------------------
+WHY SIDECAR GOVERNANCE EXISTS
+; ------------------------------------------------------------------
+
+Some file formats are controlled by external tools:
+- JSON
+- lockfiles
+- generated artifacts
+- binaries
+
+Governance MUST NEVER break tooling.
+
+Therefore:
+- Governance metadata moves to sidecar files
+- Sidecars are authoritative
+- Runtime artifacts remain pure
+
+This is not a compromise — it is intentional architecture.
+
+; ------------------------------------------------------------------
+WHY NOT RELY ON CONTINUE / BUILT-IN AGENTS ALONE
+; ------------------------------------------------------------------
+
+Continue is powerful, but:
+- It does not natively enforce hidden multi-model chaining
+- It cannot prevent a model from “doing too much”
+- It cannot hard-enforce mirroring or fingerprint rules
+
+Therefore:
+- Continue is treated as the Architect UI only
+- Enforcement lives outside the model
+- MCP / orchestrator handles invariants
+
+; ------------------------------------------------------------------
+ROLE SEPARATION INTENT
+; ------------------------------------------------------------------
+
+Architect:
+- Thinks
+- Plans
+- Explains
+- Is the ONLY user-facing AI
+- NEVER writes directly
+
+Executor:
+- Implements literally
+- No opinions
+- No creativity
+- Outputs full files by default
+
+SubSupervisor:
+- Mechanical checklist
+- Objective PASS / FAIL
+- Cannot be overridden
+
+HeadSupervisor:
+- Semantic correctness
+- Architectural intent validation
+- Risk detection
+- Cannot override mechanical failure
+
+; ------------------------------------------------------------------
+RECENT KEY DECISIONS (IMPORTANT CONTEXT)
+; ------------------------------------------------------------------
+
+[2026-01-22]
+- MVP orchestrator introduced with bootstrap-only behavior.
+- No model calls, no file writes — audit-only.
+- Establishes a safe, runnable baseline before hidden chaining is enabled.
+
+[2026-01-22]
+- JSON governance finalized via mandatory sidecar files:
+  - package.json.governance.txt
+  - tsconfig.json.governance.txt
+- JSON remains pure and non-fingerprinted by embedded headers.
+
+[2026-01-23]
+- Completed port of MirrorAhkToTxt functionality into a VS Code extension:
+  - Fingerprint updates on save (governed files, fail-closed gating)
+  - Runtime mirroring (.ahk/.ini -> .txt) with AI SOT header
+  - Standalone governed fingerprinting for additional file types
+  - UTF-8 + UTF-16 mirror encoding compatibility
+  - Audit logging into .ORCH_AUDITLOG\mirror\
+- Extension packaged (VSIX) and installed into normal VS Code.
+- Verified in normal VS Code (no Extension Development Host required).
+
+[2026-01-23]
+- VS Code Extension Development Host anomaly documented and resolved.
+
+; ------------------------------------------------------------------
+COMMON FAILURE MODES TO WATCH FOR
+; ------------------------------------------------------------------
+
+- “We’ll remember to do X later” → NO
+- “This file doesn’t need governance” → PROVE IT
+- “The AI probably won’t touch that” → INVALID ASSUMPTION
+- Silent tool behavior changes
+- Header drift
+- JSON acquiring comments (must remain pure)
+
+; ------------------------------------------------------------------
+WHEN TO STOP AND REASSESS
+; ------------------------------------------------------------------
+
+STOP if:
+- Determinism is weakened
+- Governance is bypassed
+- Memory replaces enforcement
+- Manual role switching is required
+- Audit logs degrade
+
+; ------------------------------------------------------------------
+VS CODE EXTENSION REPACKAGING – DESIGN RATIONALE
+; ------------------------------------------------------------------
+
+The pipz-mirror-governance extension is not “just a tool”.
+It is an ACTIVE GOVERNANCE ENFORCER.
+
+Therefore:
+
+- Any change to it can silently weaken guarantees if not rebuilt correctly
+- VS Code does NOT auto-reload packaged extensions
+- Extension Development Host ≠ real user environment
+
+Because of this, a strict VSIX repackaging runbook was introduced.
+
+Key principles enforced by the runbook:
+
+1. BUILD IS EXPLICIT
+   No implicit TypeScript transpilation is trusted.
+
+2. INSTALL IS EXPLICIT
+   The extension must be installed into the NORMAL VS Code instance,
+   not assumed to be active because Dev Host worked.
+
+3. VERIFICATION IS MANDATORY
+   Mirroring, fingerprinting, encoding, and audit logging must be
+   observed in real saves.
+
+4. NO SILENT FAILURE
+   If the extension fails to activate or log, work stops immediately.
+
+This mirrors the broader project philosophy:
+
+- Trust code, not memory
+- Trust logs, not assumptions
+- Trust enforcement, not intent
+
+This runbook is deliberately repetitive and procedural.
+That is a feature, not a flaw.
+
+; ------------------------------------------------------------------
+FUTURE NOTES
+; ------------------------------------------------------------------
+
+(Add dated notes below as decisions are made.)
+
+[YYYY-MM-DD] —
+- Decision:
+- Reason:
+- Impact:
+
+; ------------------------------------------------------------------
+END OF PROJECT WORKING NOTES
+; ------------------------------------------------------------------

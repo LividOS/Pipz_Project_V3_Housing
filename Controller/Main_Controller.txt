@@ -10,7 +10,7 @@
 ; MAINTEMPLATE - Main_Controller.ahk (AHK v2)
 ; Version: 2.2.4
 ; Last change: Added dynamic header app version functionality.
-; Content-Fingerprint: 2026-01-29T21-42-04Z-PAG83T6K
+; Content-Fingerprint: 2026-02-03T17-06-33Z-6H4G5FYD
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------

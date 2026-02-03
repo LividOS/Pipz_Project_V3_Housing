@@ -4,9 +4,9 @@
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt
-; Version: 1.0.5
-; Last change: Completed rehousing learned constraints into standalone file `PROJECT_LEARNED_CONSTRAINTS.txt`.
-; Content-Fingerprint: 2026-02-03T16-19-56Z-ZRC6V8CL
+; Version: 1.0.8
+; Last change: Completed standalone constraint and working notes file rehousing.
+; Content-Fingerprint: 2026-02-03T17-58-22Z-AUZWES9M
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -1626,9 +1626,9 @@ OPERATIVE TEXT (COMPENDIUM MODE) — AUTHORITATIVE FOR SINGLE-ARTIFACT OPERATION
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT
-; Version: 2.1.4
-; Last change: Migrated file to new governance directory and updated table structure.
-; Content-Fingerprint: 2026-01-29T00-25-51Z-OK6E7JM5
+; Version: 2.1.5
+; Last change: Included new standalone constraints and working notes files.
+; Content-Fingerprint: 2026-01-29T00-25-51Z-OK6E64HB
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -1655,7 +1655,14 @@ All authoritative governance content is consolidated into:
 
   - GOVERNANCE_COMPENDIUM.txt
 
-No standalone governance files are expected to exist outside the compendium.
+Non-authoritative canonical support artifacts MAY exist outside the compendium
+to preserve scalability, audit clarity, and long-form context, but MUST defer
+to compendium-defined authority, rules, and precedence.
+
+Such artifacts:
+  - MUST be explicitly listed in this Blueprint
+  - MUST NOT introduce governance authority
+  - MUST NOT redefine structure, enforcement, or bootstrap behavior
 
 Historical governance sources have been archived under:
   - \Archive\ (non-authoritative, non-operative)
@@ -1719,6 +1726,8 @@ PATH / FILE NAME                                                       | TYPE   
 \Governance                                                            | DIRECTORY                                         | Authoritative governance container. Holds the single-artifact governance compendium and other canonical AI-facing authority documents (procedural runbooks, header templates, bootstrap, blueprint, and learned constraints via compendium sections). Contents here define binding rules or mandatory protocols.
   GOVERNANCE_COMPENDIUM.txt                                            | Document                                          | Single authoritative governance artifact operating in SINGLE-ARTIFACT MODE. Consolidates all governance, bootstrap, blueprint, audit, and enforcement rules into section-addressable canonical form.
   PROTOCOL_RUNBOOK.txt                                                 | Document                                          | Canonical procedural authority file defining mandatory, repeatable runbooks for governance-critical, tooling-critical, and high-risk project operations. Houses non-optional execution protocols (e.g., extension repackaging, Policy-B registry audits). Cumulative by design; defines how specific operations must always be performed. Location subject to future consolidation under governance directory.
+  PROJECT_LEARNED_CONSTRAINTS.txt                                      | Document                                          | Canonical, append-only repository of empirically confirmed learned constraints and invalidated approaches. Non-authoritative; used exclusively for anti-regression and institutional memory. Referenced by GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.
+  PROJECT_WORKING_NOTES.txt                                            | Document                                          | Non-authoritative, append-only repository of project design rationale, architectural intent, guardrails, and historical context. Externalized from GOV.S4.ANCHOR_MASTER to prevent compendium growth and preserve long-form reasoning.
   GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT                | Virtual Document Section (Single-Artifact Mode)   | Primary source of truth for structure, search protocols, and logic rules.
   GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER            | Virtual Document Section (Single-Artifact Mode)   | Canonical unified system anchor defining mission intent, behavioral constraints, identity rules, and long-term architectural rationale. Authoritative, non-structural, and non-initializing.
   GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS          | Virtual Document Section (Single-Artifact Mode)   | AI governance ruleset; mandatory read source defining verification, fingerprinting, header mandates, and enforcement behavior.
@@ -1910,9 +1919,9 @@ OPERATIVE TEXT (COMPENDIUM MODE) — AUTHORITATIVE FOR SINGLE-ARTIFACT OPERATION
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER
-; Version: 2.0.3
-; Last change: Revised governance deference to reflect new registry system.
-; Content-Fingerprint: 2026-01-29T00-46-33Z-BH2XVGP3
+; Version: 2.0.4
+; Last change: Converted section b into pointer stub and rehoused content into standalone file.
+; Content-Fingerprint: 2026-01-29T00-46-33Z-JDL85GP3
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -2094,207 +2103,30 @@ MUST be synchronized across:
 Partial updates are invalid.
 
 ; ------------------------------------------------------------------
-
-END OF PROJECT ANCHOR SECTION (SECTION A)
-
-; ------------------------------------------------------------------
-; SECTION B — PROJECT WORKING NOTES (DESIGN & RATIONALE)
+END OF SECTION A
 ; ------------------------------------------------------------------
 
-PURPOSE OF THIS FILE SECTION
---------------------
-This document exists to preserve:
+; ------------------------------------------------------------------
+; SECTION B — PROJECT WORKING NOTES (EXTERNALIZED)
+; ------------------------------------------------------------------
+
+Project working notes, design rationale, and long-form architectural
+context have been externalized to preserve compendium stability.
+
+Canonical location:
+
+Pipz_Project_V3\Governance\PROJECT_WORKING_NOTES.txt
+
+This section intentionally contains no growing content.
+
+Refer to the canonical file for:
 - Design intent
-- Non-obvious decisions
-- Sanity checks
-- “Why we did it this way”
-- Guardrails against future regression
-
-This file is NOT a checklist.
-This file is NOT expected to be concise.
-This file SHOULD grow over time.
+- Rationale
+- Guardrails
+- Historical decision context
 
 ; ------------------------------------------------------------------
-CORE GOALS (DO NOT LOSE SIGHT OF THESE)
-; ------------------------------------------------------------------
-
-1. The user interacts with ONE assistant only (Architect).
-2. All other AI roles are hidden, automated, and auditable.
-3. Governance is enforced by code, not “AI good behavior.”
-4. Drift is mechanically impossible, not just unlikely.
-5. Every change is attributable, reviewable, and reversible.
-
-If any future change weakens these goals, STOP.
-
-; ------------------------------------------------------------------
-WHY SIDECAR GOVERNANCE EXISTS
-; ------------------------------------------------------------------
-
-Some file formats are controlled by external tools:
-- JSON
-- lockfiles
-- generated artifacts
-- binaries
-
-Governance MUST NEVER break tooling.
-
-Therefore:
-- Governance metadata moves to sidecar files
-- Sidecars are authoritative
-- Runtime artifacts remain pure
-
-This is not a compromise — it is intentional architecture.
-
-; ------------------------------------------------------------------
-WHY NOT RELY ON CONTINUE / BUILT-IN AGENTS ALONE
-; ------------------------------------------------------------------
-
-Continue is powerful, but:
-- It does not natively enforce hidden multi-model chaining
-- It cannot prevent a model from “doing too much”
-- It cannot hard-enforce mirroring or fingerprint rules
-
-Therefore:
-- Continue is treated as the Architect UI only
-- Enforcement lives outside the model
-- MCP / orchestrator handles invariants
-
-; ------------------------------------------------------------------
-ROLE SEPARATION INTENT
-; ------------------------------------------------------------------
-
-Architect:
-- Thinks
-- Plans
-- Explains
-- Is the ONLY user-facing AI
-- NEVER writes directly
-
-Executor:
-- Implements literally
-- No opinions
-- No creativity
-- Outputs full files by default
-
-SubSupervisor:
-- Mechanical checklist
-- Objective PASS / FAIL
-- Cannot be overridden
-
-HeadSupervisor:
-- Semantic correctness
-- Architectural intent validation
-- Risk detection
-- Cannot override mechanical failure
-
-; ------------------------------------------------------------------
-RECENT KEY DECISIONS (IMPORTANT CONTEXT)
-; ------------------------------------------------------------------
-
-[2026-01-22]
-- MVP orchestrator introduced with bootstrap-only behavior.
-- No model calls, no file writes — audit-only.
-- Establishes a safe, runnable baseline before hidden chaining is enabled.
-
-[2026-01-22]
-- JSON governance finalized via mandatory sidecar files:
-  - package.json.governance.txt
-  - tsconfig.json.governance.txt
-- JSON remains pure and non-fingerprinted by embedded headers.
-
-[2026-01-23]
-- Completed port of MirrorAhkToTxt functionality into a VS Code extension:
-  - Fingerprint updates on save (governed files, fail-closed gating)
-  - Runtime mirroring (.ahk/.ini -> .txt) with AI SOT header
-  - Standalone governed fingerprinting for additional file types
-  - UTF-8 + UTF-16 mirror encoding compatibility
-  - Audit logging into .ORCH_AUDITLOG\mirror\
-- Extension packaged (VSIX) and installed into normal VS Code.
-- Verified in normal VS Code (no Extension Development Host required for mirroring/fingerprints).
-
-[2026-01-23]
-- Noted VS Code Extension Development Host anomaly:
-  - Dev Host could open files but refused to open folders/workspaces.
-  - Debug console showed DisposableStore disposed warnings.
-  - Gemini assisted in resolving the folder-open issue so development can continue.
-
-; ------------------------------------------------------------------
-COMMON FAILURE MODES TO WATCH FOR
-; ------------------------------------------------------------------
-
-- “We’ll remember to do X later” → NO
-- “This file doesn’t need governance” → PROVE IT
-- “The AI probably won’t touch that” → INVALID ASSUMPTION
-- Silent tool behavior changes (VS Code / extensions)
-- Header drift across file types
-- JSON accidentally acquiring comments (must remain pure)
-
-; ------------------------------------------------------------------
-WHEN TO STOP AND REASSESS
-; ------------------------------------------------------------------
-
-STOP if:
-- A tool change removes determinism
-- A file bypasses governance
-- A human must remember a rule instead of tooling enforcing it
-- The user must manually switch AI roles for normal operation (end goal is hidden chaining)
-- Audit logs become incomplete or optional
-
-; ------------------------------------------------------------------
-VS CODE EXTENSION REPACKAGING – DESIGN RATIONALE
-; ------------------------------------------------------------------
-
-The pipz-mirror-governance extension is not “just a tool”.
-It is an ACTIVE GOVERNANCE ENFORCER.
-
-Therefore:
-
-- Any change to it can silently weaken guarantees if not rebuilt correctly
-- VS Code does NOT auto-reload packaged extensions
-- Extension Development Host ≠ real user environment
-
-Because of this, a strict VSIX repackaging runbook was introduced.
-
-Key principles enforced by the runbook:
-
-1. BUILD IS EXPLICIT
-   No implicit TypeScript transpilation is trusted.
-
-2. INSTALL IS EXPLICIT
-   The extension must be installed into the NORMAL VS Code instance,
-   not assumed to be active because Dev Host worked.
-
-3. VERIFICATION IS MANDATORY
-   Mirroring, fingerprinting, encoding, and audit logging must be
-   observed in real saves.
-
-4. NO SILENT FAILURE
-   If the extension fails to activate or log, work stops immediately.
-
-This mirrors the broader project philosophy:
-
-- Trust code, not memory
-- Trust logs, not assumptions
-- Trust enforcement, not intent
-
-This runbook is deliberately repetitive and procedural.
-That is a feature, not a flaw.
-
-; ------------------------------------------------------------------
-FUTURE NOTES
-; ------------------------------------------------------------------
-
-(Add dated notes below as decisions are made.)
-
-[YYYY-MM-DD] —
-- Decision:
-- Reason:
-- Impact:
-
-; ------------------------------------------------------------------
-
-END OF PROJECT WORKING NOTES SECTION (SECTION B)
-
+END OF SECTION B
 ; ------------------------------------------------------------------
 
 ================================================================================
@@ -2578,9 +2410,9 @@ OPERATIVE TEXT (COMPENDIUM MODE) — AUTHORITATIVE FOR SINGLE-ARTIFACT OPERATION
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST
-; Version: 1.3.4
-; Last change: Migrated file to new governance directory and updated all references in file.
-; Content-Fingerprint: 2026-01-29T00-15-48Z-9YUJOTYW
+; Version: 1.3.5
+; Last change: Included new standalone constraints and working notes files.
+; Content-Fingerprint: 2026-01-29T00-15-48Z-9YUJ25GU
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -2611,6 +2443,8 @@ All content authority, verification, and conflict resolution is governed by:
 
 Content-Fingerprint verification and GEMINI MEM TAG path validation are mandatory
 for all files, even when Drive IDs are available.
+
+Non-authoritative canonical logs (e.g. learned constraints, working notes) may be indexed here for resolution but do not participate in authority precedence.
 
 ; ------------------------------------------------------------------
 VERIFIED COLUMN SEMANTICS (STRICT)
@@ -2719,6 +2553,8 @@ IDs and VERIFIED flags are acceleration signals only, never authority.
 \Governance                                       | DIRECTORY          | 1iYz1-T6dS47O03mxYU8_FTg1Xbj7wJ_w                          | YES
   GOVERNANCE_COMPENDIUM.txt                       | Document           | 1NNndPx4st_Gpr28dQOmnhpLDVZAByFW3                          | YES
   PROTOCOL_RUNBOOK.txt                            | Document           | 1oIQfSds-AoaiTyRe4q_5RGoAe1sVosiP                          | YES
+  PROJECT_LEARNED_CONSTRAINTS.txt                 | Document           | 1jchILjl0BBPMYIQvIZmcuA4K4cZRiKxk                          | YES
+  PROJECT_WORKING_NOTES.txt                       | Document           | 1sViR9LqaJJqbDcd-Hnf0312Ou2MRwCNX                          | YES
                                                   |                    |                                                            |
 --------------------------------------------------|--------------------|------------------------------------------------------------|----------
 \Lib                                              | DIRECTORY          | 1D0zXwlTRljMLHs2x5eGNYeOFolCWZ2Be                          | YES
@@ -2826,16 +2662,18 @@ IDs and VERIFIED flags are acceleration signals only, never authority.
 -------------------------------------------------------------------|--------------------------------------------------------------------------------------------
 \Governance                                                        | governance folder, governance directory, authoritative folder, governance layer, governance root
   GOVERNANCE_COMPENDIUM.txt                                        | governance compendium, compendium, governance single artifact, master governance, (inherits all Governance folder and section aliases)
-  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT            | blueprint, project blueprint, architecture blueprint, folder blueprint, structure blueprint
-  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER        | anchor, project anchor, system anchor, ai anchor, governance anchor, intent log, design notes
-  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS      | ai instructions, governance rules, project instructions, ai governance
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS      | ai instructions, governance rules, project rules, ai governance, enforcement rules
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4         | bootstrap, bootstrap v4, init protocol, initialization protocol, cold start protocol
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT            | blueprint, project blueprint, architecture blueprint, structural blueprint, expected set blueprint
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER        | anchor, project anchor, system anchor, governance anchor, intent anchor, canonical intent
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S5.PHASE5_AUDIT         | phase 5 audit, phase 5 checklist, phase 5 verification, visibility audit
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S6.GOVERNANCE_LOCK      | governance lock, lock state, governance freeze, enforcement lock
   GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST        | index, id index, drive index, id list, master index
-  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4         | bootstrap, bootstrap v4, init protocol, initialization protocol
-  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S5.PHASE5_AUDIT         | phase 5 template, phase 5 audit template, visibility audit template
-  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S6.GOVERNANCE_LOCK      | governance lock, lock state, governance state
-  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.LEARNED_CONSTRAINTS  | learned constraints, constraints log, invalidated approaches
-  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S9.STANDARD_HEADERS     | header templates, header standards, file headers
-  PROTOCOL_RUNBOOK.txt                                             | runbook, protocol runbook, mandatory procedures, execution protocols
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.LEARNED_CONSTRAINTS  | constraints index, learned constraints index, plc index, constraint gateway, constraints overview
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S9.STANDARD_HEADERS     | header standards, standard headers, header templates, file header rules
+  PROTOCOL_RUNBOOK.txt                                             | runbook, protocol runbook, mandatory procedures, execution protocols, governed procedures
+  PROJECT_LEARNED_CONSTRAINTS.txt                                  | plc file, learned constraints log, constraints ledger, canonical constraints, plc archive
+  PROJECT_WORKING_NOTES.txt                                        | working notes, project notes, anchor notes, design rationale log, architectural notes
                                                                    |
 -------------------------------------------------------------------|--------------------------------------------------------------------------------------------
 \PipzOrchestratorExtension                                         | orchestrator extension, vs code extension, orch extension
