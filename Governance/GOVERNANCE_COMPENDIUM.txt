@@ -4,9 +4,9 @@
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt
-; Version: 1.0.3
-; Last change: Completed inclusion of new authoritative runbook and redesignation of directory authority level.
-; Content-Fingerprint: 2026-02-03T00-13-50Z-Z0DKRI7K
+; Version: 1.0.4
+; Last change: Completed rehousing of phase5 audit into protocol runbook.
+; Content-Fingerprint: 2026-02-03T00-24-52Z-T3K84059
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
