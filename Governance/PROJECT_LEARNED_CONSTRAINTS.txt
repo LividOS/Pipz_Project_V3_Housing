@@ -4,9 +4,9 @@
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - PROJECT_LEARNED_CONSTRAINTS.txt
-; Version: 0.1.2
-; Last change: Creation of PLC-0013.
-; Content-Fingerprint: 2026-02-03T16-52-36Z-FXYSGMNV
+; Version: 0.1.3
+; Last change: Updated depreciation notices to reflect current file states and rehoused locations.
+; Content-Fingerprint: 2026-02-03T17-04-17Z-704L7KOD
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -220,7 +220,7 @@ EVIDENCE:
 Header/path extraction failures occurred inconsistently until BOM/NUL-aware decoding was used, after which mirroring behaved deterministically across whitespace-only edits.
 
 RELATED FILES:
-Pipz_Project_V3\MirrorAhkToTxt.py (DEPRECIATED)
+Pipz_Project_V3\MirrorAhkToTxt.py (DEPRECIATED : TOOL PORTED TO VS CODE EXTENSION `pipz-mirror-governance`)
 
 NOTES:
 This is a tooling-layer constraint; it does not change governance semantics.
@@ -249,7 +249,7 @@ EVIDENCE:
 Removing the AI SOT header from runtime files restored deterministic fingerprinting and mirroring behavior.
 
 RELATED FILES:
-Pipz_Project_V3\MirrorAhkToTxt.py (DEPRECIATED)
+Pipz_Project_V3\MirrorAhkToTxt.py (DEPRECIATED : TOOL PORTED TO VS CODE EXTENSION `pipz-mirror-governance`)
 Pipz_Project_V3\settings.ini
 Pipz_Project_V3\settings.txt
 
@@ -280,7 +280,7 @@ EVIDENCE:
 Gemini-cleaned MirrorAhkToTxt.py introduced an indentation change that required correction before the script could be treated as safe.
 
 RELATED FILES:
-Pipz_Project_V3\MirrorAhkToTxt.py (DEPRECIATED)
+Pipz_Project_V3\MirrorAhkToTxt.py (DEPRECIATED : TOOL PORTED TO VS CODE EXTENSION `pipz-mirror-governance`)
 
 NOTES:
 This is a tooling safety constraint; it does not change project governance semantics.
@@ -309,8 +309,8 @@ EVIDENCE:
 Phase 2 Bootstrap failure on 2026-01-25; Agent reported file existence but "Zero content/Logic Blind" state.
 
 RELATED FILES:
-Pipz_Project_V3\Registry\GLOBAL_LOGIC_RULES.csv (DEPRECIATED)
-Pipz_Project_V3\Registry\GLOBAL_FUNCTION_REGISTRY.csv (DEPRECIATED)
+Pipz_Project_V3\Registry\GLOBAL_LOGIC_RULES.csv (DEPRECIATED : REGISTRY CONSOLIDATED TO GLOBAL_REGISTRY_MASTER.csv)
+Pipz_Project_V3\Registry\GLOBAL_FUNCTION_REGISTRY.csv (DEPRECIATED : REGISTRY CONSOLIDATED TO GLOBAL_REGISTRY_MASTER.csv)
 
 NOTES:
 The .gsheet remains the non-active "Backup Vault".
@@ -339,7 +339,7 @@ EVIDENCE:
 Successful ingestion and audit only after transition to individual flat CSV files.
 
 RELATED FILES:
-Pipz_Project_V3\Registry\GLOBAL_LOGIC_RULES.csv (DEPRECIATED)
+Pipz_Project_V3\Registry\GLOBAL_LOGIC_RULES.csv (DEPRECIATED : REGISTRY CONSOLIDATED TO GLOBAL_REGISTRY_MASTER.csv)
 
 NOTES:
 N/A
@@ -397,8 +397,8 @@ EVIDENCE:
 PLC-0008 technical limitation; verification of 5-file batches results in 100% accuracy.
 
 RELATED FILES:
-Pipz_Project_V3\PHASE5_EXECUTION_CHECKLIST.txt (DEPRECIATED)
-Pipz_Project_V3\PHASE5_VISIBILITY_AUDIT_TEMPLATE.txt (DEPRECIATED)
+Pipz_Project_V3\PHASE5_EXECUTION_CHECKLIST.txt (DEPRECIATED : SUPERSEDED BY RUNBOOK `PHASE 5 AUDIT EXECUTION RUNBOOK`)
+Pipz_Project_V3\PHASE5_VISIBILITY_AUDIT_TEMPLATE.txt (DEPRECIATED : SUPERSEDED BY RUNBOOK `PHASE 5 RESULT DECLARATION RUNBOOK`)
 
 NOTES:
 Governed by GLOBAL LOGIC RULE GEN-03.
@@ -424,7 +424,7 @@ EVIDENCE:
 Runtime error thrown consistently in Pipz_Project_V3 Controller whenever the Game Window Title field was modified.
 
 RELATED FILES:
-Pipz_Project_V3\Controller\Modules\Messenger.ahk (DEPRECIATED)
+Pipz_Project_V3\Controller\Modules\Messenger.ahk (DEPRECIATED : MODULE CONSOLIDATED INTO Controller_Core.ahk)
 
 NOTES:
 This constraint is critical for maintaining stable execution of AHK v2 scripts that rely on timed callbacks within static methods.
@@ -450,7 +450,7 @@ EVIDENCE:
 Successful execution of the timer callback without errors in Pipz_Project_V3 Controller after applying the `.Bind()` method.
 
 RELATED FILES:
-Pipz_Project_V3\Controller\Modules\Messenger.ahk (DEPRECIATED)
+Pipz_Project_V3\Controller\Modules\Messenger.ahk (DEPRECIATED : MODULE CONSOLIDATED INTO Controller_Core.ahk)
 
 NOTES:
 This ensures the callback is recognized as a valid callable object by the AHK v2 runtime, regardless of whether the method actually requires the `this` parameter.
