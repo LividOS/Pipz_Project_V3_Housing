@@ -75,7 +75,7 @@ const POINTER_FILE_NAME = "PIPZ_POINTER.txt";
 // IMPORTANT: Do NOT include PIPZ_POINTER.txt in this list.
 const WATCHED_REL_PATHS = new Set<string>([
   // ---- GOVERNANCE / RUNBOOKS ----
-  "Governance/GOVERNANCE_COMPENDIUM.txt",
+  "Pipz_Project_V3/Governance/GOVERNANCE_COMPENDIUM.txt",
   "Governance/PROTOCOL_RUNBOOK.txt",
 
   // ---- REGISTRIES ----
