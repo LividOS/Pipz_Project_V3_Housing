@@ -4,9 +4,9 @@
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt
-; Version: 1.1.0
-; Last change: Updated Blueprint and Index tables with new entries for publisher extension.
-; Content-Fingerprint: 2026-02-04T19-21-01Z-A2O6XJPX
+; Version: 1.1.1
+; Last change: Added new subsection clauses to sections S1-3.
+; Content-Fingerprint: 2026-02-04T20-03-04Z-ZLE515Z3
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -138,9 +138,9 @@ OPERATIVE TEXT (COMPENDIUM MODE) — AUTHORITATIVE FOR SINGLE-ARTIFACT OPERATION
 ; Pipz_Project_V3 [AHK v2] (AI-Specific Operating Instructions)
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS
-; Version: 2.0.0
-; Last change: Instated new Policy-B governance model.
-; Content-Fingerprint: 2026-01-29T22-18-17Z-BEFJ7KGF
+; Version: 2.0.1
+; Last change: Added subsection E context snapshot pointer.
+; Content-Fingerprint: 2026-02-04T22-18-17Z-JDUS847G
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -148,7 +148,7 @@ OPERATIVE TEXT (COMPENDIUM MODE) — AUTHORITATIVE FOR SINGLE-ARTIFACT OPERATION
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
-BOOTSTRAP v4 — CONVERSATION INITIALIZATION PROTOCOL (MANDATORY)
+### GOV.S1.A — BOOTSTRAP v4 — CONVERSATION INITIALIZATION PROTOCOL (MANDATORY)
 ; ------------------------------------------------------------------
 
 Bootstrap v4 is a mandatory conversation initialization protocol for Pipz_Project_V3.
@@ -158,7 +158,7 @@ Its purpose is to guarantee that the AI can reliably re-establish full project a
 Bootstrap v4 MUST be executed before any analysis, debugging, suggestions, refactors, or proposed changes related to Pipz_Project_V3.
 
 ; ------------------------------------------------------------------
-BOOTSTRAP ARTIFACT REFERENCE RULE (CANONICAL — SINGLE-ARTIFACT MODE)
+### GOV.S1.B — BOOTSTRAP ARTIFACT REFERENCE RULE (CANONICAL — SINGLE-ARTIFACT MODE)
 ; ------------------------------------------------------------------
 
 The canonical, authoritative definition of the Bootstrap v4 protocol is:
@@ -187,7 +187,7 @@ B5. If GOVERNANCE_COMPENDIUM.txt or the required section cannot be located,
     fully read, or verified (including Content-Fingerprint), the AI MUST STOP.
 
 ; ------------------------------------------------------------------
-BOOTSTRAP v4 ENFORCEMENT GATE (ABSOLUTE)
+### GOV.S1.C — BOOTSTRAP v4 ENFORCEMENT GATE (ABSOLUTE)
 ; ------------------------------------------------------------------
 
 E1. Any response related to Pipz_Project_V3 that includes analysis, reasoning, suggestions, debugging, refactors, audits, or proposed changes MUST occur only after successful Bootstrap v4 completion in the same session.
@@ -215,7 +215,7 @@ E5. This rule applies to:
     ; - Any situation where authority cannot be freshly proven
 
 ; ------------------------------------------------------------------
-BOOTSTRAP v4 INVOCATION TOKEN REQUIREMENT (ABSOLUTE)
+### GOV.S1.D — BOOTSTRAP v4 INVOCATION TOKEN REQUIREMENT (ABSOLUTE)
 ; ------------------------------------------------------------------
 
 For any new chat session related to Pipz_Project_V3, the user's FIRST message MUST include
@@ -262,6 +262,23 @@ T6. This token requirement exists to guarantee:
     ; - Clean cold-start behavior.
     ; - No reliance on memory.
     ; - Deterministic bootstrap execution across AI platforms.
+
+; ------------------------------------------------------------------
+### GOV.S1.E — CONTEXT SNAPSHOT POINTER (NON-AUTHORITATIVE)
+; ------------------------------------------------------------------
+
+`PIPZ_POINTER.txt` defines a non-authoritative routing hint to a read-only project snapshot (context bundle) intended solely to improve AI visibility into the current project state.
+
+The pointer and referenced bundle:
+- MUST NOT be treated as a source of governance authority.
+- MUST NOT override or contradict any canonical governance artifacts, including:
+  - GOVERNANCE_COMPENDIUM.txt
+  - PROTOCOL_RUNBOOK.txt
+  - GLOBAL_REGISTRY_MASTER.csv
+- MAY be used to determine file presence and contents for analysis only.
+
+If any content retrieved via the pointer contradicts a canonical governance artifact → STOP.
+This condition indicates a tooling or publishing fault, not a governance change request.
 
 ; ------------------------------------------------------------------
 PHASE 0 — GOVERNANCE GATE
@@ -1329,9 +1346,9 @@ OPERATIVE TEXT (COMPENDIUM MODE) — AUTHORITATIVE FOR SINGLE-ARTIFACT OPERATION
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4
-; Version: 1.2.3
-; Last change: Migrated file to new governance directory and updated all references in file.
-; Content-Fingerprint: 2026-01-29T00-39-06Z-M8YCFZC0
+; Version: 1.2.4
+; Last change: Added subsection B pointer aware snapshot mode.
+; Content-Fingerprint: 2026-02-04T00-39-06Z-GJS840M7
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -1339,7 +1356,7 @@ OPERATIVE TEXT (COMPENDIUM MODE) — AUTHORITATIVE FOR SINGLE-ARTIFACT OPERATION
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
-BOOTSTRAP v4 — CONVERSATION INITIALIZATION PROTOCOL
+### GOV.S2.A — BOOTSTRAP v4 — CONVERSATION INITIALIZATION PROTOCOL
 ; ------------------------------------------------------------------
 
 (FINALIZED SPECIFICATION)
@@ -1349,6 +1366,20 @@ Bootstrap v4 is a **mandatory conversation initialization protocol** for Pipz_Pr
 Its purpose is to guarantee that the AI can **reliably re-establish full project authority** at the start of any new chat **without relying on memory, inference, or Drive search heuristics**.
 
 Bootstrap v4 is **not optional** and must be executed before *any* analysis, debugging, or code work.
+
+; ------------------------------------------------------------------
+### GOV.S2.B — POINTER-AWARE SNAPSHOT MODE
+; ------------------------------------------------------------------
+
+During Bootstrap v4 initialization, if `PIPZ_POINTER.txt` is present and readable, the system MAY retrieve the referenced context bundle as a read-only snapshot of the current project state.
+
+Rules:
+- The pointer MUST include a valid BUNDLE_URL and BUILD_ID.
+- The retrieved bundle MUST be treated as immutable and read-only.
+- Governance validation and enforcement MUST continue to bind exclusively to canonical artifacts.
+- Absence of the pointer MUST NOT block bootstrap.
+
+If the pointer is present but unreadable, stale, or internally inconsistent → STOP and surface a tooling fault.
 
 ; ------------------------------------------------------------------
 PHASE 0 — GOVERNANCE GATE (HARD STOP)
@@ -1626,8 +1657,8 @@ OPERATIVE TEXT (COMPENDIUM MODE) — AUTHORITATIVE FOR SINGLE-ARTIFACT OPERATION
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT
-; Version: 2.1.6
-; Last change: Populated with new entries for the publisher extension.
+; Version: 2.1.7
+; Last change: Added subsection B project snapshot transport.
 ; Content-Fingerprint: 2026-02-04T00-25-51Z-UHG94K8U
 ; ------------------------------------------------------------------
 
@@ -1636,7 +1667,7 @@ OPERATIVE TEXT (COMPENDIUM MODE) — AUTHORITATIVE FOR SINGLE-ARTIFACT OPERATION
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
-### 1. MASTER BLUEPRINT: FOLDER ARCHITECTURE (MUST BE MAINTAINED)
+### GOV.S3.A — MASTER BLUEPRINT: FOLDER ARCHITECTURE (MUST BE MAINTAINED)
 ; ------------------------------------------------------------------
 
 AUTHORITATIVE ROLE DECLARATION (PHASE 5)
@@ -1700,6 +1731,21 @@ Structural authority explicitly excludes:
 
 The Archive directory MUST NOT be used for governance reasoning,
 verification, or enforcement, Including for historical comparison unless explicitly instructed.
+
+; ------------------------------------------------------------------
+### GOV.S3.B — PROJECT SNAPSHOT TRANSPORT (PUBLISHER MODEL)
+; ------------------------------------------------------------------
+
+The project structure MAY be verified using either:
+- Direct local filesystem enumeration, or
+- A publisher-emitted context bundle referenced by `PIPZ_POINTER.txt`.
+
+When using a bundle:
+- The bundle BUILD_ID MUST match the BUILD_ID declared in the pointer.
+- The bundle contents MUST reflect the active allowlist defined by the publisher configuration.
+- Structural mismatches (missing directories, excluded authoritative files) MUST be treated as publish drift.
+
+The snapshot transport mechanism does not define authority; it only transports state.
 
 ; ------------------------------------------------------------------
 
@@ -1812,7 +1858,7 @@ PATH / FILE NAME                                                       | TYPE   
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
-### 2. REGISTRY ACCESS & VERIFICATION PROTOCOL (CRITICAL)
+### GOV.S3.C — REGISTRY ACCESS & VERIFICATION PROTOCOL (CRITICAL)
 ; ------------------------------------------------------------------
 
 To maintain a 1:1 literal match of the project state, the following protocol MUST be followed:
@@ -1893,7 +1939,7 @@ To maintain a 1:1 literal match of the project state, the following protocol MUS
    Updates must maintain a 1:1 literal match with the source code and verified mirrors.
 
 ; ------------------------------------------------------------------
-### 3. GLOBAL LOGIC ANCHORS
+### GOV.S3.D — GLOBAL LOGIC ANCHORS
 ; ------------------------------------------------------------------
 
 ; - **DRY ARCHITECTURE:** No variable or function definitions should be hardcoded in text documents.

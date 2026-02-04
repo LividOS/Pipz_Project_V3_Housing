@@ -4,9 +4,9 @@
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - PROTOCOL_RUNBOOK.txt
-; Version: 1.0.8
-; Last change: Creation of canonical runbook number 7 `PLC EXTERNALIZATION & EMISSION RUNBOOK`.
-; Content-Fingerprint: 2026-02-03T16-20-00Z-HBBEG70L
+; Version: 1.0.9
+; Last change: Creation of canonical runbook number 8 `PUBLISHER BUNDLE & POINTER EMISSION RUNBOOK`.
+; Content-Fingerprint: 2026-02-04T20-02-48Z-OS3S0NH8
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -120,6 +120,7 @@ SECTION | TITLE
 5       | Governance Compendium Update Runbook
 6       | Registry Regeneration & Validation Runbook
 7       | PLC Externalization & Emission Runbook
+8       | Publisher Bundle & Pointer Emission Runbook
 --------------------------------------------------------------------
 
 Notes:
@@ -1056,6 +1057,60 @@ RUNBOOK STEPS:
       - No authority claims were introduced
 
       Resume normal project work.
+
+; ------------------------------------------------------------------
+; 8. PUBLISHER BUNDLE & POINTER EMISSION RUNBOOK (MANDATORY PROCEDURE)
+; ------------------------------------------------------------------
+PURPOSE:
+Deterministically publish a project context bundle and update `PIPZ_POINTER.txt` so that the current project snapshot can be retrieved reliably for AI visibility without ambiguity or silent drift.
+---
+APPLIES WHEN:
+A project context bundle is being published via the `pipz-publisher` VS Code extension to update the current authoritative snapshot referenced by `PIPZ_POINTER.txt`.
+---
+FAILURE RULE(S):
+If `PIPZ_POINTER.txt` is missing required fields (BUNDLE_URL or BUILD_ID) → STOP.
+If the referenced bundle asset cannot be retrieved end-to-end from BUNDLE_URL → STOP.
+If pointer BUILD_ID does not match bundle BUILD_ID → STOP.
+If MANIFEST.json is missing from the bundle or cannot be read → STOP.
+If the bundle contents do not include all allowlist-authoritative directories required by the current publisher configuration (e.g. Registry/, PPAVP/ when included) → STOP.
+If MANIFEST_SHA256 recorded in `PIPZ_POINTER.txt` does not match the locally generated MANIFEST.json for the publish run → STOP.
+; ------------------------------------------------------------------
+RUNBOOK STEPS:
+
+[ ] 0. Confirm publish intent and workspace target.
+      Verify the correct project workspace is open and targeted for publishing.
+
+[ ] 1. Trigger publish via `pipz-publisher`.
+      Invoke the publish command (hotkey or command palette) and allow it to complete.
+
+[ ] 2. Verify local output artifacts exist for this publish run.
+      Confirm presence of:
+      - `.pipz_publish_out/BUILD_ID.txt`
+      - `.pipz_publish_out/MANIFEST.json`
+      - `.pipz_publish_out/<releaseAssetName>.zip` (default: `pipz-context-latest.zip`)
+
+[ ] 3. Verify allowlist coverage within the produced bundle.
+      Open the bundle zip and confirm it includes all allowlist-authoritative directories required by current configuration (e.g. `Registry/`, `PPAVP/` if configured).
+
+[ ] 4. Verify GitHub Release asset presence and retrieval.
+      Confirm the Release tag exists (default: `context-latest`), the asset is present, and the asset is downloadable end-to-end.
+
+[ ] 5. Verify pointer emission occurred and fields are present.
+      Open `Governance/PIPZ_POINTER.txt` and confirm it contains:
+      - `BUNDLE_URL`
+      - `BUILD_ID`
+      - `BASE_COMMIT_SHA`
+      - `WORKTREE_STATE`
+      - `MANIFEST_SHA256`
+
+[ ] 6. Enforce determinism gate for the publish run.
+      Confirm:
+      - `BUILD_ID` in pointer matches `BUILD_ID.txt`
+      - `BUNDLE_URL` resolves to the newly uploaded asset
+      - `MANIFEST_SHA256` corresponds to the locally generated MANIFEST.json for this run
+
+[ ] 7. Record completion and proceed.
+      Treat the published bundle referenced by `PIPZ_POINTER.txt` as the current snapshot for AI visibility until superseded by a later publish run.
 
 ; ------------------------------------------------------------------
 
