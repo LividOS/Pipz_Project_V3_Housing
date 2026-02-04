@@ -4,7 +4,7 @@
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt
-; Version: 1.1.4
+; Version: 1.1.5
 ; Last change: Added new subsection clauses to sections S1-3.
 ; Content-Fingerprint: 2026-02-04T23-08-05Z-50FRNWWB
 ; ------------------------------------------------------------------

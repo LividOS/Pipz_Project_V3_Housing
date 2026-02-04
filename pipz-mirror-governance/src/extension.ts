@@ -83,7 +83,7 @@ const didSaveGuard = new Set<string>();
 // ================================
 
 // Pointer file location: workspace root / PIPZ_POINTER.txt
-const POINTER_FILE_NAME = "Governance\PIPZ_POINTER.txt";
+const POINTER_FILE_NAME = "Governance/PIPZ_POINTER.txt";
 
 // Watch list (workspace-relative paths, case-insensitive).
 // Use forward slashes or backslashes — we normalize.
@@ -93,8 +93,8 @@ const WATCHED_REL_PATHS = new Set<string>([
   // Support both root-level and foldered layouts (case-insensitive after normalization).
   "GOVERNANCE_COMPENDIUM.txt",
   "PROTOCOL_RUNBOOK.txt",
-  "Governance\GOVERNANCE_COMPENDIUM.txt",
-  "Governance\PROTOCOL_RUNBOOK.txt",
+  "Governance/GOVERNANCE_COMPENDIUM.txt",
+  "Governance/PROTOCOL_RUNBOOK.txt",
 
   // ---- REGISTRIES ----
   "GLOBAL_REGISTRY_MASTER.csv",
