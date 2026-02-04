@@ -64,6 +64,142 @@ const willSaveGuard = new Set<string>();
 const didSaveGuard = new Set<string>();
 
 // ================================
+// BUILD_ID bump (watched files -> pointer)
+// ================================
+
+// Pointer file location: workspace root / PIPZ_POINTER.txt
+const POINTER_FILE_NAME = "PIPZ_POINTER.txt";
+
+// Watch list (workspace-relative paths, case-insensitive).
+// Use forward slashes or backslashes — we normalize.
+// IMPORTANT: Do NOT include PIPZ_POINTER.txt in this list.
+const WATCHED_REL_PATHS = new Set<string>([
+  // ---- GOVERNANCE / RUNBOOKS ----
+  "Governance/GOVERNANCE_COMPENDIUM.txt",
+  "Governance/PROTOCOL_RUNBOOK.txt",
+
+  // ---- REGISTRIES ----
+  "GLOBAL_REGISTRY_MASTER.csv",
+  "INTERNAL_FUNCTION_INDEX.csv",
+
+  // ---- CORE MIRRORS (optional) ----
+  "Main_Controller.txt",
+  "Controller_Core.txt",
+  "Main_Worker.txt",
+  "Worker_Core.txt",
+  "Core_Utils.txt",
+  "Interop.txt",
+  "Humanoid.txt",
+].map(p => normalizeRelPath(p)));
+
+const pointerBumpGuard = new Set<string>();
+
+function normalizeRelPath(p: string): string {
+  return p.replace(/\\/g, "/").replace(/^\/+/g, "").toLowerCase();
+}
+
+function stripProjectPrefix(projectPath: string): string {
+  // Converts: "Pipz_Project_V3\X\Y.txt" -> "X\Y.txt" (workspace-root relative)
+  const norm = projectPath.replace(/\\/g, "/");
+  const idx = norm.toLowerCase().indexOf("pipz_project_v3/");
+  if (idx === -1) return norm;
+  return norm.slice(idx + "pipz_project_v3/".length);
+}
+
+function pad8(n: number): string {
+  return String(n).padStart(8, "0").slice(-8);
+}
+
+function nextBuildId8(current?: string): string {
+  const nowSec = Math.floor(Date.now() / 1000);
+  let v = nowSec % 100000000;
+
+  if (current && /^\d{8}$/.test(current)) {
+    const cur = Number(current);
+    if (v === cur) v = (v + 1) % 100000000;
+  }
+  return pad8(v);
+}
+
+function detectEolFromText(raw: string): string {
+  return raw.includes("\r\n") ? "\r\n" : "\n";
+}
+
+function formatUpdatedUtc(): string {
+  // Produces: 2026-02-04T20-04-40Z
+  return new Date()
+    .toISOString()
+    .replace(/\.\d{3}Z$/, "Z")
+    .replace(/:/g, "-");
+}
+
+function isWatchedDoc(doc: vscode.TextDocument): boolean {
+  // Prefer governed GEMINI path when available
+  const text = doc.getText();
+  let rel: string | null = null;
+
+  if (hasGeminiMemTag(text)) {
+    const projectPath = extractGeminiProjectPath(text);
+    if (projectPath) rel = stripProjectPrefix(projectPath);
+  }
+
+  // Fallback: workspace-relative path
+  if (!rel) {
+    const folder = vscode.workspace.getWorkspaceFolder(doc.uri);
+    if (!folder) return false;
+    rel = path.relative(folder.uri.fsPath, doc.fileName);
+  }
+
+  const normRel = normalizeRelPath(rel);
+  return WATCHED_REL_PATHS.has(normRel);
+}
+
+function bumpPointerBuildId(workspaceRoot: string) {
+  const pointerFs = path.join(workspaceRoot, POINTER_FILE_NAME);
+  if (!fs.existsSync(pointerFs)) return;
+
+  const guardKey = pointerFs.toLowerCase();
+  if (pointerBumpGuard.has(guardKey)) return;
+
+  try {
+    pointerBumpGuard.add(guardKey);
+
+    const raw = fs.readFileSync(pointerFs, "utf8");
+    const eol = detectEolFromText(raw);
+
+    const lines = raw.split(/\r?\n/);
+
+    // --- BUILD_ID bump (8-digit) ---
+    const buildIdx = lines.findIndex(l => /^\s*BUILD_ID\s*:/.test(l));
+    if (buildIdx !== -1) {
+      // Capture any prior value (timestamp, number, etc.) but only use it if it's already 8 digits.
+      const m = lines[buildIdx].match(/^\s*BUILD_ID\s*:\s*(.*?)\s*$/);
+      const prior = m?.[1];
+      const cur8 = (prior && /^\d{8}$/.test(prior)) ? prior : undefined;
+
+      const next = nextBuildId8(cur8);
+      lines[buildIdx] = `BUILD_ID: ${next}`;
+    }
+
+    // --- UPDATED_UTC refresh (timestamp format preserved) ---
+    const updIdx = lines.findIndex(l => /^\s*UPDATED_UTC\s*:/.test(l));
+    if (updIdx !== -1) {
+      lines[updIdx] = `UPDATED_UTC: ${formatUpdatedUtc()}`;
+    }
+
+    const updated = lines.join(eol);
+    if (updated !== raw) {
+      fs.writeFileSync(pointerFs, updated, "utf8");
+      OUT.appendLine(`Pointer update PASS: ${POINTER_FILE_NAME} | BUILD_ID bumped + UPDATED_UTC refreshed`);
+    }
+  } catch (e: any) {
+    OUT.appendLine(`Pointer update ERROR: ${String(e?.message ?? e)}`);
+  } finally {
+    pointerBumpGuard.delete(guardKey);
+  }
+}
+
+// ================================
 // Fingerprint generation
 // ================================
 function utcFingerprint(): string {
@@ -413,10 +549,21 @@ function handleDidSave(doc: vscode.TextDocument) {
   const key = doc.uri.toString();
   if (didSaveGuard.has(key)) return;
 
-  if (!isRuntimeMirrorTarget(doc)) return;
-
   didSaveGuard.add(key);
   try {
+    // ----------------------------
+    // NEW: Watched-file pointer bump
+    // ----------------------------
+    const root = workspaceRootForDoc(doc);
+    if (root && isWatchedDoc(doc)) {
+      bumpPointerBuildId(root);
+    }
+
+    // ----------------------------
+    // Existing mirror behavior (runtime .ahk/.ini only)
+    // ----------------------------
+    if (!isRuntimeMirrorTarget(doc)) return;
+
     const text = doc.getText();
 
     // Require GEMINI MEM TAG and project path
@@ -449,7 +596,6 @@ function handleDidSave(doc: vscode.TextDocument) {
 
     OUT.appendLine(`Mirror write PASS: ${doc.fileName} -> ${mirrorFs} | enc=${runtimeEnc}`);
 
-    const root = workspaceRootForDoc(doc);
     if (root) {
       writeAuditEvent(root, {
         event: "mirror_write",
@@ -461,11 +607,11 @@ function handleDidSave(doc: vscode.TextDocument) {
       });
     }
   } catch (e: any) {
-    OUT.appendLine(`Mirror write ERROR: ${String(e?.message ?? e)}`);
+    OUT.appendLine(`DidSave ERROR: ${String(e?.message ?? e)}`);
     const root = workspaceRootForDoc(doc);
     if (root) {
       writeAuditEvent(root, {
-        event: "mirror_write",
+        event: "did_save_handler",
         runtime: doc.fileName,
         result: "FAIL",
         error: String(e?.message ?? e),
