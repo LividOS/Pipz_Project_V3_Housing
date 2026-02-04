@@ -1,0 +1,21 @@
+; ------------------------------------------------------------------
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\pipz-publisher\tsconfig.json.governance.txt"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - tsconfig.json.governance.txt
+; Version: 0.1.0
+; Last change: Initial creation. (Sidecar governance header for tsconfig.json)
+; Content-Fingerprint: 2026-02-04T18-47-55Z-PT69948C
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+GOVERNED TARGET:
+- Pipz_Project_V3\pipz-publisher\tsconfig.json
+
+NOTES:
+- tsconfig.json must remain valid JSON (no comments).
+- Governance header lives in this sidecar file only.

@@ -4,9 +4,9 @@
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt
-; Version: 1.0.9
-; Last change: Converted to header class normalization for standardized file headers.
-; Content-Fingerprint: 2026-02-03T19-16-38Z-V8RZU97P
+; Version: 1.1.0
+; Last change: Updated Blueprint and Index tables with new entries for publisher extension.
+; Content-Fingerprint: 2026-02-04T19-21-01Z-A2O6XJPX
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -1626,9 +1626,9 @@ OPERATIVE TEXT (COMPENDIUM MODE) — AUTHORITATIVE FOR SINGLE-ARTIFACT OPERATION
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT
-; Version: 2.1.5
-; Last change: Included new standalone constraints and working notes files.
-; Content-Fingerprint: 2026-01-29T00-25-51Z-OK6E64HB
+; Version: 2.1.6
+; Last change: Populated with new entries for the publisher extension.
+; Content-Fingerprint: 2026-02-04T00-25-51Z-UHG94K8U
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -1728,6 +1728,7 @@ PATH / FILE NAME                                                       | TYPE   
   PROTOCOL_RUNBOOK.txt                                                 | Document                                          | Canonical procedural authority file defining mandatory, repeatable runbooks for governance-critical, tooling-critical, and high-risk project operations. Houses non-optional execution protocols (e.g., extension repackaging, Policy-B registry audits). Cumulative by design; defines how specific operations must always be performed. Location subject to future consolidation under governance directory.
   PROJECT_LEARNED_CONSTRAINTS.txt                                      | Document                                          | Canonical, append-only repository of empirically confirmed learned constraints and invalidated approaches. Non-authoritative; used exclusively for anti-regression and institutional memory. Referenced by GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.
   PROJECT_WORKING_NOTES.txt                                            | Document                                          | Non-authoritative, append-only repository of project design rationale, architectural intent, guardrails, and historical context. Externalized from GOV.S4.ANCHOR_MASTER to prevent compendium growth and preserve long-form reasoning.
+  PIPZ_POINTER.txt                                                     | Document                                          | Drive-synced pointer file defining the current authoritative context bundle (BUNDLE_URL, BUILD_ID, BASE_COMMIT_SHA, WORKTREE_STATE, WORKTREE_PATCH_SHA256, MANIFEST_SHA256). Updated automatically by the pipz-publisher publish pipeline; serves as the canonical “latest bundle” locator for AI context sync.
   GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT                | Virtual Document Section (Single-Artifact Mode)   | Primary source of truth for structure, search protocols, and logic rules.
   GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER            | Virtual Document Section (Single-Artifact Mode)   | Canonical unified system anchor defining mission intent, behavioral constraints, identity rules, and long-term architectural rationale. Authoritative, non-structural, and non-initializing.
   GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS          | Virtual Document Section (Single-Artifact Mode)   | AI governance ruleset; mandatory read source defining verification, fingerprinting, header mandates, and enforcement behavior.
@@ -1779,18 +1780,24 @@ PATH / FILE NAME                                                       | TYPE   
 \pipz-mirror-governance                                                | DIRECTORY                                         | VS Code extension for governance enforcement (mirroring, fingerprinting).
   package.json                                                         | Config (JSON)                                     | Extension manifest for the mirror governance extension.
   tsconfig.json                                                        | Config (JSON)                                     | TypeScript compiler configuration.
+  package.json.governance.txt                                          | Document                                          | Governance sidecar for package.json; stores mandated headers, fingerprints, and audit metadata.
+  tsconfig.json.governance.txt                                         | Document                                          | Governance sidecar for tsconfig.json; stores mandated headers, fingerprints, and audit metadata.
   README.md                                                            | Document                                          | Documentation for the mirror governance extension.
+  LICENSE.md                                                           | Document                                          | License file for extension packaging compliance.
   \src                                                                 | SUB-DIRECTORY                                     | Source code for the extension.
     extension.ts                                                       | Script                                            | Entry point for mirroring and fingerprinting logic.
-  \.vscode                                                             | SUB-DIRECTORY                                     | Workspace configuration.
-    extensions.json                                                    | Config (JSON)                                     | Recommended VS Code extensions.
-    launch.json                                                        | Config (JSON)                                     | Debug configuration.
-    settings.json                                                      | Config (JSON)                                     | Workspace settings.
-    tasks.json                                                         | Config (JSON)                                     | Build tasks.
-    extensions.json.governance.txt                                     | Document                                          | Governance sidecar for extensions.json.
-    launch.json.governance.txt                                         | Document                                          | Governance sidecar for launch.json.
-    settings.json.governance.txt                                       | Document                                          | Governance sidecar for settings.json.
-    tasks.json.governance.txt                                          | Document                                          | Governance sidecar for tasks.json.
+                                                                       |                                                   |
+-----------------------------------------------------------------------|---------------------------------------------------|------------------------------------------------------------------------
+\pipz-publisher                                                        | DIRECTORY                                         | VS Code extension providing a hotkey-driven “publish-on-intent” context bundling pipeline. Generates MANIFEST.json + BUILD_ID and uploads a stable Release Asset bundle to GitHub, then updates Governance\PIPZ_POINTER.txt for deterministic context synchronization.
+  package.json                                                         | Config (JSON)                                     | Extension manifest defining command registration, keybindings, configuration schema, and metadata.
+  tsconfig.json                                                        | Config (JSON)                                     | TypeScript compiler configuration for the extension.
+  package.json.governance.txt                                          | Document                                          | Governance sidecar for package.json; stores mandated headers, fingerprints, and audit metadata.
+  tsconfig.json.governance.txt                                         | Document                                          | Governance sidecar for tsconfig.json; stores mandated headers, fingerprints, and audit metadata.
+  README.md                                                            | Document                                          | Human-readable overview of the publisher extension purpose, requirements, and settings.
+  LICENSE.md                                                           | Document                                          | License file for extension packaging compliance.
+  \src                                                                 | SUB-DIRECTORY                                     | Source code for the VS Code extension.
+    extension.ts                                                       | Script                                            | Extension entry point; registers publish command and dispatches the publish pipeline.
+    \publish                                                           | SUB-DIRECTORY                                     | Publish pipeline modules (preflight, file collection, manifest, zipping, gh release upload, pointer write, audit).
                                                                        |                                                   |
 -----------------------------------------------------------------------|---------------------------------------------------|------------------------------------------------------------------------
 \.ORCH_AUDITLOG                                                        | DIRECTORY                                         | Audit log storage for mirror operations.
@@ -2410,9 +2417,9 @@ OPERATIVE TEXT (COMPENDIUM MODE) — AUTHORITATIVE FOR SINGLE-ARTIFACT OPERATION
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST
-; Version: 1.3.5
-; Last change: Included new standalone constraints and working notes files.
-; Content-Fingerprint: 2026-01-29T00-15-48Z-9YUJ25GU
+; Version: 1.3.6
+; Last change: Populated with new entries for publisher extension.
+; Content-Fingerprint: 2026-02-04T00-15-48Z-837GH6TD
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -2555,6 +2562,7 @@ IDs and VERIFIED flags are acceleration signals only, never authority.
   PROTOCOL_RUNBOOK.txt                            | Document           | 1oIQfSds-AoaiTyRe4q_5RGoAe1sVosiP                          | YES
   PROJECT_LEARNED_CONSTRAINTS.txt                 | Document           | 1jchILjl0BBPMYIQvIZmcuA4K4cZRiKxk                          | YES
   PROJECT_WORKING_NOTES.txt                       | Document           | 1sViR9LqaJJqbDcd-Hnf0312Ou2MRwCNX                          | YES
+  PIPZ_POINTER.txt                                | Document           | 1RAW-fCgkXnqSCI_4a8UuU8BtiVWUAImi                          | YES
                                                   |                    |                                                            |
 --------------------------------------------------|--------------------|------------------------------------------------------------|----------
 \Lib                                              | DIRECTORY          | 1D0zXwlTRljMLHs2x5eGNYeOFolCWZ2Be                          | YES
@@ -2591,18 +2599,24 @@ IDs and VERIFIED flags are acceleration signals only, never authority.
 \pipz-mirror-governance                           | DIRECTORY          | 1iG82QgKEAB0_xSRT7uFog2ih77PuW9q-                          | YES
   package.json                                    | Config (JSON)      | 1biisIAXFeqe5y0yGdcJA5T-7_akPvxi-                          | N/A
   tsconfig.json                                   | Config (JSON)      | 1gjnig6YyeyfEOnDXT33RstG2cgCbBvR7                          | N/A
+  package.json.governance.txt                     | Document           | 1i2SiE5h-1mqhpKOZMzUd7Eslkj9OuRGR                          | YES
+  tsconfig.json.governance.txt                    | Document           | 1CmNkqv24cAhc8mjzefI0ObXkG4FIvRvu                          | YES
   README.md                                       | Document           | 1JC7qmZZyGWktYvW32stOBjNbF_xmmYIU                          | YES
+  LICENSE.md                                      | Document           | 1xYEALW2OLAM2dwTGhG1uOu_pc-Xp1xCI                          | YES
   \src                                            | SUB-DIRECTORY      | 1-0dIctg_cGNMuuCMHJQYLY2kvvLFgfbE                          | YES
     extension.ts                                  | Script             | 1UgblarfwhWob4r5Nh1A_WFbBZCIgkKCx                          | N/A
-  \.vscode                                        | SUB-DIRECTORY      | 1ltwlLX8CjynRrmxCDdJ7rrtqJ0-pWRk-                          | YES
-    extensions.json                               | Config (JSON)      | 1IvQ_FY_OYq3wAzmkmHQSfaO1p8L8DZeV                          | N/A
-    launch.json                                   | Config (JSON)      | 1V_LYXBocQdskfZOD1kjK29o5mCiOvUvK                          | N/A
-    settings.json                                 | Config (JSON)      | 1Mgt2X4a1QX9hy9qIUKP1GEEqJLfBWigN                          | N/A
-    tasks.json                                    | Config (JSON)      | 1EBh0WLFPNDI5l2IqCIzOGL4xTpqYM34T                          | N/A
-    extensions.json.governance.txt                | Document           | 1yq8GJ4mUhLtCb1dZya8unIjEkpfNqdtH                          | YES
-    launch.json.governance.txt                    | Document           | 1L0sy7iAQ8okrj_8zNkqE1HiGkxytQkWH                          | YES
-    settings.json.governance.txt                  | Document           | 1LIa7DtCH_H5JFgPE0Q3GWMOTww93Bgi6                          | YES
-    tasks.json.governance.txt                     | Document           | 1dhonC67pLRoVdY4DTlQP2dqGieS0RYdL                          | YES
+                                                  |                    |                                                            |
+--------------------------------------------------|--------------------|-----------------------------------------------------------------------
+\pipz-publisher                                   | DIRECTORY          | 1UAxMIICieMhkEpkE6gNXOCtcy0Rrvnal                          | YES
+  package.json                                    | Config (JSON)      | 1GsiG9O3gJLa1--o75LJAhJo7QNAEQgVL                          | N/A
+  tsconfig.json                                   | Config (JSON)      | 1ikU2aS510dlfVnSGiB7UGYVz8jV3WGVg                          | N/A
+  package.json.governance.txt                     | Document           | 11vpXJNE6-er66o7Ybhi6vpTJu6mlgLdD                          | YES
+  tsconfig.json.governance.txt                    | Document           | 1aowJZtbMxGNx6fxlxS3tPO8JZPkEfFKb                          | YES
+  README.md                                       | Document           | 1WTGZFmoOgOvdbQCT6GPeM_XUIaDOJJLS                          | YES
+  LICENSE.md                                      | Document           | 1Fbt60dVvtWXF260bZJXZmATq5p2SMXwf                          | YES
+  \src                                            | SUB-DIRECTORY      | 1h6zsO6jUoyT6xDvhsojnQolgcRU5g0Lw                          | YES
+    extension.ts                                  | Script             | 1QpmCfswZvoW6gA82gWTMlGTBdS3oza6F                          | N/A
+    \publish                                      | SUB-DIRECTORY      | 1Xj5_OLu3W9Eo4mxegnyxgOiA63-t3tag                          | YES
                                                   |                    |                                                            |
 --------------------------------------------------|--------------------|------------------------------------------------------------|----------
 \.ORCH_AUDITLOG                                   | DIRECTORY          | 1x6aXWyf0wyef4VGDaf_98RNvPim9KwI-                          | YES
@@ -2674,14 +2688,15 @@ IDs and VERIFIED flags are acceleration signals only, never authority.
   PROTOCOL_RUNBOOK.txt                                             | runbook, protocol runbook, mandatory procedures, execution protocols, governed procedures
   PROJECT_LEARNED_CONSTRAINTS.txt                                  | plc file, learned constraints log, constraints ledger, canonical constraints, plc archive
   PROJECT_WORKING_NOTES.txt                                        | working notes, project notes, anchor notes, design rationale log, architectural notes
+  PIPZ_POINTER.txt                                                 | pointer file, pipz pointer, github pointer, drive pointer file, drive pointer
                                                                    |
 -------------------------------------------------------------------|--------------------------------------------------------------------------------------------
 \PipzOrchestratorExtension                                         | orchestrator extension, vs code extension, orch extension
   package.json                                                     | orch package file, orchestrator manifest
   tsconfig.json                                                    | orch typescript config, orchestrator compiler config
-  README.md                                                        | orchestrator documentation, extension readme
   package.json.governance.txt                                      | package governance, package sidecar
   tsconfig.json.governance.txt                                     | tsconfig governance, typescript governance sidecar
+  README.md                                                        | orchestrator documentation, extension readme
   \src                                                             | orchestrator source, extension source
     extension.ts                                                   | orchestrator entry, extension main
 -------------------------------------------------------------------|--------------------------------------------------------------------------------------------
@@ -2689,21 +2704,27 @@ IDs and VERIFIED flags are acceleration signals only, never authority.
   orch_bootstrap.js                                                | bootstrap script, orchestrator bootstrap
                                                                    |
 -------------------------------------------------------------------|--------------------------------------------------------------------------------------------
-\pipz-mirror-governance                                            | mirror governance, governance enforcement extension
+\pipz-mirror-governance                                            | mirror governance, governance enforcement extension, mirror extension
   package.json                                                     | mirror manifest, governance manifest
-  tsconfig.json                                                    | mirror typescript config
+  tsconfig.json                                                    | mirror typescript config, mirror compiler config
+  package.json.governance.txt                                      | mirror package governance, mirror manifest sidecar, governance package sidecar
+  tsconfig.json.governance.txt                                     | mirror tsconfig governance, mirror compiler governance sidecar
   README.md                                                        | mirror documentation
+  LICENSE.md                                                       | mirror license, governance license
   \src                                                             | mirror source
     extension.ts                                                   | mirror entry, governance mirror main
-  \.vscode                                                         | mirror vscode workspace
-    extensions.json                                                | mirror recommended extensions
-    launch.json                                                    | mirror debug config
-    settings.json                                                  | mirror workspace settings
-    tasks.json                                                     | mirror build tasks
-    extensions.json.governance.txt                                 | mirror extensions governance
-    launch.json.governance.txt                                     | mirror launch governance
-    settings.json.governance.txt                                   | mirror settings governance
-    tasks.json.governance.txt                                      | mirror tasks governance
+                                                                   |
+-------------------------------------------------------------------|--------------------------------------------------------------------------------------------
+\pipz-publisher                                                    | publisher extension, publish extension, context publisher, bundle publisher, release publisher
+  package.json                                                     | publisher manifest, publisher package file, publish manifest
+  tsconfig.json                                                    | publisher typescript config, publisher compiler config
+  package.json.governance.txt                                      | publisher package governance, publisher package sidecar
+  tsconfig.json.governance.txt                                     | publisher tsconfig governance, publisher typescript governance sidecar
+  README.md                                                        | publisher documentation, publisher readme
+  LICENSE.md                                                       | publisher license, publish license
+  \src                                                             | publisher source, publish source, extension source
+    extension.ts                                                   | publisher entry, publish command entry, extension main
+    \publish                                                       | publish pipeline, publisher pipeline, publish modules
                                                                    |
 -------------------------------------------------------------------|--------------------------------------------------------------------------------------------
 \.ORCH_AUDITLOG                                                    | orch logs, audit logs, mirror logs
