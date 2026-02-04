@@ -1,23 +1,49 @@
+# -------------------------------------------------
 # Dependencies
+# -------------------------------------------------
 node_modules/
 
+# -------------------------------------------------
 # Build output
+# -------------------------------------------------
 out/
 dist/
 
-# VS Code temporary files
+# -------------------------------------------------
+# VS Code / Editor temporary files
+# -------------------------------------------------
+.vscode/
 .vscode-test/
 *.log
+*.code-workspace
 
-# OneDrive / System files
+# -------------------------------------------------
+# Pipz publish / orchestration artifacts
+# -------------------------------------------------
+.pipz_publish_out/
+.ORCH_AUDITLOG/
+
+# -------------------------------------------------
+# Bundles & archives (prevent recursion)
+# -------------------------------------------------
+*.zip
+
+# -------------------------------------------------
+# System files (Windows / macOS)
+# -------------------------------------------------
 $RECYCLE.BIN/
 Thumbs.db
 desktop.ini
+Desktop.ini
+.DS_Store
 
-# Google Drive Sync Temp Files
+# -------------------------------------------------
+# Google Drive sync temp files
+# -------------------------------------------------
 .tmp.driveupload/
 .tmp.drivedownload/
 
-# OneDrive Sync Temp Files
+# -------------------------------------------------
+# OneDrive sync temp files
+# -------------------------------------------------
 *.tmp
-.DS_Store
