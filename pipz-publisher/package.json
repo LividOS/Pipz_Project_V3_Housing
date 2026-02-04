@@ -1,0 +1,139 @@
+{
+  "name": "pipz-publisher",
+  "displayName": "pipz-publisher",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.108.1"
+  },
+  "categories": [
+    "Other"
+  ],
+  "repository": {
+  "type": "git",
+  "url": "https://github.com/LividOS/Pipz_Project_V3_Housing.git"
+  },
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+  "commands": [
+    {
+      "command": "pipz.publishBundle",
+      "title": "Pipz: Publish Context Bundle"
+    }
+  ],
+  "keybindings": [
+    {
+      "command": "pipz.publishBundle",
+      "key": "ctrl+alt+s",
+      "when": "workspaceFolderCount > 0"
+    }
+  ],
+  "configuration": {
+    "title": "Pipz Publisher",
+    "properties": {
+      "pipz.publish.outputDir": {
+        "type": "string",
+        "default": ".pipz_publish_out",
+        "description": "Output directory for bundle artifacts (relative to workspace root)."
+      },
+      "pipz.publish.auditDir": {
+        "type": "string",
+        "default": ".ORCH_AUDITLOG/publish",
+        "description": "Audit directory for publish run records (relative to workspace root)."
+      },
+      "pipz.publish.pointerPath": {
+        "type": "string",
+        "default": "Governance/PIPZ_POINTER.txt",
+        "description": "Drive-synced pointer file path to overwrite (relative to workspace root)."
+      },
+      "pipz.publish.releaseTag": {
+        "type": "string",
+        "default": "context-latest",
+        "description": "GitHub release tag to create/update."
+      },
+      "pipz.publish.releaseAssetName": {
+        "type": "string",
+        "default": "pipz-context-latest.zip",
+        "description": "Asset name to upload/replace in the release."
+      },
+      "pipz.publish.allowlist": {
+        "type": "array",
+        "items": { "type": "string" },
+        "default": [
+          "Controller/**",
+          "Worker/**",
+          "Lib/**",
+          "Governance/**",
+          "_PROJECT_BLUEPRINT.txt",
+          "PROJECT_STATUS_CHECKLIST.txt",
+          "PROTOCOL_RUNBOOK.txt",
+          "GOVERNANCE_COMPENDIUM.txt",
+          "GLOBAL_REGISTRY_MASTER.csv",
+          "INTERNAL_FUNCTION_INDEX.csv",
+          "Main_Controller.txt",
+          "Controller_Core.txt",
+          "Main_Worker.txt",
+          "Worker_Core.txt",
+          "Humanoid.txt",
+          "Core_Utils.txt",
+          "Interop.txt"
+        ],
+        "description": "Glob patterns to include in bundle."
+      },
+      "pipz.publish.exclude": {
+        "type": "array",
+        "items": { "type": "string" },
+        "default": [
+          ".git/**",
+          ".vscode/**",
+          ".vscode-test/**",
+          ".pipz_publish_out/**",
+          ".ORCH_AUDITLOG/**",
+          "node_modules/**",
+          "dist/**",
+          "out/**",
+          "**/*.zip",
+          "**/*.tmp",
+          "**/*.log",
+          "**/~$*",
+          "Thumbs.db",
+          "Desktop.ini",
+          "desktop.ini"
+        ],
+        "description": "Glob patterns to exclude from bundle."
+      },
+      "pipz.publish.requireCleanGit": {
+        "type": "boolean",
+        "default": false,
+        "description": "If true, blocks publishing when git status is dirty."
+      }
+    }
+  }
+},
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/archiver": "^7.0.0",
+    "@types/fs-extra": "^11.0.4",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "@types/vscode": "^1.108.1",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2",
+    "eslint": "^9.39.2",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.52.0"
+  },
+  "dependencies": {
+    "archiver": "^7.0.1",
+    "fast-glob": "^3.3.3",
+    "fs-extra": "^11.3.3"
+  }
+}
