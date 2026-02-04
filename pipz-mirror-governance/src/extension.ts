@@ -165,7 +165,7 @@ function isWatchedDoc(doc: vscode.TextDocument): boolean {
   return WATCHED_REL_PATHS.has(normRel);
 }
 
-function bumpPointerBuildId(workspaceRoot: string) {
+function bumpPointerBuildId(workspaceRoot: string, triggerFileFsPath: string) {
   const resolved = resolvePointerFs(workspaceRoot);
   if (!resolved) return;
 
@@ -180,7 +180,10 @@ function bumpPointerBuildId(workspaceRoot: string) {
     const eol = detectEolFromText(raw);
     const lines = raw.split(/\r?\n/);
 
-    // BUILD_ID line: overwrite with 8-digit value regardless of prior format.
+    let bumpedBuildId: string | null = null;
+    let refreshedUpdatedUtc: string | null = null;
+
+    // --- BUILD_ID bump (8-digit) ---
     const buildIdx = lines.findIndex(l => /^\s*BUILD_ID\s*:/.test(l));
     if (buildIdx !== -1) {
       const m = lines[buildIdx].match(/^\s*BUILD_ID\s*:\s*(.*?)\s*$/);
@@ -189,21 +192,49 @@ function bumpPointerBuildId(workspaceRoot: string) {
 
       const next = nextBuildId8(prior8);
       lines[buildIdx] = `BUILD_ID: ${next}`;
+      bumpedBuildId = next;
     }
 
-    // UPDATED_UTC line: refresh in timestamp format
+    // --- UPDATED_UTC refresh (timestamp format preserved) ---
     const updIdx = lines.findIndex(l => /^\s*UPDATED_UTC\s*:/.test(l));
     if (updIdx !== -1) {
-      lines[updIdx] = `UPDATED_UTC: ${formatUpdatedUtc()}`;
+      const nextUtc = formatUpdatedUtc();
+      lines[updIdx] = `UPDATED_UTC: ${nextUtc}`;
+      refreshedUpdatedUtc = nextUtc;
     }
 
     const updated = lines.join(eol);
-    if (updated !== raw) {
-      fs.writeFileSync(pointerFs, updated, "utf8");
-      OUT.appendLine(`Pointer update PASS: ${resolved.rel} | BUILD_ID bumped + UPDATED_UTC refreshed`);
-    }
+    if (updated === raw) return;
+
+    fs.writeFileSync(pointerFs, updated, "utf8");
+    OUT.appendLine(`Pointer update PASS: ${resolved.rel} | BUILD_ID bumped + UPDATED_UTC refreshed`);
+
+    // --- NEW: Audit event ---
+    writeAuditEvent(workspaceRoot, {
+      event: "pointer_update",
+      result: "PASS",
+      pointer_rel: resolved.rel,
+      pointer_fs: pointerFs,
+      build_id: bumpedBuildId,
+      updated_utc: refreshedUpdatedUtc,
+      trigger_file: triggerFileFsPath,
+      ts_utc: new Date().toISOString(),
+    });
+
   } catch (e: any) {
     OUT.appendLine(`Pointer update ERROR: ${String(e?.message ?? e)}`);
+
+    // Optional: also log failures (recommended)
+    writeAuditEvent(workspaceRoot, {
+      event: "pointer_update",
+      result: "FAIL",
+      pointer_rel: resolved?.rel ?? null,
+      pointer_fs: resolved?.fsPath ?? null,
+      trigger_file: triggerFileFsPath,
+      error: String(e?.message ?? e),
+      ts_utc: new Date().toISOString(),
+    });
+
   } finally {
     pointerBumpGuard.delete(guardKey);
   }
@@ -564,7 +595,7 @@ function handleDidSave(doc: vscode.TextDocument) {
     // NEW: pointer bump first (does not require runtime mirror target)
     const root0 = workspaceRootForDoc(doc);
     if (root0 && isWatchedDoc(doc)) {
-      bumpPointerBuildId(root0);
+      bumpPointerBuildId(root0, doc.fileName);
     }
 
     // Existing behavior: only runtime targets get mirrored post-save
