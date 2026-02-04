@@ -6,7 +6,7 @@
 ; MAINTEMPLATE - Controller_Core.ahk (AHK v2)
 ; Version: 1.0.0
 ; Last change: Consolidated Controller\Modules\*.ahk into Controller_Core.
-; Content-Fingerprint: 2026-01-28T23-06-31Z-FKYT1AGA
+; Content-Fingerprint: 2026-02-04T02-49-56Z-0YLZ62UZ
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
