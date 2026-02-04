@@ -1,3 +1,18 @@
+// ------------------------------------------------------------------
+// GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\pipz-mirror-governance\src\extension.ts"
+// ------------------------------------------------------------------
+
+// ------------------------------------------------------------------
+// MAINTEMPLATE - extension.ts
+// Version: 0.0.2
+// Last change: Added watched-file pointer bump (BUILD_ID 8-digit) + UPDATED_UTC refresh; broadened watched path matching.
+// Content-Fingerprint: 2026-02-04T23-13-01Z-UHLCZ89Z
+// ------------------------------------------------------------------
+
+// ------------------------------------------------------------------
+// ALL CONTENT MUST GO BELOW THIS POINT (LINES 1-14 RESERVED)
+// ------------------------------------------------------------------
+
 import * as vscode from "vscode";
 import * as fs from "fs";
 import * as path from "path";
@@ -68,15 +83,18 @@ const didSaveGuard = new Set<string>();
 // ================================
 
 // Pointer file location: workspace root / PIPZ_POINTER.txt
-const POINTER_FILE_NAME = "PIPZ_POINTER.txt";
+const POINTER_FILE_NAME = "Governance\PIPZ_POINTER.txt";
 
 // Watch list (workspace-relative paths, case-insensitive).
 // Use forward slashes or backslashes — we normalize.
 // IMPORTANT: Do NOT include PIPZ_POINTER.txt in this list.
 const WATCHED_REL_PATHS = new Set<string>([
   // ---- GOVERNANCE / RUNBOOKS ----
-  "Pipz_Project_V3/Governance/GOVERNANCE_COMPENDIUM.txt",
-  "Governance/PROTOCOL_RUNBOOK.txt",
+  // Support both root-level and foldered layouts (case-insensitive after normalization).
+  "GOVERNANCE_COMPENDIUM.txt",
+  "PROTOCOL_RUNBOOK.txt",
+  "Governance\GOVERNANCE_COMPENDIUM.txt",
+  "Governance\PROTOCOL_RUNBOOK.txt",
 
   // ---- REGISTRIES ----
   "GLOBAL_REGISTRY_MASTER.csv",
@@ -354,174 +372,157 @@ function detectHeaderPrefix(lines: string[], start: number | null, end: number |
     if (p) return p;
   }
 
+  // default fallback
   return ";";
 }
 
-// ================================
-// Decide if a document is a standalone FP target
-// ================================
-function isStandaloneFingerprintTarget(doc: vscode.TextDocument): boolean {
-  const fp = doc.fileName;
-  const lower = fp.toLowerCase();
+function isExcluded(doc: vscode.TextDocument): boolean {
+  const ext = path.extname(doc.fileName).toLowerCase();
+  return EXCLUDED_EXTS.has(ext);
+}
 
-  // Exclude JSON always
-  if (lower.endsWith(".json")) return false;
-
-  // Sidecar special-case
-  if (lower.endsWith(".json.governance.txt")) return true;
-
-  // Extension allowlist
-  const ext = path.extname(lower);
-  if (EXCLUDED_EXTS.has(ext)) return false;
+function isGovernedReadable(doc: vscode.TextDocument): boolean {
+  const ext = path.extname(doc.fileName).toLowerCase();
+  if (isExcluded(doc)) return false;
   if (STANDALONE_FP_EXTS.has(ext)) return true;
-
-  // Multi-extension support: ".governance.txt"
-  if (lower.endsWith(".governance.txt")) return true;
-
+  // handle *.json.governance.txt style
+  if (doc.fileName.toLowerCase().endsWith(".governance.txt")) return true;
   return false;
 }
 
 function isRuntimeMirrorTarget(doc: vscode.TextDocument): boolean {
-  const ext = path.extname(doc.fileName.toLowerCase());
+  const ext = path.extname(doc.fileName).toLowerCase();
   return MIRROR_RUNTIME_EXTS.has(ext);
 }
 
 // ================================
-// Fingerprint update (replace or insert)
+// Mirror path mapping (.ahk/.ini -> .txt)
 // ================================
-function updateFingerprintInText(
-  text: string,
-  eol: string
-): { updated: string; changed: boolean; newFp?: string } {
-  const newFp = utcFingerprint();
-
-  // Replace existing fingerprint line
-  if (FP_LINE_RE.test(text)) {
-    const updated = text.replace(FP_LINE_RE, `$1${newFp}`);
-    return { updated, changed: updated !== text, newFp };
-  }
-
-  // Insert into header block if possible
-  const lines = text.split(/\r?\n/);
-  const hb = findHeaderBlock(lines);
-
-  if (hb.start !== null && hb.end !== null) {
-    const prefix = detectHeaderPrefix(lines, hb.start, hb.end);
-    lines.splice(hb.end, 0, `${prefix} Content-Fingerprint: ${newFp}`);
-    return { updated: lines.join(eol), changed: true, newFp };
-  }
-
-  // Fail closed: no header block -> no insertion
-  return { updated: text, changed: false };
+function mirrorFsPathFromRuntime(runtimeFs: string): string {
+  const dir = path.dirname(runtimeFs);
+  const base = path.basename(runtimeFs);
+  return path.join(dir, `${base}.txt`);
 }
 
-// ================================
-// Mirror creation
-// ================================
-function mirrorFsPathFromRuntime(runtimeFsPath: string): string {
-  return runtimeFsPath.replace(/\.(ahk|ini)$/i, ".txt");
-}
-
-// AI SOT header for mirror files (keep your exact style)
-function makeAiSotHeader(mirrorProjectPath: string, eol: string): string {
-  return (
-    "; ------------------------------------------------------------------" + eol +
-    '; AI SOT TEXT FILE (DO NOT EVER REMOVE, EDIT OR INCLUDE IN FILE EDITS) - MY FULL PATH IS "' +
-    mirrorProjectPath + '"' + eol +
-    "; ------------------------------------------------------------------" + eol + eol
-  );
-}
-
-// Convert GEMINI path for runtime .ahk/.ini into mirror .txt project path
 function mirrorProjectPathFromRuntimeProjectPath(runtimeProjectPath: string): string {
-  return runtimeProjectPath.replace(/\.(ahk|ini)$/i, ".txt");
+  // runtimeProjectPath is like: Pipz_Project_V3\Lib\Humanoid.ahk
+  return `${runtimeProjectPath}.txt`;
 }
 
 // ================================
-// Audit logging
+// AI SOT mirror header (written ONLY into .txt mirrors)
 // ================================
-function ensureDir(p: string) {
-  fs.mkdirSync(p, { recursive: true });
+function makeAiSotHeader(projectFullPathTxt: string, eol: string): string {
+  return [
+    "; ------------------------------------------------------------------",
+    `; AI SOT TEXT FILE (DO NOT EVER REMOVE, EDIT OR INCLUDE IN FILE EDITS) - MY FULL PATH IS "${projectFullPathTxt}"`,
+    "; ------------------------------------------------------------------",
+    "",
+    "",
+  ].join(eol);
 }
 
-function writeAuditEvent(workspaceRoot: string, payload: any) {
-  try {
-    const auditDir = path.join(workspaceRoot, AUDIT_DIR_REL);
-    ensureDir(auditDir);
-
-    const stamp = new Date().toISOString().replace(/[:]/g, "-");
-    const id = crypto.randomUUID ? crypto.randomUUID() : crypto.randomBytes(8).toString("hex");
-    const fp = path.join(auditDir, `${stamp}_${id}.json`);
-    fs.writeFileSync(fp, JSON.stringify(payload, null, 2), "utf8");
-  } catch (e: any) {
-    OUT.appendLine(`AUDIT LOG ERROR: ${String(e?.message ?? e)}`);
-  }
-}
-
+// ================================
+// Audit logging (simple JSON drop)
+// ================================
 function workspaceRootForDoc(doc: vscode.TextDocument): string | null {
   const folder = vscode.workspace.getWorkspaceFolder(doc.uri);
   if (!folder) return null;
   return folder.uri.fsPath;
 }
 
+function ensureDir(p: string) {
+  if (!fs.existsSync(p)) fs.mkdirSync(p, { recursive: true });
+}
+
+function writeAuditEvent(workspaceRoot: string, payload: any) {
+  try {
+    const dir = path.join(workspaceRoot, AUDIT_DIR_REL);
+    ensureDir(dir);
+    const ts = new Date().toISOString().replace(/[:.]/g, "-");
+    const fname = `${ts}-${crypto.randomBytes(3).toString("hex")}.json`;
+    fs.writeFileSync(path.join(dir, fname), JSON.stringify(payload, null, 2), "utf8");
+  } catch (e: any) {
+    OUT.appendLine(`Audit write ERROR: ${String(e?.message ?? e)}`);
+  }
+}
+
 // ================================
-// Stage 1 + 3: fingerprint on save (pre-save)
+// Stage 1: fingerprint on will-save (governed-readable files)
 // ================================
-async function handleWillSave(e: vscode.TextDocumentWillSaveEvent) {
+function handleWillSave(e: vscode.TextDocumentWillSaveEvent) {
   const doc = e.document;
   if (doc.uri.scheme !== "file") return;
+  if (isExcluded(doc)) return;
+  if (!isGovernedReadable(doc)) return;
 
   const key = doc.uri.toString();
   if (willSaveGuard.has(key)) return;
-
-  const lower = doc.fileName.toLowerCase();
-
-  // Exclude JSON
-  if (lower.endsWith(".json")) return;
-
-  // Decide if eligible
-  const eligible = isRuntimeMirrorTarget(doc) || isStandaloneFingerprintTarget(doc);
-  if (!eligible) return;
-
-  const text = doc.getText();
-
-  // Fail closed: require GEMINI MEM TAG
-  if (!hasGeminiMemTag(text)) return;
-
-  // Fail closed: require a delimited header block
-  const lines = text.split(/\r?\n/);
-  const hb = findHeaderBlock(lines);
-  if (hb.start === null || hb.end === null) return;
-
-  const eol = eolString(doc);
-  const { updated, changed, newFp } = updateFingerprintInText(text, eol);
-  if (!changed) return;
-
   willSaveGuard.add(key);
-
-  const fullRange = new vscode.Range(
-    doc.positionAt(0),
-    doc.positionAt(text.length)
-  );
-
-  const edit = new vscode.WorkspaceEdit();
-  edit.replace(doc.uri, fullRange, updated);
 
   e.waitUntil((async () => {
     try {
-      await vscode.workspace.applyEdit(edit);
-      OUT.appendLine(`Fingerprint staged (will-save): ${doc.fileName}${newFp ? ` | ${newFp}` : ""}`);
+      const text = doc.getText();
+      if (!hasGeminiMemTag(text)) {
+        OUT.appendLine(`Fingerprint SKIP (no GEMINI MEM TAG): ${doc.fileName}`);
+        return [];
+      }
 
+      // Find header block
+      const lines = text.split(/\r?\n/);
+      const { start, end } = findHeaderBlock(lines);
+      if (start === null || end === null) {
+        OUT.appendLine(`Fingerprint SKIP (no header block): ${doc.fileName}`);
+        return [];
+      }
+
+      // Update Content-Fingerprint line (within header scan window)
+      const headSlice = lines.slice(start, Math.min(lines.length, start + HEADER_SCAN_LINES)).join("\n");
+      if (!FP_LINE_RE.test(headSlice)) {
+        OUT.appendLine(`Fingerprint SKIP (no Content-Fingerprint line): ${doc.fileName}`);
+        return [];
+      }
+
+      const newFp = utcFingerprint();
+
+      // Replace in full text but only first occurrence within header region
+      const prefix = detectHeaderPrefix(lines, start, end);
+      const scoped = lines.slice(0, end + 1).join("\n");
+      const rest = lines.slice(end + 1).join("\n");
+
+      const scopedUpdated = scoped.replace(FP_LINE_RE, `$1${newFp}`);
+
+      // If replacement didn't happen (shouldn't), fail closed
+      if (scopedUpdated === scoped) {
+        OUT.appendLine(`Fingerprint FAIL (replace no-op): ${doc.fileName}`);
+        return [];
+      }
+
+      const eol = eolString(doc);
+      const finalText = scopedUpdated.split("\n").join(eol) + (rest ? eol + rest.split("\n").join(eol) : "");
+
+      const edit = new vscode.WorkspaceEdit();
+      const fullRange = new vscode.Range(
+        doc.positionAt(0),
+        doc.positionAt(text.length)
+      );
+      edit.replace(doc.uri, fullRange, finalText);
+
+      OUT.appendLine(`Fingerprint PASS: ${doc.fileName} -> ${newFp}`);
+
+      // Audit
       const root = workspaceRootForDoc(doc);
       if (root) {
         writeAuditEvent(root, {
           event: "fingerprint_stage",
           file: doc.fileName,
           result: "PASS",
-          fingerprint: newFp ?? null,
+          fingerprint: newFp,
           ts_utc: new Date().toISOString(),
         });
       }
+
+      return [edit];
     } catch (err: any) {
       OUT.appendLine(`Fingerprint stage ERROR: ${String(err?.message ?? err)}`);
       const root = workspaceRootForDoc(doc);
@@ -534,6 +535,7 @@ async function handleWillSave(e: vscode.TextDocumentWillSaveEvent) {
           ts_utc: new Date().toISOString(),
         });
       }
+      return [];
     } finally {
       willSaveGuard.delete(key);
     }
@@ -596,8 +598,9 @@ function handleDidSave(doc: vscode.TextDocument) {
 
     OUT.appendLine(`Mirror write PASS: ${doc.fileName} -> ${mirrorFs} | enc=${runtimeEnc}`);
 
-    if (root) {
-      writeAuditEvent(root, {
+    const root2 = workspaceRootForDoc(doc);
+    if (root2) {
+      writeAuditEvent(root2, {
         event: "mirror_write",
         runtime: doc.fileName,
         mirror: mirrorFs,
@@ -607,11 +610,11 @@ function handleDidSave(doc: vscode.TextDocument) {
       });
     }
   } catch (e: any) {
-    OUT.appendLine(`DidSave ERROR: ${String(e?.message ?? e)}`);
+    OUT.appendLine(`Mirror write ERROR: ${String(e?.message ?? e)}`);
     const root = workspaceRootForDoc(doc);
     if (root) {
       writeAuditEvent(root, {
-        event: "did_save_handler",
+        event: "mirror_write",
         runtime: doc.fileName,
         result: "FAIL",
         error: String(e?.message ?? e),
