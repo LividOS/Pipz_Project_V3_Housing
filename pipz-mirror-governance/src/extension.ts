@@ -1,18 +1,3 @@
-// ------------------------------------------------------------------
-// GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\pipz-mirror-governance\src\extension.ts"
-// ------------------------------------------------------------------
-
-// ------------------------------------------------------------------
-// MAINTEMPLATE - extension.ts
-// Version: 0.0.2
-// Last change: Added watched-file pointer bump (BUILD_ID 8-digit) + UPDATED_UTC refresh; broadened watched path matching.
-// Content-Fingerprint: 2026-02-04T23-13-01Z-UHLCZ89Z
-// ------------------------------------------------------------------
-
-// ------------------------------------------------------------------
-// ALL CONTENT MUST GO BELOW THIS POINT (LINES 1-14 RESERVED)
-// ------------------------------------------------------------------
-
 import * as vscode from "vscode";
 import * as fs from "fs";
 import * as path from "path";
@@ -79,41 +64,41 @@ const willSaveGuard = new Set<string>();
 const didSaveGuard = new Set<string>();
 
 // ================================
-// BUILD_ID bump (watched files -> pointer)
+// NEW: Pointer bump (watched files -> PIPZ_POINTER.txt)
 // ================================
 
-// Pointer file location: workspace root / PIPZ_POINTER.txt
-const POINTER_FILE_NAME = "Governance/PIPZ_POINTER.txt";
+// Your log shows pointer is under Governance/, so we support both common locations.
+// First existing wins.
+const POINTER_REL_CANDIDATES = [
+  "Governance/PIPZ_POINTER.txt",
+  "PIPZ_POINTER.txt",
+];
 
-// Watch list (workspace-relative paths, case-insensitive).
-// Use forward slashes or backslashes — we normalize.
-// IMPORTANT: Do NOT include PIPZ_POINTER.txt in this list.
+// Watched files: workspace-relative paths, normalized (case-insensitive).
+// IMPORTANT: Do NOT include PIPZ_POINTER.txt itself.
 const WATCHED_REL_PATHS = new Set<string>([
-  // ---- GOVERNANCE / RUNBOOKS ----
-  // Support both root-level and foldered layouts (case-insensitive after normalization).
-  "GOVERNANCE_COMPENDIUM.txt",
-  "PROTOCOL_RUNBOOK.txt",
+  // Governance
   "Governance/GOVERNANCE_COMPENDIUM.txt",
   "Governance/PROTOCOL_RUNBOOK.txt",
 
-  // ---- REGISTRIES ----
-  "GLOBAL_REGISTRY_MASTER.csv",
-  "INTERNAL_FUNCTION_INDEX.csv",
+  // Registries
+  "Registry/GLOBAL_REGISTRY_MASTER.csv",
+  "Registry/INTERNAL_FUNCTION_INDEX.csv",
 
-  // ---- CORE MIRRORS (optional) ----
-  "Main_Controller.txt",
-  "Controller_Core.txt",
-  "Main_Worker.txt",
-  "Worker_Core.txt",
-  "Core_Utils.txt",
-  "Interop.txt",
-  "Humanoid.txt",
+  // Core mirrors (optional)
+  "Controller/Main_Controller.txt",
+  "Controller/Controller_Core.txt",
+  "Worker/Main_Worker.txt",
+  "Worker/Worker_Core.txt",
+  "Lib/Core_Utils.txt",
+  "Lib/Interop.txt",
+  "Lib/Humanoid.txt",
 ].map(p => normalizeRelPath(p)));
 
 const pointerBumpGuard = new Set<string>();
 
 function normalizeRelPath(p: string): string {
-  return p.replace(/\\/g, "/").replace(/^\/+/g, "").toLowerCase();
+  return p.replace(/\\/g, "/").replace(/^\/+/, "").toLowerCase();
 }
 
 function stripProjectPrefix(projectPath: string): string {
@@ -128,19 +113,15 @@ function pad8(n: number): string {
   return String(n).padStart(8, "0").slice(-8);
 }
 
-function nextBuildId8(current?: string): string {
+function nextBuildId8(current8?: string): string {
   const nowSec = Math.floor(Date.now() / 1000);
   let v = nowSec % 100000000;
 
-  if (current && /^\d{8}$/.test(current)) {
-    const cur = Number(current);
+  if (current8 && /^\d{8}$/.test(current8)) {
+    const cur = Number(current8);
     if (v === cur) v = (v + 1) % 100000000;
   }
   return pad8(v);
-}
-
-function detectEolFromText(raw: string): string {
-  return raw.includes("\r\n") ? "\r\n" : "\n";
 }
 
 function formatUpdatedUtc(): string {
@@ -149,6 +130,18 @@ function formatUpdatedUtc(): string {
     .toISOString()
     .replace(/\.\d{3}Z$/, "Z")
     .replace(/:/g, "-");
+}
+
+function detectEolFromText(raw: string): string {
+  return raw.includes("\r\n") ? "\r\n" : "\n";
+}
+
+function resolvePointerFs(workspaceRoot: string): { fsPath: string; rel: string } | null {
+  for (const rel of POINTER_REL_CANDIDATES) {
+    const fsPath = path.join(workspaceRoot, rel);
+    if (fs.existsSync(fsPath)) return { fsPath, rel };
+  }
+  return null;
 }
 
 function isWatchedDoc(doc: vscode.TextDocument): boolean {
@@ -173,9 +166,10 @@ function isWatchedDoc(doc: vscode.TextDocument): boolean {
 }
 
 function bumpPointerBuildId(workspaceRoot: string) {
-  const pointerFs = path.join(workspaceRoot, POINTER_FILE_NAME);
-  if (!fs.existsSync(pointerFs)) return;
+  const resolved = resolvePointerFs(workspaceRoot);
+  if (!resolved) return;
 
+  const pointerFs = resolved.fsPath;
   const guardKey = pointerFs.toLowerCase();
   if (pointerBumpGuard.has(guardKey)) return;
 
@@ -184,22 +178,20 @@ function bumpPointerBuildId(workspaceRoot: string) {
 
     const raw = fs.readFileSync(pointerFs, "utf8");
     const eol = detectEolFromText(raw);
-
     const lines = raw.split(/\r?\n/);
 
-    // --- BUILD_ID bump (8-digit) ---
+    // BUILD_ID line: overwrite with 8-digit value regardless of prior format.
     const buildIdx = lines.findIndex(l => /^\s*BUILD_ID\s*:/.test(l));
     if (buildIdx !== -1) {
-      // Capture any prior value (timestamp, number, etc.) but only use it if it's already 8 digits.
       const m = lines[buildIdx].match(/^\s*BUILD_ID\s*:\s*(.*?)\s*$/);
       const prior = m?.[1];
-      const cur8 = (prior && /^\d{8}$/.test(prior)) ? prior : undefined;
+      const prior8 = (prior && /^\d{8}$/.test(prior)) ? prior : undefined;
 
-      const next = nextBuildId8(cur8);
+      const next = nextBuildId8(prior8);
       lines[buildIdx] = `BUILD_ID: ${next}`;
     }
 
-    // --- UPDATED_UTC refresh (timestamp format preserved) ---
+    // UPDATED_UTC line: refresh in timestamp format
     const updIdx = lines.findIndex(l => /^\s*UPDATED_UTC\s*:/.test(l));
     if (updIdx !== -1) {
       lines[updIdx] = `UPDATED_UTC: ${formatUpdatedUtc()}`;
@@ -208,7 +200,7 @@ function bumpPointerBuildId(workspaceRoot: string) {
     const updated = lines.join(eol);
     if (updated !== raw) {
       fs.writeFileSync(pointerFs, updated, "utf8");
-      OUT.appendLine(`Pointer update PASS: ${POINTER_FILE_NAME} | BUILD_ID bumped + UPDATED_UTC refreshed`);
+      OUT.appendLine(`Pointer update PASS: ${resolved.rel} | BUILD_ID bumped + UPDATED_UTC refreshed`);
     }
   } catch (e: any) {
     OUT.appendLine(`Pointer update ERROR: ${String(e?.message ?? e)}`);
@@ -372,157 +364,174 @@ function detectHeaderPrefix(lines: string[], start: number | null, end: number |
     if (p) return p;
   }
 
-  // default fallback
   return ";";
 }
 
-function isExcluded(doc: vscode.TextDocument): boolean {
-  const ext = path.extname(doc.fileName).toLowerCase();
-  return EXCLUDED_EXTS.has(ext);
-}
+// ================================
+// Decide if a document is a standalone FP target
+// ================================
+function isStandaloneFingerprintTarget(doc: vscode.TextDocument): boolean {
+  const fp = doc.fileName;
+  const lower = fp.toLowerCase();
 
-function isGovernedReadable(doc: vscode.TextDocument): boolean {
-  const ext = path.extname(doc.fileName).toLowerCase();
-  if (isExcluded(doc)) return false;
+  // Exclude JSON always
+  if (lower.endsWith(".json")) return false;
+
+  // Sidecar special-case
+  if (lower.endsWith(".json.governance.txt")) return true;
+
+  // Extension allowlist
+  const ext = path.extname(lower);
+  if (EXCLUDED_EXTS.has(ext)) return false;
   if (STANDALONE_FP_EXTS.has(ext)) return true;
-  // handle *.json.governance.txt style
-  if (doc.fileName.toLowerCase().endsWith(".governance.txt")) return true;
+
+  // Multi-extension support: ".governance.txt"
+  if (lower.endsWith(".governance.txt")) return true;
+
   return false;
 }
 
 function isRuntimeMirrorTarget(doc: vscode.TextDocument): boolean {
-  const ext = path.extname(doc.fileName).toLowerCase();
+  const ext = path.extname(doc.fileName.toLowerCase());
   return MIRROR_RUNTIME_EXTS.has(ext);
 }
 
 // ================================
-// Mirror path mapping (.ahk/.ini -> .txt)
+// Fingerprint update (replace or insert)
 // ================================
-function mirrorFsPathFromRuntime(runtimeFs: string): string {
-  const dir = path.dirname(runtimeFs);
-  const base = path.basename(runtimeFs);
-  return path.join(dir, `${base}.txt`);
+function updateFingerprintInText(
+  text: string,
+  eol: string
+): { updated: string; changed: boolean; newFp?: string } {
+  const newFp = utcFingerprint();
+
+  // Replace existing fingerprint line
+  if (FP_LINE_RE.test(text)) {
+    const updated = text.replace(FP_LINE_RE, `$1${newFp}`);
+    return { updated, changed: updated !== text, newFp };
+  }
+
+  // Insert into header block if possible
+  const lines = text.split(/\r?\n/);
+  const hb = findHeaderBlock(lines);
+
+  if (hb.start !== null && hb.end !== null) {
+    const prefix = detectHeaderPrefix(lines, hb.start, hb.end);
+    lines.splice(hb.end, 0, `${prefix} Content-Fingerprint: ${newFp}`);
+    return { updated: lines.join(eol), changed: true, newFp };
+  }
+
+  // Fail closed: no header block -> no insertion
+  return { updated: text, changed: false };
 }
 
+// ================================
+// Mirror creation
+// ================================
+function mirrorFsPathFromRuntime(runtimeFsPath: string): string {
+  return runtimeFsPath.replace(/\.(ahk|ini)$/i, ".txt");
+}
+
+// AI SOT header for mirror files (keep your exact style)
+function makeAiSotHeader(mirrorProjectPath: string, eol: string): string {
+  return (
+    "; ------------------------------------------------------------------" + eol +
+    '; AI SOT TEXT FILE (DO NOT EVER REMOVE, EDIT OR INCLUDE IN FILE EDITS) - MY FULL PATH IS "' +
+    mirrorProjectPath + '"' + eol +
+    "; ------------------------------------------------------------------" + eol + eol
+  );
+}
+
+// Convert GEMINI path for runtime .ahk/.ini into mirror .txt project path
 function mirrorProjectPathFromRuntimeProjectPath(runtimeProjectPath: string): string {
-  // runtimeProjectPath is like: Pipz_Project_V3\Lib\Humanoid.ahk
-  return `${runtimeProjectPath}.txt`;
+  return runtimeProjectPath.replace(/\.(ahk|ini)$/i, ".txt");
 }
 
 // ================================
-// AI SOT mirror header (written ONLY into .txt mirrors)
+// Audit logging
 // ================================
-function makeAiSotHeader(projectFullPathTxt: string, eol: string): string {
-  return [
-    "; ------------------------------------------------------------------",
-    `; AI SOT TEXT FILE (DO NOT EVER REMOVE, EDIT OR INCLUDE IN FILE EDITS) - MY FULL PATH IS "${projectFullPathTxt}"`,
-    "; ------------------------------------------------------------------",
-    "",
-    "",
-  ].join(eol);
+function ensureDir(p: string) {
+  fs.mkdirSync(p, { recursive: true });
 }
 
-// ================================
-// Audit logging (simple JSON drop)
-// ================================
+function writeAuditEvent(workspaceRoot: string, payload: any) {
+  try {
+    const auditDir = path.join(workspaceRoot, AUDIT_DIR_REL);
+    ensureDir(auditDir);
+
+    const stamp = new Date().toISOString().replace(/[:]/g, "-");
+    const id = crypto.randomUUID ? crypto.randomUUID() : crypto.randomBytes(8).toString("hex");
+    const fp = path.join(auditDir, `${stamp}_${id}.json`);
+    fs.writeFileSync(fp, JSON.stringify(payload, null, 2), "utf8");
+  } catch (e: any) {
+    OUT.appendLine(`AUDIT LOG ERROR: ${String(e?.message ?? e)}`);
+  }
+}
+
 function workspaceRootForDoc(doc: vscode.TextDocument): string | null {
   const folder = vscode.workspace.getWorkspaceFolder(doc.uri);
   if (!folder) return null;
   return folder.uri.fsPath;
 }
 
-function ensureDir(p: string) {
-  if (!fs.existsSync(p)) fs.mkdirSync(p, { recursive: true });
-}
-
-function writeAuditEvent(workspaceRoot: string, payload: any) {
-  try {
-    const dir = path.join(workspaceRoot, AUDIT_DIR_REL);
-    ensureDir(dir);
-    const ts = new Date().toISOString().replace(/[:.]/g, "-");
-    const fname = `${ts}-${crypto.randomBytes(3).toString("hex")}.json`;
-    fs.writeFileSync(path.join(dir, fname), JSON.stringify(payload, null, 2), "utf8");
-  } catch (e: any) {
-    OUT.appendLine(`Audit write ERROR: ${String(e?.message ?? e)}`);
-  }
-}
-
 // ================================
-// Stage 1: fingerprint on will-save (governed-readable files)
+// Stage 1 + 3: fingerprint on save (pre-save)
 // ================================
-function handleWillSave(e: vscode.TextDocumentWillSaveEvent) {
+async function handleWillSave(e: vscode.TextDocumentWillSaveEvent) {
   const doc = e.document;
   if (doc.uri.scheme !== "file") return;
-  if (isExcluded(doc)) return;
-  if (!isGovernedReadable(doc)) return;
 
   const key = doc.uri.toString();
   if (willSaveGuard.has(key)) return;
+
+  const lower = doc.fileName.toLowerCase();
+
+  // Exclude JSON
+  if (lower.endsWith(".json")) return;
+
+  // Decide if eligible
+  const eligible = isRuntimeMirrorTarget(doc) || isStandaloneFingerprintTarget(doc);
+  if (!eligible) return;
+
+  const text = doc.getText();
+
+  // Fail closed: require GEMINI MEM TAG
+  if (!hasGeminiMemTag(text)) return;
+
+  // Fail closed: require a delimited header block
+  const lines = text.split(/\r?\n/);
+  const hb = findHeaderBlock(lines);
+  if (hb.start === null || hb.end === null) return;
+
+  const eol = eolString(doc);
+  const { updated, changed, newFp } = updateFingerprintInText(text, eol);
+  if (!changed) return;
+
   willSaveGuard.add(key);
+
+  const fullRange = new vscode.Range(
+    doc.positionAt(0),
+    doc.positionAt(text.length)
+  );
+
+  const edit = new vscode.WorkspaceEdit();
+  edit.replace(doc.uri, fullRange, updated);
 
   e.waitUntil((async () => {
     try {
-      const text = doc.getText();
-      if (!hasGeminiMemTag(text)) {
-        OUT.appendLine(`Fingerprint SKIP (no GEMINI MEM TAG): ${doc.fileName}`);
-        return [];
-      }
+      await vscode.workspace.applyEdit(edit);
+      OUT.appendLine(`Fingerprint staged (will-save): ${doc.fileName}${newFp ? ` | ${newFp}` : ""}`);
 
-      // Find header block
-      const lines = text.split(/\r?\n/);
-      const { start, end } = findHeaderBlock(lines);
-      if (start === null || end === null) {
-        OUT.appendLine(`Fingerprint SKIP (no header block): ${doc.fileName}`);
-        return [];
-      }
-
-      // Update Content-Fingerprint line (within header scan window)
-      const headSlice = lines.slice(start, Math.min(lines.length, start + HEADER_SCAN_LINES)).join("\n");
-      if (!FP_LINE_RE.test(headSlice)) {
-        OUT.appendLine(`Fingerprint SKIP (no Content-Fingerprint line): ${doc.fileName}`);
-        return [];
-      }
-
-      const newFp = utcFingerprint();
-
-      // Replace in full text but only first occurrence within header region
-      const prefix = detectHeaderPrefix(lines, start, end);
-      const scoped = lines.slice(0, end + 1).join("\n");
-      const rest = lines.slice(end + 1).join("\n");
-
-      const scopedUpdated = scoped.replace(FP_LINE_RE, `$1${newFp}`);
-
-      // If replacement didn't happen (shouldn't), fail closed
-      if (scopedUpdated === scoped) {
-        OUT.appendLine(`Fingerprint FAIL (replace no-op): ${doc.fileName}`);
-        return [];
-      }
-
-      const eol = eolString(doc);
-      const finalText = scopedUpdated.split("\n").join(eol) + (rest ? eol + rest.split("\n").join(eol) : "");
-
-      const edit = new vscode.WorkspaceEdit();
-      const fullRange = new vscode.Range(
-        doc.positionAt(0),
-        doc.positionAt(text.length)
-      );
-      edit.replace(doc.uri, fullRange, finalText);
-
-      OUT.appendLine(`Fingerprint PASS: ${doc.fileName} -> ${newFp}`);
-
-      // Audit
       const root = workspaceRootForDoc(doc);
       if (root) {
         writeAuditEvent(root, {
           event: "fingerprint_stage",
           file: doc.fileName,
           result: "PASS",
-          fingerprint: newFp,
+          fingerprint: newFp ?? null,
           ts_utc: new Date().toISOString(),
         });
       }
-
-      return [edit];
     } catch (err: any) {
       OUT.appendLine(`Fingerprint stage ERROR: ${String(err?.message ?? err)}`);
       const root = workspaceRootForDoc(doc);
@@ -535,7 +544,6 @@ function handleWillSave(e: vscode.TextDocumentWillSaveEvent) {
           ts_utc: new Date().toISOString(),
         });
       }
-      return [];
     } finally {
       willSaveGuard.delete(key);
     }
@@ -553,17 +561,13 @@ function handleDidSave(doc: vscode.TextDocument) {
 
   didSaveGuard.add(key);
   try {
-    // ----------------------------
-    // NEW: Watched-file pointer bump
-    // ----------------------------
-    const root = workspaceRootForDoc(doc);
-    if (root && isWatchedDoc(doc)) {
-      bumpPointerBuildId(root);
+    // NEW: pointer bump first (does not require runtime mirror target)
+    const root0 = workspaceRootForDoc(doc);
+    if (root0 && isWatchedDoc(doc)) {
+      bumpPointerBuildId(root0);
     }
 
-    // ----------------------------
-    // Existing mirror behavior (runtime .ahk/.ini only)
-    // ----------------------------
+    // Existing behavior: only runtime targets get mirrored post-save
     if (!isRuntimeMirrorTarget(doc)) return;
 
     const text = doc.getText();
@@ -598,9 +602,9 @@ function handleDidSave(doc: vscode.TextDocument) {
 
     OUT.appendLine(`Mirror write PASS: ${doc.fileName} -> ${mirrorFs} | enc=${runtimeEnc}`);
 
-    const root2 = workspaceRootForDoc(doc);
-    if (root2) {
-      writeAuditEvent(root2, {
+    const root = workspaceRootForDoc(doc);
+    if (root) {
+      writeAuditEvent(root, {
         event: "mirror_write",
         runtime: doc.fileName,
         mirror: mirrorFs,
