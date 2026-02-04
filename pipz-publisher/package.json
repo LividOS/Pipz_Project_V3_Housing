@@ -65,19 +65,8 @@
           "Worker/**",
           "Lib/**",
           "Governance/**",
-          "_PROJECT_BLUEPRINT.txt",
-          "PROJECT_STATUS_CHECKLIST.txt",
-          "PROTOCOL_RUNBOOK.txt",
-          "GOVERNANCE_COMPENDIUM.txt",
-          "GLOBAL_REGISTRY_MASTER.csv",
-          "INTERNAL_FUNCTION_INDEX.csv",
-          "Main_Controller.txt",
-          "Controller_Core.txt",
-          "Main_Worker.txt",
-          "Worker_Core.txt",
-          "Humanoid.txt",
-          "Core_Utils.txt",
-          "Interop.txt"
+          "Registry/**",
+          "PPAVP/**"
         ],
         "description": "Glob patterns to include in bundle."
       },
