@@ -1,8 +1,0 @@
-{
-  "event": "mirror_write",
-  "runtime": "c:\\Users\\mello\\OneDrive\\Desktop\\Pipz_Project_V3\\Controller\\Main_Controller.ahk",
-  "mirror": "c:\\Users\\mello\\OneDrive\\Desktop\\Pipz_Project_V3\\Controller\\Main_Controller.txt",
-  "result": "PASS",
-  "encoding": "utf8bom",
-  "ts_utc": "2026-01-28T18:57:34.613Z"
-}

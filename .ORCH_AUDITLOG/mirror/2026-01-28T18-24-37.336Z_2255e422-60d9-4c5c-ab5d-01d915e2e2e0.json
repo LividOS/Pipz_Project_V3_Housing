@@ -1,8 +1,0 @@
-{
-  "event": "mirror_write",
-  "runtime": "c:\\Users\\mello\\OneDrive\\Desktop\\Pipz_Project_V3\\Lib\\Humanoid.ahk",
-  "mirror": "c:\\Users\\mello\\OneDrive\\Desktop\\Pipz_Project_V3\\Lib\\Humanoid.txt",
-  "result": "PASS",
-  "encoding": "utf8",
-  "ts_utc": "2026-01-28T18:24:37.336Z"
-}
