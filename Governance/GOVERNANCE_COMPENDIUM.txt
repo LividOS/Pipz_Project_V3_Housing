@@ -5,8 +5,9 @@
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt
 ; Version: 1.1.5
-; Last change: Added new subsection clauses to sections S1-3.
-; Content-Fingerprint: 2026-02-04T23-25-38Z-4ANLXY6G
+; Last change: Added new working set limitations rule.
+; Content-Fingerprint: 2026-02-05T00-13-24Z-I2FOZJSX
+; File Tag: Working Set (Live)
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -38,7 +39,9 @@ If the compendium or any required section cannot be located or fully read, gover
 
 Archived originals are stored separately under /Archive and are non-operative.
 
-SECTION ID CONTRACT (STABLE IDENTITIES)
+; ------------------------------------------------------------------
+### GOV.S0.A — SECTION ID CONTRACT (STABLE IDENTITIES)
+; ------------------------------------------------------------------
 
 The following Section IDs are case-sensitive, immutable, and must never be aliased:
 
@@ -52,9 +55,9 @@ The following Section IDs are case-sensitive, immutable, and must never be alias
 - GOV.S8.LEARNED_CONSTRAINTS  (origin: PROJECT_LEARNED_CONSTRAINTS.txt)
 - GOV.S9.STANDARD_HEADERS  (origin: STANDARDIZED_HEADERS.txt)
 
-POLICY A — ARCHIVED ORIGINAL HEADERS
-
-ARCHIVED ORIGINAL CONTENT (EXTERNAL — NON-OPERATIVE)
+; ------------------------------------------------------------------
+### GOV.S0.B — ARCHIVED ORIGINAL CONTENT (EXTERNAL — NON-OPERATIVE)
+; ------------------------------------------------------------------
 
 Original standalone governance files have been removed from this document and
 are preserved exclusively under the project-level /Archive directory.
@@ -76,7 +79,9 @@ Operative governance semantics for single-artifact mode are defined
 exclusively by the OPERATIVE TEXT (COMPENDIUM MODE) sections
 within this document.
 
-REGISTRY AUTHORITY NOTICE (EXTERNAL)
+; ------------------------------------------------------------------
+### GOV.S0.C — REGISTRY AUTHORITY NOTICE (EXTERNAL)
+; ------------------------------------------------------------------
 
 The following artifacts are authoritative registries and are intentionally NOT embedded as compendium sections:
   - GLOBAL_REGISTRY_MASTER.csv (Policy-B governed surface)
@@ -85,7 +90,9 @@ The following artifacts are authoritative registries and are intentionally NOT e
 
 Any governance rule that requires registry verification continues to require these artifacts externally. If a required registry cannot be located or read, the original hard-stop semantics apply unchanged.
 
-INTERPRETATION & CONFLICT RULES (MANDATORY)
+; ------------------------------------------------------------------
+### GOV.S0.D — INTERPRETATION & CONFLICT RULES (MANDATORY)
+; ------------------------------------------------------------------
 
 IR-1. Archived original governance content exists exclusively outside this document
      (under the project-level /Archive directory) and solely for:
@@ -119,6 +126,53 @@ IR-5. A governance section within GOVERNANCE_COMPENDIUM.txt is considered UNREAD
      Partial readability SHALL be treated as unreadable for all enforcement purposes
      and MUST trigger the same STOP conditions as total absence.
 
+; ------------------------------------------------------------------
+### GOV.S0.E — WORKING_SET_CAP — Working Set (Live) Hard Cap (20 Files)
+; ------------------------------------------------------------------
+
+DEFINITIONS:
+
+Working Set (Live):
+- Files present in the ChatGPT Project “Files” area (project-scoped), treated as the authoritative live context.
+- The AI must treat only this set as “in-session reality” unless the user explicitly imports additional artifacts.
+
+Backend Set (Cold):
+- All other project artifacts stored outside the live Project Files area (GitHub, Drive, archives, bundles, snapshots).
+- These may be referenced, but MUST NOT be treated as live reality unless imported into Working Set (Live).
+
+HARD CAP:
+
+1) Working Set (Live) MUST NOT exceed 20 files.
+2) If a change would exceed 20:
+   a) User must demote one or more files to Backend Set (Cold), OR
+   b) User must consolidate content into existing Working Set files (under existing governance).
+3) AI MUST NOT request imports that would exceed the cap.
+4) If compliance cannot be achieved, STOP and request a demotion/consolidation decision.
+
+RATIONALE (non-normative):
+- Prevents context sprawl and reduces drift risk.
+
+CURRENT WORKING SET (Count : 15):
+- GOVERNANCE_COMPENDIUM.txt
+- PROJECT_WORKING_NOTES.txt
+- PROJECT_LEARNED_CONSTRAINTS.txt
+- PROJECT_STATUS_CHECKLIST.txt
+- PROTOCOL_RUNBOOK.txt
+- PIPZ_POINTER.txt
+- GLOBAL_REGISTRY_MASTER.csv
+- INTERNAL_FUNCTION_INDEX.csv
+- Main_Controller.txt
+- Controller_Core.txt
+- Main_Worker.txt
+- Worker_Core.txt
+- Core_Utils.txt
+- Interop.txt
+- Humanoid.txt
+
+CURRENT BACKEND SET (Count : 3):
+- GLOBAL_REGISTRY_MASTER.gsheet
+- settings.txt
+- .gitignore
 ================================================================================
 END OF SECTION GOV.S0.COMPENDIUM_META
 
