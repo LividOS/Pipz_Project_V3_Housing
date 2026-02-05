@@ -6,7 +6,7 @@
 ; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt
 ; Version: 1.1.5
 ; Last change: Added new working set limitations rule.
-; Content-Fingerprint: 2026-02-05T00-17-28Z-3QFINW5J
+; Content-Fingerprint: 2026-02-05T00-32-26Z-N19BRPVH
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -151,27 +151,41 @@ HARD CAP:
 RATIONALE (non-normative):
 - Prevents context sprawl and reduces drift risk.
 
-CURRENT WORKING SET (Count : 15):
-- GOVERNANCE_COMPENDIUM.txt
-- PROJECT_WORKING_NOTES.txt
-- PROJECT_LEARNED_CONSTRAINTS.txt
-- PROJECT_STATUS_CHECKLIST.txt
-- PROTOCOL_RUNBOOK.txt
-- PIPZ_POINTER.txt
-- GLOBAL_REGISTRY_MASTER.csv
-- INTERNAL_FUNCTION_INDEX.csv
-- Main_Controller.txt
-- Controller_Core.txt
-- Main_Worker.txt
-- Worker_Core.txt
-- Core_Utils.txt
-- Interop.txt
-- Humanoid.txt
+INVOCATION: BUILD UPDATED
 
-CURRENT BACKEND SET (Count : 3):
-- GLOBAL_REGISTRY_MASTER.gsheet
-- settings.txt
-- .gitignore
+When the user states: "BUILD UPDATED"
+
+The AI MUST:
+1) Re-read ALL Working Set (Live) files present in the Project Files area.
+2) Confirm rehydration completion.
+3) Read the current pointer file and report:
+   - BUILD_ID: <value>
+   - UPDATED_UTC: <value>
+
+The AI MUST NOT report BUILD_ID/UPDATED_UTC until after step (1) is complete.
+If any Working Set file cannot be read, governed operations MUST STOP.
+
+CURRENT WORKING SET (Count : 15):
+- Pipz_Project_V3/Governance/GOVERNANCE_COMPENDIUM.txt
+- Pipz_Project_V3/Governance/PROJECT_WORKING_NOTES.txt
+- Pipz_Project_V3/Governance/PROJECT_LEARNED_CONSTRAINTS.txt
+- Pipz_Project_V3/Governance/PROTOCOL_RUNBOOK.txt
+- Pipz_Project_V3/Governance/PIPZ_POINTER.txt
+- Pipz_Project_V3/PPAVP/PROJECT_STATUS_CHECKLIST.txt
+- Pipz_Project_V3/Registry/GLOBAL_REGISTRY_MASTER.csv
+- Pipz_Project_V3/Registry/INTERNAL_FUNCTION_INDEX.csv
+- Pipz_Project_V3/Controller/Main_Controller.txt
+- Pipz_Project_V3/Controller/Controller_Core.txt
+- Pipz_Project_V3/Worker/Main_Worker.txt
+- Pipz_Project_V3/Worker/Worker_Core.txt
+- Pipz_Project_V3/Lib/Core_Utils.txt
+- Pipz_Project_V3/Lib/Interop.txt
+- Pipz_Project_V3/Lib/Humanoid.txt
+
+CURRENT BACKEND SET (Count : 3) [INFORMATIONAL ONLY — NOT ENFORCED]:
+- Pipz_Project_V3/Registry/GLOBAL_REGISTRY_MASTER.gsheet
+- Pipz_Project_V3/settings.txt
+- Pipz_Project_V3/.gitignore
 
 ================================================================================
 END OF SECTION GOV.S0.COMPENDIUM_META
