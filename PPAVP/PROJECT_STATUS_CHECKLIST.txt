@@ -4,9 +4,9 @@
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - PROJECT_STATUS_CHECKLIST.txt
-; Version: 1.0.0
-; Last change: Stripped checklist down to skeleton in preparation for next project phase.
-; Content-Fingerprint: 2026-02-02T17-19-52Z-MODIOTXN
+; Version: 1.1.8
+; Last change: Creation of tasks H-008 - H-012.
+; Content-Fingerprint: 2026-02-09T21-00-07Z-FBQYTOIQ
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -24,77 +24,136 @@ LEGEND:
 [ ] NOT STARTED / PENDING
 [!] BLOCKER / HIGH RISK
 
+TASK FORMAT (MANDATORY):
+[ ] #ID(<SECTION_LETTER>-<NUMBER>) <Task Title>
+    - Logic Goal: <Specific goal of this task>
+    - Last Known Constraint: <Relevant constraint or "None">
+
+INDEX:
+--------------------------------------------------------------------
+SECTION (ID PREFIX) | CATEGORY
+--------------------------------------------------------------------
+A       | GOVERNANCE & AUTHORITY
+B       | POLICY-B SURFACE (REGISTRY)
+C       | CORE FILES & SIGNPOSTS
+D       | MIRRORING & FINGERPRINTING
+E       | CONTROLLER (GUI / LIFECYCLE)
+F       | WORKER (RUNTIME / OVERLAY)
+G       | INTEROP / IPC
+H       | ORCHESTRATOR / MCP
+I       | AUDITABILITY
+J       | TOOLING / ENVIRONMENT
+K       | OPEN QUESTIONS / DECISIONS
+L       | NEXT ACTIONS (SHORT-TERM)
+--------------------------------------------------------------------
+
 ; ------------------------------------------------------------------
 A. GOVERNANCE & AUTHORITY
 ; ------------------------------------------------------------------
 
-[ ] PLACEHOLDER
+[✓] #ID(A-001) Compendium Structural Audit & Slimming (v1.2.0 Baseline)
+    - Logic Goal: Compendium Structural Audit & Slimming (Initial Phase).
+    - Last Known Constraint: We have deprecated "Mia/PED" and shifted to "Tia/AD" direct coordination.
+
+[✓] #ID(A-002) Machine-Checkable Governance Audit (Phase 1)
+    - Logic Goal: Audit and tag all governance artifacts (Compendium, Runbook, PLC) as ENFORCEABLE or NON-ENFORCEABLE.
+    - Last Known Constraint: Every enforceable rule must be machine-checkable and assigned an Authority Level (1-3).
 
 ; ------------------------------------------------------------------
 B. POLICY-B SURFACE (REGISTRY)
 ; ------------------------------------------------------------------
 
-[ ] PLACEHOLDER
+[ ] #ID(#) PLACEHOLDER
 
 ; ------------------------------------------------------------------
 C. CORE FILES & SIGNPOSTS
 ; ------------------------------------------------------------------
 
-[ ] PLACEHOLDER
+[ ] #ID(#) PLACEHOLDER
 
 ; ------------------------------------------------------------------
 D. MIRRORING & FINGERPRINTING
 ; ------------------------------------------------------------------
 
-[ ] PLACEHOLDER
+[ ] #ID(#) PLACEHOLDER
 
 ; ------------------------------------------------------------------
 E. CONTROLLER (GUI / LIFECYCLE)
 ; ------------------------------------------------------------------
 
-[ ] PLACEHOLDER
+[ ] #ID(#) PLACEHOLDER
 
 ; ------------------------------------------------------------------
 F. WORKER (RUNTIME / OVERLAY)
 ; ------------------------------------------------------------------
 
-[ ] PLACEHOLDER
+[ ] #ID(#) PLACEHOLDER
 
 ; ------------------------------------------------------------------
 G. INTEROP / IPC
 ; ------------------------------------------------------------------
 
-[ ] PLACEHOLDER
+[ ] #ID(#) PLACEHOLDER
 
 ; ------------------------------------------------------------------
 H. ORCHESTRATOR / MCP
 ; ------------------------------------------------------------------
 
-[ ] PLACEHOLDER
+[✓] #ID(H-001) Validator Execution Contract (VEC) Implementation -> Moved to GEM.S2
+
+[✓] #ID(H-002) Orchestrator Release Logic Implementation (Phase 3) -> Moved to GEM.S3
+
+[✓] #ID(H-003) Orchestrator Policy Spec (Phase 4) -> Moved to GEM.S3
+
+[✓] #ID(H-004) Architect Execution Contract (Phase 5) -> Moved to GEM.S1
+
+[✓] #ID(H-005) Governance Execution Consolidation
+
+[✓] #ID(H-006) System Flow Dry Run Validation (Phase 6)
+
+[✓] #ID(H-007) Implementation Readiness (Phase 7)
+    - Logic Goal: Define the physical tech stack and file boundaries for enforcement.
+    - Last Known Constraint: Python 3.10+ mandated for Validator/Orchestrator.
+
+[~] #ID(H-008) Implement Validator Engine (Phase 8)
+    - Logic Goal: Create the Python 3.10+ engine to parse ADs and enforce Logic Gates.
+    - Last Known Constraint: Must emit JSON Violation Objects per GEM.S2.3.
+
+[ ] #ID(H-009) Implement Orchestrator (Phase 8)
+    - Logic Goal: Automate PASS/FAIL branching and file release per Runbook §11.
+
+[ ] #ID(H-010) Integrate local LLM as Architect (Phase 8)
+    - Logic Goal: Connect the generation loop to a governed local LLM instance.
+
+[ ] #ID(H-011) Enforce Visibility Gating (Phase 8)
+    - Logic Goal: Ensure FAIL artifacts are never surfaced to the user context.
+
+[ ] #ID(H-012) Add Regression Test Suite (Phase 8)
+    - Logic Goal: Create a suite of known PASS/FAIL cases to verify engine stability.
 
 ; ------------------------------------------------------------------
 I. AUDITABILITY
 ; ------------------------------------------------------------------
 
-[ ] PLACEHOLDER
+[ ] #ID(#) PLACEHOLDER
 
 ; ------------------------------------------------------------------
 J. TOOLING / ENVIRONMENT
 ; ------------------------------------------------------------------
 
-[ ] PLACEHOLDER
+[ ] #ID(#) PLACEHOLDER
 
 ; ------------------------------------------------------------------
 K. OPEN QUESTIONS / DECISIONS
 ; ------------------------------------------------------------------
 
-[ ] PLACEHOLDER
+[ ] #ID(#) PLACEHOLDER
 
 ; ------------------------------------------------------------------
 L. NEXT ACTIONS (SHORT-TERM)
 ; ------------------------------------------------------------------
 
-[ ] PLACEHOLDER
+[ ] #ID(#) PLACEHOLDER
 
 ---
 

@@ -1,0 +1,206 @@
+[✓] DONE / CONFIRMED
+[~] IN PROGRESS / PARTIALLY COMPLETE
+
+
+======================================================================
+GOVERNED ARCHITECT + VALIDATOR SYSTEM — IMPLEMENTATION CHECKLIST
+======================================================================
+
+PHASE 0 — CONCEPT LOCK-IN (NO CODE)
+----------------------------------
+[✓] Confirm and freeze target execution model (Architect → Validator → Release)
+  ✅ Proposal:
+    - Architect: generates output strictly according to the Execution Contract.
+    - Validator: receives Architect output and checks every enforceable rule; produces PASS / FAIL.
+    - Release / Orchestrator: only accepts PASSed artifacts; FAIL artifacts are never surfaced beyond internal logging.
+[✓] Confirm that governance enforcement is POST-GENERATION, PRE-PUBLICATION.
+  ✅ Proposal:
+    - Architect can never enforce governance itself.
+    - Validation occurs after output generation, before release.
+    - Only the Validator / Orchestrator can enforce CRITICAL-HARD, CRITICAL-RETRY, BLOCK, or WARNING behaviors.
+[✓] Confirm that FAIL artifacts are NEVER surfaced to the user.
+  ✅ Proposal:
+    - FAIL artifacts are logged internally with deterministic violation objects.
+    - No FAIL content leaves the system.
+    - User-facing output only occurs on PASS artifacts or explicit failure notices (STOP messages).
+[✓] Confirm retry semantics (retry vs hard-stop) at a policy level.
+  ✅ Proposal:
+    - On FAIL:
+      - Validator logs the violation object.
+      - Orchestrator decides whether retry is allowed according to policy (max retries, safe paths).
+    - CRITICAL-HARD rules cannot be retried; CRITICAL-RETRY / BLOCKING rules may allow deterministic retry according to the policy table.
+[✓] Confirm that ChatGPT/Gemini environment is NOT expected to enforce hard stops.
+  ✅ Proposal:
+    - Enforcement authority resides on the local system (Validator + Orchestrator).
+    - ChatGPT/Gemini (Architect) only produces output under constraints; violations are fed back but never enforced.
+[✓] Confirm local system is the enforcement authority.
+  ✅ Proposal:
+    - Validator engine + Orchestrator implement all critical-hard / critical-retry / blocking / warning logic.
+    - ChatGPT/Gemini environment is completely decoupled from enforcement.
+
+GATE: No further work until all above are explicitly agreed and frozen.
+
+======================================================================
+MINOR REFINEMENTS / IMPLEMENTATION NOTES (INTEGRATED)
+------------------------------------------------------
+1. PHASE 1–2: Governance Corpus & Rule Formalization
+   - Explicitly map each enforceable section to its AUTHORITY LEVEL:
+       * LEVEL ONE → CRITICAL-HARD or CRITICAL-RETRY
+       * LEVEL TWO → BLOCKING
+       * LEVEL THREE → WARNING
+   - Maintain a stable ID for every enforceable rule to ensure traceability.
+   - Convert governance prose into explicit rules with deterministic triggers and outcomes.
+
+2. PHASE 0 — Architect Temporary Storage: Retry Policy
+   - Link each retry rule explicitly to the Violation Object schema defined in PHASE 3:
+       * CRITICAL-HARD / CRITICAL-RETRY → must reference violation_id, type, artifact_id, and retry_count.
+       * BLOCKING / WARNING → must reference violation_id and artifact_id.
+   - Ensure all retry attempts are logged deterministically with timestamps and enforcement action.
+
+3. PHASE 6 — System Flow Validation (Dry Run)
+   - Include both CRITICAL-HARD and CRITICAL-RETRY scenarios during the dry run.
+   - Validate:
+       * Correct Validator logging
+       * Proper Orchestrator retry behavior
+       * PASS and FAIL artifacts flow as intended
+       * STOP behavior triggers deterministically on CRITICAL-HARD failures
+
+4. PHASE 7–8 — Implementation Readiness / Build & Integration
+   - Ensure all tools, languages, and local LLM choices explicitly respect file I/O boundaries.
+   - Confirm audit logging locations and retention policies.
+   - Add cross-check to verify all frozen governance snapshots are loaded before any execution.
+   - Regression tests must include known FAIL/PASS cases for every rule severity and retry type.
+
+RATIONALE
+---------
+- Ensures full traceability between enforceable governance rules and their runtime enforcement.
+- Guarantees deterministic behavior across Architect → Validator → Orchestrator phases.
+- Reduces risk of ambiguous or partially enforced rules during initial integration.
+
+======================================================================
+
+
+PHASE 1 — GOVERNANCE CORPUS PREPARATION
+--------------------------------------
+[✓] Identify all governance artifacts required by the validator:
+    - GOVERNANCE_COMPENDIUM.txt
+    - PROTOCOL_RUNBOOK.txt
+    - PROJECT_LEARNED_CONSTRAINTS.txt
+    - PROJECT_WORKING_NOTES.txt
+    - GLOBAL_REGISTRY_MASTER.csv / INDEXES
+[✓] Audit each governance section for enforceability.
+[✓] Tag each section as:
+    - ENFORCEABLE
+    - NON-ENFORCEABLE (Informational only)
+[✓] Assign AUTHORITY LEVEL to every enforceable section.
+[✓] Remove or rewrite any rule that relies on:
+    - Intent
+    - Interpretation
+    - “Best effort”
+    - Human judgment
+[✓] Freeze a validator-safe snapshot of governance files.
+
+GATE: Every enforceable rule must be machine-checkable.
+
+
+PHASE 2 — RULE FORMALIZATION (CRITICAL)
+--------------------------------------
+[✓] Design canonical Rule schema: COMPLETE: (Implemented in VEC.S2/S3). (ID, trigger, enforcement, authority).
+[✓] Assign stable rule IDs: COMPLETE: (Implemented via VEC-XXX codes).
+[✓] Convert governance prose into explicit Rule definitions: COMPLETE: (Implemented in Compendium V3).
+[✓] Validate that each rule has:
+    - A deterministic trigger
+    - A deterministic outcome
+    COMPLETE: (VEC Logic Gates).
+[✓] Define severity mapping:
+    - CRITICAL-HARD
+    - CRITICAL-RETRY
+    - BLOCKING
+    - WARNING
+    COMPLETE: (VEC Section VEC.S2.2).
+[✓] Confirm that LEVEL ONE rules ALWAYS map to CRITICAL-HARD, CRITICAL-RETRY, or BLOCKING. COMPLETE: (VEC Logic Engine).
+
+GATE: Governance is now data, not text.
+
+
+PHASE 3 — VALIDATOR SPEC & ENGINE DESIGN
+---------------------------------------
+[✓] Define Validator input contract. COMPLETE: (VEC Section VEC.S1).
+[✓] Define Validator output contract (PASS / FAIL + violations). COMPLETE: (VEC Section VEC.S3).
+[✓] Define Violation object schema. COMPLETE: (VEC Section VEC.S3).
+[✓] Decide validation order (syntax → structure → references → role). COMPLETE: (VEC Section VEC.S2).
+[✓] Decide whether validation is:
+    - Full-pass only
+    - Short-circuit on first CRITICAL-HARD
+    COMPLETE: (Runbook §11 Step 3 - Short-circuits on HARD).
+[✓] Decide logging / audit output format. COMPLETE: (Runbook §11 Step 4).
+[✓] Write Validator SPEC (no implementation yet). COMPLETE: (This is the VALIDATOR_EXECUTION_CONTRACT.txt itself).
+
+GATE: Validator behavior is fully predictable on paper.
+
+
+PHASE 4 — ORCHESTRATOR POLICY DESIGN
+------------------------------------
+[✓] Define Orchestrator responsibilities (and non-responsibilities). COMPLETE: Implemented in OPS.S1.
+[✓] Explicitly prohibit Orchestrator from modifying artifacts. COMPLETE: Implemented in OPS.S1 (Prohibitions).
+[✓] Define retry policy:
+    - Max retries
+    - What is fed back to Architect
+    - When retries are disallowed
+    COMPLETE: Implemented in OPS.S2 (Retry Policy).
+[✓] Define STOP behavior and user-facing error format. COMPLETE: Implemented in OPS.S3 (Stop Behavior).
+[✓] Write Orchestrator Policy SPEC. COMPLETE: Created as ORCHESTRATOR_POLICY_SPEC.txt (v1.0.0).
+
+GATE: Orchestrator is dumb, mechanical, and safe.
+
+
+PHASE 5 — ARCHITECT CONTRACT DEFINITION
+---------------------------------------
+[✓] Define Architect input constraints. COMPLETE: Implemented in AEC.S1.
+[✓] Define Architect output constraints. COMPLETE: Implemented in AEC.S2.
+[✓] Explicitly prohibit:
+    - Partial output
+    - Self-certification
+    - Governance interpretation
+    COMPLETE: Implemented in AEC.S2 (Literal blocks) and AEC.S4 (No bypass).
+[✓] Decide how violations are fed back during retries. COMPLETE: Implemented in AEC.S4.
+[✓] Write Architect Execution Contract SPEC. COMPLETE: Created as ARCHITECT_EXECUTION_CONTRACT.txt (v1.0.0).
+
+GATE: Architect has zero authority.
+
+
+PHASE 6 — SYSTEM FLOW VALIDATION (DRY RUN)
+------------------------------------------
+[✓] Walk a sample user prompt through the entire flow on paper. COMPLETE: Implemented in Turn 15 Dry Run Report.
+[✓] Generate a hypothetical failing artifact. COMPLETE: Simulated in Scenario B/C.
+[✓] Validate expected FAIL behavior. COMPLETE: Verified via VEC Severity mapping.
+[✓] Generate a hypothetical passing artifact. COMPLETE: Simulated in Scenario A.
+[✓] Validate expected PASS behavior. COMPLETE: Verified via Orchestrator Release logic.
+[✓] Identify any ambiguity or loopholes. COMPLETE: None detected; loop is deterministic.
+
+GATE: No step requires “trust the model”.
+
+
+PHASE 7 — IMPLEMENTATION READINESS
+----------------------------------
+[✓] Decide validator implementation language. COMPLETE: Python 3.10+.
+[✓] Decide orchestrator implementation language. COMPLETE: Python 3.10+.
+[✓] Decide local LLM runtime (Ollama / LM Studio / etc). COMPLETE: JSON-Schema compatible interface.
+[✓] Define file I/O boundaries. COMPLETE: Restricted to Pipz_Project_V3 root.
+[✓] Define audit log storage strategy. COMPLETE: Append-only JSONL in \Audit\Logs\.
+[✓] Define versioning strategy for governance snapshots. COMPLETE: Git-based atomic commits on PASS.
+
+GATE: Tooling choices are now safe to make.
+
+
+PHASE 8 — BUILD & INTEGRATION (FUTURE)
+-------------------------------------
+[~] Implement validator engine. IN PROGRESS: Core Logic implementation in H-008.
+[ ] Implement orchestrator.
+[ ] Integrate local LLM as Architect.
+[ ] Enforce visibility gating.
+[ ] Add regression test suite with known FAIL/PASS cases.
+
+FINAL GATE:
+System can fail loudly, safely, and deterministically.
+======================================================================

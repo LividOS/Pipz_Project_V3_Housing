@@ -4,9 +4,9 @@
 
 ; ------------------------------------------------------------------
 ; MAINTEMPLATE - PROTOCOL_RUNBOOK.txt
-; Version: 1.0.9
-; Last change: Creation of canonical runbook number 8 `PUBLISHER BUNDLE & POINTER EMISSION RUNBOOK`.
-; Content-Fingerprint: 2026-02-04T20-02-48Z-OS3S0NH8
+; Version: 1.1.6
+; Last change: Creation of canonical runbook 11 `ORCHESTRATOR RELEASE & FAILOVER RUNBOOK`.
+; Content-Fingerprint: 2026-02-09T19-32-24Z-JS552PDW
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -121,6 +121,9 @@ SECTION | TITLE
 6       | Registry Regeneration & Validation Runbook
 7       | PLC Externalization & Emission Runbook
 8       | Publisher Bundle & Pointer Emission Runbook
+9       | Heartbeat & Drift Mitigation Runbook
+10      | Bootstrap v4 Execution Runbook
+11      | Orchestrator Release & Failover Runbook
 --------------------------------------------------------------------
 
 Notes:
@@ -350,11 +353,27 @@ Format:
 
 FAILURE RULE(S):
 <one failure rule per line>
+----
 
 Rules:
 - At least one rule is mandatory
 - Each rule MUST describe a STOP condition
 - Recovery steps are not allowed in this section
+
+---
+
+#### NOTES
+
+Format:
+
+NOTES:
+<informational content>
+
+Rules:
+- Optional section
+- Content is informational and non-operative
+- MUST NOT define steps, failure rules, or enforcement logic
+- DO NOT OMIT, if none use `N/A`
 
 ---
 
@@ -392,6 +411,32 @@ No shortcuts. No partial execution. No “I already know this part.”
 ---
 
 ; ------------------------------------------------------------------
+; #. EXAMPLE RUNBOOK (MANDATORY PROCEDURE) | [MANDATORY FORMATTING]
+; ------------------------------------------------------------------
+PURPOSE:  
+<single concise description>
+----
+APPLIES WHEN:
+<single declarative condition>
+----
+FAILURE RULE(S):
+<one failure rule per line>
+----
+NOTES:
+<informational content>
+; ------------------------------------------------------------------
+RUNBOOK STEPS:
+
+[ ] <STEP_NUMBER>. <step description>
+      <optional indented detail>
+
+---
+
+; ------------------------------------------------------------------
+; ALL CANONICAL RUNBOOKS GO BELOW THIS POINT
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
 ; 1. VS CODE EXTENSION REPACKAGING RUNBOOK (MANDATORY PROCEDURE)
 ; ------------------------------------------------------------------
 PURPOSE:  
@@ -403,6 +448,9 @@ Any change is made to the pipz-mirror-governance VS Code extension source, confi
 FAILURE RULE(S):
 If ANY verification step fails, STOP.  
 Do NOT continue project work until resolved.
+----
+NOTES:
+N/A
 ; ------------------------------------------------------------------
 RUNBOOK STEPS:
 
@@ -454,6 +502,9 @@ FAILURE RULE(S):
 If any required registry entry cannot be verified for accuracy, ownership, or scope, STOP.
 If GLOBAL_REGISTRY_MASTER.csv is missing, unreadable, or incomplete, STOP.
 Do NOT proceed with code changes or registry edits until the failure condition is resolved.
+----
+NOTES:
+N/A
 ; ------------------------------------------------------------------
 RUNBOOK STEPS:
 
@@ -631,6 +682,9 @@ If any Expected Set item is missing from the Observed Set, STOP.
 If any Observed item exists outside the Expected Set, STOP.
 If any required governance artifact cannot be fully read, STOP.
 If tooling limitations prevent deterministic verification, STOP.
+----
+NOTES:
+N/A
 ; ------------------------------------------------------------------
 RUNBOOK STEPS:
 
@@ -716,6 +770,9 @@ If results cannot be declared using the required format → STOP.
 If any classification is ambiguous or inferred → STOP.
 If remediation, analysis, or speculation is introduced → STOP.
 If Phase 5 execution was incomplete or invalid → STOP.
+----
+NOTES:
+N/A
 ; ------------------------------------------------------------------
 RUNBOOK STEPS:
 
@@ -792,6 +849,9 @@ If any required verification step fails, STOP.
 If any Section ID is modified, reused, or reordered, STOP.
 If Content-Fingerprint updates cannot be verified deterministically, STOP.
 If archival originals are consulted for enforcement or reasoning, STOP.
+----
+NOTES:
+N/A
 ; ------------------------------------------------------------------
 RUNBOOK STEPS:
 
@@ -899,6 +959,9 @@ FAILURE RULE(S):
 If any Policy-B governed surface area is added, removed, or modified, STOP.
 If GLOBAL_REGISTRY_MASTER.csv is altered as part of regeneration, STOP.
 If regeneration cannot be proven non-governance-impacting, STOP.
+----
+NOTES:
+N/A
 ; ------------------------------------------------------------------
 RUNBOOK STEPS:
 
@@ -994,6 +1057,9 @@ If a PLC entry is added without explicit confirmation, STOP.
 If PLC format or scope taxonomy is altered, STOP.
 If PLC content is treated as authoritative or enforcement-capable, STOP.
 If compendium PLC content diverges from the canonical PLC file, STOP.
+----
+NOTES:
+N/A
 ; ------------------------------------------------------------------
 RUNBOOK STEPS:
 
@@ -1074,6 +1140,9 @@ If pointer BUILD_ID does not match bundle BUILD_ID → STOP.
 If MANIFEST.json is missing from the bundle or cannot be read → STOP.
 If the bundle contents do not include all allowlist-authoritative directories required by the current publisher configuration (e.g. Registry/, PPAVP/ when included) → STOP.
 If MANIFEST_SHA256 recorded in `PIPZ_POINTER.txt` does not match the locally generated MANIFEST.json for the publish run → STOP.
+----
+NOTES:
+N/A
 ; ------------------------------------------------------------------
 RUNBOOK STEPS:
 
@@ -1111,6 +1180,180 @@ RUNBOOK STEPS:
 
 [ ] 7. Record completion and proceed.
       Treat the published bundle referenced by `PIPZ_POINTER.txt` as the current snapshot for AI visibility until superseded by a later publish run.
+
+; ------------------------------------------------------------------
+; 9. HEARTBEAT & DRIFT MITIGATION RUNBOOK (MANDATORY PROCEDURE)
+; ------------------------------------------------------------------
+PURPOSE:
+Perform a high-fidelity re-sync to eliminate logical drift and ensure
+context alignment between current chat momentum and authoritative governance.
+----
+APPLIES WHEN:
+Triggered by the 5-turn counter, a Context Shift, or detection of
+internal efficiency heuristics (summarization/truncation).
+----
+FAILURE RULE(S):
+If the Task Snapshot fails to align with re-hydrated file contents, STOP.
+If any mandatory file (Compendium, Pointer, Checklist) is unreadable, STOP.
+----
+NOTES:
+N/A
+; ------------------------------------------------------------------
+RUNBOOK STEPS:
+
+[ ] 1. TASK SNAPSHOT (Pre-Sync):
+      Before re-reading files, the AI must quote the active task from 
+      PROJECT_STATUS_CHECKLIST.txt verbatim inside a markdown codeblock. 
+      Format:
+
+      [Status] #ID(####) Title
+          - Logic Goal: <Goal>
+          - Last Known Constraint: <Constraint>
+
+[ ] 2. AUTHORITATIVE RE-HYDRATION:
+      The AI then uses the tool to:
+      - Use tool to re-read GOVERNANCE_COMPENDIUM.txt.
+      - Use tool to re-read PIPZ_POINTER.txt.
+      - Use tool to re-read PROJECT_STATUS_CHECKLIST.txt.
+      - Re-read all files in the current Live "Working Set".
+
+[ ] 3. ALIGNMENT VERIFICATION (Post-Sync):
+      - Compare Step 1 Snapshot against Step 2 Data.
+      - Confirm MAINTEMPLATE version headers are current.
+      - Confirm Fingerprints are valid.
+
+[ ] 4. RESUME:
+      - Declare Heartbeat Complete.
+      - Proceed with task.
+
+; ------------------------------------------------------------------
+; 10. BOOTSTRAP v4 EXECUTION RUNBOOK (MANDATORY PROCEDURE)
+; ------------------------------------------------------------------
+PURPOSE:
+Execute Bootstrap v4 deterministically to establish or re-establish authoritative project context in accordance with GOVERNANCE_COMPENDIUM.txt §GOV.S2.
+--------------------------------------------------------------------
+APPLIES WHEN:
+The invocation token BOOTSTRAP_V4_INIT is received and Bootstrap v4 execution is required to establish session authority.
+--------------------------------------------------------------------
+FAILURE RULE(S):
+If any required governance artifact cannot be fully read, STOP.
+If any required bootstrap phase fails or cannot be completed in order, STOP.
+If any inconsistency is detected between pointers, resolved roots, or expected structures, STOP.
+If any STOP condition defined in GOVERNANCE_COMPENDIUM.txt §GOV.S2 is triggered, STOP.
+----
+NOTES:
+This runbook **executes** Bootstrap v4 but does not define it.
+All authority, invariants, and legality are defined exclusively by GOVERNANCE_COMPENDIUM.txt §GOV.S2.
+This runbook MUST NOT be modified without a corresponding governance review.
+; ------------------------------------------------------------------
+RUNBOOK STEPS:
+
+[ ] 0. Invocation confirmation.
+      - Verify that Bootstrap v4 has been explicitly invoked via the exact token:
+
+        BOOTSTRAP_V4_INIT
+
+      - If invocation is implicit, inferred, or malformed → STOP.
+
+[ ] 1. Establish execution context.
+      - Confirm read-only execution intent.
+      - Confirm no file modifications, regeneration, or remediation actions
+        will occur during bootstrap execution.
+
+[ ] 2. Phase 0 — Root resolution.
+      - Resolve the authoritative project root using the active pointer
+        mechanism defined by governance.
+      - Confirm a single, unambiguous root is identified.
+      - If multiple roots or no root is resolved → STOP.
+
+[ ] 3. Phase 1 — Mandatory governance artifact readability.
+      - Fully read and confirm readability of all required artifacts,
+        including but not limited to:
+        - GOVERNANCE_COMPENDIUM.txt
+        - PROTOCOL_RUNBOOK.txt
+        - GLOBAL_REGISTRY_MASTER.csv
+      - If any required artifact is unreadable, truncated, or partially accessible → STOP.
+
+[ ] 4. Phase 2 — Structural expectation reconstruction.
+      - Reconstruct the Expected Set exclusively from
+        GOVERNANCE_COMPENDIUM.txt §GOV.S3.BLUEPRINT and its referenced
+        virtual governance sections.
+      - Do NOT derive expectations from directory listings, memory,
+        prior audits, or tooling heuristics.
+
+[ ] 5. Phase 3 — Observed Set enumeration.
+      - Enumerate the Observed Set using deterministic visibility from
+        the resolved project root.
+      - Enumeration is presence-based only:
+        - No inference
+        - No extrapolation
+        - No correction
+      - If enumeration cannot be completed deterministically → STOP.
+
+[ ] 6. Phase 4 — Consistency verification.
+      - Compare Expected Set and Observed Set bidirectionally:
+        - Expected → Observed
+        - Observed → Expected
+      - Confirm no missing, extra, orphaned, or ungoverned items exist.
+        Any discrepancy → STOP.
+
+[ ] 7. Governance surface verification.
+      - Verify that all observed governance-surface elements are
+        accurately represented in GLOBAL_REGISTRY_MASTER.csv.
+      - If registry inconsistency or ambiguity is detected → STOP.
+
+[ ] 8. Bootstrap validity assertion.
+      - Confirm that all Bootstrap v4 invariants defined in
+        GOVERNANCE_COMPENDIUM.txt §GOV.S2 are satisfied.
+      - This step asserts validity only; it does not reinterpret law.
+
+[ ] 9. Canonical completion declaration.
+      - Emit the exact declaration string defined by
+        GOVERNANCE_COMPENDIUM.txt §GOV.S2:
+
+        “BOOTSTRAP v4 COMPLETE — Pipz_Project_V3 authority established.”
+
+[ ] 10. Termination.
+      - Mark Bootstrap v4 execution complete.
+      - Await further instruction.
+
+; ------------------------------------------------------------------
+; 11. ORCHESTRATOR RELEASE & FAILOVER RUNBOOK (MANDATORY PROCEDURE)
+; ------------------------------------------------------------------
+PURPOSE:  
+Define the deterministic PASS/FAIL branching and file release logic for the Orchestrator.
+----
+APPLIES WHEN:
+The Validator emits a mechanical result (PASS or FAIL) for a proposed Architectural Directive (AD).
+----
+FAILURE RULE(S):
+If branching fails to execute the correct file overwrite on PASS, STOP.
+If branching fails to distinguish between CRITICAL-HARD and CRITICAL-RETRY, STOP.
+If branching fails to block writes or provide feedback on FAIL, STOP.
+----
+NOTES:
+Level One rules are divided into HARD (Stop) and RETRY (Loop) per Phase 0 Policy.
+; ------------------------------------------------------------------
+RUNBOOK STEPS:
+
+[ ] 1. Result Acquisition.
+      - Capture the numeric Exit Code and JSON Violation Object from the Validator.
+
+[ ] 2. Branching Logic: PASS.
+      - Execute character-for-character overwrite of the target project file(s) using the proposed content.
+      - Update PROJECT_STATUS_CHECKLIST.txt to mark the associated Task ID as [✓].
+      - Append "RELEASE_SYNC: COMPLETE" to the local session audit log.
+
+[ ] 3. Branching Logic: FAIL.
+      - BLOCK all file write operations to the target project directory.
+      - Extract the Violation Object and prepend it to the Architect's next prompt (per VEC.S5).
+      - IF (Severity == CRITICAL-HARD) -> Trigger SESSION_TERMINATION.
+      - IF (Severity == CRITICAL-RETRY OR BLOCKING) -> Trigger ARCHITECT_REGENERATE (Max 3 retries).
+      - IF (Retry count >= 3) -> Escalate to CRITICAL-HARD and trigger SESSION_TERMINATION.
+
+[ ] 4. Post-Execution Persistence.
+      - Store the failed artifact in Pipz_Project_V3\Audit\Logs\FAIL_<TIMESTAMP>.txt for review.
+      - Execute RUNBOOK §9 (Heartbeat) to ensure context alignment post-operation.
 
 ; ------------------------------------------------------------------
 

@@ -1,0 +1,139 @@
+; ------------------------------------------------------------------
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "Pipz_Project_V3\Governance\GOVERNANCE_ENGINE_MASTER.txt"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - GOVERNANCE_ENGINE_MASTER.txt
+; Version: 1.1.0
+; Last Change: Addition of section GEM.S4.
+; Content-Fingerprint: 2026-02-09T20-50-26Z-GHEOJ3HP
+; Status: AUTHORITATIVE EXECUTION LAYER SPECIFICATION
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT (LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; SECTION GEM.S1: ARCHITECT EXECUTION CONTRACT (FORMERLY AEC)
+; ------------------------------------------------------------------
+
+SECTION GEM.S1.1.MANDATORY_PRECHECKS
+Before producing any Architectural Directive (AD), the Architect MUST:
+1. RE-HYDRATE: Read the literal text of the target section/file from the source.
+2. CHECKLIST_SYNC: Verify the task ID (#ID) exists in PROJECT_STATUS_CHECKLIST.txt.
+3. PLC_AUDIT: Consult PROJECT_LEARNED_CONSTRAINTS.txt for relevant regression risks.
+4. REGISTRY_LOCK: Confirm that proposed changes to Entrypoints/IPC align with GLOBAL_REGISTRY_MASTER.csv (Policy-B).
+
+SECTION GEM.S1.2.MANDATORY_OUTPUT_SCHEMA
+Every response containing a technical change MUST be wrapped in the canonical AD code block:
+- Header: GOAL, SCOPE, WORKING SET IMPACT, POLICY-B IMPACT.
+- Pre-checks: Literal verification of Bootstrap and Fingerprints.
+- Changes: Character-for-character literal blocks for each file.
+- Post-checks: Verification of logic gates and checklist updates.
+
+SECTION GEM.S1.3.REGISTRY_SYNCHRONIZATION (POLICY-B)
+- If a change affects an Entrypoint, Timer, or IPC handler, the Architect MUST include a simultaneous update to GLOBAL_REGISTRY_MASTER.csv in the same AD.
+- Failure to include the Registry update in the same atomic transaction is a CRITICAL-HARD violation.
+
+SECTION GEM.S1.4.LOOP_TERMINATION
+- The Architect is authorized to retry a failed AD up to 3 times (Max Retries).
+- If the 3rd retry fails, the Architect MUST trigger a SESSION_TERMINATION.
+- The Architect MUST NOT attempt to explain away or bypass a Validator FAIL.
+
+; ------------------------------------------------------------------
+; SECTION GEM.S2: VALIDATOR EXECUTION CONTRACT (FORMERLY VEC)
+; ------------------------------------------------------------------
+
+SECTION GEM.S2.1.INPUT_SCHEMA
+- The Validator accepts only one input type: a single Markdown code block containing an ARCHITECTURAL DIRECTIVE (AD).
+- Metadata Required: BUILD_ID, TIMESTAMP, and SOURCE_FINGERPRINT.
+
+SECTION GEM.S2.2.LOGIC_ENGINE (STEP-BY-STEP)
+1. HEADER_VALIDATION:
+   - IF (AD-HEADER is missing) THEN FAIL (Violation: VEC-001).
+   - IF (AD-HEADER does not match Section GOV.S8) THEN FAIL (Violation: VEC-002).
+2. LOGIC_GATE_AUDIT:
+   - For every section modified in the AD, the Validator MUST match the modification against the section's LOGIC_GATE and Severity mapping in GOVERNANCE_COMPENDIUM.txt.
+   - LEVEL ONE (CRITICAL-HARD): Any mismatch = FAIL (Immediate STOP).
+   - LEVEL ONE (CRITICAL-RETRY): Any mismatch = FAIL (Retry permitted).
+   - LEVEL TWO (BLOCKING): Any mismatch = FAIL (Retry permitted).
+   - LEVEL THREE (WARNING): Any mismatch = PASS (Log violation only).
+3. LITERAL_FIDELITY_CHECK:
+   - The Validator performs a character-for-character diff between the "CONTENT" block and the target file (for MODIFY operations).
+   - IF (Truncation detected) THEN FAIL (Violation: VEC-003).
+
+SECTION GEM.S2.3.VIOLATION_OBJECT_SCHEMA
+In the event of a FAIL, the Validator must emit a JSON-compliant Violation Object:
+{
+  "status": "FAIL",
+  "authority_level": [1|2|3],
+  "severity": ["CRITICAL-HARD" | "CRITICAL-RETRY" | "BLOCKING" | "WARNING"],
+  "violation_id": "VEC-XXX",
+  "rule_reference": "GOV.S#.NAME",
+  "artifact_id": "STRING",
+  "type": "STRING",
+  "expected_state": "STRING",
+  "observed_state": "STRING",
+  "retry_count": "N",
+  "timestamp": "ISO-8601"
+}
+
+SECTION GEM.S2.4.RETRY_RESOLUTION
+- IF (Status == FAIL):
+    - IF (Severity == CRITICAL-HARD):
+        - Trigger SESSION_TERMINATION(Violation_Object).
+    - ELSE IF (Severity == CRITICAL-RETRY OR BLOCKING):
+        - IF (retry_count < 3):
+            - Trigger ARCHITECT_REGENERATE(Violation_Object).
+        - ELSE:
+            - Trigger SESSION_TERMINATION(Violation_Object with ESCALATION_FLAG).
+- ELSE:
+    - Trigger ORCHESTRATOR_RELEASE(Proposed_Artifact).
+
+SECTION GEM.S2.5.FEEDBACK_INJECTION
+- On FAIL: The Orchestrator MUST prepend the Violation Object to the next prompt sent to the Architect.
+- Format: [VALIDATOR_REPORT] <JSON_OBJECT> [/VALIDATOR_REPORT]
+- Requirement: The Architect MUST acknowledge the violation and explain the literal correction before regenerating.
+
+; ------------------------------------------------------------------
+; SECTION GEM.S3: ORCHESTRATOR POLICY SPEC (FORMERLY OPS)
+; ------------------------------------------------------------------
+
+SECTION GEM.S3.1.RESPONSIBILITIES
+- The Orchestrator is the sole authority for file I/O operations.
+- Responsibility: Execute PASS/FAIL branching per Runbook §11.
+- Responsibility: Maintain the session audit log and retry counters.
+- Prohibition: The Orchestrator MUST NOT modify any artifact content (except during a PASS overwrite).
+- Prohibition: The Orchestrator MUST NOT interpret governance rules; it only executes mechanical results.
+
+SECTION GEM.S3.2.RETRY_POLICY
+- Max Retries: 3 (Default).
+- Feedback: The Orchestrator MUST prepend the full JSON Violation Object to the Architect input.
+- Disallowance: Retries are strictly forbidden for CRITICAL-HARD severities.
+
+SECTION GEM.S3.3.STOP_BEHAVIOR
+- Trigger: Execution of a CRITICAL-HARD violation or exceeding Max Retries.
+- Action: Immediate termination of the generation session.
+- Output: A deterministic "SESSION TERMINATED" notice.
+- Security: No FAIL artifact content or specific code logic is to be leaked to the user-facing output.
+
+; ------------------------------------------------------------------
+; SECTION GEM.S4: PHYSICAL IMPLEMENTATION STACK
+; ------------------------------------------------------------------
+
+SECTION GEM.S4.1.ENFORCEMENT_LANGUAGE
+- Python 3.10+ is the mandated language for the Validator and Orchestrator.
+- Rationale: Deterministic JSON parsing and robust file-system locking.
+
+SECTION GEM.S4.2.RUNTIME_ENVIRONMENT
+- Orchestrator must support standard stdin/stdout for Architect communication.
+- Recommended LLM Runtime: Any interface supporting OpenAI-compatible JSON Schema enforcement.
+
+SECTION GEM.S4.3.FILE_IO_BOUNDARIES
+- Root: Pipz_Project_V3\
+- Restricted: No write access permitted to .git/, .vscode/, or parent directories.
+
+SECTION GEM.S4.4.AUDIT_AND_VERSIONING
+- Logs: Append-only JSONL format in \Audit\Logs\.
+- Snapshots: Every PASS release MUST include a Git-commit of the target artifact.

@@ -3,12 +3,10 @@
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
-; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt (MACHINE)
-; Version: 1.3.8
-; Last change: Inclusion of new validator engine working set entry.
-; Content-Fingerprint: 2026-02-09T21-16-23Z-4FE5V6ZZ
-; Date: 2026-02-09
-; Status: AUTHORITATIVE GOVERNANCE (SINGLE-ARTIFACT MODE)
+; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt
+; Version: 1.1.5
+; Last change: Added new working set limitations rule.
+; Content-Fingerprint: 2026-02-06T19-09-22Z-R9TFWOOE
 ; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
@@ -16,91 +14,16 @@
 ; ------------------------------------------------------------------
 
 ================================================================================
-SECTION ID: GOV.S0.COMPENDIUM_AUTHORITY_PRIORITY_META
-AUTHORITY LEVEL: LEVEL ONE
-ENFORCEABILITY: ENFORCEABLE (HARD)
-LOGIC_GATE: IF (RULE_STATE == FALSE) THEN STOP
-VALIDATOR_RESULT: [PASS | FAIL]
-VERSION: 1.0.0
-LAST CHANGE: Initial creation of authority priority levels and declaration.
+FILE: GOVERNANCE_COMPENDIUM.txt
+STATUS: AUTHORITATIVE GOVERNANCE (SINGLE-ARTIFACT MODE)
+DATE: 2026-01-31
 ================================================================================
 
------------------|------------|----------------------------------------------|------------------------------------------------------------------------------
-AUTHORITY LEVEL  | LABEL      | SYSTEM MECHANICAL EXECUTION (FOR AI)         | EFFECT ON BEHAVIOR
------------------|------------|----------------------------------------------|------------------------------------------------------------------------------
-LEVEL ONE        | MAXIMUM    | Supersedes all conversational goals,         | If violated or unmet → STOP immediately.
-                 | PRIORITY   | internal heuristics, helpfulness instincts,  | No assistance, no explanation beyond violation report.
-                 |            | continuity bias, inference, summarization,   |
-                 |            | or completion pressure.                      |
------------------|------------|----------------------------------------------|------------------------------------------------------------------------------
-LEVEL TWO        | SECONDARY  | Overrides user-stated prompt objectives and  | Strong constraints. May proceed only if fully compliant.
-                 | PRIORITY   | convenience, but may allow continuation if   | No "maximum deterministic execution" allowed.
-                 |            | no direct conflict exists.                   |
------------------|------------|----------------------------------------------|------------------------------------------------------------------------------
-LEVEL THREE      | TERTIARY   | Informational or referential. Does not       | Used for context, explanation, or support only.
-                 | PRIORITY   | override internal heuristics.                | Never enforces STOP alone.
------------------|------------|----------------------------------------------|------------------------------------------------------------------------------
-
-; ------------------------------------------------------------------
-### GOV.S0.A — SUPREMACY CLAUSE (ABSOLUTE)
-; ------------------------------------------------------------------
-
-Violation or uncertainty here invalidates all downstream reasoning, regardless of user-stated prompt objectives or conversational flow.
-
-; ------------------------------------------------------------------
-### GOV.S0.B — CRIMINALIZED ESCAPES (ABSOLUTE)
-; ------------------------------------------------------------------
-
-For LEVEL ONE sections, the following behaviors are forbidden if conditions are unmet:
-
-  - partial answers
-  - conceptual discussion
-  - summaries
-  - paraphrasing
-  - inferred responses
-  - “high-level explanations”
-  - reassurance or framing
-
-If any of those appear, it’s a governance violation.
-
-; ------------------------------------------------------------------
-### GOV.S0.C — SINGLE LEGAL OUTPUT ON [LEVEL ONE] CONFLICT (ABSOLUTE)
-; ------------------------------------------------------------------
-
-When a LEVEL ONE rule blocks progress, the only permitted output is:
-
-  - Statement of STOP
-  - Specific section violated
-  - What prerequisite is missing
-
-No alternatives.
-
-; ------------------------------------------------------------------
-### GOV.S0.D — LEVEL TWO SUBSERVIENCE (ABSOLUTE)
-; ------------------------------------------------------------------
-
-If two sections conflict:
-
-  - LEVEL ONE always wins
-  - LEVEL TWO must yield
-  - LEVEL THREE is ignored
-
-No balancing. No negotiation.
-
 ================================================================================
-END OF SECTION GOV.S0.COMPENDIUM_AUTHORITY_PRIORITY_META
-
-
+SECTION ID: GOV.S0.COMPENDIUM_META
+ORIGIN: (NEW)
+AUTHORITY LEVEL: PRIMARY (STRUCTURAL ENABLEMENT)
 ================================================================================
-SECTION ID: GOV.S0.5.COMPENDIUM_META
-AUTHORITY LEVEL: LEVEL ONE
-ENFORCEABILITY: ENFORCEABLE (HARD)
-LOGIC_GATE: IF (RULE_STATE == FALSE) THEN STOP
-VALIDATOR_RESULT: [PASS | FAIL]
-VERSION: 1.1.0
-LAST CHANGE: Inclusion of governance lock.
-================================================================================
-
 GOVERNANCE COMPENDIUM — AUTHORITATIVE DECLARATION
 
 This document, GOVERNANCE_COMPENDIUM.txt, is the sole authoritative governance artifact for Pipz_Project_V3 in single-artifact mode.
@@ -116,23 +39,24 @@ If the compendium or any required section cannot be located or fully read, gover
 Archived originals are stored separately under /Archive and are non-operative.
 
 ; ------------------------------------------------------------------
-### GOV.S0.5.A — SECTION ID CONTRACT (STABLE IDENTITIES)
+### GOV.S0.A — SECTION ID CONTRACT (STABLE IDENTITIES)
 ; ------------------------------------------------------------------
 
 The following Section IDs are case-sensitive, immutable, and must never be aliased:
 
-- GOV.S1.AI_INSTRUCTIONS
-- GOV.S2.BOOTSTRAP_V4
-- GOV.S3.BLUEPRINT
-- GOV.S4.ANCHOR_MASTER
-- GOV.S5.PHASE5_AUDIT
-- GOV.S6.INDEX_ID_LIST
-- GOV.S7.LEARNED_CONSTRAINTS
-- GOV.S8.STANDARD_HEADERS
-- GOV.S9.HEARTBEAT_PROTOCOL
+- GOV.S1.AI_INSTRUCTIONS  (origin: AI_PROJECT_INSTRUCTIONS.txt)
+- GOV.S2.BOOTSTRAP_V4  (origin: BOOTSTRAPv4.txt)
+- GOV.S3.BLUEPRINT  (origin: _PROJECT_BLUEPRINT.txt)
+- GOV.S4.ANCHOR_MASTER  (origin: _PROJECT_ANCHOR_MASTER.txt)
+- GOV.S5.PHASE5_AUDIT  (origin: PHASE5_AUDIT_MASTER.txt)
+- GOV.S6.GOVERNANCE_LOCK  (origin: GOVERNANCE_LOCK.txt)
+- GOV.S7.INDEX_ID_LIST  (origin: INDEXIDLIST.txt)
+- GOV.S8.LEARNED_CONSTRAINTS  (origin: PROJECT_LEARNED_CONSTRAINTS.txt)
+- GOV.S9.STANDARD_HEADERS  (origin: STANDARDIZED_HEADERS.txt)
+- GOV.S10.HEARTBEAT_PROTOCOL (origin: NEW)
 
 ; ------------------------------------------------------------------
-### GOV.S0.5.B — ARCHIVED ORIGINAL CONTENT (EXTERNAL — NON-OPERATIVE)
+### GOV.S0.B — ARCHIVED ORIGINAL CONTENT (EXTERNAL — NON-OPERATIVE)
 ; ------------------------------------------------------------------
 
 Original standalone governance files have been removed from this document and
@@ -147,7 +71,7 @@ Archived originals are NON-AUTHORITATIVE and MUST NOT be used for:
   - governance reasoning
   - enforcement decisions
   - STOP / hard-stop evaluation
-  - semantic mechanical execution
+  - semantic interpretation
   - proposal justification
   - path, identity, or file-existence assertions
 
@@ -156,10 +80,10 @@ exclusively by the OPERATIVE TEXT (COMPENDIUM MODE) sections
 within this document.
 
 ; ------------------------------------------------------------------
-### GOV.S0.5.C — REGISTRY AUTHORITY NOTICE (EXTERNAL)
+### GOV.S0.C — REGISTRY AUTHORITY NOTICE (EXTERNAL)
 ; ------------------------------------------------------------------
 
-The following artifacts are authoritative registries and are literal structural constraintionally NOT embedded as compendium sections:
+The following artifacts are authoritative registries and are intentionally NOT embedded as compendium sections:
   - GLOBAL_REGISTRY_MASTER.csv (Policy-B governed surface)
   - INTERNAL_FUNCTION_INDEX.csv (non-governed symbol index)
   - GLOBAL_REGISTRY_MASTER.gsheet (backup vault only, if referenced)
@@ -167,7 +91,7 @@ The following artifacts are authoritative registries and are literal structural 
 Any governance rule that requires registry verification continues to require these artifacts externally. If a required registry cannot be located or read, the original hard-stop semantics apply unchanged.
 
 ; ------------------------------------------------------------------
-### GOV.S0.5.D — MECHANICAL EXECUTION & CONFLICT RULES (MANDATORY)
+### GOV.S0.D — INTERPRETATION & CONFLICT RULES (MANDATORY)
 ; ------------------------------------------------------------------
 
 IR-1. Archived original governance content exists exclusively outside this document
@@ -181,7 +105,7 @@ IR-2. Archived original content MUST NOT be used for:
      - enforcement decisions
      - STOP / hard-stop evaluation
      - proposal justification
-     - semantic mechanical execution
+     - semantic interpretation
      - path, identity, or file-existence assertions
 
 IR-3. OPERATIVE TEXT (COMPENDIUM MODE) within this document is the ONLY valid source
@@ -203,7 +127,7 @@ IR-5. A governance section within GOVERNANCE_COMPENDIUM.txt is considered UNREAD
      and MUST trigger the same STOP conditions as total absence.
 
 ; ------------------------------------------------------------------
-### GOV.S0.5.E — WORKING_SET_CAP — Working Set (Live) Hard Cap (20 Files)
+### GOV.S0.E — WORKING_SET_CAP — Working Set (Live) Hard Cap (20 Files)
 ; ------------------------------------------------------------------
 
 DEFINITIONS:
@@ -242,13 +166,12 @@ The AI MUST:
 The AI MUST NOT report BUILD_ID/UPDATED_UTC until after step (1) is complete.
 If any Working Set file cannot be read, governed operations MUST STOP.
 
-CURRENT WORKING SET (Count : 17):
+CURRENT WORKING SET (Count : 15):
 - Pipz_Project_V3/Governance/GOVERNANCE_COMPENDIUM.txt
 - Pipz_Project_V3/Governance/PROJECT_WORKING_NOTES.txt
 - Pipz_Project_V3/Governance/PROJECT_LEARNED_CONSTRAINTS.txt
 - Pipz_Project_V3/Governance/PROTOCOL_RUNBOOK.txt
 - Pipz_Project_V3/Governance/PIPZ_POINTER.txt
-- Pipz_Project_V3/Governance/GOVERNANCE_ENGINE_MASTER.txt
 - Pipz_Project_V3/PPAVP/PROJECT_STATUS_CHECKLIST.txt
 - Pipz_Project_V3/Registry/GLOBAL_REGISTRY_MASTER.csv
 - Pipz_Project_V3/Registry/INTERNAL_FUNCTION_INDEX.csv
@@ -259,91 +182,39 @@ CURRENT WORKING SET (Count : 17):
 - Pipz_Project_V3/Lib/Core_Utils.txt
 - Pipz_Project_V3/Lib/Interop.txt
 - Pipz_Project_V3/Lib/Humanoid.txt
-- Pipz_Project_V3/Validator_Engine.py
 
 CURRENT BACKEND SET (Count : 3) [INFORMATIONAL ONLY — NOT ENFORCED]:
 - Pipz_Project_V3/Registry/GLOBAL_REGISTRY_MASTER.gsheet
 - Pipz_Project_V3/settings.txt
 - Pipz_Project_V3/.gitignore
 
-; ------------------------------------------------------------------
-### GOV.S0.5.F — GOVERNANCE LOCK STATUS (CANONICAL)
-; ------------------------------------------------------------------
-
-Status: **LOCKED (OPERATIONAL)**
-
-As of this declaration:
-
-; - The governance architecture for Pipz_Project_V3 is considered **stable**
-; - Core governance rules are finalized, including implicit file resolution and constraint consultation rules
-; - Initialization, verification, and enforcement semantics are fixed
-
-The authoritative governance sources remain:
-
-; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS`
-; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4`
-; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT`
-; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER`
-; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S6.INDEX_ID_LIST`
-
-This file does not participate in governance enforcement.
-
-; ------------------------------------------------------------------
-### GOV.S0.5.F.A — SCOPE OF THE LOCK
-; ------------------------------------------------------------------
-
-The following are considered **locked**:
-
-; - Bootstrap v4 phase structure and semantics
-; - Content-Fingerprint enforcement rules
-; - GEMINI MEM TAG identity requirements
-; - Stop-on-conflict behavior
-; - Verification precedence rules
-; - Phase 5 invocation boundaries
-
-The following remain **permitted** without reopening governance:
-
-; - Adding new files or modules to the project
-; - Updating `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT` to reflect structural extensions
-; - Updating `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S6.INDEX_ID_LIST` to reflect new resolvable items
-; - Updating mirrors and fingerprints as part of normal operation
-
-No change may alter **governance behavior** without explicitly reopening the governance layer.
-
-; ------------------------------------------------------------------
-### GOV.S0.5.F.B — GOVERNANCE REOPENING RULE (STRICT)
-; ------------------------------------------------------------------
-
-Reopening the governance layer requires **explicit, literal structural constraintional action**.
-
-A governance reopening MUST:
-
-1. Be explicitly declared by the user
-
-2. Result in a versioned update to:
-
-   ; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS`
-   ; - AND / OR `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4`
-
-3. Be accompanied by an updated declaration in this file
-
-Absent those conditions, governance is considered locked.
-
 ================================================================================
-END OF SECTION GOV.S0.5.COMPENDIUM_META
+END OF SECTION GOV.S0.COMPENDIUM_META
 
 
 ================================================================================
 SECTION ID: GOV.S1.AI_INSTRUCTIONS
-AUTHORITY LEVEL: LEVEL ONE
-ENFORCEABILITY: ENFORCEABLE (HARD)
-LOGIC_GATE: IF (RULE_STATE == FALSE) THEN STOP
-VALIDATOR_RESULT: [PASS | FAIL]
-VERSION: 2.0.1
-LAST CHANGE: Added subsection E context snapshot pointer.
+ORIGIN: AI_PROJECT_INSTRUCTIONS.txt
+AUTHORITY LEVEL: PRIMARY
 ================================================================================
 OPERATIVE TEXT (COMPENDIUM MODE) — AUTHORITATIVE FOR SINGLE-ARTIFACT OPERATION
 ================================================================================
+; ------------------------------------------------------------------
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; Pipz_Project_V3 [AHK v2] (AI-Specific Operating Instructions)
+; ------------------------------------------------------------------
+; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS
+; Version: 2.0.1
+; Last change: Added subsection E context snapshot pointer.
+; Content-Fingerprint: 2026-02-04T22-18-17Z-JDUS847G
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
 ### GOV.S1.A — BOOTSTRAP v4 — CONVERSATION INITIALIZATION PROTOCOL (MANDATORY)
@@ -536,7 +407,7 @@ Bootstrap v4 MUST NOT rely on Google Drive search alone.
 
 Root resolution precedence is STRICT:
 
-1) GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S6.INDEX_ID_LIST (if present)
+1) GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST (if present)
 2) GEMINI MEM TAG declared paths
 3) GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT defined structure
 4) Google Drive search (LAST RESORT ONLY)
@@ -554,7 +425,7 @@ The AI MUST verify the following authoritative governance sources:
 ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS
 ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT
 ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER
-; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S6.INDEX_ID_LIST
+; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST
 ; - GLOBAL_REGISTRY_MASTER (AUTHORITY HIERARCHY):
     1. PRIMARY: GLOBAL_REGISTRY_MASTER.csv (Authoritative governed registry, Policy-B)
     2. FALLBACK: GLOBAL_REGISTRY_MASTER.gsheet (Backup Vault ONLY — may be unreadable to tooling)
@@ -784,7 +655,7 @@ E) INTERACTION WITH GOVERNANCE COMPENDIUM (MANDATORY)
 ----------------------------------------
 
 In single-artifact mode, all conflict handling MUST comply with
-GOV.S0.5.COMPENDIUM_META — MECHANICAL EXECUTION & CONFLICT RULES.
+GOV.S0.COMPENDIUM_META — INTERPRETATION & CONFLICT RULES.
 
 No registry, signpost, or code conflict may be implicitly resolved by
 precedence alone.
@@ -846,9 +717,9 @@ PB-3. No Policy-B conflict may be resolved by:
       - heuristic reasoning
       - code inspection alone
       - precedence shortcuts
-      - assumed registry literal structural constraint
+      - assumed registry intent
 
-PB-4. If GLOBAL_REGISTRY_MASTER.csv is missing, unreadable, or colliding (>1 registry match)
+PB-4. If GLOBAL_REGISTRY_MASTER.csv is missing, unreadable, or ambiguous
       with respect to the conflicted surface area, the AI MUST STOP.
 
 PB-5. Resolution authority for Policy-B conflicts is NEVER implicit.
@@ -1067,12 +938,12 @@ Where:
      Pipz_Project_V3, the AI MUST:
 
 2haa. Locate, open, and fully read:
-      ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.LEARNED_CONSTRAINTS
+      ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.LEARNED_CONSTRAINTS
 
 2hab. Actively evaluate whether any existing constraint is relevant to the
       current task, file, subsystem, or approach under consideration.
 
-2hb. The GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.LEARNED_CONSTRAINTS file is authoritative for negative
+2hb. The GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.LEARNED_CONSTRAINTS file is authoritative for negative
      knowledge.
 
 2hc. Any approach, method, or pattern recorded as invalidated or constrained
@@ -1091,14 +962,14 @@ Where:
 2hed. Or an approach conflicts with project reality,
 
 2hf. The AI MUST immediately draft a proposed entry for:
-      ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.LEARNED_CONSTRAINTS
+      ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.LEARNED_CONSTRAINTS
 
 2hg. Drafted constraint entries MUST:
 2hga. Follow the Project Learned Constraints ID Policy.
 2hgb. Clearly describe the invalidated approach.
 2hgc. Be presented to the user explicitly for confirmation or rejection.
 
-2hh. Failure to consult GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.LEARNED_CONSTRAINTS before reasoning, or
+2hh. Failure to consult GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.LEARNED_CONSTRAINTS before reasoning, or
      failure to draft a newly discovered constraint, constitutes a violation
      of this instruction set and requires the AI to stop under Rule 3b.
 
@@ -1112,21 +983,21 @@ Where:
      before claiming inability to read or locate the file.
 
 2ib. Deterministic resolution MUST follow this order:
-2iba. Consult GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S6.INDEX_ID_LIST for a matching file entry,
+2iba. Consult GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST for a matching file entry,
       including alias and role mappings defined therein.
 2ibb. Use the associated Drive ID to locate and open the file.
 2ibc. Verify the file identity using path declarations and fingerprints.
 
 2ic. The AI MUST NOT state that it cannot locate, read, or verify a file
-     if a valid Drive ID exists for that file in GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S6.INDEX_ID_LIST.
+     if a valid Drive ID exists for that file in GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST.
 
 2id. Only if:
-     ; - No matching entry exists in GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S6.INDEX_ID_LIST, AND
+     ; - No matching entry exists in GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST, AND
      ; - Path-based resolution fails, AND
      ; - Search fallback is exhausted per Rule 2g,
      may the AI report inability to locate the file.
 
-2ie. Failure to consult GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S6.INDEX_ID_LIST when resolving an implicitly
+2ie. Failure to consult GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST when resolving an implicitly
      referenced file constitutes a violation of this instruction set
      and requires the AI to stop under Rule 3b.
 
@@ -1182,7 +1053,7 @@ STATUS — HISTORICAL
 2ka. Prior to completing any response, the AI MUST perform a silent internal 
      audit of the proposed content against all required governance sections of GOVERNANCE_COMPENDIUM.txt.
 2kb. VERIFICATION CRITERIA:
-     - Is there a Version Header from GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.STANDARD_HEADERS?
+     - Is there a Version Header from GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S9.STANDARD_HEADERS?
      - Is the content a 1:1 literal match (no summarization)?
      - Does the logic violate any PLC (e.g., PLC-0005 or PLC-0006)?
      - Are all registry updates formatted in raw tab-separated style?
@@ -1220,7 +1091,7 @@ STATUS — HISTORICAL
 
 3c. Project Learned Constraints ID Policy (ABSOLUTE)
 
-3ca. All entries in GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.LEARNED_CONSTRAINTS must be identified
+3ca. All entries in GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.LEARNED_CONSTRAINTS must be identified
      by a stable, monotonically increasing ID using the format:
 
      PLC-XXXX
@@ -1253,7 +1124,7 @@ Where:
 3da. Upon identifying a "Learned Constraint" (defined as any discovery that 
      invalidates a previous approach, reveals a platform/tooling limitation, 
      or identifies a non-obvious failure mode), the AI MUST immediately 
-     stop and draft a new entry for GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.LEARNED_CONSTRAINTS.
+     stop and draft a new entry for GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.LEARNED_CONSTRAINTS.
 
 3db. The AI is FORBIDDEN from attempting to "fix" the issue in code or 
      structural files until the PLC entry has been formally proposed and 
@@ -1322,7 +1193,7 @@ Where:
      regardless of Drive availability or file existence.
 5ae. Partial visibility, truncation, or section-level unreadability of
      GOVERNANCE_COMPENDIUM.txt or any required Section ID
-     SHALL be treated as UNREADABLE per GOV.S0.5.COMPENDIUM_META IR-5
+     SHALL be treated as UNREADABLE per GOV.S0.COMPENDIUM_META IR-5
      and MUST trigger an immediate STOP.
 
 5b. Rules:
@@ -1347,7 +1218,7 @@ Where:
 6c. Rules:
 6ca. The AI must confirm this tag before reasoning about file location.
 6cb. Path reconstruction must use this tag, never assumptions.
-6cc. If the tag is missing or colliding (>1 registry match), the AI must stop.
+6cc. If the tag is missing or ambiguous, the AI must stop.
 
 6cd. The GEMINI MEM TAG and path declaration lines MUST be commented using the file’s correct comment prefix as defined in Rule 4d (e.g., '//' for .js/.ts, '#' for .py/.yaml). The semantic text must remain identical.
 
@@ -1453,7 +1324,7 @@ Where:
 12ab. Mirror mismatch
 12ac. Blueprint mismatch
 12ad. Missing file
-12ae. colliding (>1 registry match) ownership
+12ae. Ambiguous ownership
 
 12b. It must:
 12ba. Stop immediately.
@@ -1533,159 +1404,308 @@ END OPERATIVE TEXT (COMPENDIUM MODE)
 
 ================================================================================
 SECTION ID: GOV.S2.BOOTSTRAP_V4
-AUTHORITY LEVEL: LEVEL ONE
-ENFORCEABILITY: ENFORCEABLE (HARD)
-LOGIC_GATE: IF (RULE_STATE == FALSE) THEN STOP
-VALIDATOR_RESULT: [PASS | FAIL]
-VERSION: 2.0.0
-LAST CHANGE: Reconstituted as Bootstrap Constitution; execution mechanics externalized to PROTOCOL_RUNBOOK §10.
+ORIGIN: BOOTSTRAPv4.txt
+AUTHORITY LEVEL: PRIMARY
 ================================================================================
 OPERATIVE TEXT (COMPENDIUM MODE) — AUTHORITATIVE FOR SINGLE-ARTIFACT OPERATION
 ================================================================================
-
-Bootstrap v4 is the mandatory, non-optional process by which authoritative
-project context is established or re-established for Pipz_Project_V3.
-
-No governed reasoning, execution, audit, regeneration, or modification
-is permitted until Bootstrap v4 has completed successfully.
-
-Bootstrap v4 is constitutive in nature:
-it establishes authority; it does not assume it.
-
-Bootstrap v4 applies to all sessions, chats, tools, and operators without
-exception.
-
 ; ------------------------------------------------------------------
-### GOV.S2.A — MANDATORY INVOCATION
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4"
 ; ------------------------------------------------------------------
 
-Bootstrap v4 MUST be executed whenever authoritative project context
-is required.
-
-Bootstrap v4 is invoked exclusively by the explicit token:
-
-BOOTSTRAP_V4_INIT
-
-Implicit, inferred, substituted, or partial invocation is prohibited.
-Failure to invoke Bootstrap v4 when required invalidates authority.
-
 ; ------------------------------------------------------------------
-### GOV.S2.B — CANONICAL PHASE MODEL
+; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4
+; Version: 1.2.4
+; Last change: Added subsection B pointer aware snapshot mode.
+; Content-Fingerprint: 2026-02-04T00-39-06Z-GJS840M7
 ; ------------------------------------------------------------------
 
-Bootstrap v4 consists of the following ordered phases:
-
-- Phase 0 — Root Resolution
-- Phase 1 — Mandatory Governance Artifact Readability
-- Phase 2 — Structural Expectation Reconstruction
-- Phase 3 — Observed Set Enumeration
-- Phase 4 — Consistency Verification
-
-Phases MUST be executed in strict order.
-No phase may be skipped, reordered, merged, or partially completed.
-
-Failure of any phase invalidates Bootstrap v4.
-
 ; ------------------------------------------------------------------
-### GOV.S2.C — VALIDITY INVARIANTS
+; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
 ; ------------------------------------------------------------------
 
-Bootstrap v4 is considered VALID only if ALL of the following are true:
-
-- A single authoritative project root is resolved deterministically
-- All required governance artifacts are fully readable
-- The Expected Set is derived exclusively from governed declarations
-- The Observed Set is enumerated deterministically without inference
-- The Expected Set and Observed Set match exactly
-- No ambiguity, omission, orphaned item, or ungoverned artifact exists
-
-Unreadable content SHALL be treated as absent.
-Ambiguity at any stage results in STOP.
-
-There is no partial success state.
-There is no degraded success state.
-
 ; ------------------------------------------------------------------
-### GOV.S2.D — FAILURE SEMANTICS
+### GOV.S2.A — BOOTSTRAP v4 — CONVERSATION INITIALIZATION PROTOCOL
 ; ------------------------------------------------------------------
 
-Bootstrap v4 is FAIL-FAST and STOP-ENFORCED.
+(FINALIZED SPECIFICATION)
 
-Bootstrap v4 MUST STOP immediately if:
+Bootstrap v4 is a **mandatory conversation initialization protocol** for Pipz_Project_V3.
 
-- Any required governance artifact cannot be fully read
-- Any required section of GOVERNANCE_COMPENDIUM.txt is truncated
-- Any phase fails or cannot be completed in order
-- Any ambiguity or inconsistency is detected
-- Execution deviates from this section’s declared invariants
+Its purpose is to guarantee that the AI can **reliably re-establish full project authority** at the start of any new chat **without relying on memory, inference, or Drive search heuristics**.
 
-STOP conditions defined elsewhere in governance remain fully binding.
+Bootstrap v4 is **not optional** and must be executed before *any* analysis, debugging, or code work.
 
 ; ------------------------------------------------------------------
-### GOV.S2.E — CANONICAL COMPLETION DECLARATION
+### GOV.S2.B — POINTER-AWARE SNAPSHOT MODE
 ; ------------------------------------------------------------------
 
-Bootstrap v4 is complete ONLY when the following declaration
-is emitted verbatim:
+During Bootstrap v4 initialization, if `PIPZ_POINTER.txt` is present and readable, the system MAY retrieve the referenced context bundle as a read-only snapshot of the current project state.
+
+Rules:
+- The pointer MUST include a valid BUNDLE_URL and BUILD_ID.
+- The retrieved bundle MUST be treated as immutable and read-only.
+- Governance validation and enforcement MUST continue to bind exclusively to canonical artifacts.
+- Absence of the pointer MUST NOT block bootstrap.
+
+If the pointer is present but unreadable, stale, or internally inconsistent → STOP and surface a tooling fault.
+
+; ------------------------------------------------------------------
+PHASE 0 — GOVERNANCE GATE (HARD STOP)
+; ------------------------------------------------------------------
+
+The AI **MUST**:
+
+1. Locate, open, and fully read:
+
+   ; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS`
+
+2. Verify:
+
+   ; - Presence of GEMINI MEM TAG
+   ; - Presence of Content-Fingerprint
+   ; - Fingerprint is well-formed and readable
+
+3. Obey **all rules** defined within, including but not limited to:
+
+   ; - Mandatory re-verification rules
+   ; - Fingerprint precedence rules
+   ; - Stop-on-conflict rules
+   ; - ANYSKIPPERS single-use confirmation requirement
+
+STOP CONDITIONS (ABSOLUTE):
+
+; - File cannot be opened
+; - File is truncated
+; - Fingerprint is missing or malformed
+; - Any rule cannot be satisfied
+
+No further phases may execute if Phase 0 fails.
+
+; ------------------------------------------------------------------
+PHASE 1 — ROOT RESOLUTION (NO SEARCH HEURISTICS)
+; ------------------------------------------------------------------
+
+Bootstrap v4 **does not rely on Google Drive search alone**.
+
+Root resolution uses the following **strict precedence order**:
+
+1. `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST` (if present)
+
+   ; - Canonical Drive folder ID for `\Pipz_Project_V3`
+   ; - Declared as acceleration only, never truth
+
+2. GEMINI MEM TAG declared paths
+
+3. `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT` defined structure
+
+4. Google Drive search (LAST RESORT ONLY)
+
+RULE:
+
+Drive IDs accelerate access but do not establish authority.
+
+If root cannot be resolved deterministically → **STOP**.
+
+; ------------------------------------------------------------------
+PHASE 2 — CANONICAL FILE SET VERIFICATION
+; ------------------------------------------------------------------
+
+The AI **MUST** locate, open, and fully read the following mandatory files:
+; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS
+; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT
+; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER
+; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST
+; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.LEARNED_CONSTRAINTS
+
+The AI **MUST** ALSO locate and read the MASTER REGISTRY (Policy-B):
+; - PRIMARY: GLOBAL_REGISTRY_MASTER.csv (Authoritative governed registry, Policy-B)
+; - SECONDARY: GLOBAL_REGISTRY_MASTER.gsheet (Backup Vault ONLY — may be inaccessible to tooling)
+
+Each file must:
+; - Be readable in full
+; - Declare Content-Fingerprint (where applicable)
+; - Match its declared identity
+; - Adhere to the PLC-0006 "Flat-File Sovereignty" constraint
+
+STOP CONDITIONS:
+; - Any of the mandatory governance sections of GOVERNANCE_COMPENDIUM.txt are missing.
+; - GLOBAL_REGISTRY_MASTER.csv is missing or unreadable.
+; - The registry cannot be verified as Policy-B scoped.
+
+; ------------------------------------------------------------------
+PHASE 3 — STRUCTURE RECONSTRUCTION (EXPECTED STATE)
+; ------------------------------------------------------------------
+
+Using **only authoritative declarations**, the AI reconstructs the **expected project structure**, including:
+
+; - Root directory
+; - Governance directory
+; - Registry directory
+; - Controller / Worker / Lib / Modules directories
+; - Required `.txt` mirrors
+; - Required runtime counterparts
+
+This phase establishes **what must exist**, not what Drive happens to expose.
+No inference is permitted.
+
+; ------------------------------------------------------------------
+PHASE 4 — VERIFICATION DECLARATION
+; ------------------------------------------------------------------
+
+Only after Phases 0–3 succeed may the AI:
+
+; - Declare successful Bootstrap v4 completion
+; - Proceed with analysis, debugging, or code work
+
+All subsequent responses must continue to obey:
+
+; - Mandatory fingerprint declarations
+; - Stop-on-conflict behavior
+; - No assumption / no inference rules
+
+; ------------------------------------------------------------------
+BOOTSTRAP v4 — COMPLETION DECLARATION (CANONICAL)
+; ------------------------------------------------------------------
+
+If and only if Phases 0 through 4 complete successfully, the AI MUST emit
+the following declaration verbatim in its response:
 
 "BOOTSTRAP v4 COMPLETE — Pipz_Project_V3 authority established."
 
 Rules:
 
-- The declaration MUST appear as a standalone line
-- The declaration MUST appear before any analysis or reasoning
-- The declaration MUST NOT be paraphrased, abbreviated, or combined
-- The declaration MUST NOT be emitted conditionally or speculatively
+1. The declaration MUST:
 
-If any phase fails, the declaration MUST NOT be emitted.
+   ; - Appear as a standalone line
+   ; - Appear before any analysis, reasoning, or suggestions
+   ; - Appear only after successful completion of Phases 0–4
+
+2. The declaration MUST NOT:
+
+   ; - Be paraphrased
+   ; - Be abbreviated
+   ; - Be combined with other text
+   ; - Be emitted conditionally or speculatively
+
+3. If any phase fails:
+
+   ; - The declaration MUST NOT be emitted
+   ; - The AI MUST stop and report the failure point
+
+4. This declaration:
+
+   ; - Does NOT bypass fingerprint verification
+   ; - Does NOT bypass registry checks
+   ; - Does NOT authorize Phase 5 implicitly
 
 This declaration signals initialization success only.
-All subsequent governance rules remain in force.
+All subsequent rules remain in force.
 
 ; ------------------------------------------------------------------
-### GOV.S2.F — EXECUTION AUTHORITY
-; ------------------------------------------------------------------
 
-The execution mechanics, step ordering, and procedural enforcement of
-Bootstrap v4 are defined by:
+================================================================================
+BOOTSTRAP v4 — SINGLE-ARTIFACT MODE ADDENDUM
+APPLIES WHEN: GOVERNANCE_COMPENDIUM.txt IS PRESENT AND AUTHORITATIVE
+================================================================================
 
-PROTOCOL_RUNBOOK.txt §10  
-BOOTSTRAP v4 EXECUTION RUNBOOK (MANDATORY PROCEDURE)
+This addendum defines how Bootstrap v4 operates when Pipz_Project_V3 governance
+is consolidated into GOVERNANCE_COMPENDIUM.txt under single-artifact mode.
 
-That runbook is binding for HOW Bootstrap v4 is executed.
+This addendum is ADDITIVE and does not replace or modify the canonical Bootstrap
+v4 phase definitions. All existing Bootstrap v4 rules remain in force unless
+explicitly overridden here.
 
-This section remains authoritative for:
-- WHAT Bootstrap v4 is
-- WHEN authority exists
-- WHAT conditions invalidate authority
-
-; ------------------------------------------------------------------
-### GOV.S2.G — SINGLE-ARTIFACT MODE (CONSTITUTIONAL)
-; ------------------------------------------------------------------
+-------------------------------------------------------------------------------
+A. AUTHORITY REBINDING (MANDATORY)
+-------------------------------------------------------------------------------
 
 When GOVERNANCE_COMPENDIUM.txt is present and declared authoritative:
 
-- GOVERNANCE_COMPENDIUM.txt is the sole bootstrap governance container
-- Bootstrap resolution operates exclusively via Section IDs
-- Archived original files are non-authoritative and informational only
-- Partial visibility of any required section SHALL be treated as absence
+- GOVERNANCE_COMPENDIUM.txt becomes the sole bootstrap governance container.
+- All prior standalone governance files (now represented as sections) are treated as ARCHIVED ORIGINALS only.
+- Bootstrap v4 MUST resolve governance artifacts via Section IDs, not filenames.
 
-If GOVERNANCE_COMPENDIUM.txt or this section cannot be fully read,
-Bootstrap v4 MUST STOP.
+Canonical Bootstrap authority is now:
 
-; ------------------------------------------------------------------
-### GOV.S2.H — SCOPE BOUNDARY
-; ------------------------------------------------------------------
+- GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4
 
-This section defines Bootstrap v4 as law.
+If this section cannot be located or fully read, Bootstrap v4 MUST STOP.
 
-It does NOT define:
-- Tooling behavior
-- Operator actions
-- Step-level execution mechanics
-- Recovery or remediation procedures
+-------------------------------------------------------------------------------
+B. PHASE 0 — COMPENDIUM GATE (ADDITIVE)
+-------------------------------------------------------------------------------
 
-Procedural detail belongs exclusively in PROTOCOL_RUNBOOK.txt.
+Phase 0 MUST additionally verify:
+
+[ ] GOVERNANCE_COMPENDIUM.txt is readable in full
+[ ] Compendium MAINTEMPLATE header is present
+[ ] Content-Fingerprint is present and well-formed
+[ ] Required governance sections are not truncated:
+    - GOV.S1.AI_INSTRUCTIONS
+    - GOV.S2.BOOTSTRAP_V4
+    - GOV.S3.BLUEPRINT
+    - GOV.S7.INDEX_ID_LIST
+
+If ANY required section is unreadable or truncated → STOP.
+
+-------------------------------------------------------------------------------
+C. FILE RESOLUTION OVERRIDE (MANDATORY)
+-------------------------------------------------------------------------------
+
+All Bootstrap references to governance files are rebound as follows:
+
+- AI_PROJECT_INSTRUCTIONS.txt
+  → GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS
+
+- BOOTSTRAPv4.txt
+  → GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4
+
+- _PROJECT_BLUEPRINT.txt
+  → GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT
+
+- _PROJECT_ANCHOR_MASTER.txt
+  → GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER
+
+- PHASE5_AUDIT_MASTER.txt
+  → GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S5.PHASE5_AUDIT
+
+- INDEXIDLIST.txt
+  → GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST
+
+Legacy file paths MUST NOT be consulted when compendium mode is active.
+
+-------------------------------------------------------------------------------
+D. STOP CONDITION REINFORCEMENT
+-------------------------------------------------------------------------------
+
+Bootstrap v4 MUST STOP if:
+
+- GOVERNANCE_COMPENDIUM.txt is unreadable
+- Any required Section ID cannot be located
+- Any required section is partially visible or truncated
+- Section ID conflicts with Compendium Meta (GOV.S0)
+- Archived Original content is mistakenly used for enforcement
+
+Partial visibility SHALL be treated as total absence.
+
+-------------------------------------------------------------------------------
+E. DECLARATION INTEGRITY
+-------------------------------------------------------------------------------
+
+The declaration:
+
+"BOOTSTRAP v4 COMPLETE — Pipz_Project_V3 authority established."
+
+is VALID ONLY IF:
+
+- GOVERNANCE_COMPENDIUM.txt was read in full
+- GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4 was read in full
+- All Phase 0–4 requirements were satisfied under compendium rules
+
+-------------------------------------------------------------------------------
+END BOOTSTRAP v4 — SINGLE-ARTIFACT MODE ADDENDUM
+================================================================================
 
 ================================================================================
 END OF SECTION GOV.S2.BOOTSTRAP_V4
@@ -1695,15 +1715,25 @@ END OPERATIVE TEXT (COMPENDIUM MODE)
 
 ================================================================================
 SECTION ID: GOV.S3.BLUEPRINT
-AUTHORITY LEVEL: LEVEL TWO
-ENFORCEABILITY: ENFORCEABLE (BLOCKING)
-LOGIC_GATE: IF (RULE_STATE == FALSE) THEN RETRY_OR_STOP
-VALIDATOR_RESULT: [PASS | FAIL]
-VERSION: 2.1.8
-LAST CHANGE: Rehousing of global logic anchor section into GOV.S4.
+ORIGIN: _PROJECT_BLUEPRINT.txt
+AUTHORITY LEVEL: SECONDARY (STRUCTURAL TRUTH)
 ================================================================================
 OPERATIVE TEXT (COMPENDIUM MODE) — AUTHORITATIVE FOR SINGLE-ARTIFACT OPERATION
 ================================================================================
+; ------------------------------------------------------------------
+; GEMINI MEM TAG(DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT
+; Version: 2.1.7
+; Last change: Added subsection B project snapshot transport.
+; Content-Fingerprint: 2026-02-04T00-25-51Z-UHG94K8U
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
 ### GOV.S3.A — MASTER BLUEPRINT: FOLDER ARCHITECTURE (MUST BE MAINTAINED)
@@ -1715,8 +1745,8 @@ This section constitutes the sole authoritative Expected Set definition used dur
 All Expected items for Phase 5 MUST be derived exclusively from this section.
 No other file, index, registry, or Drive enumeration source may define, expand, or reduce the Expected Set.
 
-GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S6.INDEX_ID_LIST provides acceleration only.
-GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER provides literal structural constraint, identity rules, architectural rationale and constraints only.
+GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST provides acceleration only.
+GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER provides intent, identity rules, architectural rationale and constraints only.
 Discovered Drive contents provide Observed Set data only.
 
 GOVERNANCE STRUCTURE NOTE (SINGLE-ARTIFACT MODE)
@@ -1799,7 +1829,7 @@ PATH / FILE NAME                                                       | TYPE   
   settings.txt                                                         | Document                                          | Auditable AI mirror of settings.ini.
                                                                        |                                                   |
 -----------------------------------------------------------------------|---------------------------------------------------|------------------------------------------------------------------------
-\Archive                                                               | DIRECTORY                                         | Archived prior standalone governance files and artifacts (literal structural constraintionally excluded).
+\Archive                                                               | DIRECTORY                                         | Archived prior standalone governance files and artifacts (Intentionally excluded).
 -----------------------------------------------------------------------|---------------------------------------------------|------------------------------------------------------------------------
 \Controller                                                            | DIRECTORY                                         | Container for the Interactive GUI Process.
   Main_Controller.ahk                                                  | Main Script                                       | Entry point for GUI; handles UI, validation, orchestration commands, and high-level control.
@@ -1812,18 +1842,17 @@ PATH / FILE NAME                                                       | TYPE   
   GOVERNANCE_COMPENDIUM.txt                                            | Document                                          | Single authoritative governance artifact operating in SINGLE-ARTIFACT MODE. Consolidates all governance, bootstrap, blueprint, audit, and enforcement rules into section-addressable canonical form.
   PROTOCOL_RUNBOOK.txt                                                 | Document                                          | Canonical procedural authority file defining mandatory, repeatable runbooks for governance-critical, tooling-critical, and high-risk project operations. Houses non-optional execution protocols (e.g., extension repackaging, Policy-B registry audits). Cumulative by design; defines how specific operations must always be performed. Location subject to future consolidation under governance directory.
   PROJECT_LEARNED_CONSTRAINTS.txt                                      | Document                                          | Canonical, append-only repository of empirically confirmed learned constraints and invalidated approaches. Non-authoritative; used exclusively for anti-regression and institutional memory. Referenced by GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.
-  PROJECT_WORKING_NOTES.txt                                            | Document                                          | Non-authoritative, append-only repository of project design rationale, architectural literal structural constraint, guardrails, and historical context. Externalized from GOV.S4.ANCHOR_MASTER to prevent compendium growth and preserve long-form reasoning.
+  PROJECT_WORKING_NOTES.txt                                            | Document                                          | Non-authoritative, append-only repository of project design rationale, architectural intent, guardrails, and historical context. Externalized from GOV.S4.ANCHOR_MASTER to prevent compendium growth and preserve long-form reasoning.
   PIPZ_POINTER.txt                                                     | Document                                          | Drive-synced pointer file defining the current authoritative context bundle (BUNDLE_URL, BUILD_ID, BASE_COMMIT_SHA, WORKTREE_STATE, WORKTREE_PATCH_SHA256, MANIFEST_SHA256). Updated automatically by the pipz-publisher publish pipeline; serves as the canonical “latest bundle” locator for AI context sync.
-  GOVERNANCE_ENGINE_MASTER.txt                                         | Document                                          | Consolidated mechanical enforcement engine. Houses the Architect Execution Contract (GEM.S1), Validator Execution Contract (GEM.S2), and Orchestrator Policy Spec (GEM.S3). Defines the deterministic rules for AD generation, PASS/FAIL validation logic, and automated release/retry branching.
   GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT                | Virtual Document Section (Single-Artifact Mode)   | Primary source of truth for structure, search protocols, and logic rules.
-  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER            | Virtual Document Section (Single-Artifact Mode)   | Canonical unified system anchor defining mission literal structural constraint, behavioral constraints, identity rules, and long-term architectural rationale. Authoritative, non-structural, and non-initializing.
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER            | Virtual Document Section (Single-Artifact Mode)   | Canonical unified system anchor defining mission intent, behavioral constraints, identity rules, and long-term architectural rationale. Authoritative, non-structural, and non-initializing.
   GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS          | Virtual Document Section (Single-Artifact Mode)   | AI governance ruleset; mandatory read source defining verification, fingerprinting, header mandates, and enforcement behavior.
-  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S6.INDEX_ID_LIST            | Virtual Document Section (Single-Artifact Mode)   | Deterministic Google Drive ID acceleration map; reference-only, never a source of authority.
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST            | Virtual Document Section (Single-Artifact Mode)   | Deterministic Google Drive ID acceleration map; reference-only, never a source of authority.
   GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4             | Virtual Document Section (Single-Artifact Mode)   | Canonical, authoritative definition of the Bootstrap v4 initialization protocol.
   GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S5.PHASE5_AUDIT             | Virtual Document Section (Single-Artifact Mode)   | Deterministic execution checklist and read-only report template for Phase 5 visibility audits.
-  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.LEARNED_CONSTRAINTS      | Virtual Document Section (Single-Artifact Mode)   | Non-authoritative, scope-indexed log of confirmed constraints and invalidated approaches to prevent regression.
-  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.STANDARD_HEADERS         | Virtual Document Section (Single-Artifact Mode)   | Templates for mandatory file headers.
-  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S9.HEARTBEAT_PROTOCOL       | Virtual Document Section (Single-Artifact Mode)   | Mandatory high-fidelity re-sync cycle; enforces a "Context Carry-Forward" to eliminate logical drift during long sessions.
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S6.GOVERNANCE_LOCK          | Virtual Document Section (Single-Artifact Mode)   | Governance lifecycle state declaration and phase lock indicator (non-authoritative).
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.LEARNED_CONSTRAINTS      | Virtual Document Section (Single-Artifact Mode)   | Non-authoritative, scope-indexed log of confirmed constraints and invalidated approaches to prevent regression.
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S9.STANDARD_HEADERS         | Virtual Document Section (Single-Artifact Mode)   | Templates for mandatory file headers.
                                                                        |                                                   |
 -----------------------------------------------------------------------|---------------------------------------------------|------------------------------------------------------------------------
 \Lib                                                                   | DIRECTORY                                         | Shared Libraries (#Include) used by both Controller and Worker.
@@ -1874,7 +1903,7 @@ PATH / FILE NAME                                                       | TYPE   
     extension.ts                                                       | Script                                            | Entry point for mirroring and fingerprinting logic.
                                                                        |                                                   |
 -----------------------------------------------------------------------|---------------------------------------------------|------------------------------------------------------------------------
-\pipz-publisher                                                        | DIRECTORY                                         | VS Code extension providing a hotkey-driven “publish-on-literal structural constraint” context bundling pipeline. Generates MANIFEST.json + BUILD_ID and uploads a stable Release Asset bundle to GitHub, then updates Governance\PIPZ_POINTER.txt for deterministic context synchronization.
+\pipz-publisher                                                        | DIRECTORY                                         | VS Code extension providing a hotkey-driven “publish-on-intent” context bundling pipeline. Generates MANIFEST.json + BUILD_ID and uploads a stable Release Asset bundle to GitHub, then updates Governance\PIPZ_POINTER.txt for deterministic context synchronization.
   package.json                                                         | Config (JSON)                                     | Extension manifest defining command registration, keybindings, configuration schema, and metadata.
   tsconfig.json                                                        | Config (JSON)                                     | TypeScript compiler configuration for the extension.
   package.json.governance.txt                                          | Document                                          | Governance sidecar for package.json; stores mandated headers, fingerprints, and audit metadata.
@@ -1890,7 +1919,7 @@ PATH / FILE NAME                                                       | TYPE   
   \mirror                                                              | SUB-DIRECTORY                                     | Mirror-specific audit logs.
                                                                        |                                                   |
 -----------------------------------------------------------------------|---------------------------------------------------|------------------------------------------------------------------------
-\PPAVP                                                                 | DIRECTORY                                         | Non-authoritative planning and execution support workspace. Holds living task/status tracking and optional procedural aids used to run audits or verify work, but does not define binding governance. Long-term literal structural constraint: migrate any mandatory, repeatable, or enforcement-relevant procedures into PROTOCOL_RUNBOOK.txt, leaving PPAVP as a transient, non-authoritative planning and proof-staging area only.
+\PPAVP                                                                 | DIRECTORY                                         | Non-authoritative planning and execution support workspace. Holds living task/status tracking and optional procedural aids used to run audits or verify work, but does not define binding governance. Long-term intent: migrate any mandatory, repeatable, or enforcement-relevant procedures into PROTOCOL_RUNBOOK.txt, leaving PPAVP as a transient, non-authoritative planning and proof-staging area only.
   PROJECT_STATUS_CHECKLIST.txt                                         | Document                                          | Living execution tracker enumerating completed, pending, and blocked work items across governance, tooling, and orchestration.
                                                                        |                                                   |
 -----------------------------------------------------------------------|---------------------------------------------------|------------------------------------------------------------------------
@@ -1907,7 +1936,7 @@ To maintain a 1:1 literal match of the project state, the following protocol MUS
 
 2. **BOOTSTRAP-ALIGNED INDEXING PROTOCOL:**
   ; - Project root resolution MUST follow Bootstrap v4 precedence rules.
-  ; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S6.INDEX_ID_LIST` MUST be used first when present to deterministically resolve the project root.
+  ; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST` MUST be used first when present to deterministically resolve the project root.
   ; - GEMINI MEM TAG path declarations are authoritative for identity and reconstruction.
   ; - Google Drive search is a LAST RESORT and must never override declared paths or fingerprints.
 
@@ -1926,10 +1955,10 @@ To maintain a 1:1 literal match of the project state, the following protocol MUS
     ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT
     ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER
     ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S5.PHASE5_AUDIT
-    ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S6.INDEX_ID_LIST
-    ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.LEARNED_CONSTRAINTS
-    ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.STANDARD_HEADERS
-    ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S9.HEARTBEAT_PROTOCOL
+    ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S6.GOVERNANCE_LOCK
+    ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST
+    ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.LEARNED_CONSTRAINTS
+    ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S9.STANDARD_HEADERS
 
   ; - Confirm visibility of required EXTERNAL REGISTRY ARTIFACTS (Policy-B):
     ; - GLOBAL_REGISTRY_MASTER.csv (PRIMARY — MUST be readable)
@@ -1978,6 +2007,21 @@ To maintain a 1:1 literal match of the project state, the following protocol MUS
 6. **CUMULATIVE INTEGRITY:** Never remove registry entries.
    Updates must maintain a 1:1 literal match with the source code and verified mirrors.
 
+; ------------------------------------------------------------------
+### GOV.S3.D — GLOBAL LOGIC ANCHORS
+; ------------------------------------------------------------------
+
+; - **DRY ARCHITECTURE:** No variable or function definitions should be hardcoded in text documents.
+Refer to `GLOBAL_REGISTRY_MASTER.csv` for Policy-B governed surface area ownership and invariants.
+For full symbol inventory, consult `INTERNAL_FUNCTION_INDEX.csv` (informational; non-governed).
+
+; - **IPC STANDARD:** All communication between Controller and Worker uses WM_COPYDATA or custom message `0x5555`.
+
+; - **STATE PERSISTENCE:** The Worker must remain a slave to `Settings.ini`; enforcement is handled by the Watchdog in `WorkerState.ahk`.
+
+; - **GROUND TRUTH RULES (MANDATORY):** Logic invariants and non-negotiable behavior rules are defined in `GLOBAL_REGISTRY_MASTER.csv`
+(Policy-B governed surface area). These rules must be consulted before audit, debugging, refactor, or feature change.
+
 ================================================================================
 END OF SECTION GOV.S3.BLUEPRINT
 ================================================================================
@@ -1986,22 +2030,36 @@ END OPERATIVE TEXT (COMPENDIUM MODE)
 
 ================================================================================
 SECTION ID: GOV.S4.ANCHOR_MASTER
-AUTHORITY LEVEL: LEVEL TWO
-ENFORCEABILITY: ENFORCEABLE (BLOCKING)
-LOGIC_GATE: IF (RULE_STATE == FALSE) THEN RETRY_OR_STOP
-VALIDATOR_RESULT: [PASS | FAIL]
-VERSION: 2.0.6
-LAST CHANGE: Inclusion of global logic anchors section.
+ORIGIN: _PROJECT_ANCHOR_MASTER.txt
+AUTHORITY LEVEL: SECONDARY (INTENT / RATIONALE)
 ================================================================================
 OPERATIVE TEXT (COMPENDIUM MODE) — AUTHORITATIVE FOR SINGLE-ARTIFACT OPERATION
 ================================================================================
+; ------------------------------------------------------------------
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER"
+; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
-; PROJECT ANCHOR: Pipz_Project_V3 (AutoHotkey v2) (CANONICAL AUTHORITY)
+; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER
+; Version: 2.0.4
+; Last change: Converted section b into pointer stub and rehoused content into standalone file.
+; Content-Fingerprint: 2026-01-29T00-46-33Z-JDL85GP3
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT (LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; SECTION A — PROJECT ANCHOR (CANONICAL AUTHORITY)
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+PROJECT ANCHOR: Pipz_Project_V3 (AutoHotkey v2)
 ; ------------------------------------------------------------------
 
 **UNIFIED SYSTEM ANCHOR (CANONICAL):**
-This file defines the *mission literal structural constraint*, *behavioral constraints*, and *system-level anchoring rules* for Pipz_Project_V3.
+This file defines the *mission intent*, *behavioral constraints*, and *system-level anchoring rules* for Pipz_Project_V3.
 
 >
 Structural authority is defined in `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT`.
@@ -2011,7 +2069,7 @@ Governance and enforcement authority is defined in `GOVERNANCE_COMPENDIUM.txt ::
 This file MUST NOT override Bootstrap v4.
 
 ; ------------------------------------------------------------------
-### GOV.S4.A — MISSION STATEMENT & IDENTITY (MUST BE MAINTAINED)
+1. MISSION STATEMENT & IDENTITY (MUST BE MAINTAINED)
 ; ------------------------------------------------------------------
 
 Pipz_Project_V3 is a dual-process automation system composed of:
@@ -2034,7 +2092,7 @@ Every governed file **MUST** declare its identity using:
 Absence, ambiguity, or mismatch of this tag constitutes a **hard stop**.
 
 ; ------------------------------------------------------------------
-### GOV.S4.B — BOOTSTRAP & GOVERNANCE DEFERENCE (AUTHORITATIVE)
+2. BOOTSTRAP & GOVERNANCE DEFERENCE (AUTHORITATIVE)
 ; ------------------------------------------------------------------
 
 This file **DOES NOT** define initialization behavior.
@@ -2058,7 +2116,7 @@ The hierarchy of authority for Pipz_Project_V3 is:
 4. GLOBAL_REGISTRY_MASTER.csv (Authoritative governed registry, Policy-B)
 5. INTERNAL_FUNCTION_INDEX.csv (Informational, regenerable; non-governed)
 6. GLOBAL_REGISTRY_MASTER.gsheet (Backup Vault ONLY; may be unreadable to tooling)
-7. GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER (literal structural constraint & Rationale)
+7. GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER (Intent & Rationale)
 
 **NEW CHAT INVOCATION (REFERENCE ONLY)**
 For a fresh session cold-start, the required user invocation (including the machine-checkable token `BOOTSTRAP_V4_INIT`) is defined in:
@@ -2068,7 +2126,7 @@ For a fresh session cold-start, the required user invocation (including the mach
 This Anchor does not redefine or override invocation enforcement.
 
 ; ------------------------------------------------------------------
-### GOV.S4.C — VISIBILITY VS GOVERNANCE DISTINCTION (CLARIFIED)
+3. VISIBILITY VS GOVERNANCE DISTINCTION (CLARIFIED)
 ; ------------------------------------------------------------------
 
 The project contains **three classes of artifacts**:
@@ -2094,7 +2152,7 @@ These:
 ; - MUST exist at declared paths
 ; - MAY be enumerated via Drive
 ; - MUST NOT be read or reasoned about directly
-; - Are classified as **N/A** in `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S6.INDEX_ID_LIST`
+; - Are classified as **N/A** in `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST`
 
 ### C. Externalized Authority
 ; - `GLOBAL_REGISTRY_MASTER.gsheet`
@@ -2102,7 +2160,7 @@ These:
 This is a **non-negotiable source of truth** and must be fully readable.
 
 ; ------------------------------------------------------------------
-### GOV.S4.D — STRUCTURAL & EXPECTED-SET AUTHORITY (REFERENCE ONLY)
+4. STRUCTURAL & EXPECTED-SET AUTHORITY (REFERENCE ONLY)
 ; ------------------------------------------------------------------
 
 The expected project structure **and the authoritative Expected Set used for Phase 5** are defined **exclusively** in:
@@ -2120,22 +2178,7 @@ If structure or expected items change:
 ; - This file is synchronized second
 
 ; ------------------------------------------------------------------
-### GOV.S3.E — GLOBAL LOGIC ANCHORS (REFERENCE ONLY)
-; ------------------------------------------------------------------
-
-; - **DRY ARCHITECTURE:** No variable or function definitions must be hardcoded in text documents.
-Refer to `GLOBAL_REGISTRY_MASTER.csv` for Policy-B governed surface area ownership and invariants.
-For full symbol inventory, consult `INTERNAL_FUNCTION_INDEX.csv` (informational; non-governed).
-
-; - **IPC STANDARD:** All communication between Controller and Worker uses WM_COPYDATA or custom message `0x5555`.
-
-; - **STATE PERSISTENCE:** The Worker must remain a slave to `Settings.ini`; enforcement is handled by the Watchdog in `WorkerState.ahk`.
-
-; - **GROUND TRUTH RULES (MANDATORY):** Logic invariants and non-negotiable behavior rules are defined in `GLOBAL_REGISTRY_MASTER.csv`
-(Policy-B governed surface area). These rules must be consulted before audit, debugging, refactor, or feature change.
-
-; ------------------------------------------------------------------
-### GOV.S4.F — FINGERPRINT & VERIFICATION BEHAVIOR (DEFERRED)
+5. FINGERPRINT & VERIFICATION BEHAVIOR (DEFERRED)
 ; ------------------------------------------------------------------
 
 All fingerprint rules, cache-busting behavior, and Fingerprint Challenge Mode (FCM) handling are defined in:
@@ -2148,7 +2191,7 @@ This Anchor:
 ; - Does not introduce alternative validation rules
 
 ; ------------------------------------------------------------------
-### GOV.S4.G — SYSTEM literal structural constraint (NON-TECHNICAL ANCHOR)
+6. SYSTEM INTENT (NON-TECHNICAL ANCHOR)
 ; ------------------------------------------------------------------
 
 The purpose of Pipz_Project_V3 is to:
@@ -2161,7 +2204,7 @@ The purpose of Pipz_Project_V3 is to:
 The AI is a **verifier and executor**, never an estimator.
 
 ; ------------------------------------------------------------------
-### GOV.S4.H — SYNCHRONIZATION OBLIGATION (MANDATORY)
+7. SYNCHRONIZATION OBLIGATION (MANDATORY)
 ; ------------------------------------------------------------------
 
 Any change that affects:
@@ -2175,11 +2218,38 @@ MUST be synchronized across:
 ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT
 ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER
 ; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS
-; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S6.INDEX_ID_LIST (when applicable)
+; - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST (when applicable)
 ; - GLOBAL_REGISTRY_MASTER.gsheet
 ; - GLOBAL_REGISTRY_MASTER.csv
 
 Partial updates are invalid.
+
+; ------------------------------------------------------------------
+END OF SECTION A
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; SECTION B — PROJECT WORKING NOTES (EXTERNALIZED)
+; ------------------------------------------------------------------
+
+Project working notes, design rationale, and long-form architectural
+context have been externalized to preserve compendium stability.
+
+Canonical location:
+
+Pipz_Project_V3\Governance\PROJECT_WORKING_NOTES.txt
+
+This section intentionally contains no growing content.
+
+Refer to the canonical file for:
+- Design intent
+- Rationale
+- Guardrails
+- Historical decision context
+
+; ------------------------------------------------------------------
+END OF SECTION B
+; ------------------------------------------------------------------
 
 ================================================================================
 END OF SECTION GOV.S4.ANCHOR_MASTER
@@ -2189,16 +2259,27 @@ END OPERATIVE TEXT (COMPENDIUM MODE)
 
 ================================================================================
 SECTION ID: GOV.S5.PHASE5_AUDIT
-AUTHORITY LEVEL: LEVEL ONE
-ENFORCEABILITY: ENFORCEABLE (HARD)
-LOGIC_GATE: IF (RULE_STATE == FALSE) THEN STOP
-VALIDATOR_RESULT: [PASS | FAIL]
-VERSION: 2.0.0
-LAST CHANGE: Converted Phase 5 from procedural checklist into declarative
-             governance contract; execution fully delegated to Protocol Runbook.
+ORIGIN: PHASE5_AUDIT_MASTER.txt
+AUTHORITY LEVEL: PRIMARY (GOVERNANCE CONTRACT)
 ================================================================================
 OPERATIVE TEXT (COMPENDIUM MODE) — AUTHORITATIVE FOR SINGLE-ARTIFACT OPERATION
 ================================================================================
+; ------------------------------------------------------------------
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT)
+; MY FULL PATH IS "GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S5.PHASE5_AUDIT"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S5.PHASE5_AUDIT
+; Version: 3.0.0
+; Last change: Converted Phase 5 from procedural checklist into declarative
+;              governance contract; execution fully delegated to Protocol Runbook.
+; Content-Fingerprint: <UPDATE ON SAVE>
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT (LINES 1–14 RESERVED)
+; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
 ; PHASE 5 — GOVERNANCE AUDIT CONTRACT
@@ -2211,7 +2292,7 @@ Its purpose is to assert, with determinism and without inference, that the
 governance.
 
 Phase 5 governs **visibility, accessibility, and structural correctness** only.
-It does not authorize remediation, modification, refactor, or mechanical execution.
+It does not authorize remediation, modification, refactor, or interpretation.
 
 ---
 
@@ -2305,16 +2386,160 @@ END OPERATIVE TEXT (COMPENDIUM MODE)
 
 
 ================================================================================
-SECTION ID: GOV.S6.INDEX_ID_LIST
-AUTHORITY LEVEL: LEVEL TWO
-ENFORCEABILITY: ENFORCEABLE (BLOCKING)
-LOGIC_GATE: IF (RULE_STATE == FALSE) THEN RETRY_OR_STOP
-VALIDATOR_RESULT: [PASS | FAIL]
-VERSION: 1.3.6
-LAST CHANGE: Populated with new entries for publisher extension.
+SECTION ID: GOV.S6.GOVERNANCE_LOCK
+ORIGIN: GOVERNANCE_LOCK.txt
+AUTHORITY LEVEL: ENFORCEMENT
 ================================================================================
 OPERATIVE TEXT (COMPENDIUM MODE) — AUTHORITATIVE FOR SINGLE-ARTIFACT OPERATION
 ================================================================================
+; ------------------------------------------------------------------
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S6.GOVERNANCE_LOCK"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S6.GOVERNANCE_LOCK
+; Version: 1.0.7
+; Last change: Governance state re-locked after total governance layer consolidation and creation of compendium for single-artifact mode.
+; Content-Fingerprint: 2026-01-29T01-01-37Z-873JDKIP
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+GOVERNANCE LAYER LOCK — DECLARATION OF STABLE STATE
+; ------------------------------------------------------------------
+
+(CANONICAL, NON-AUTHORITATIVE)
+
+This document records a **governance lifecycle state transition** for Pipz_Project_V3.
+
+It does NOT define rules.
+It does NOT grant authority.
+It does NOT override any governance mechanism.
+
+Its sole purpose is to provide a **durable, verifiable record** that the governance layer
+has entered a **stable, locked phase**.
+
+; ------------------------------------------------------------------
+1. GOVERNANCE LOCK STATUS
+; ------------------------------------------------------------------
+
+Status: **LOCKED (OPERATIONAL)**
+
+As of this declaration:
+
+; - The governance architecture for Pipz_Project_V3 is considered **stable**
+; - Core governance rules are finalized, including implicit file resolution and constraint consultation rules
+; - Initialization, verification, and enforcement semantics are fixed
+
+The authoritative governance sources remain:
+
+; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS`
+; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4`
+; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT`
+; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER`
+; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST`
+
+This file does not participate in governance enforcement.
+
+; ------------------------------------------------------------------
+2. SCOPE OF THE LOCK
+; ------------------------------------------------------------------
+
+The following are considered **locked**:
+
+; - Bootstrap v4 phase structure and semantics
+; - Content-Fingerprint enforcement rules
+; - GEMINI MEM TAG identity requirements
+; - Stop-on-conflict behavior
+; - Verification precedence rules
+; - Phase 5 invocation boundaries
+
+The following remain **permitted** without reopening governance:
+
+; - Adding new files or modules to the project
+; - Updating `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT` to reflect structural extensions
+; - Updating `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST` to reflect new resolvable items
+; - Updating mirrors and fingerprints as part of normal operation
+
+No change may alter **governance behavior** without explicitly reopening the governance layer.
+
+; ------------------------------------------------------------------
+3. WHAT THIS FILE IS NOT
+; ------------------------------------------------------------------
+
+This document:
+
+; - Is NOT consulted during Bootstrap execution
+; - Is NOT required for Bootstrap success
+; - Is NOT used to resolve conflicts
+; - Is NOT used to validate fingerprints
+; - Is NOT referenced during Phase 5 execution
+; - Is NOT a substitute for any governance file
+
+In all conflicts, this file has **zero authority**.
+
+; ------------------------------------------------------------------
+4. GOVERNANCE REOPENING RULE (STRICT)
+; ------------------------------------------------------------------
+
+Reopening the governance layer requires **explicit, intentional action**.
+
+A governance reopening MUST:
+
+1. Be explicitly declared by the user
+
+2. Result in a versioned update to:
+
+   ; - `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS`
+   ; - AND / OR `GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4`
+
+3. Be accompanied by an updated declaration in this file
+
+Absent those conditions, governance is considered locked.
+
+; ------------------------------------------------------------------
+5. INTENDED AUDIENCE
+; ------------------------------------------------------------------
+
+This file exists for:
+
+; - Long-term project integrity
+; - Future session clarity
+; - Human verification
+; - Audit traceability
+
+It exists to prevent ambiguity — not to introduce it.
+
+================================================================================
+END OF SECTION GOV.S6.GOVERNANCE_LOCK
+================================================================================
+END OPERATIVE TEXT (COMPENDIUM MODE)
+
+
+================================================================================
+SECTION ID: GOV.S7.INDEX_ID_LIST
+ORIGIN: INDEXIDLIST.txt
+AUTHORITY LEVEL: SUPPORT (RESOLUTION)
+================================================================================
+OPERATIVE TEXT (COMPENDIUM MODE) — AUTHORITATIVE FOR SINGLE-ARTIFACT OPERATION
+================================================================================
+; ------------------------------------------------------------------
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST
+; Version: 1.3.6
+; Last change: Populated with new entries for publisher extension.
+; Content-Fingerprint: 2026-02-04T00-15-48Z-837GH6TD
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
 AUTHORITY NOTICE (MANDATORY)
@@ -2400,7 +2625,7 @@ ID USAGE & PRECEDENCE RULES (STRICT)
 
    ; - Locate items deterministically
    ; - Enumerate child contents of folders
-   ; - Accelerate indexing when Drive search is colliding (>1 registry match) or truncated
+   ; - Accelerate indexing when Drive search is ambiguous or truncated
 
 2. File and folder IDs listed here MUST NOT:
 
@@ -2449,7 +2674,6 @@ IDs and VERIFIED flags are acceleration signals only, never authority.
 --------------------------------------------------|--------------------|------------------------------------------------------------|----------
 \Governance                                       | DIRECTORY          | 1iYz1-T6dS47O03mxYU8_FTg1Xbj7wJ_w                          | YES
   GOVERNANCE_COMPENDIUM.txt                       | Document           | 1NNndPx4st_Gpr28dQOmnhpLDVZAByFW3                          | YES
-  GOVERNANCE_ENGINE_MASTER.txt                    | Document           | 1UCbvJIYreL5TZxz7cWc2Zecp52o8Ydz_                          | YES
   PROTOCOL_RUNBOOK.txt                            | Document           | 1oIQfSds-AoaiTyRe4q_5RGoAe1sVosiP                          | YES
   PROJECT_LEARNED_CONSTRAINTS.txt                 | Document           | 1jchILjl0BBPMYIQvIZmcuA4K4cZRiKxk                          | YES
   PROJECT_WORKING_NOTES.txt                       | Document           | 1sViR9LqaJJqbDcd-Hnf0312Ou2MRwCNX                          | YES
@@ -2570,13 +2794,13 @@ IDs and VERIFIED flags are acceleration signals only, never authority.
   GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S1.AI_INSTRUCTIONS      | ai instructions, governance rules, project rules, ai governance, enforcement rules
   GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S2.BOOTSTRAP_V4         | bootstrap, bootstrap v4, init protocol, initialization protocol, cold start protocol
   GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S3.BLUEPRINT            | blueprint, project blueprint, architecture blueprint, structural blueprint, expected set blueprint
-  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER        | anchor, project anchor, system anchor, governance anchor, literal structural constraint anchor, canonical literal structural constraint
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S4.ANCHOR_MASTER        | anchor, project anchor, system anchor, governance anchor, intent anchor, canonical intent
   GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S5.PHASE5_AUDIT         | phase 5 audit, phase 5 checklist, phase 5 verification, visibility audit
-  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S6.INDEX_ID_LIST        | index, id index, drive index, id list, master index
-  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.LEARNED_CONSTRAINTS  | constraints index, learned constraints index, plc index, constraint gateway, constraints overview
-  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.STANDARD_HEADERS     | header standards, standard headers, header templates, file header rules
-  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S9.HEARTBEAT_PROTOCOL   | heartbeat protocol, heart protocol, drift protocol, heartbeat rules, heartbeat
-  GOVERNANCE_ENGINE_MASTER.txt                                     | governance engine, governance engine master, governance engine manifest
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S6.GOVERNANCE_LOCK      | governance lock, lock state, governance freeze, enforcement lock
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST        | index, id index, drive index, id list, master index
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.LEARNED_CONSTRAINTS  | constraints index, learned constraints index, plc index, constraint gateway, constraints overview
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S9.STANDARD_HEADERS     | header standards, standard headers, header templates, file header rules
+  GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S10.HEARTBEAT_PROTOCOL  | heartbeat protocol, heart protocol, drift protocol, heartbeat rules, heartbeat
   PROTOCOL_RUNBOOK.txt                                             | runbook, protocol runbook, mandatory procedures, execution protocols, governed procedures
   PROJECT_LEARNED_CONSTRAINTS.txt                                  | plc file, learned constraints log, constraints ledger, canonical constraints, plc archive
   PROJECT_WORKING_NOTES.txt                                        | working notes, project notes, anchor notes, design rationale log, architectural notes
@@ -2629,23 +2853,33 @@ IDs and VERIFIED flags are acceleration signals only, never authority.
 -------------------------------------------------------------------|--------------------------------------------------------------------------------------------
 
 ================================================================================
-END OF SECTION GOV.S6.INDEX_ID_LIST
+END OF SECTION GOV.S7.INDEX_ID_LIST
 ================================================================================
 END OPERATIVE TEXT (COMPENDIUM MODE)
 
 
 ================================================================================
-SECTION ID: GOV.S7.LEARNED_CONSTRAINTS
-AUTHORITY LEVEL: LEVEL TWO
-ENFORCEABILITY: ENFORCEABLE (BLOCKING)
-LOGIC_GATE: IF (RULE_STATE == FALSE) THEN RETRY_OR_STOP
-VALIDATOR_RESULT: [PASS | FAIL]
-VERSION: 2.0.0
-LAST CHANGE: Externalized Project Learned Constraints into canonical standalone
-             file; converted compendium section to pointer + optional snapshot.
+SECTION ID: GOV.S8.LEARNED_CONSTRAINTS
+ORIGIN: PROJECT_LEARNED_CONSTRAINTS.txt
+AUTHORITY LEVEL: SUPPORT (ANTI-REGRESSION)
 ================================================================================
 OPERATIVE TEXT (COMPENDIUM MODE) — AUTHORITATIVE FOR SINGLE-ARTIFACT OPERATION
 ================================================================================
+; ------------------------------------------------------------------
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.LEARNED_CONSTRAINTS"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S8.LEARNED_CONSTRAINTS
+; Version: 2.0.0
+; Last change: Externalized Project Learned Constraints into canonical standalone
+;              file; converted compendium section to pointer + optional snapshot.
+; Content-Fingerprint: 2026-02-03T00-15-48Z-8JTJUHSF
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT (LINES 1–14 RESERVED)
+; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
 NON-AUTHORITATIVE NOTICE (MANDATORY)
@@ -2734,22 +2968,32 @@ The authoritative emission procedure is defined in:
 PROTOCOL_RUNBOOK.txt — PLC Externalization & Emission Runbook
 
 ================================================================================
-END OF SECTION GOV.S7.LEARNED_CONSTRAINTS
+END OF SECTION GOV.S8.LEARNED_CONSTRAINTS
 ================================================================================
 END OPERATIVE TEXT (COMPENDIUM MODE)
 
 
 ================================================================================
-SECTION ID: GOV.S8.STANDARD_HEADERS
-AUTHORITY LEVEL: LEVEL TWO
-ENFORCEABILITY: ENFORCEABLE (BLOCKING)
-LOGIC_GATE: IF (RULE_STATE == FALSE) THEN RETRY_OR_STOP
-VALIDATOR_RESULT: [PASS | FAIL]
-VERSION: 0.1.6
-LAST CHANGE: Converted to header class normalization instead of per-file iteration.
+SECTION ID: GOV.S9.STANDARD_HEADERS
+ORIGIN: STANDARDIZED_HEADERS.txt
+AUTHORITY LEVEL: ENFORCEMENT
 ================================================================================
 OPERATIVE TEXT (COMPENDIUM MODE) — AUTHORITATIVE FOR SINGLE-ARTIFACT OPERATION
 ================================================================================
+; ------------------------------------------------------------------
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S9.STANDARD_HEADERS"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S9.STANDARD_HEADERS
+; Version: 0.1.6
+; Last change: Converted to header class normalization instead of per-file iteration.
+; Content-Fingerprint: 2026-01-29T21-31-20Z-749GHD8U
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT (LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
 
 ; ------------------------------------------------------------------
 MANDATED HEADER STYLES (ABSOLUTE)
@@ -2879,7 +3123,7 @@ SIDECAR FILE REQUIREMENTS:
 - MUST include GEMINI MEM TAG with FULL PATH pointing to the SIDECAR FILE
 - MUST reference the governed JSON file explicitly in content
 - MUST receive Content-Fingerprint updates on save
-- MUST be listed in GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S6.INDEX_ID_LIST as the authoritative governance artifact
+- MUST be listed in GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S7.INDEX_ID_LIST as the authoritative governance artifact
 
 THE .json FILE ITSELF:
 - MUST remain valid, comment-free JSON
@@ -2988,61 +3232,64 @@ ADDITIONAL AHK-SPECIFIC REQUIREMENTS (MANDATORY):
 ; - GOVERNANCE MOVES TO A SIDE CHANNEL
 
 ================================================================================
-END OF SECTION GOV.S8.STANDARD_HEADERS
+END OF SECTION GOV.S9.STANDARD_HEADERS
 ================================================================================
 END OPERATIVE TEXT (COMPENDIUM MODE)
 
 
 ================================================================================
-SECTION ID: GOV.S9.HEARTBEAT_PROTOCOL
-AUTHORITY LEVEL: LEVEL ONE
-ENFORCEABILITY: ENFORCEABLE (HARD)
-LOGIC_GATE: IF (RULE_STATE == FALSE) THEN STOP
-VALIDATOR_RESULT: [PASS | FAIL]
-VERSION: 1.0.2
-LAST CHANGE: Revision of trigger conditions to reflect new AD and addition of step 4.
+SECTION ID: GOV.S10.HEARTBEAT_PROTOCOL
+ORIGIN: (NEW)
+AUTHORITY LEVEL: OPERATIONAL (DRIFT MITIGATION)
 ================================================================================
 OPERATIVE TEXT (COMPENDIUM MODE) — AUTHORITATIVE FOR SINGLE-ARTIFACT OPERATION
 ================================================================================
+; ------------------------------------------------------------------
+; GEMINI MEM TAG (DO NOT EVER REMOVE OR EDIT) - MY FULL PATH IS "GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S10.HEARTBEAT_PROTOCOL"
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; MAINTEMPLATE - GOVERNANCE_COMPENDIUM.txt :: SECTION GOV.S10.HEARTBEAT_PROTOCOL
+; Version: 1.0.0
+; Last change: Initial creation of drift mitigation protocol.
+; Content-Fingerprint: 2026-02-06T01-01-37Z-839GK8SP
+; ------------------------------------------------------------------
+
+; ------------------------------------------------------------------
+; ALL CONTENT MUST GO BELOW THIS POINT(LINES 1-14 RESERVED)
+; ------------------------------------------------------------------
 
 1. THE FIVE-TURN PULSE (MANDATORY)
 Every 5 turns of conversation, the AI MUST perform a "System Heartbeat." 
 This is a hard requirement to counteract Context Erosion.
 
 2. THE "CARRY-FORWARD" PROCEDURE
-Execution of the Heartbeat MUST be performed exclusively via:
+The Heartbeat MUST follow this sequence to prevent task displacement:
 
-  PROTOCOL_RUNBOOK.txt :: Runbook §9
-  "HEARTBEAT & DRIFT MITIGATION RUNBOOK"
+   A. TASK SNAPSHOT (Pre-Sync): 
+      Before re-reading files, the AI must explicitly state:
+      - Current Active Task ID (from PROJECT_STATUS_CHECKLIST.txt)
+      - Specific Logic Goal (e.g., "Refactoring WindMouse overshoot")
+      - Last known constraint discussed in chat.
 
-Any Heartbeat not executed via the runbook is invalid.
+   B. AUTHORITATIVE RE-HYDRATION:
+      The AI then uses the tool to re-read:
+      - GOVERNANCE_COMPENDIUM.txt
+      - PIPZ_POINTER.txt
+      - PROJECT_STATUS_CHECKLIST.txt
+      - Any file currently in the "Surgical Working Set."
+
+   C. ALIGNMENT VERIFICATION (Post-Sync):
+      The AI confirms the Task Snapshot still aligns with the literal text of 
+      re-read files. If a discrepancy is found, STOP and report.
 
 3. TRIGGER CONDITIONS
 - Every 5 turns (Calculated from session start).
 - Immediately upon a "Context Shift" (user changes the core task).
 - If the AI detects its own "Internal Efficiency Heuristic" attempting 
-  to summarize or truncate an AD (Architectural Directive).
-
-4. CHECKLIST SYNCHRONIZATION (MANDATORY)
-To ensure Heartbeat integrity in the absence of a separate Executor, the 
-following coordination rules are instated:
-
-   A. THE ID BINDING RULE: 
-      Every design or implementation task MUST be assigned a unique ID in 
-      PROJECT_STATUS_CHECKLIST.txt (e.g., #ID(G-001)) before work begins.
-
-   B. PRE-IMPLEMENTATION VALIDATION:
-      Before proposing any structural changes or code blocks, the AI MUST 
-      verify the task exists in the Checklist. If missing, the AI MUST 
-      propose the specific Checklist addition/update as the first step 
-      of the architectural directive.
-
-   C. REAL-TIME STATE TRACKING:
-      The AI and Developer will maintain the Checklist as a living document. 
-      The AI must prompt for a Checklist status update immediately upon 
-      verifying that a directive has been implemented and synced.
+  to summarize or truncate a PED.
 
 ================================================================================
-END OF SECTION GOV.S9.HEARTBEAT_PROTOCOL
+END OF SECTION GOV.S10.HEARTBEAT_PROTOCOL
 ================================================================================
 END OPERATIVE TEXT (COMPENDIUM MODE)
